@@ -1,0 +1,85 @@
+.ui-panel-title {
+    background-color: blue!important;
+    color: white!important;
+}
+
+.ui-panel-titlebar {
+    background-color: blue!important;
+    color: white!important;
+}
+
+.p-tabpanel {
+    background-color: blue!important;
+    color: white!important;
+}
+
+.greenText a {
+    color: green;
+}
+
+.inpcal {
+   width : 100px!important;
+   display: inline-block!important;
+   padding: 4px!important;
+   position: relative;
+   top: 2px;
+}
+
+.inlbox {
+    display: block!important;
+    width: 130px!important;
+    padding-top: 10px!important;
+}
+
+.inptime {
+    position: absolute;
+    display: inline-block!important;
+    top: 40px;
+    left: 150px;
+}
+.bx {
+    display: block!important;
+    height: 65px;
+}
+
+.btncal {
+    position: relative;
+    top: 3px;
+    left: -2px; 
+
+}
+
+.alert-heading {
+    color: #0062cc!important;
+    font-style: oblique;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.hrline {
+    border: solid 1px green;
+}
+
+.bdcontent {
+    background-color: white;
+    width: 700px;
+}
+
+.toolbtn {
+    background-color: lightgrey;
+    display: block;
+    float: left;
+    padding: 5px!important;
+    height: 50px;
+    width: 720px;
+}
+
+.btn-primary {
+    position: absolute;
+    right: 110px;
+}
+
+.btn-warning {
+    position: absolute;
+    right: 30px;
+}

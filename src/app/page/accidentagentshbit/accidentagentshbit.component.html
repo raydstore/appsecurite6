@@ -1,0 +1,31 @@
+<!-- <div class="ui-g-12 ui-md-4" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
+  <div class="ui-inputgroup">
+    <span class="ui-inputgroup-addon">{{vw$accidentagentshbit.classname}}</span>
+    <input type="text" pInputText [ngModel]="vw$accidentagentshbit.name" placeholder="vw$accidentagentshbit.name">
+    <button pButton type="button" label="Valider"></button>
+  </div>
+</div>
+ -->
+<div class="card">
+  <div class="card-header">
+    Bit d'agent
+    <p-button (click)="newNature()" label="Nature"></p-button>
+    
+    <p-button (click)="newSiege()" icon="fa fa-fw fa-check" label="Siège"></p-button>
+    
+    <p-button (click)="newForme()" icon="fa fa-fw fa-check" iconPos="right" label="Forme"></p-button>
+    
+    <p-button (click)="newMateriel()" icon="fa fa-fw fa-check" [disabled]="true" label="Matériel"></p-button>
+
+
+  </div>
+  <div class="card-body">
+    <div class="input-group" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">{{vw$accidentagentshbit.classname}}</span>
+      </div>
+      <input type="text" class="form-control" [ngModel]="vw$accidentagentshbit.name" aria-describedby="basic-addon1">
+      <button type="button" class="btn btn-primary">Valider</button>
+    </div>
+  </div>
+</div>

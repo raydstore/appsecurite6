@@ -1,0 +1,12 @@
+<p-panel *ngFor="let accidentnature of accidentnatures" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" ><h2>{{accidentnature.name}}</h2> </span>
+    </div>
+  </p-header>
+    <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
+ <!--  <p-footer>
+    <button pButton type="button" icon="fa-plus" label="New" class="ui-button-info"></button>
+    <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
+  </p-footer> -->
+</p-panel>
