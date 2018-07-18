@@ -1,10 +1,10 @@
-import { BadInput } from '../../common/bad-input';
-import { Caseagent } from '../../table/table';
-import { CaseagentService } from '../../services/caseagent.service';
+import { BadInput } from '../../core/component/common/bad-input';
+import { Caseagent } from 'shared/table/table';
+import { CaseagentService } from 'shared/services/caseagent.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/treenode';
-import { AppError } from '../../common/app-error';
-import { NotFoundError } from '../../common/not-found-error';
+import { AppError } from '../../core/component/common/app-error';
+import { NotFoundError } from '../../core/component/common/not-found-error';
 
 @Component({
   selector: 'app-caseagent',

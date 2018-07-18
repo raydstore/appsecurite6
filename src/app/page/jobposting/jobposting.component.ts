@@ -1,10 +1,10 @@
-import { BadInput } from '../../common/bad-input';
+import { BadInput } from '../../core/component/common/bad-input';
 import { TreeNode } from 'primeng/primeng';
 import { Component, OnInit } from '@angular/core';
-import { JobpostingService } from '../../services/jobposting.service';
-import { Jobposting } from '../../table/table';
-import { AppError } from '../../common/app-error';
-import { NotFoundError } from '../../common/not-found-error';
+import { JobpostingService } from 'shared/services/jobposting.service';
+import { Jobposting } from 'shared/table/table';
+import { AppError } from '../../core/component/common/app-error';
+import { NotFoundError } from '../../core/component/common/not-found-error';
 
 
 @Component({

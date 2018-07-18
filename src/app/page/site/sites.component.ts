@@ -1,11 +1,11 @@
 import { InfoSite } from '../dialog-modal/dialog-modal.component';
-import { NotFoundError } from '../../common/not-found-error';
+import { NotFoundError } from '../../core/component/common/not-found-error';
 /* import { Label } from './../../table/label'; */
-import { LabelService } from '../../services/label.service';
-import { AppError } from '../../common/app-error';
-import { BadInput } from '../../common/bad-input';
+import { LabelService } from 'shared/services/label.service';
+import { AppError } from '../../core/component/common/app-error';
+import { BadInput } from '../../core/component/common/bad-input';
 /* import { Site } from './../../table/site'; */
-import { SiteService } from '../../services/site.service';
+import { SiteService } from 'shared/services/site.service';
 import { TreeNode } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
 import { OrganizationChartModule } from 'primeng/primeng';
@@ -14,8 +14,8 @@ import { DataGridModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
-import {Site} from '../../table/table';
-import { LastidService } from '../../services/lastid.service';
+import {Site} from 'shared/table/table';
+import { LastidService } from 'shared/services/lastid.service';
 
 @Component({
   selector: 'app-site',

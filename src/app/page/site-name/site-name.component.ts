@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SiteService } from '../../services/site.service';
+import { SiteService } from 'shared/services/site.service';
 
 @Component({
   selector: 'app-site-name',

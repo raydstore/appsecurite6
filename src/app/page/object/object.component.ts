@@ -1,16 +1,16 @@
-import { PropertyService } from '../../services/property.service';
-import { LastidService } from '../../services/lastid.service';
-import { NotFoundError } from '../../common/not-found-error';
-import { AppError } from '../../common/app-error';
-import { BadInput } from '../../common/bad-input';
-import { ObjectService } from '../../services/object.service';
+import { PropertyService } from 'shared/services/property.service';
+import { LastidService } from 'shared/services/lastid.service';
+import { NotFoundError } from '../../core/component/common/not-found-error';
+import { AppError } from '../../core/component/common/app-error';
+import { BadInput } from '../../core/component/common/bad-input';
+import { ObjectService } from 'shared/services/object.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Object } from '../../table/table';
-import { Property } from '../../table/table';
+import { Object } from 'shared/table/table';
+import { Property } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
-import { TypeObjectService } from '../../services/type-object.service';
+import { TypeObjectService } from 'shared/services/type-object.service';
 
 @Component({
   selector: 'app-object',

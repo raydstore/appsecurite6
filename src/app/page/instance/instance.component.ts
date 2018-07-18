@@ -1,6 +1,6 @@
-import { PropertyService } from '../../services/property.service';
+import { PropertyService } from 'shared/services/property.service';
 import { Component, OnInit } from '@angular/core';
-import { ObjectService } from '../../services/object.service';
+import { ObjectService } from 'shared/services/object.service';
 
 @Component({
   selector: 'app-instance',

@@ -1,11 +1,11 @@
-import { BadInput } from '../../common/bad-input';
-import { NatureService } from '../../services/nature.service';
-import { Nature } from '../../table/table';
+import { BadInput } from '../../core/component/common/bad-input';
+import { NatureService } from 'shared/services/nature.service';
+import { Nature } from 'shared/table/table';
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/components/common/treenode';
-import { LastidService } from '../../services/lastid.service';
-import { AppError } from '../../common/app-error';
-import { NotFoundError } from '../../common/not-found-error';
+import { LastidService } from 'shared/services/lastid.service';
+import { AppError } from '../../core/component/common/app-error';
+import { NotFoundError } from '../../core/component/common/not-found-error';
 
 @Component({
   selector: 'app-nature',

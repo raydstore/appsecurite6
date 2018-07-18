@@ -1,0 +1,284 @@
+<div class="accidentd bg-light">
+  <div class="accidentd-header alCenter accidentdtitle">
+
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
+
+    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- <div class="accidentd-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
+  <!-- expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" 
+    (onNodeExpand)="nodeExpand($event)" rowExpandMode="single">
+    [expandedRowKeys]="expandedRows"
+    selectionMode="single" [(selection)]="selectedNode"
+
+    [expandedRowKeys]="expandedRows"
+
+    sortField="id" [paginator]="true" [rows]="10"
+  -->
+
+  <p-table [value]="accidents" dataKey="id" selectionMode="single" [(selection)]="selectedNode"  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 2.25em"></th>
+        <th>id</th>
+        <th>Classification</th>
+        <th>date</th>
+        <th>time</th>
+        <th>site</th>
+        <th>lieu</th>
+        <th>description</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
+      <tr>
+        <td>
+          <a href="#" [pRowToggler]="rowData ">
+            <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
+          </a>
+        </td>
+        <td>{{rowData.id}}</td>
+        <td>{{rowData.classification}}</td>
+        <td>{{rowData.curdate | date:'shortDate'}}</td>
+        <td>{{rowData.time | date:'shortDate'}}</td>
+        <td>{{rowData.idsiteparent.name}}</td>
+        <td>{{rowData.idsite.name}}</td>
+        <td>{{rowData.description}}</td>
+      </tr>
+    </ng-template>
+    <!--     <p-column expander="true" styleClass="col-icon"></p-column>
+    <p-column field="id" header="Id"></p-column>
+    <p-column field="classification" header="classification"></p-column>
+     <p-column field="curdate" header="date">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+         {{m[col.field] | date:'shortDate'}}
+       </ng-template>
+    </p-column>
+    <p-column field="time" header="Heure">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+         {{m[col.field] | date:'shortDate'}}
+       </ng-template>
+    </p-column>
+     <p-column field="idsiteparent.name" header="site parent"></p-column>
+    <p-column field="idsite.name" header="idsite"></p-column>
+    <p-column field="sitedescription" header="description"></p-column>
+    <p-column field="event" header="evenement"></p-column>
+
+    <p-column field="idagentdeclare.name" header="agent declare"></p-column>
+    <p-column field="idagentvalidate.name" header="agent valide"></p-column>
+     -->
+
+    <!-- <ng-template pTemplate="rowexpansion" let-item> -->
+    <ng-template pTemplate="rowexpansion" let-accident>
+      <!-- <tr>
+
+            <td [attr.colspan]="columns.length + 1">
+                <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                    <div class="ui-g-12 ui-md-3" style="text-align:center">
+                        <img [attr.alt]="rowData.brand" src="assets/showcase/images/demo/car/{{rowData.brand}}.png">
+                    </div>
+                    <div class="ui-g-12 ui-md-9">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <b>Vin:</b> {{rowData.vin}}
+                            </div>
+                            <div class="ui-g-12">
+                                <b>Year:</b> {{rowData.year}}
+                            </div>
+                            <div class="ui-g-12">
+                                <b>Brand:</b> {{rowData.brand}}
+                            </div>
+                            <div class="ui-g-12">
+                                <b>Color:</b> {{rowData.color}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr> -->
+      <!-- <tr>
+        <td [attr.colspan]="8">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                <div class="ui-g-12 ui-md-9">
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <b>Vin:</b> {{accident.id}}
+                        </div>
+                        <div class="ui-g-12">
+                            <b>Year:</b> {{accident.curdate}}
+                        </div>
+                        <div class="ui-g-12">
+                            <b>Brand:</b> {{accident.time}}
+                        </div>
+                        <div class="ui-g-12">
+                            <b>Color:</b> {{accident.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+      </tr> -->
+      <tr>
+        <td [attr.colspan]="8">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+          <div class="accidentd text-white bg-info mb-3">
+            <div class="accidentd-header">Info Accident</div>
+            <div class="accidentd-body">
+              <p-tabView>
+                <p-tabPanel [selected]="true" [header]="'Détail'">
+                  <app-faccident [item]="accident" [mode]="mUpdate" (operation)="performAction($event)"></app-faccident>
+                </p-tabPanel>
+                <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
+                  <app-accidentdetail [accident]="accident"></app-accidentdetail>
+                </p-tabPanel>
+                <p-tabPanel [header]="'Cause'">
+                  <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
+                </p-tabPanel>
+                <p-tabPanel [header]="'Action / Recommandation'">
+                  <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
+                </p-tabPanel>
+                <p-tabPanel [header]="'Investigation'">
+
+                </p-tabPanel>
+                <p-tabPanel [header]="'Fichier attaché'">
+                  <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
+                </p-tabPanel>
+              </p-tabView>
+            </div>
+          </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- <ng-template let-item pTemplate="rowexpansion">
+      <div class="accidentd text-white bg-info mb-3">
+        <div class="accidentd-header">Info Accident</div>
+        <div class="accidentd-body">
+          <p-tabView>
+            <p-tabPanel [selected]="true" [header]="'Détail'">
+              <app-faccident [item]="item" [mode]="mUpdate" (operation)="performAction($event)" ></app-faccident>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
+              <app-accidentdetail [accident]="item"></app-accidentdetail>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Cause'">
+              <app-cause [idaccident]="item" [titlelist]="'Causes'"></app-cause>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Action / Recommandation'">
+              <app-action [idaccident]="item" [titlelist]="'Action / Recommandation'"></app-action>
+            </p-tabPanel>
+            <p-tabPanel [header]="'Investigation'">
+
+            </p-tabPanel>
+            <p-tabPanel [header]="'Fichier attaché'">
+               <app-accidentfile [idaccident]="item" [titlelist]="'Fichier attaché'"></app-accidentfile>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+
+    </ng-template> -->
+  </p-table>
+</div>
+
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="748">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
+    <!-- <div class="bdcontent">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">classification :</h5>
+            <hr class="hrline">
+            <div class="radio">
+              <div>
+              <label>
+                <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="A"> Accident
+              </label>
+              </div>
+              <div>
+              <label>
+                <input [(ngModel)]="newAccident.classification" type="radio" name="rb" value="I"> Incident
+              </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="alert alert-secondary" role="alert">
+            <h5 class="alert-heading">c'est produite :</h5>
+            <hr class="hrline">
+            <div class="bx">
+              <div class="inlbox">
+                <p-calendar [(ngModel)]="newAccident.curdate" [showTime]="true" [showIcon]="true" ></p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Localisation :</h5>
+        <hr class="hrline">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidsiteparent">site :</label>
+              <app-autocomplete id="iidsiteparent" [i_item]="newAccident.idsiteparent" [service]="siteService" [functionName]="displayNameSite" [args]="['name']"
+                (changeItem)="onChangeItem(newAccident, 'idsiteparent', $event)"></app-autocomplete>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidsiteparent">lieu :</label>
+              <app-autocomplete id="iidsite" [i_item]="newAccident.idsite" [service]="siteService" [functionName]="displayNameSite"
+                [args]="['name']" (changeItem)="onChangeItem(newAccident, 'idsite', $event)"></app-autocomplete>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <span>
+                <label for="isitedescription">description du lieu : </label>
+                <input type="text" class="form-control" id="isitedescription" [(ngModel)]="newAccident.sitedescription" placeholder="description">
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Description de l'evenement :</h5>
+        <hr class="hrline">
+        <div>
+        <textarea rows="5" cols="70" pInputTextarea [(ngModel)]="newAccident.event" ></textarea>
+        </div>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+        <h5 class="alert-heading">Signature :</h5>
+        <hr class="hrline">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidagentdeclare">établi par :</label>
+              <app-autocomplete id="iidagentdeclare" [i_item]="newAccident.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agentService"
+                (changeItem)="onChangeItem(newAccident, 'idagentdeclare', $event)"></app-autocomplete>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="iidagentvalidate">validé par :</label>
+              <app-autocomplete id="iidagentvalidate" [i_item]="newAccident.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"
+                [service]="agentService" (changeItem)="onChangeItem(newAccident, 'idagentvalidate', $event)"></app-autocomplete>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createAccident()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
+      </div>
+    </div> -->
+    <app-faccident [item]="newAccident" [mode]="mInsert" (operation)="performAction($event)"></app-faccident>
+  </div>

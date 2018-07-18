@@ -1,11 +1,11 @@
-import { LastidService } from '../../services/lastid.service';
-import { NotFoundError } from '../../common/not-found-error';
-import { AppError } from '../../common/app-error';
-import { BadInput } from '../../common/bad-input';
-import { UnitMeasureService } from '../../services/unit-measure.service';
+import { LastidService } from 'shared/services/lastid.service';
+import { NotFoundError } from '../../core/component/common/not-found-error';
+import { AppError } from '../../core/component/common/app-error';
+import { BadInput } from '../../core/component/common/bad-input';
+import { UnitMeasureService } from 'shared/services/unit-measure.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { UnitMeasure } from '../../table/table';
+import { UnitMeasure } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 

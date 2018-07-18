@@ -1,10 +1,10 @@
-import { BadInput } from '../../common/bad-input';
-import { BitService } from '../../services/bit.service';
+import { BadInput } from '../../core/component/common/bad-input';
+import { BitService } from 'shared/services/bit.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TreeTableModule, TreeNode, SharedModule } from 'primeng/primeng';
-import { Bit } from '../../table/table';
-import { AppError } from '../../common/app-error';
-import { NotFoundError } from '../../common/not-found-error';
+import { Bit } from 'shared/table/table';
+import { AppError } from '../../core/component/common/app-error';
+import { NotFoundError } from '../../core/component/common/not-found-error';
 
 @Component({
   selector: 'app-bit',

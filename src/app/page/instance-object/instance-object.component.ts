@@ -1,18 +1,18 @@
-import { MarkService } from '../../services/mark.service';
-import { SiteService } from '../../services/site.service';
-import { PropertyService } from '../../services/property.service';
-import { LastidService } from '../../services/lastid.service';
-import { NotFoundError } from '../../common/not-found-error';
-import { AppError } from '../../common/app-error';
-import { BadInput } from '../../common/bad-input';
-import { ObjectService } from '../../services/object.service';
+import { MarkService } from 'shared/services/mark.service';
+import { SiteService } from 'shared/services/site.service';
+import { PropertyService } from 'shared/services/property.service';
+import { LastidService } from 'shared/services/lastid.service';
+import { NotFoundError } from '../../core/component/common/not-found-error';
+import { AppError } from '../../core/component/common/app-error';
+import { BadInput } from '../../core/component/common/bad-input';
+import { ObjectService } from 'shared/services/object.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Object, Instance } from '../../table/table';
-import { Property } from '../../table/table';
+import { Object, Instance } from 'shared/table/table';
+import { Property } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
-import { InstanceService } from '../../services/instance.service';
+import { InstanceService } from 'shared/services/instance.service';
 
 @Component({
   selector: 'app-instance-object',
