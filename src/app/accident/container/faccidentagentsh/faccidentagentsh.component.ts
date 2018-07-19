@@ -24,7 +24,6 @@ export class FaccidentagentshComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('faccident list agents = ' + JSON.stringify(this.agents));
     // this.loadAgent();
   }
 
@@ -77,9 +76,9 @@ export class FaccidentagentshComponent implements OnInit {
     return res;
   } */
 
-  getAgent(id?): Agent {
+  getAgent(id?: string): Agent {
     if (!isNullOrUndefined(id) && !isNullOrUndefined(this.agents)) {
-     return this.agents.find(item => item.id === id);
+      return this.agents.find(item => item.id === id);
     }
   }
 

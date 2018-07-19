@@ -16,7 +16,7 @@
   <p-column field="accidentagentshPK.idagent" header="id"></p-column>
   <p-column field="accidentagentshPK" header="name">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      {{getName(getAgent(m[col.field].idagent))}}
+      {{getName(m[col.field].agent)}}
     </ng-template>
   </p-column>
   <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>

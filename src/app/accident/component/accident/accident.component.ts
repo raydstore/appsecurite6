@@ -27,6 +27,7 @@ import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { LazyLoadEvent } from 'primeng/api';
 
 
 /**
@@ -53,6 +54,8 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
 export class AccidentComponent implements OnInit {
  // @Input() displayValue;
   accidents: Accident[];
+  _accidents: Accident[];
+
   sites: Site[];
   agents: Agent[];
   selectedAccident: Accident;
@@ -70,6 +73,16 @@ export class AccidentComponent implements OnInit {
   selectedNatures: string[];
   filteredAgentsSingle: IAgent[];
  // expandedRows: {} = {};
+  totalRecords: number;
+
+  cols: any[];
+
+  loading: boolean;
+
+
+
+
+
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<string>();
@@ -89,10 +102,31 @@ export class AccidentComponent implements OnInit {
     this.loadData();
     this.loadSite();
     this.loadAgent();
+    this.loading = true;
     /* this.accidents.forEach(function(accident) {
       thisRef.expandedRows[accident.id] = 1;
     }); */
   }
+
+  loadAccidentsLazy(event: LazyLoadEvent) {
+    this.loading = true;
+
+    // in a real application, make a remote request to load data using state metadata from event
+    // event.first = First row offset
+    // event.rows = Number of rows per page
+    // event.sortField = Field name to sort with
+    // event.sortOrder = Sort order as number, 1 for asc and -1 for dec
+    // filters: FilterMetadata object having field as key and filter value, filter matchMode as value
+
+    // imitate db connection over a network
+    setTimeout(() => {
+        if (this.accidents) {
+            this._accidents = this.accidents.slice(event.first, (event.first + event.rows));
+            this.loading = false;
+        }
+    }, 1000);
+}
+
 
 
   initAccident() {
@@ -120,6 +154,7 @@ export class AccidentComponent implements OnInit {
     this.service.getAll()
       .subscribe(accidents => {
         this.accidents = accidents;
+        this.totalRecords = this.accidents.length;
       });
   }
 

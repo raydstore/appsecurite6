@@ -22,7 +22,11 @@
     sortField="id" [paginator]="true" [rows]="10"
   -->
 
-  <p-table [value]="accidents" dataKey="id" selectionMode="single" [(selection)]="selectedNode">
+  <!-- [lazy]="true" (onLazyLoad)="loadAccidentsLazy($event)" 
+  [totalRecords]="totalRecords" [loading]="loading" -->
+
+  <p-table [value]="accidents" dataKey="id"  rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode" 
+           [paginator]="true" [rows]="10">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 2.25em"></th>
@@ -37,7 +41,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
       <tr>
-        <td>
+        <td [pSelectableRow]="rowData">
           <a href="#" [pRowToggler]="rowData ">
             <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
           </a>

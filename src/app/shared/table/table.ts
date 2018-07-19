@@ -312,7 +312,7 @@ export interface AccidentagenttpPK {
 
 export interface Accidentagentsh {
     accidentagentshPK: AccidentagentshPK;
-    idagent?: string;
+    agent?: Agent;
     countstopwork: number;
     accidentdomain: number;
     typeaccident: string;
