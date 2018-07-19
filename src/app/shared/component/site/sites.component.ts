@@ -1,9 +1,8 @@
-import { InfoSite } from '../dialog-modal/dialog-modal.component';
-import { NotFoundError } from '../../core/component/common/not-found-error';
+import { NotFoundError } from '../../../core/component/common/not-found-error';
 /* import { Label } from './../../table/label'; */
 import { LabelService } from 'shared/services/label.service';
-import { AppError } from '../../core/component/common/app-error';
-import { BadInput } from '../../core/component/common/bad-input';
+import { AppError } from '../../../core/component/common/app-error';
+import { BadInput } from '../../../core/component/common/bad-input';
 /* import { Site } from './../../table/site'; */
 import { SiteService } from 'shared/services/site.service';
 import { TreeNode } from 'primeng/primeng';
@@ -13,9 +12,10 @@ import { Component, OnInit, ViewEncapsulation, Attribute } from '@angular/core';
 import { DataGridModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
-import { DialogModalComponent } from '../dialog-modal/dialog-modal.component';
+
 import {Site} from 'shared/table/table';
 import { LastidService } from 'shared/services/lastid.service';
+import { InfoSite } from 'shared/component/dialog-modal/dialog-modal.component';
 
 @Component({
   selector: 'app-site',

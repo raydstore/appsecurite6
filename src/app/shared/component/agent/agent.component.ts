@@ -1,8 +1,8 @@
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
-import { NotFoundError } from '../../core/component/common/not-found-error';
-import { AppError } from '../../core/component/common/app-error';
-import { BadInput } from '../../core/component/common/bad-input';
+import { NotFoundError } from '../../../core/component/common/not-found-error';
+import { AppError } from '../../../core/component/common/app-error';
+import { BadInput } from '../../../core/component/common/bad-input';
 import { AgentService } from 'shared/services/agent.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';

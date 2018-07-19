@@ -1,26 +1,26 @@
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
-import { NotFoundError } from '../../core/component/common/not-found-error';
-import { AppError } from '../../core/component/common/app-error';
-import { BadInput } from '../../core/component/common/bad-input';
-import { MarkService } from 'shared/services/mark.service';
+import { NotFoundError } from '../../../core/component/common/not-found-error';
+import { AppError } from '../../../core/component/common/app-error';
+import { BadInput } from '../../../core/component/common/bad-input';
+import { RankService } from 'shared/services/rank.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Mark } from 'shared/table/table';
+import { Rank } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 
 @Component({
-  selector: 'app-mark',
-  templateUrl: 'mark.component.html',
-  styleUrls: ['./mark.component.css']
+  selector: 'app-rank',
+  templateUrl: 'rank.component.html',
+  styleUrls: ['./rank.component.css']
 })
-export class MarkComponent implements OnInit {
-  marks: any[];
-  selectedMark: Mark;
+export class RankComponent implements OnInit {
+  ranks: any[];
+  selectedRank: Rank;
   selectedNode: TreeNode;
-
-  newMark: any = {
+  // rank: any;
+  newRank: any = {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
@@ -35,17 +35,18 @@ export class MarkComponent implements OnInit {
   lastid: any;
   titlelist = 'Marque';
 
-  constructor(private service: MarkService, private lastidService: LastidService) {
+  constructor(private service: RankService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
+    // this.loadLastId(); 
   }
 
   loadData() {
     this.service.getAll()
-      .subscribe(marks => {
-        this.marks = marks;
+      .subscribe(ranks => {
+        this.ranks = ranks;
       });
   }
 
@@ -55,12 +56,12 @@ export class MarkComponent implements OnInit {
   }
 
   getLastid(name) {
-    let lts: any[] ;
-    this.loadLastId(); 
-    for (let lid of this.lastids)  {
-        if (lid.id === name) {
-           return lid['count'] ;
-        }
+    let lts: any[];
+    this.loadLastId();
+    for (let lid of this.lastids) {
+      if (lid.id === name) {
+        return lid['count'];
+      }
     }
     return 0;
   }
@@ -74,16 +75,14 @@ export class MarkComponent implements OnInit {
   }
 
 
-  createMark() {
+  createRank() {
     this.dialogVisible = false;
-    this.marks = [this.newMark, ...this.marks];
-
-
-    this.service.create(this.newMark)
-      .subscribe(newMark => {
+    this.ranks = [this.newRank, ...this.ranks];
+    this.service.create(this.newRank)
+      .subscribe(newRank => {
         this.loadData();
       }, (error: AppError) => {
-        this.marks.splice(0, 1);
+        this.ranks.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
@@ -92,15 +91,15 @@ export class MarkComponent implements OnInit {
       });
   }
 
-  deleteMark(_mark: Mark) {
-    let index = this.marks.indexOf(_mark);
-    this.marks.splice(index, 1);
-    this.marks = [...this.marks] ;
-    this.service.delete(_mark.id)
+  deleteRank(_rank: Rank) {
+    let index = this.ranks.indexOf(_rank);
+    this.ranks.splice(index, 1);
+    this.ranks = [...this.ranks];
+    this.service.delete(_rank.id)
       .subscribe(
-      () => { this.loadData(); } ,
+      () => { this.loadData(); },
       (error: Response) => {
-        this.marks.splice(index, 0, _mark);
+        this.ranks.splice(index, 0, _rank);
 
         if (error instanceof NotFoundError) {
           alert('this post has already been deleted');
@@ -111,22 +110,23 @@ export class MarkComponent implements OnInit {
       );
   }
 
-  updateMark(_mark, input: HTMLInputElement) {
-    _mark.name = input.value;
-    this.service.update(_mark)
-      .subscribe(updatemark => {
+  updateRank(_rank, input: HTMLInputElement) {
+    _rank.name = input.value;
+    this.service.update(_rank)
+      .subscribe(updaterank => {
         this.loadData();
+        console.log(updaterank);
       });
   }
 
-  cancelUpdate(_mark) {
+  cancelUpdate(_rank) {
     //
   }
 
   showNewDialoge() {
     this.dialogVisible = true;
     this.newMode = true;
-    this.newMark = {
+    this.newRank = {
       datecreate: new Date(),
       dateupdate: new Date(),
       id: 0,
@@ -146,35 +146,35 @@ export class MarkComponent implements OnInit {
   }
 
   save() {
-    let marks = [...this.marks];
+    let ranks = [...this.ranks];
     if (this.newMode) {
-      marks.push(this.newMark);
+      ranks.push(this.newRank);
     } else {
-      marks[this.findSelectedMarkIndex()] = this.newMark;
+      ranks[this.findSelectedRankIndex()] = this.newRank;
     }
-    this.marks = marks;
-    this.newMark = null;
+    this.ranks = ranks;
+    this.newRank = null;
     this.dialogVisible = false;
   }
 
   delete() {
-    let index = this.findSelectedMarkIndex();
-    this.marks = this.marks.filter((val, i) => i !== index);
-    this.newMark = null;
+    let index = this.findSelectedRankIndex();
+    this.ranks = this.ranks.filter((val, i) => i !== index);
+    this.newRank = null;
     this.dialogVisible = false;
   }
 
   onRowSelect(event) {
   }
 
-  cloneMark(c: Mark): Mark {
-    let mark: Mark;
-    mark = c;
-    return mark;
+  cloneRank(c: Rank): Rank {
+    let rank: Rank; 
+    rank = c;
+    return rank;
   }
 
-  findSelectedMarkIndex(): number {
-    return this.marks.indexOf(this.selectedMark);
+  findSelectedRankIndex(): number {
+    return this.ranks.indexOf(this.selectedRank);
   }
 }
 

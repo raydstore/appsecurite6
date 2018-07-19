@@ -1,3 +1,47 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  OrganizationChartModule,
+  AutoCompleteModule,
+  CalendarModule,
+  CheckboxModule,
+  CodeHighlighterModule,
+  DataGridModule,
+  DataTableModule,
+  DialogModule,
+  DropdownModule,
+  GrowlModule,
+  InplaceModule,
+  ListboxModule,
+  PanelModule,
+  RadioButtonModule,
+  TabViewModule,
+  TreeTableModule,
+} from 'primeng/primeng';
+import { TableModule } from 'primeng/table';
+import { ActivityComponent } from 'shared/component/activity/activity.component';
+import { AgentComponent } from 'shared/component/agent/agent.component';
+import { BitComponent } from 'shared/component/bit/bit.component';
+import { EntrepriseComponent } from 'shared/component/entreprise/entreprise.component';
+import { LabelsComponent } from 'shared/component/label/labels.component';
+import { MarkComponent } from 'shared/component/mark/mark.component';
+import { NatureComponent } from 'shared/component/nature/nature.component';
+import { NotFoundComponent } from 'shared/component/notfound/notFound.component';
+import { OperationComponent } from 'shared/component/operation/operation.component';
+import { PropertyComponent } from 'shared/component/property/property.component';
+import { SiteNameComponent } from 'shared/component/site-name/site-name.component';
+import { SitesComponent } from 'shared/component/site/sites.component';
+import { StructureComponent } from 'shared/component/structure/structure.component';
+import { TypeFormationComponent } from 'shared/component/type-formation/type-formation.component';
+import { TypeObjectComponent } from 'shared/component/type-object/type-object.component';
+import { TypeOperationComponent } from 'shared/component/type-operation/type-operation.component';
+import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.component';
+import { VwpropertyComponent } from 'shared/component/vwproperty/vwproperty.component';
 import { AccidentService } from 'shared/services/accident.service';
 import { AccidentagenteeService } from 'shared/services/accidentagentee.service';
 import { AccidentagentshService } from 'shared/services/accidentagentsh.service';
@@ -55,20 +99,12 @@ import { VwgridService } from 'shared/services/vwgrid.service';
 import { VwnotelementofnatureaccidentService } from 'shared/services/vwnotelementofnatureaccident.service';
 import { VwnotnatureofaccidentService } from 'shared/services/vwnotnatureofaccident.service';
 import { VwpropertyService } from 'shared/services/vwproperty.service';
-//
-import { ErrorHandler, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DataGridModule, GrowlModule, ListboxModule, PanelModule, AutoCompleteModule, TabViewModule,
-         TreeTableModule, InplaceModule, DropdownModule, DialogModule, DataTableModule, RadioButtonModule,
-         CheckboxModule, CodeHighlighterModule, CalendarModule } from '../../../node_modules/primeng/primeng';
-import { TableModule } from '../../../node_modules/primeng/table';
-import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 
+import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
+import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
+
+//
+// import {TreeTableModule} from 'primeng/treetable';
 
 @NgModule({
   imports: [
@@ -76,6 +112,7 @@ import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    OrganizationChartModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
@@ -124,9 +161,48 @@ import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
     PdfViewerModule,
     CalendarModule,
     NgbModule.forRoot().ngModule,
+    NotFoundComponent,
+    LabelsComponent,
+    MarkComponent,
+    TypeObjectComponent,
+    TypeOperationComponent,
+    OperationComponent,
+    ActivityComponent,
+    SitesComponent,
+    UnitmeasureComponent,
+    TypeFormationComponent,
+    NatureComponent,
+    BitComponent,
+    AgentComponent,
+    StructureComponent,
+    OperationComponent,
+    PropertyComponent,
+    EntrepriseComponent,
+    VwpropertyComponent,
+    SiteNameComponent,
+    DialogModalComponent,
   ],
   declarations: [
-
+    NotFoundComponent,
+    LabelsComponent,
+    MarkComponent,
+    TypeObjectComponent,
+    TypeOperationComponent,
+    OperationComponent,
+    ActivityComponent,
+    SitesComponent,
+    UnitmeasureComponent,
+    TypeFormationComponent,
+    NatureComponent,
+    BitComponent,
+    AgentComponent,
+    StructureComponent,
+    OperationComponent,
+    PropertyComponent,
+    EntrepriseComponent,
+    VwpropertyComponent,
+    SiteNameComponent,
+    DialogModalComponent,
   ],
   providers: [
     PostService,
@@ -186,7 +262,6 @@ import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
     StructureService,
     AccidentfileService,
     UploadfileService,
-
   ]
 })
 export class SharedModule { }

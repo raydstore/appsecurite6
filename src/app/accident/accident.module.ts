@@ -1,9 +1,9 @@
-import { CalendarComponent } from './../shared/calendar/calendar.component';
-import { AutocompleteComponent } from './../shared/autocomplete/autocomplete.component';
-import { NotFoundComponent } from './../page/notfound/notFound.component';
+import { CalendarComponent } from 'shared/component/calendar/calendar.component';
+import { AutocompleteComponent } from 'shared/component/autocomplete/autocomplete.component';
+import { NotFoundComponent } from 'shared/component/notfound/notFound.component';
 import { SharedModule } from './../shared/shared.module';
 import { ElementComponent } from './component/element/element.component';
-import { RankComponent } from '../page/rank/rank.component';
+import { RankComponent } from 'shared/component/rank/rank.component';
 import { GridComponent } from '../page/grid/grid.component';
 import { AccidentComponent } from './component/accident/accident.component';
 import { AccidentnatureComponent } from './component/accidentnature/accidentnature.component';
@@ -40,9 +40,9 @@ import { NgModule } from '@angular/core';
   imports: [
     SharedModule,
     RouterModule.forChild([
-      { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'accident', component: AccidentComponent },
-      { path: '**', component: NotFoundComponent }
+/*       { path: '', redirectTo: '/home' , pathMatch: 'full'},
+      { path: '**', component: NotFoundComponent } */
     ])
 
   ],

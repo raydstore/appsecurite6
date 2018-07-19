@@ -1,45 +1,43 @@
-import { SharedModule } from './shared/shared.module';
-import { AdminModule } from './admin/admin.module';
-import { AccidentModule } from './accident/accident.module';
-import { TitletaskComponent } from './page/titletask/titletask.component';
-import { NotFoundComponent } from './page/notfound/notFound.component';
-import { SitesComponent } from './page/site/sites.component';
-import { OrganizationChartModule } from 'primeng/primeng';
-import { LabelsComponent } from './page/label/labels.component';
-import { AppErrorHandler } from './core/component/common/app-error-handler';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { MarkComponent } from './page/mark/mark.component';
-import { TypeObjectComponent } from './page/type-object/type-object.component';
-import { TypeOperationComponent } from './page/type-operation/type-operation.component';
-import { OperationComponent } from './page/operation/operation.component';
-import { ActivityComponent } from './page/activity/activity.component';
-import { ObjectComponent } from './page/object/object.component';
-import { InstanceComponent } from './page/instance/instance.component';
-import { UnitmeasureComponent } from './page/unitmeasure/unitmeasure.component';
-import { JobpostingComponent } from './page/jobposting/jobposting.component';
-import { TypeFormationComponent } from './page/type-formation/type-formation.component';
-import { FormationComponent } from './page/formation/formation.component';
-import { AlertComponent } from './page/alert/alert.component';
-import { DialogModalComponent } from './page/dialog-modal/dialog-modal.component';
-import { PropertyComponent } from './page/property/property.component';
-import { VwpropertyComponent } from './page/vwproperty/vwproperty.component';
-import { InstanceObjectComponent } from './page/instance-object/instance-object.component';
-import { SiteNameComponent } from './page/site-name/site-name.component';
-import { CaseagentComponent } from './page/caseagent/caseagent.component';
-import { ListagentComponent } from './page/listagent/listagent.component';
-import { NatureComponent } from './page/nature/nature.component';
+import { OrganizationChartModule } from 'primeng/primeng';
+
+import { AccidentModule } from './accident/accident.module';
 import { ElementComponent } from './accident/component/element/element.component';
-import { RankComponent } from './page/rank/rank.component';
-import { GridComponent } from './page/grid/grid.component';
-import { BitComponent } from './page/bit/bit.component';
-import { AgentComponent } from './page/agent/agent.component';
-import { OpscardComponent } from './page/opscard/opscard.component';
-import { EntrepriseComponent } from './page/entreprise/entreprise.component';
-import { StructureComponent } from './page/structure/structure.component';
-import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
+import { AppComponent } from './app.component';
+import { AppErrorHandler } from './core/component/common/app-error-handler';
 import { HomeComponent } from './core/component/home/home.component';
+import { CoreModule } from './core/core.module';
+import { ActivityComponent } from 'shared/component/activity/activity.component';
+import { AgentComponent } from 'shared/component/agent/agent.component';
+import { AlertComponent } from './page/alert/alert.component';
+import { BitComponent } from 'shared/component/bit/bit.component';
+import { CaseagentComponent } from './page/caseagent/caseagent.component';
+import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
+import { EntrepriseComponent } from 'shared/component/entreprise/entreprise.component';
+import { FormationComponent } from './page/formation/formation.component';
+import { GridComponent } from './page/grid/grid.component';
+import { InstanceObjectComponent } from './page/instance-object/instance-object.component';
+import { InstanceComponent } from './page/instance/instance.component';
+import { JobpostingComponent } from './page/jobposting/jobposting.component';
+import { LabelsComponent } from 'shared/component/label/labels.component';
+import { ListagentComponent } from './page/listagent/listagent.component';
+import { MarkComponent } from 'shared/component/mark/mark.component';
+import { NatureComponent } from 'shared/component/nature/nature.component';
+import { NotFoundComponent } from 'shared/component/notfound/notFound.component';
+import { ObjectComponent } from './page/object/object.component';
+import { OperationComponent } from 'shared/component/operation/operation.component';
+import { OpscardComponent } from './page/opscard/opscard.component';
+import { RankComponent } from 'shared/component/rank/rank.component';
+import { SitesComponent } from 'shared/component/site/sites.component';
+import { StructureComponent } from 'shared/component/structure/structure.component';
+import { TitletaskComponent } from './page/titletask/titletask.component';
+import { TypeObjectComponent } from 'shared/component/type-object/type-object.component';
+import { TypeOperationComponent } from 'shared/component/type-operation/type-operation.component';
+import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.component';
+import { SharedModule } from './shared/shared.module';
+import { TreeTableModule, TreeNode } from 'primeng/primeng';
 
 
 
@@ -48,42 +46,33 @@ import { HomeComponent } from './core/component/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LabelsComponent,
-    SitesComponent,
-    NotFoundComponent,
     TitletaskComponent,
-    MarkComponent,
-    TypeObjectComponent,
-    TypeOperationComponent,
-    OperationComponent,
-    ActivityComponent,
     ObjectComponent,
     InstanceComponent,
-    UnitmeasureComponent,
     JobpostingComponent,
-    TypeFormationComponent,
     FormationComponent,
     AlertComponent,
-    DialogModalComponent,
-    PropertyComponent,
-    VwpropertyComponent,
     InstanceObjectComponent,
-    SiteNameComponent,
-    OperationComponent,
     CaseagentComponent,
     ListagentComponent,
-    NatureComponent,
-    BitComponent,
-    AgentComponent,
-    EntrepriseComponent,
     OpscardComponent,
-    StructureComponent
   ],
   imports: [
     OrganizationChartModule,
-    OrganizationChartModule,
+    SharedModule,
+    AdminModule,
+    AccidentModule,
+    CoreModule,
+    TreeTableModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
+      { path: 'object', component: ObjectComponent },
+      { path: 'titletask', component: TitletaskComponent },
+      { path: 'instance', component: InstanceComponent },
+      { path: 'jobposting', component: JobpostingComponent },
+      { path: 'home', component: HomeComponent },
+
+      { path: 'operation', component: OperationComponent },
       { path: 'activity', component: ActivityComponent },
       { path: 'label', component: LabelsComponent },
       { path: 'mark', component: MarkComponent },
@@ -93,25 +82,17 @@ import { HomeComponent } from './core/component/home/home.component';
       { path: 'unitmeasure', component: UnitmeasureComponent },
       { path: 'site', component: SitesComponent },
       { path: 'structure', component: StructureComponent },
-      { path: 'object', component: ObjectComponent },
-      { path: 'operation', component: OperationComponent },
-      { path: 'titletask', component: TitletaskComponent },
-      { path: 'instance', component: InstanceComponent },
-      { path: 'jobposting', component: JobpostingComponent },
-      { path: 'home', component: HomeComponent },
       { path: 'agent', component: AgentComponent },
       { path: 'entreprise', component: EntrepriseComponent },
       { path: 'nature', component: NatureComponent },
-      { path: 'element', component: ElementComponent },
-      { path: 'rank', component: RankComponent },
-      { path: 'grid', component: GridComponent },
       { path: 'bit', component: BitComponent },
+      { path: 'rank', component: RankComponent },
+
+      { path: 'element', component: ElementComponent },
+
+      { path: 'grid', component: GridComponent },
       { path: '**', component: NotFoundComponent }
-    ]),
-    SharedModule,
-    AdminModule,
-    AccidentModule,
-    CoreModule,
+    ])
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}

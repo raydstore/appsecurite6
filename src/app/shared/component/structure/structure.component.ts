@@ -1,26 +1,26 @@
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
-import { NotFoundError } from '../../core/component/common/not-found-error';
-import { AppError } from '../../core/component/common/app-error';
-import { BadInput } from '../../core/component/common/bad-input';
-import { EntrepriseService } from 'shared/services/entreprise.service';
+import { NotFoundError } from '../../../core/component/common/not-found-error';
+import { AppError } from '../../../core/component/common/app-error';
+import { BadInput } from '../../../core/component/common/bad-input';
+import { StructureService } from 'shared/services/structure.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Entreprise } from 'shared/table/table';
+import { Structure } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 
 @Component({
-  selector: 'app-entreprise',
-  templateUrl: 'entreprise.component.html',
-  styleUrls: ['./entreprise.component.css']
+  selector: 'app-structure',
+  templateUrl: 'structure.component.html',
+  styleUrls: ['./structure.component.css']
 })
-export class EntrepriseComponent implements OnInit {
-  entreprises: any[];
-  selectedEntreprise: Entreprise;
+export class StructureComponent implements OnInit {
+  structures: any[];
+  selectedStructure: Structure;
   selectedNode: TreeNode;
-  // entreprise: any;
-  newEntreprise: any = {
+
+  newStructure: any = {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
@@ -35,18 +35,17 @@ export class EntrepriseComponent implements OnInit {
   lastid: any;
   titlelist = 'Marque';
 
-  constructor(private service: EntrepriseService, private lastidService: LastidService) {
+  constructor(private service: StructureService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
   }
 
   loadData() {
     this.service.getAll()
-      .subscribe(entreprises => {
-        this.entreprises = entreprises;
+      .subscribe(structures => {
+        this.structures = structures;
       });
   }
 
@@ -75,14 +74,16 @@ export class EntrepriseComponent implements OnInit {
   }
 
 
-  createEntreprise() {
+  createStructure() {
     this.dialogVisible = false;
-    this.entreprises = [this.newEntreprise, ...this.entreprises];
-    this.service.create(this.newEntreprise)
-      .subscribe(newEntreprise => {
+    this.structures = [this.newStructure, ...this.structures];
+
+
+    this.service.create(this.newStructure)
+      .subscribe(newStructure => {
         this.loadData();
       }, (error: AppError) => {
-        this.entreprises.splice(0, 1);
+        this.structures.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
@@ -91,15 +92,16 @@ export class EntrepriseComponent implements OnInit {
       });
   }
 
-  deleteEntreprise(_entreprise: Entreprise) {
-    let index = this.entreprises.indexOf(_entreprise);
-    this.entreprises.splice(index, 1);
-    this.entreprises = [...this.entreprises];
-    this.service.delete(_entreprise.id)
+  deleteStructure(_structure: Structure) {
+    let index = this.structures.indexOf(_structure);
+    this.structures.splice(index, 1);
+    this.structures = [...this.structures];
+    this.service.delete(_structure.id)
       .subscribe(
         () => { this.loadData(); },
         (error: Response) => {
-          this.entreprises.splice(index, 0, _entreprise);
+          this.structures.splice(index, 0, _structure);
+
           if (error instanceof NotFoundError) {
             alert('this post has already been deleted');
           } else {
@@ -109,22 +111,22 @@ export class EntrepriseComponent implements OnInit {
       );
   }
 
-  updateEntreprise(_entreprise, input: HTMLInputElement) {
-    _entreprise.name = input.value;
-    this.service.update(_entreprise)
-      .subscribe(updateentreprise => {
+  updateStructure(_structure, input: HTMLInputElement) {
+    _structure.name = input.value;
+    this.service.update(_structure)
+      .subscribe(updatestructure => {
         this.loadData();
       });
   }
 
-  cancelUpdate(_entreprise) {
+  cancelUpdate(_structure) {
     //
   }
 
   showNewDialoge() {
     this.dialogVisible = true;
     this.newMode = true;
-    this.newEntreprise = {
+    this.newStructure = {
       datecreate: new Date(),
       dateupdate: new Date(),
       id: 0,
@@ -144,35 +146,35 @@ export class EntrepriseComponent implements OnInit {
   }
 
   save() {
-    let entreprises = [...this.entreprises];
+    let structures = [...this.structures];
     if (this.newMode) {
-      entreprises.push(this.newEntreprise);
+      structures.push(this.newStructure);
     } else {
-      entreprises[this.findSelectedEntrepriseIndex()] = this.newEntreprise;
+      structures[this.findSelectedStructureIndex()] = this.newStructure;
     }
-    this.entreprises = entreprises;
-    this.newEntreprise = null;
+    this.structures = structures;
+    this.newStructure = null;
     this.dialogVisible = false;
   }
 
   delete() {
-    let index = this.findSelectedEntrepriseIndex();
-    this.entreprises = this.entreprises.filter((val, i) => i !== index);
-    this.newEntreprise = null;
+    let index = this.findSelectedStructureIndex();
+    this.structures = this.structures.filter((val, i) => i !== index);
+    this.newStructure = null;
     this.dialogVisible = false;
   }
 
   onRowSelect(event) {
   }
 
-  cloneEntreprise(c: Entreprise): Entreprise {
-    let entreprise: Entreprise; 
-    entreprise = c;
-    return entreprise;
+  cloneStructure(c: Structure): Structure {
+    let structure: Structure;
+    structure = c;
+    return structure;
   }
 
-  findSelectedEntrepriseIndex(): number {
-    return this.entreprises.indexOf(this.selectedEntreprise);
+  findSelectedStructureIndex(): number {
+    return this.structures.indexOf(this.selectedStructure);
   }
 }
 

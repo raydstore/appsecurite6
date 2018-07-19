@@ -22,7 +22,7 @@
     sortField="id" [paginator]="true" [rows]="10"
   -->
 
-  <p-table [value]="accidents" dataKey="id" selectionMode="single" [(selection)]="selectedNode"  >
+  <p-table [value]="accidents" dataKey="id" selectionMode="single" [(selection)]="selectedNode">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 2.25em"></th>
@@ -125,32 +125,32 @@
       </tr> -->
       <tr>
         <td [attr.colspan]="8">
-            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
-          <div class="accidentd text-white bg-info mb-3">
-            <div class="accidentd-header">Info Accident</div>
-            <div class="accidentd-body">
-              <p-tabView>
-                <p-tabPanel [selected]="true" [header]="'Détail'">
-                  <app-faccident [item]="accident" [mode]="mUpdate" (operation)="performAction($event)"></app-faccident>
-                </p-tabPanel>
-                <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
-                  <app-accidentdetail [accident]="accident"></app-accidentdetail>
-                </p-tabPanel>
-                <p-tabPanel [header]="'Cause'">
-                  <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
-                </p-tabPanel>
-                <p-tabPanel [header]="'Action / Recommandation'">
-                  <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
-                </p-tabPanel>
-                <p-tabPanel [header]="'Investigation'">
+          <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+            <div class="accidentd text-white bg-info mb-3">
+              <div class="accidentd-header">Info Accident</div>
+              <div class="accidentd-body">
+                <p-tabView>
+                  <p-tabPanel [selected]="true" [header]="'Détail'">
+                    <app-faccident [item]="accident" [mode]="mUpdate" (operation)="performAction($event)"></app-faccident>
+                  </p-tabPanel>
+                  <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
+                    <app-accidentdetail [accident]="accident"></app-accidentdetail>
+                  </p-tabPanel>
+                  <p-tabPanel [header]="'Cause'">
+                    <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
+                  </p-tabPanel>
+                  <p-tabPanel [header]="'Action / Recommandation'">
+                    <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
+                  </p-tabPanel>
+                  <p-tabPanel [header]="'Investigation'">
 
-                </p-tabPanel>
-                <p-tabPanel [header]="'Fichier attaché'">
-                  <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
-                </p-tabPanel>
-              </p-tabView>
+                  </p-tabPanel>
+                  <p-tabPanel [header]="'Fichier attaché'">
+                    <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
+                  </p-tabPanel>
+                </p-tabView>
+              </div>
             </div>
-          </div>
           </div>
         </td>
       </tr>

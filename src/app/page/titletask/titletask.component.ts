@@ -1,10 +1,11 @@
 import { BadInput } from '../../core/component/common/bad-input';
 import { TitletaskService } from 'shared/services/titletask.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TreeTableModule, TreeNode, SharedModule } from 'primeng/primeng';
 import { Titletask } from 'shared/table/table';
 import { AppError } from '../../core/component/common/app-error';
 import { NotFoundError } from '../../core/component/common/not-found-error';
+
+import {TreeNode} from 'primeng/api';
 
 @Component({
   selector: 'app-titletask',
