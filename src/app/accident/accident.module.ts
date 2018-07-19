@@ -4,7 +4,7 @@ import { NotFoundComponent } from 'shared/component/notfound/notFound.component'
 import { SharedModule } from './../shared/shared.module';
 import { ElementComponent } from './component/element/element.component';
 import { RankComponent } from 'shared/component/rank/rank.component';
-import { GridComponent } from '../page/grid/grid.component';
+import { GridComponent } from 'shared/component/grid/grid.component';
 import { AccidentComponent } from './component/accident/accident.component';
 import { AccidentnatureComponent } from './component/accidentnature/accidentnature.component';
 import { DamageComponent } from './component/damage/damage.component';

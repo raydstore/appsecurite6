@@ -3,6 +3,7 @@ import { AppError } from '../../../core/component/common/app-error';
 import { AgentService } from 'shared/services/agent.service';
 import { Accidentagentsh, Mode, Agent, EventArgs } from 'shared/table/table';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-faccidentagentsh',
@@ -13,24 +14,27 @@ export class FaccidentagentshComponent implements OnInit {
 
   @Input() item: Accidentagentsh;
   @Input() mode: Mode;
+  @Input() agents: Agent[];
   @Output() operation = new EventEmitter();
 
   sites: Site[];
-  agents: Agent[];
+  // agents: Agent[];
+  // public agentService: AgentService
 
-  constructor(public agentService: AgentService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.loadAgent();
+    console.log('faccident list agents = ' + JSON.stringify(this.agents));
+    // this.loadAgent();
   }
 
 
-  loadAgent() {
+  /* loadAgent() {
     this.agentService.getAll()
       .subscribe(agents => {
         this.agents = agents;
       });
-  }
+  } */
 
   onChangeItem(item: Accidentagentsh, field: string, event) {
     /* passe choise agent to field item on accidentagent */
@@ -44,7 +48,7 @@ export class FaccidentagentshComponent implements OnInit {
     /* build event argument to send to parent call component */
     eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false }
                                          : { item: this.item, mode: Mode.update, dialogVisible: false };
-    /* send event argument  */                                     
+    /* send event argument  */
     this.operation.emit(eventargs);
   }
 
@@ -54,7 +58,7 @@ export class FaccidentagentshComponent implements OnInit {
 
   displayNameAgent(item: any, args: string[]): string {
     let result = '';
-    if (item !== null) {
+    if (!isNullOrUndefined(item)) {
       if (args.length > 0) {
         result = item[args[0]];
       }
@@ -66,11 +70,23 @@ export class FaccidentagentshComponent implements OnInit {
   }
 
 
-  getAgent(id?: string): Agent {
+  /* getAgent(id?: string): Agent {
     let res: Agent  = null;
     this.agentService.getItem(id)
-  .subscribe(result => res = result);
-  return res;
-}
+        .subscribe(result => res = result);
+    return res;
+  } */
+
+  getAgent(id?): Agent {
+    if (!isNullOrUndefined(id) && !isNullOrUndefined(this.agents)) {
+     return this.agents.find(item => item.id === id);
+    }
+  }
+
+  /* getName(agent?: Agent): string {
+    if (!isNullOrUndefined(agent)) {
+       return agent.firstname + ' ' + agent.lastname;
+    }
+  } */
 
 }

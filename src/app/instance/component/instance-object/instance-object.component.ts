@@ -1,32 +1,35 @@
+import { MarkService } from 'shared/services/mark.service';
+import { SiteService } from 'shared/services/site.service';
 import { PropertyService } from 'shared/services/property.service';
 import { LastidService } from 'shared/services/lastid.service';
-import { NotFoundError } from '../../core/component/common/not-found-error';
-import { AppError } from '../../core/component/common/app-error';
-import { BadInput } from '../../core/component/common/bad-input';
+import { NotFoundError } from '../../../core/component/common/not-found-error';
+import { AppError } from '../../../core/component/common/app-error';
+import { BadInput } from '../../../core/component/common/bad-input';
 import { ObjectService } from 'shared/services/object.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Object } from 'shared/table/table';
+import { Object, Instance } from 'shared/table/table';
 import { Property } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
-import { TypeObjectService } from 'shared/services/type-object.service';
+import { InstanceService } from 'shared/services/instance.service';
 
 @Component({
-  selector: 'app-object',
-  templateUrl: 'object.component.html',
-  styleUrls: ['./object.component.css']
+  selector: 'app-instance-object',
+  templateUrl: 'instance-object.component.html',
+  styleUrls: ['./instance-object.component.css']
 })
-export class ObjectComponent implements OnInit {
-  objects: any[];
-  selectedObject: Object;
-  // object: any;
-  newObject: any = {
+export class InstanceObjectComponent implements OnInit {
+  @Input() idObject: Object;
+  instances: any[];
+  selectedInstance: Instance;
+  // instance: any;
+  newInstance: any = {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
     lastuser: 'ali',
-    name: '',
+    idsite: '',
     owner: 'ali'
   };
   dialogVisible = false;
@@ -50,31 +53,31 @@ export class ObjectComponent implements OnInit {
   /* */
   lastids: any[];
   lastid: any;
-  titlelist = 'Objet';
-  typeObjects: any[];
+  titlelist = 'Répartition objet';
+  sites: any[];
+  marks: any[];
 
-  constructor(private service: ObjectService, private serviceProperty: PropertyService,
-    private lastidService: LastidService, private typeObjectService: TypeObjectService) {
+  constructor(private service: InstanceService, private serviceProperty: PropertyService, private lastidService: LastidService,
+              private siteService: SiteService, private markService: MarkService) {
   }
 
   ngOnInit() {
     this.loadData();
-    this.serviceProperty.getAll()
-      .subscribe(propertys => {
-        this.propertys = propertys;
+
+    this.siteService.getAll()
+      .subscribe(sites => {
+        this.sites = sites;
       });
-    this.typeObjectService.getAll()
-      .subscribe(typeObjects => {
-        this.typeObjects = typeObjects;
+    this.markService.getAll()
+      .subscribe(marks => {
+        this.marks = marks;
       });
-    /* this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids); */
   }
 
   loadData() {
-    this.service.getAll()
-      .subscribe(objects => {
-        this.objects = objects;
+    this.service.getByQueryParam({ 'idobject': this.idObject.id })
+      .subscribe(instances => {
+        this.instances = instances;
       });
   }
 
@@ -91,15 +94,15 @@ export class ObjectComponent implements OnInit {
 
 
 
-  createObject() {
+  createInstance() {
     this.dialogVisible = false;
-    this.objects = [this.newObject, ...this.objects];
-
-    this.service.create(this.newObject)
-      .subscribe(newObject => {
+    this.newInstance.idobject = this.idObject;
+    this.instances = [this.newInstance, ...this.instances];
+    this.service.create(this.newInstance)
+      .subscribe(newInstance => {
         this.loadData();
       }, (error: AppError) => {
-        this.objects.splice(0, 1);
+        this.instances.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
         } else {
@@ -108,15 +111,15 @@ export class ObjectComponent implements OnInit {
       });
   }
 
-  deleteObject(_object: Object) {
-    let index = this.objects.indexOf(_object);
-    this.objects.splice(index, 1);
-    this.objects = [...this.objects];
-    this.service.delete(_object.id)
+  deleteInstance(_instance: Instance) {
+    let index = this.instances.indexOf(_instance);
+    this.instances.splice(index, 1);
+    this.instances = [...this.instances];
+    this.service.delete(_instance.id)
       .subscribe(
       null,
       (error: Response) => {
-        this.objects.splice(index, 0, _object);
+        this.instances.splice(index, 0, _instance);
 
         if (error instanceof NotFoundError) {
           alert('this post has already been deleted');
@@ -127,27 +130,26 @@ export class ObjectComponent implements OnInit {
       );
   }
 
-  updateObject(_object, input: HTMLInputElement) {
-    _object.name = input.value;
-    this.service.update(_object)
-      .subscribe(updateobject => {
-        console.log(updateobject);
+  updateInstance(_instance, input: HTMLInputElement) {
+    this.service.update(_instance)
+      .subscribe(updateinstance => {
+        console.log(updateinstance);
       });
   }
 
-  cancelUpdate(_object) {
+  cancelUpdate(_instance) {
     //
   }
 
   showNewDialoge() {
     this.dialogVisible = true;
     this.newMode = true;
-    this.newObject = {
+    this.newInstance = {
       datecreate: new Date(),
       dateupdate: new Date(),
       id: 0,
       lastuser: 'ali',
-      name: '',
+      idsite: 0,
       owner: 'ali'
     };
   }
@@ -162,44 +164,44 @@ export class ObjectComponent implements OnInit {
   }
 
   save() {
-    let objects = [...this.objects];
+    let instances = [...this.instances];
     if (this.newMode) {
-      objects.push(this.newObject);
+      instances.push(this.newInstance);
     } else {
-      objects[this.findSelectedObjectIndex()] = this.newObject;
+      instances[this.findSelectedInstanceIndex()] = this.newInstance;
     }
-    this.objects = objects;
-    this.newObject = null;
+    this.instances = instances;
+    this.newInstance = null;
     this.dialogVisible = false;
   }
 
   delete() {
-    let index = this.findSelectedObjectIndex();
-    this.objects = this.objects.filter((val, i) => i !== index);
-    this.newObject = null;
+    let index = this.findSelectedInstanceIndex();
+    this.instances = this.instances.filter((val, i) => i !== index);
+    this.newInstance = null;
     this.dialogVisible = false;
   }
 
   onRowSelect(event) {
   }
 
-  cloneObject(c: Object): Object {
-    let object: Object; 
-    object = c;
-    return object;
+  cloneInstance(c: Instance): Instance {
+    let instance: Instance; 
+    instance = c;
+    return instance;
   }
 
-  findSelectedObjectIndex(): number {
-    return this.objects.indexOf(this.selectedObject);
+  findSelectedInstanceIndex(): number {
+    return this.instances.indexOf(this.selectedInstance);
   }
 
   /* la gestion des property d'objet */
 
   createProperty() {
     this.dialogVisibleProperty = false;
-    this.propertys = [this.newObject, ...this.propertys];
-    this.service.create(this.newObject)
-      .subscribe(newObject => {
+    this.propertys = [this.newInstance, ...this.propertys];
+    this.service.create(this.newInstance)
+      .subscribe(newInstance => {
       }, (error: AppError) => {
         this.propertys.splice(0, 1);
         if (error instanceof BadInput) {
@@ -211,7 +213,7 @@ export class ObjectComponent implements OnInit {
   }
 
   deleteProperty(_property: Property) {
-    let index = this.objects.indexOf(_property);
+    let index = this.instances.indexOf(_property);
     this.propertys.splice(index, 1);
     this.propertys = [...this.propertys];
     this.service.delete(_property.propertyPK.id)
@@ -266,7 +268,7 @@ export class ObjectComponent implements OnInit {
   saveProperty() {
     let propertys = [...this.propertys];
     if (this.newMode) {
-      propertys.push(this.newObject);
+      propertys.push(this.newInstance);
     } else {
       propertys[this.findSelectedPropertyIndex()] = this.newProperty;
     }
@@ -294,8 +296,3 @@ export class ObjectComponent implements OnInit {
     return this.propertys.indexOf(this.selectedProperty);
   }
 }
-
-
-
-
-

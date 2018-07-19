@@ -1,6 +1,7 @@
 import { TFunctionName } from 'shared/table/table';
 import { DataService } from 'shared/services/data.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-autocomplete',
@@ -25,10 +26,10 @@ export class AutocompleteComponent implements OnInit {
   ngOnInit() {
     this.item.item = this.i_item;
     this.item.name = this.functionName(this.item.item, this.args);
-    }
+  }
 
   getProperty<T, K extends keyof T>(obj: T, key: K) {
-     return obj[key];
+    return obj[key];
   }
 
   setProperty<T, K extends keyof T>(obj: T, key: K, value) {
@@ -44,24 +45,27 @@ export class AutocompleteComponent implements OnInit {
 
   filterItem(event) {
     let query = event.query;
-    this.service.getAll().subscribe(items => {
+    this.filteredList = this.filter(query, this.service);
+    /* this.service.getAll().subscribe(items => {
       this.filteredList = this.filter(query, items);
-    });
+    }); */
   }
 
 
-  filter <T>(query, items: T[]): IItem[] {
+  filter<T>(query, items: T[] = this.service): IItem[] {
     // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
     let filtered: IItem[] = [];
-    for (let i = 0; i < items.length; i++) {
-      let item = items[i];
-      let displayName = this.functionName(item, this.args);
-      if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-        let iitem: IItem = {
-          item: item,
-          name: displayName
+    if (!isNullOrUndefined(items)) {
+      for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let displayName = this.functionName(item, this.args);
+        if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+          let iitem: IItem = {
+            item: item,
+            name: displayName
           }
-        filtered.push(iitem);
+          filtered.push(iitem);
+        }
       }
     }
     return filtered;

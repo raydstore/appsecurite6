@@ -131,22 +131,32 @@
               <div class="accidentd-body">
                 <p-tabView>
                   <p-tabPanel [selected]="true" [header]="'Détail'">
-                    <app-faccident [item]="accident" [mode]="mUpdate" (operation)="performAction($event)"></app-faccident>
+                    <app-faccident [item]="accident" [mode]="mUpdate" [agents]="agents" [sites]="sites" (operation)="performAction($event)"></app-faccident>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
-                    <app-accidentdetail [accident]="accident"></app-accidentdetail>
+                    <ng-template pTemplate="content">
+                      <app-accidentdetail [accident]="accident"></app-accidentdetail>
+                    </ng-template>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Cause'">
-                    <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
+                    <ng-template pTemplate="content">
+                      <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
+                    </ng-template>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Action / Recommandation'">
-                    <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
+                    <ng-template pTemplate="content">
+                      <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
+                    </ng-template>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Investigation'">
+                    <ng-template pTemplate="content">
+                    </ng-template>
 
                   </p-tabPanel>
                   <p-tabPanel [header]="'Fichier attaché'">
-                    <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
+                    <ng-template pTemplate="content">
+                      <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
+                    </ng-template>
                   </p-tabPanel>
                 </p-tabView>
               </div>
@@ -280,5 +290,5 @@
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div> -->
-    <app-faccident [item]="newAccident" [mode]="mInsert" (operation)="performAction($event)"></app-faccident>
+    <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites" (operation)="performAction($event)"></app-faccident>
   </div>

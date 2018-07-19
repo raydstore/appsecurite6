@@ -1,4 +1,3 @@
-import { EventArgs, Mode } from 'shared/table/table';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +10,7 @@ import { BadInput } from '../../../core/component/common/bad-input';
 import { AccidentagentshService } from 'shared/services/accidentagentsh.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Accidentagentsh, AccidentagentshPK, Agent } from 'shared/table/table';
+import { Accidentagentsh, AccidentagentshPK, Agent, EventArgs, Mode } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import { isUndefined, isNullOrUndefined } from 'util';
@@ -30,8 +29,8 @@ export class AccidentagentshComponent implements OnInit {
   @Input() titlelist: string;
 
   
-  accidentagentshs: any[];
-  agents: any[];
+  accidentagentshs: Accidentagentsh[];
+  agents: Agent[];
   selectedAccidentagentsh: Accidentagentsh;
   selectedNode: TreeNode;
   agent: Agent;
@@ -56,6 +55,7 @@ export class AccidentagentshComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
+  mUpdate = Mode.update;
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<String>();

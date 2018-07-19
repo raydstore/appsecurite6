@@ -12,19 +12,22 @@ import { Accident, Mode } from 'shared/table/table';
 export class FaccidentComponent implements OnInit {
   @Input() item: Accident;
   @Input() mode: Mode;
+  @Input() sites: Site[];
+  @Input() agents: Agent[];
   @Output() operation = new EventEmitter();
 
-  sites: Site[];
-  agents: Agent[];
+//   sites: Site[];
+  // agents: Agent[];
 
-  constructor(public siteService: SiteService, public agentService: AgentService) { }
+  // public siteService: SiteService, public agentService: AgentService
+  constructor() { }
 
   ngOnInit() {
-    this.loadSite();
-    this.loadAgent();
+  //  this.loadSite();
+  //  this.loadAgent();
   }
 
-  loadSite() {
+  /* loadSite() {
     this.siteService.getAll()
       .subscribe(sites => {
         this.sites = sites;
@@ -36,7 +39,7 @@ export class FaccidentComponent implements OnInit {
       .subscribe(agents => {
         this.agents = agents;
       });
-  }
+  } */
 
   onChangeDate(item: Accident, event) {
     item.curdate = event;
@@ -48,7 +51,6 @@ export class FaccidentComponent implements OnInit {
 
 
   perform(event) {
-    
     let eventargs: EventArgs;
     eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false }
                                          : { item: this.item, mode: Mode.update, dialogVisible: false };

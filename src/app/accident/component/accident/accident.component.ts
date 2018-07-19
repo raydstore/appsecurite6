@@ -53,8 +53,8 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
 export class AccidentComponent implements OnInit {
  // @Input() displayValue;
   accidents: Accident[];
-  sites: any[];
-  agents: any[];
+  sites: Site[];
+  agents: Agent[];
   selectedAccident: Accident;
   selectedNode: TreeNode;
   newAccident: Accident;
@@ -167,7 +167,7 @@ export class AccidentComponent implements OnInit {
       .debounceTime(200).distinctUntilChanged()
       .merge(this.focus$)
       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
-      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.name).toLowerCase()
+      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.firstname).toLowerCase()
         .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
 
   searchAgentValidate = (text$: Observable<string>) =>
@@ -175,7 +175,7 @@ export class AccidentComponent implements OnInit {
       .debounceTime(200).distinctUntilChanged()
       .merge(this.focus$)
       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
-      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.name).toLowerCase()
+      .map(term => (term === '' ? this.agents : this.agents.filter(v => (v.id + v.firstname).toLowerCase()
         .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
 
   formatter = (x: { name: string }) => x.name;
@@ -380,7 +380,7 @@ export class AccidentComponent implements OnInit {
   }
 
   cloneAccident(c: Accident): Accident {
-    let accident: Accident; 
+    let accident: Accident;
     return accident;
   }
 
