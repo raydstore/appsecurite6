@@ -1,3 +1,14 @@
-<div>
-  <app-elementswitch  *ngFor="let damage of damages" [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="accidentdomain"></app-elementswitch>
+<div class="container">
+ <div class="container" *ngFor="let damage of damages">
+ <!--    <p-carousel headerText="{{damage.name}}" [value]="damages"> 
+        <ng-template let-elementdamage pTemplate="item">
+          <div class="container">
+            <app-elementswitch   [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="accidentdomain"></app-elementswitch>
+          </div>
+        </ng-template>
+    </p-carousel>
+  </div>   -->
+  <!-- <app-elementswitch  *ngFor="let damage of damages" [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="accidentdomain"></app-elementswitch> -->
+  <app-elementswitch   [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="accidentdomain"></app-elementswitch>
+</div>
 </div>

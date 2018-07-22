@@ -23,6 +23,7 @@ import {
   TabViewModule,
   TreeTableModule,
 } from 'primeng/primeng';
+import {CarouselModule} from 'primeng/carousel';
 import { TableModule } from 'primeng/table';
 import { ActivityComponent } from 'shared/component/activity/activity.component';
 import { AgentComponent } from 'shared/component/agent/agent.component';
@@ -102,6 +103,9 @@ import { VwpropertyService } from 'shared/services/vwproperty.service';
 
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatIconModule } from '../../../node_modules/@angular/material';
+/* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
 // import {TreeTableModule} from 'primeng/treetable';
@@ -112,6 +116,11 @@ import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    /* FormBuilder,
+    FormGroup,
+    Validators, */
+    MatStepperModule,
     OrganizationChartModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -133,6 +142,7 @@ import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal
     CodeHighlighterModule,
     PdfViewerModule,
     CalendarModule,
+    CarouselModule,
     NgbModule.forRoot(),
   ],
   exports: [
@@ -140,6 +150,11 @@ import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    /* FormBuilder,
+    FormGroup,
+    Validators, */
+    MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
@@ -181,6 +196,7 @@ import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal
     VwpropertyComponent,
     SiteNameComponent,
     DialogModalComponent,
+    CarouselModule,
   ],
   declarations: [
     NotFoundComponent,

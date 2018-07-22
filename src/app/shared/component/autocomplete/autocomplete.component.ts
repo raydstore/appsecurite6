@@ -26,9 +26,6 @@ export class AutocompleteComponent implements OnInit {
   ngOnInit() {
     this.item.item = this.i_item;
     this.item.name = this.functionName(this.item.item, this.args);
-    console.log('this.i_item = ' + JSON.stringify(this.i_item));
-    console.log('this.item = ' + JSON.stringify(this.item.item));
-    console.log('name = ' + this.item.name)
   }
 
   getProperty<T, K extends keyof T>(obj: T, key: K) {

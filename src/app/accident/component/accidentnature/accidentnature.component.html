@@ -7,9 +7,12 @@
     <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
  </p-panel>
  [selected]="true"
+ *ngFor="let accidentnature of accidentnatures; let i = index"
  -->
  <p-tabView>
-    <p-tabPanel  *ngFor="let accidentnature of accidentnatures" [header]="accidentnature.name">
+    <ng-template ngFor let-accidentnature [ngForOf]="accidentnatures" let-i="index">
+     <p-tabPanel [selected]="i==0"  [header]="accidentnature.name">
         <app-elementdamage [idaccident]="idaccident" [idnature]="accidentnature.idnature"></app-elementdamage>
     </p-tabPanel>
+    </ng-template>
   </p-tabView>

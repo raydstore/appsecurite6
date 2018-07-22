@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 body {
     margin-left: 100px!important;
     margin-right: 100px!important;
@@ -117,4 +118,12 @@ body {
 
 .ui-calendar.ui-calendar-w-btn input {
     width: 273px!important;
+}
+
+
+.ui-carousel .ui-carousel-viewport {
+    /* overflow: hidden;
+    position: relative;
+    border: 0; */
+    width: 850px;
 }
