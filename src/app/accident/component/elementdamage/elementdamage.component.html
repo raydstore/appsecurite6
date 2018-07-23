@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <div class="row" *ngFor="let elementdamage of elementdamages" >
-      <div class="col-sm-5 clplleft">
+  <div class="row" *ngFor="let elementdamage of elementdamages">
+    <div class="col-sm-5 clplleft">
 
-  
 
-<!-- <div>
+
+      <!-- <div>
     
     <mat-horizontal-stepper>
         <ng-template *ngFor="let damage of getDamages(idaccident, idnature, elementdamage.accidentdomain)" matStepLabel>
@@ -25,38 +25,38 @@
 
 
 
-    <!-- <app-damage [idaccident]="idaccident" [idnature]="idnature" [accidentdomain]="elementdamage.accidentdomain"></app-damage> 
+      <!-- <app-damage [idaccident]="idaccident" [idnature]="idnature" [accidentdomain]="elementdamage.accidentdomain"></app-damage> 
   </div>
   <!-- <div *ngFor="let elementdamage of elementdamages" class="jumbotron"> -->
-    <!--   *ngFor="let damage of damages" -->
-      
-  
-  <!-- </div> -->
+      <!--   *ngFor="let damage of damages" -->
+
+
+      <!-- </div> -->
 
 
 
 
-<!-- </div> -->
+      <!-- </div> -->
 
 
 
-    <!-- <span>
+      <!-- <span>
       
       <h3 class="display-6 titledamage">{{elementdamage.name}}</h3>
     </span> -->
 
 
 
-  <!--   <div class="container"> -->
-        <div class="form-group row">
-    <p-carousel headerText="{{elementdamage.name}}" circular="true" effectDuration="10000" numVisible="1" [value]="getDamages(idaccident, idnature, elementdamage.accidentdomain)">
-        <ng-template let-damage pTemplate="item">
+      <!--   <div class="container"> -->
+      <div class="form-group row">
+        <p-carousel headerText="{{elementdamage.name}}" circular="true" effectDuration="10000" numVisible="1" [value]="getDamages(idaccident, idnature, elementdamage.accidentdomain)">
+          <ng-template let-damage pTemplate="item">
             <div class="ui-grid ui-grid-responsive">
-            <app-elementswitch   [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="elementdamage.accidentdomain"></app-elementswitch>
-          </div>
-        </ng-template>
-    </p-carousel>
-    </div> 
+              <app-elementswitch [iddamage]="damage.id" [idgrid]="damage.idgrid" [titlelist]="damage.name" [accidentdomain]="elementdamage.accidentdomain"></app-elementswitch>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
     </div>
-    </div>
-    </div>
+  </div>
+</div>

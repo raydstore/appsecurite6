@@ -122,8 +122,11 @@ body {
 
 
 .ui-carousel .ui-carousel-viewport {
-    /* overflow: hidden;
-    position: relative;
-    border: 0; */
     width: 850px;
+}
+
+.ui-carousel .ui-carousel-header .ui-carousel-header-title {
+    color: #4e4e5fc7;
+    font: bold;
+    font-size: 32px;
 }
