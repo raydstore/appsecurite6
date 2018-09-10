@@ -1,4 +1,4 @@
-<div class="card ctn" [ngSwitch]="accidentdomain" >
+<ng-container class="card ctn" [ngSwitch]="accidentdomain" >
   <app-accidentagentsh *ngSwitchCase="1" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagentsh>
   <app-accidentagentee *ngSwitchCase="2" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagentee>
   <app-accidentagenttp *ngSwitchCase="3" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagenttp>
@@ -6,4 +6,4 @@
   <app-accidentvehicule *ngSwitchCase="6" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"
        [classification]="'S'" [accidentdomain]="'6'"></app-accidentvehicule>
   <app-damagedefinition *ngSwitchDefault  [iddamage]="iddamage" [idgrid]="idgrid" [accidentdomain]="accidentdomain" [titlelist]="titlelist"></app-damagedefinition>
-</div>  
+</ng-container>  

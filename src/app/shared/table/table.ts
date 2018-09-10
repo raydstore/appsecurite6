@@ -296,8 +296,8 @@ export interface Agent {
 }
 
 export interface AccidentagentshPK {
-    iddamage: number;
     idagent: string;
+    iddamage: number;
 }
 
 export interface AccidentagenteePK {
@@ -312,16 +312,16 @@ export interface AccidentagenttpPK {
 
 export interface Accidentagentsh {
     accidentagentshPK: AccidentagentshPK;
+    accidentdomain: number;
     agent?: Agent;
     countstopwork: number;
-    accidentdomain: number;
-    typeaccident: string;
-    idgrid: number;
-    samury: string;
-    owner?: string;
-    lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
+    idgrid: number;
+    owner?: string;
+    lastuser?: string;
+    samury: string;
+    typeaccident: string;
 }
 
 export interface Accidentagentee {

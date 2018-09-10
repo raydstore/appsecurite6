@@ -2,3 +2,17 @@
  /*    background-color: brown!important;
     color: white!important; */
 }
+
+.selheader {
+    background-color: #95a5a6!important;
+    /*  blueviolet!important; */
+    color: white;
+}
+
+.trheader {
+    background-color: red!important;
+}
+
+.ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tbody > tr > td, .ui-table .ui-table-tfoot > tr > td {
+    background-color: #bdc3c7!important;
+}

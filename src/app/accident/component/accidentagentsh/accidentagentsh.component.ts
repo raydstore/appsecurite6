@@ -28,7 +28,7 @@ export class AccidentagentshComponent implements OnInit {
   @Input() idgrid: number;
   @Input() titlelist: string;
 
-  
+
   accidentagentshs: Accidentagentsh[];
   agents: Agent[];
   selectedAccidentagentsh: Accidentagentsh;
@@ -38,17 +38,17 @@ export class AccidentagentshComponent implements OnInit {
 
   accidentagentshPK: AccidentagentshPK;
   newAccidentagentsh: Accidentagentsh = {
+    accidentagentshPK: {idagent: '', iddamage : this.iddamage},
+    accidentdomain: 1,
+    agent: null,
+    countstopwork: 0,
     datecreate: new Date(),
     dateupdate: new Date(),
-    accidentagentshPK: {iddamage : this.iddamage, idagent: ''},
-    accidentdomain: 1,
-    idgrid: 0,
-    agent: null,
+    idgrid: this.idgrid,
     lastuser: 'ali',
+    owner: 'ali',
     samury: '',
-    countstopwork: 0,
-    typeaccident: 'L',
-    owner: 'ali'
+    typeaccident: 'L'
   };
   dialogVisible = false;
   newMode = false;
@@ -56,6 +56,7 @@ export class AccidentagentshComponent implements OnInit {
   lastids: any[];
   lastid: any;
   mUpdate = Mode.update;
+  mInsert = Mode.insert;
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<String>();
@@ -143,8 +144,9 @@ export class AccidentagentshComponent implements OnInit {
 
   createAccidentagentsh() {
     this.dialogVisible = false;
-    this.newAccidentagentsh.accidentagentshPK.idagent = this.agent.id;
+   // this.newAccidentagentsh.accidentagentshPK.idagent = this.agent.id;
     this.accidentagentshs = [this.newAccidentagentsh, ...this.accidentagentshs];
+    console.log('aa = ' + JSON.stringify(this.newAccidentagentsh));
     this.service.create(this.newAccidentagentsh)
       .subscribe(newAccidentagentsh => {
         this.loadData();
@@ -191,17 +193,17 @@ export class AccidentagentshComponent implements OnInit {
     this.dialogVisible = true;
     this.newMode = true;
     this.newAccidentagentsh = {
+      accidentagentshPK: {idagent: '', iddamage : this.iddamage},
+      accidentdomain: 1,
+      agent: null,
+      countstopwork: 0,
       datecreate: new Date(),
       dateupdate: new Date(),
-      accidentagentshPK: {iddamage: this.iddamage, idagent: ''} ,
-      agent: null,
+      idgrid: this.idgrid,
       lastuser: 'ali',
-      idgrid: 1,
-      countstopwork: 0,
-      accidentdomain: 1,
+      owner: 'ali',
       samury: '',
-      typeaccident: 'L',
-      owner: 'ali'
+      typeaccident: 'L'
     };
   }
 

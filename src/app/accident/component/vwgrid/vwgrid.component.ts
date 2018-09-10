@@ -18,8 +18,10 @@ import { DamageService } from 'shared/services/damage.service';
 export class VwgridComponent implements OnInit {
   @Input() accident: any;
   // @Input() idnature: number;
+  indexheader: number;
   vwgrids: any[];
-  damages: any[];
+  damages: Damage[];
+  expandedRows: any[] = [];
   vwnotnatureofaccidents: any[];
   accidentnatures: any;
   newaccidentnaturePK: AccidentnaturePK = {
@@ -32,22 +34,54 @@ export class VwgridComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     owner: 'ali'
-  }
-
-
+  };
+  infoDamage: any  = {
+    id: -1,
+    name: ''
+  };
 
   constructor(private service: VwgridService, private damageService: DamageService,
     private vwnotnatureofaccidentService: VwnotnatureofaccidentService, private accidentnatureService: AccidentnatureService) { }
 
   ngOnInit() {
     this.loadData();
+    this.indexheader = 1;
+    // this.expandedRows = [...this.vwgrids];
+   /*  const thisRef = this;
+    this.vwgrids.forEach(function(vwgrid) {
+      thisRef.expandedRows[vwgrid.id] = 1;
+    }); */
   }
 
   loadData() {
     this.service.getAll()
       .subscribe(grids => {
         this.vwgrids = grids;
+        this.expandedRows = this.vwgrids.filter(function(row) {
+          return row.id in [1, 2, 3, 4];
+        });
+        console.log('this.expandedRows = ' + JSON.stringify(this.expandedRows));
       });
+    this.damageService.getAll()
+      .subscribe(damages => {
+        this.damages = damages;
+      });
+  }
+
+  getIdDamage(idaccident, idgrid): any {
+    let result: any[];
+    result = this.damages.filter(function(damage){
+      return ((damage.accidentnature.accident.id === idaccident) && (damage.idgrid === idgrid));
+    });
+    if (result.length === 0) {
+      this.infoDamage.id   = -1;
+      this.infoDamage.name = '';
+    } else {
+      this.infoDamage.id   = result[0].id;
+      this.infoDamage.name = result[0].name;
+      // result[0].id;
+    };
+    return this.infoDamage;
   }
 
   loadAccidentNature() {

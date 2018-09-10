@@ -21,12 +21,22 @@ export class AccidentagentshbitComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.loadDataBitClass();
+
   }
 
   loadData() {
     this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idagent': this.idagent, 'idgrid': this.idgrid })
       .subscribe(vw$accidentagentshbits => {
         this.vw$accidentagentshbits = vw$accidentagentshbits;
+      });
+  }
+
+
+  loadDataBitClass() {
+    this.bitclassService.getAll()
+      .subscribe(bitclasss => {
+        this.bitclasss = bitclasss;
       });
   }
 

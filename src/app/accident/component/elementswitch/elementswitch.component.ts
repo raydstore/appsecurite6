@@ -15,6 +15,7 @@ export class ElementswitchComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.iddamage;
+    console.log('es ig = '  + this.idgrid);
   }
 
 }
