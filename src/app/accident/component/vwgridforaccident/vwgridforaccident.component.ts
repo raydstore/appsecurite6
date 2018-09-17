@@ -26,7 +26,7 @@ export class VwgridforaccidentComponent implements OnInit {
   indexheader: number;
   vwgridforaccidents: VwGridForAccident[];
   damages: Damage[];
-  expandedRows: any[] = [];
+  expandedRows: any = {};
   vwnotnatureofaccidents: any[];
   accidentnatures: any;
   newaccidentnaturePK: AccidentnaturePK = {
@@ -65,6 +65,7 @@ export class VwgridforaccidentComponent implements OnInit {
   };
 
   cols: any[];
+  expandAll = false;
 
   constructor(private service: VwgridforaccidentService, private damageService: DamageService,
     private vwnotnatureofaccidentService: VwnotnatureofaccidentService, private accidentnatureService: AccidentnatureService) { }
@@ -81,15 +82,10 @@ export class VwgridforaccidentComponent implements OnInit {
       {field: 'col6', header: 'Véhicules'},
       {field: 'col7', header: 'Epandage d"hydrocarbures'}
     ];
-    // this.expandedRows = [...this.vwgrids];
-   /*  const thisRef = this;
-    this.vwgrids.forEach(function(vwgrid) {
-      thisRef.expandedRows[vwgrid.id] = 1;
-    }); */
   }
 
   loadData() {
-    let v: any;
+    // let v: any;
     this.service.getByQueryParam({ 'idaccident': this.accident['id'] })
       .subscribe(vwgridforaccidents => {
         /*  */
@@ -97,20 +93,26 @@ export class VwgridforaccidentComponent implements OnInit {
           // console.log('this.vwgridforaccidents = ' + JSON.stringify(vwgridforaccidents[i].col1));
           /* v = this.StringToCellGrid((JSON.stringify(vwgridforaccidents[i].col1).replace('///g', ''));
           console.log('v = ' + v); */
-          vwgridforaccidents[i].col1 = this.StringToCellGrid(vwgridforaccidents[i].col1);
+          for (let col of this.cols) {
+/*             console.log(' (vwgridforaccidents[i]) = ' +  JSON.stringify((vwgridforaccidents[i])));
+            console.log(' (vwgridforaccidents[i])[col] = ' +  JSON.stringify((vwgridforaccidents[i])[col]));
+ */            (vwgridforaccidents[i])[col.field]     = this.StringToCellGrid((vwgridforaccidents[i])[col.field]);
+            vwgridforaccidents[i].expanded = true;
+          }
+          /* vwgridforaccidents[i].col1 = this.StringToCellGrid(vwgridforaccidents[i].col1);
           vwgridforaccidents[i].col2 = this.StringToCellGrid(vwgridforaccidents[i].col2);
           vwgridforaccidents[i].col3 = this.StringToCellGrid(vwgridforaccidents[i].col3);
           vwgridforaccidents[i].col4 = this.StringToCellGrid(vwgridforaccidents[i].col4);
           vwgridforaccidents[i].col5 = this.StringToCellGrid(vwgridforaccidents[i].col5);
           vwgridforaccidents[i].col6 = this.StringToCellGrid(vwgridforaccidents[i].col6);
-          vwgridforaccidents[i].col7 = this.StringToCellGrid(vwgridforaccidents[i].col7);
+          vwgridforaccidents[i].col7 = this.StringToCellGrid(vwgridforaccidents[i].col7); */
         }
         this.vwgridforaccidents = vwgridforaccidents;
         /*  */
-        this.expandedRows = this.vwgridforaccidents.filter(function(row) {
+     /*    this.expandedRows = this.vwgridforaccidents.filter(function(row) {
           return row.id in [1, 2, 3, 4];
-        });
-        console.log('this.vwgridforaccidents = ' + JSON.stringify(this.vwgridforaccidents));
+        }); */
+      //  console.log('this.vwgridforaccidents = ' + JSON.stringify(this.vwgridforaccidents));
         // console.log('this.expandedRows = ' + JSON.stringify(this.expandedRows));
       });
     this.damageService.getAll()
@@ -118,6 +120,16 @@ export class VwgridforaccidentComponent implements OnInit {
         this.damages = damages;
       });
   }
+
+ExpandedRow()   {
+  if (this.expandAll) {
+     this.expandedRows = {"1": 1, "2": 1, "3": 1, "4": 1};
+     console.log('true');
+  } else {
+      this.expandedRows = {};
+      console.log('false');
+  }
+}
 
 StringToCellGrid(col): CellGrid {
   let cell: CellGrid = <CellGrid> JSON.parse(col);

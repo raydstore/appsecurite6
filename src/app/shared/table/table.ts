@@ -223,6 +223,7 @@ export interface VwGridForAccident {
     col5?: CellGrid;
     col6?: CellGrid;
     col7?: CellGrid;
+    expanded?: boolean;
 }
 
 export interface Accident {
