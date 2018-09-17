@@ -1,3 +1,4 @@
+import { VwgridforaccidentService } from './services/vwgridforaccident.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,7 @@ import {
   TabViewModule,
   TreeTableModule,
 } from 'primeng/primeng';
+import {RatingModule} from 'primeng/rating';
 import {CarouselModule} from 'primeng/carousel';
 import { TableModule } from 'primeng/table';
 import { ActivityComponent } from 'shared/component/activity/activity.component';
@@ -132,6 +134,7 @@ import { MatIconModule } from '../../../node_modules/@angular/material';
     AutoCompleteModule,
     TabViewModule,
     TreeTableModule,
+    RatingModule,
     InplaceModule,
     DropdownModule,
     DialogModule,
@@ -169,6 +172,7 @@ import { MatIconModule } from '../../../node_modules/@angular/material';
     DropdownModule,
     DialogModule,
     DataTableModule,
+    RatingModule,
     RadioButtonModule,
     TableModule,
     CheckboxModule,
@@ -270,6 +274,7 @@ import { MatIconModule } from '../../../node_modules/@angular/material';
     VwelementgridService,
     VwnotelementofnatureaccidentService,
     VwgridService,
+    VwgridforaccidentService,
     VwdamagewithrankService,
     DamageService,
     EntrepriseService,

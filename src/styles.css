@@ -130,3 +130,7 @@ body {
     font: bold;
     font-size: 32px;
 }
+
+.clautocomplete {
+    width: 350px!important;
+}

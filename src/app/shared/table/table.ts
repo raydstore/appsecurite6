@@ -203,6 +203,28 @@ export interface Grid {
     dateupdate?: Date;
 }
 
+export interface CellGrid {
+    iddamage: number;
+    idgrid: number;
+    name: string;
+    accidentdomain: number;
+    idnature: number;
+    rate: number;
+    oldrate: number;
+  }
+
+export interface VwGridForAccident {
+    id?: number;
+    idaccident?: number;
+    col1?: CellGrid;
+    col2?: CellGrid;
+    col3?: CellGrid;
+    col4?: CellGrid;
+    col5?: CellGrid;
+    col6?: CellGrid;
+    col7?: CellGrid;
+}
+
 export interface Accident {
     id?: number;
     classification?: string;
@@ -244,7 +266,7 @@ export interface Accidentnature {
 export interface Damage {
     id?: number;
     accidentdomain?: number;
-    accidentnature?: any;
+    accidentnature?: Accidentnature;
     idgrid?: number;
     degree?: string;
     description?: string;
@@ -274,6 +296,7 @@ export interface Recommendation {
 
 export interface Bit {
     id?: string;
+    idbitclass?: string;
     name?: string;
     kind?: string;
     idparent?: string;
@@ -403,6 +426,7 @@ export interface Accidentagentshbit {
 export interface Bitclass {
     id?: string;
     kind: string;
+    name?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

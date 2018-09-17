@@ -36,6 +36,7 @@ import {
 import { VwnotnatureofaccidentComponent } from './component/vwnotnatureofaccident/vwnotnatureofaccident.component';
 import { FaccidentComponent } from './container/faccident/faccident.component';
 import { FaccidentagentshComponent } from './container/faccidentagentsh/faccidentagentsh.component';
+import { VwgridforaccidentComponent } from './component/vwgridforaccident/vwgridforaccident.component';
 
 
 
@@ -82,6 +83,7 @@ import { FaccidentagentshComponent } from './container/faccidentagentsh/facciden
     AutocompleteComponent,
     FaccidentComponent,
     FaccidentagentshComponent,
+    VwgridforaccidentComponent,
   ]
 })
 export class AccidentModule { }

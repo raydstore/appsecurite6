@@ -106,6 +106,16 @@ export class AccidentComponent implements OnInit {
     /* this.accidents.forEach(function(accident) {
       thisRef.expandedRows[accident.id] = 1;
     }); */
+
+    this.cols = [
+      { field: 'id',                header: 'id' },
+      { field: 'Classification',    header: 'Classification' },
+      { field: 'date',              header: 'curdate' },
+      { field: 'time',              header: 'time' },
+      { field: 'idsiteparent.name', header: 'site' },
+      { field: 'idsiteparent.name', header: 'lieu' },
+      { field: 'description',       header: 'description' }
+  ];
   }
 
   loadAccidentsLazy(event: LazyLoadEvent) {
@@ -288,12 +298,18 @@ export class AccidentComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs) {
+    console.log(JSON.stringify(eventArgs));
     switch (eventArgs.mode) {
-      case this.mInsert: this.dialogVisible = eventArgs.dialogVisible;
-                         this.createAccident();
-        break;
-      case this.mUpdate: this.updateAccident(<Accident>eventArgs.item);
-        break;
+      case 1: {
+    
+                           this.dialogVisible = eventArgs.dialogVisible;
+                           this.createAccident();
+                           break;
+                         }
+      case this.mUpdate: {
+                           this.updateAccident(<Accident>eventArgs.item);
+                           break;
+                         }
     }
   }
 

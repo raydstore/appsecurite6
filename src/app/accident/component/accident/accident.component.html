@@ -25,18 +25,29 @@
   <!-- [lazy]="true" (onLazyLoad)="loadAccidentsLazy($event)" 
   [totalRecords]="totalRecords" [loading]="loading" -->
 
-  <p-table [value]="accidents" dataKey="id"  rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode" 
-           [paginator]="true" [rows]="10">
-    <ng-template pTemplate="header">
+  <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode"
+    [paginator]="true" [rows]="10" [globalFilterFields]="['id','classification', 'idsiteparent.name', 'idsite.name']">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 2.25em"></th>
-        <th>id</th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th>
+        <!-- <th>id</th>
         <th>Classification</th>
         <th>date</th>
         <th>time</th>
         <th>site</th>
         <th>lieu</th>
-        <th>description</th>
+        <th>description</th> -->
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
@@ -201,7 +212,8 @@
   </p-table>
 </div>
 
-<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="748">
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+  width="748">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
     <!-- <div class="bdcontent">
       <div class="row">

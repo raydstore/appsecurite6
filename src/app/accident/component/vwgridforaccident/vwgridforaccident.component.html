@@ -1,0 +1,81 @@
+<p-table [columns]="cols" [value]="vwgridforaccidents" dataKey="id" [expandedRowKeys]="expandedRows" expandableRows="true">
+    <ng-template pTemplate="header" let-columns>
+        <tr class="trheader">
+            <th colspan="1" style="width: 2.25em"></th>
+            <th colspan="3">Dommages aux personnes</th>
+            <th colspan="3">Dommages aux biens</th>
+            <th colspan="1">Dommages à l'envirenement</th>
+        </tr>
+        <tr class="trheader">
+            <th></th>
+            <th *ngFor="let col of columns; let i = index" [class.selheader]="indexheader == i + 1" (click)="indexheader = i + 1">
+                {{col.header}}
+            </th>
+            <!-- <th [class.selheader]="indexheader == 1" (click)="indexheader = 1">Salaries du groupe Sonatrach</th>
+            <th [class.selheader]="indexheader == 2" (click)="indexheader = 2">Salaries EE</th>
+            <th [class.selheader]="indexheader == 3" (click)="indexheader = 3">Tierce personne</th>
+            <th [class.selheader]="indexheader == 4" (click)="indexheader = 4">Installations (coûts directs)</th>
+            <th [class.selheader]="indexheader == 5" (click)="indexheader = 5">Pertes de production</th>
+            <th [class.selheader]="indexheader == 6" (click)="indexheader = 6">Véhicules</th>
+            <th [class.selheader]="indexheader == 7" (click)="indexheader = 7">Epandage d'hydrocarbures</th> -->
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-grid let-rowData let-expanded="expanded" let-columns="columns">
+        <tr expanded="true">
+            <td>
+                <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">{{grid.id}}</i>
+                </a>
+                <!-- {{grid.col1}} -->
+            </td>
+            <td *ngFor="let col of columns; let i = index" [class.selheader]="indexheader == (i + 1)" [class.colred]="grid[col.field].iddamage != 0">
+                <p-rating [(ngModel)]="grid[col.field].rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid[col.field])"
+                    (onCancel)="deleteAN($event)"></p-rating>
+                {{grid[col.field].name}}
+            </td>
+            <!--             <td class="bgcelselected" [class.selheader]="indexheader == 1" [class.colred]="grid.col1.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col1.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col1, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col1.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 2" [class.colred]="grid.col2.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col2.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col2, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col2.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 3" [class.colred]="grid.col3.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col3.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col3, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col3.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 4" [class.colred]="grid.col4.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col4.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col4, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col4.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 5" [class.colred]="grid.col5.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col5.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col5, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col5.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 6" [class.colred]="grid.col6.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col6.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col6, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col6.name}}
+            </td>
+            <td class="bgcelselected" [class.selheader]="indexheader == 7" [class.colred]="grid.col7.iddamage != 0">
+                <p-rating [(ngModel)]="grid.col7.rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid.col7, grid.col1.rate)" (onCancel)="deleteAN($event)"></p-rating>
+                {{grid.col7.name}}
+            </td>
+ -->
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-grid let-columns="columns">
+        <tr *ngIf="getIdDamage(accident.id,  (indexheader - 1)*4 + grid.id).id != -1">
+            <td [attr.colspan]="8">
+                <div class="container" style="font-size:16px;padding:20px">
+                    {{ (indexheader - 1)*4 + grid.id }}
+                    {{getIdDamage(accident.id, (indexheader - 1)*4 + grid.id)}}
+                    <app-elementswitch [iddamage]="infoDamage.id" [idgrid]="(indexheader - 1)*4 + grid.id" [titlelist]="getTitle(grid,indexheader)"
+                        [accidentdomain]="indexheader"></app-elementswitch>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>
