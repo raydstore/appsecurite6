@@ -524,3 +524,41 @@ export interface Accidentfile {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+// ******     partie inspection  ***********
+
+export interface InspectedSite {
+    idsite?: Site;
+    periodicity: number;
+    enable?: number;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface VwinspectedSite  {
+    id?: Site;
+    name?: string;
+    periodicity: number;
+    enable?: number;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+
+export interface InspectPlanning {
+    id?: number;
+    idsiteinspected?: InspectedSite;
+    datefirst?: Date;
+    datelast?: Date;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+
+// *****************************************

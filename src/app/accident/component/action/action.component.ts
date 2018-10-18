@@ -50,7 +50,7 @@ export class ActionComponent implements OnInit {
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'idaccident': this.idaccident.id })
+    this.service.getByQueryParam({ 'idparent': this.idaccident.id })
       .subscribe(actions => {
         this.actions = actions;
       });

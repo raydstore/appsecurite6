@@ -1,3 +1,5 @@
+import { InspectedsiteService } from './services/inspectedsite.service';
+import { InspectplanningService } from './services/inspectplanning.service';
 import { VwgridforaccidentService } from './services/vwgridforaccident.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   OrganizationChartModule,
-  AutoCompleteModule,
   CalendarModule,
   CheckboxModule,
   CodeHighlighterModule,
@@ -22,11 +23,13 @@ import {
   PanelModule,
   RadioButtonModule,
   TabViewModule,
-  TreeTableModule,
 } from 'primeng/primeng';
-import {RatingModule} from 'primeng/rating';
-import {CarouselModule} from 'primeng/carousel';
+import {TreeNode} from 'primeng/api';
+import { TreeTableModule } from 'primeng/treetable';
+import { RatingModule } from 'primeng/rating';
+import { CarouselModule } from 'primeng/carousel';
 import { TableModule } from 'primeng/table';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ActivityComponent } from 'shared/component/activity/activity.component';
 import { AgentComponent } from 'shared/component/agent/agent.component';
 import { BitComponent } from 'shared/component/bit/bit.component';
@@ -107,6 +110,8 @@ import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '../../../node_modules/@angular/material';
+import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
+import { VwinspectedsiteService } from './services/vwinspectedsite.service';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -283,6 +288,10 @@ import { MatIconModule } from '../../../node_modules/@angular/material';
     StructureService,
     AccidentfileService,
     UploadfileService,
+    InspectedsiteService,
+    InspectplanningService,
+    VwsitenotinspectedService,
+    VwinspectedsiteService
   ]
 })
 export class SharedModule { }

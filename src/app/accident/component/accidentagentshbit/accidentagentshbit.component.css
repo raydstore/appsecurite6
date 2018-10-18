@@ -10,6 +10,19 @@
 }
 
 .alw {
-    width: 680px;
-    /* background-color: blue; */
+    display: block;
+    float: left;
+    width: 280px !important;
+    background-color: green !important;
+    color: white !important;
+}
+
+.spc {
+    background-color: brown !important;
+    margin-right: 30px !important;
+    width: 350px !important;
+    max-width: 350px !important;
+    display: inline-block;
+    float: left;
+    word-wrap: break-word;
 }

@@ -212,7 +212,7 @@
   </p-table>
 </div>
 
-<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+<p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="onHide($event)"
   width="748">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
     <!-- <div class="bdcontent">

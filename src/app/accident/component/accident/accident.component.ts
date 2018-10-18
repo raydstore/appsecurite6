@@ -310,6 +310,10 @@ export class AccidentComponent implements OnInit {
                            this.updateAccident(<Accident>eventArgs.item);
                            break;
                          }
+      /* default: {
+             this.dialogVisible = false;
+             this.initAccident();
+      } */
     }
   }
 
@@ -363,11 +367,15 @@ export class AccidentComponent implements OnInit {
   cancelUpdate(_accident) {
     //
   }
+  
 
   showNewDialoge() {
+    console.log('a');
+    this.initAccident();
+    console.log('a = ' + JSON.stringify(this.newAccident));
     this.dialogVisible = true;
     this.newMode = true;
-    this.initAccident();
+    // this.initAccident();
     /* this.newAccident = {
       id: 0,
       classification: 'A',
@@ -385,6 +393,12 @@ export class AccidentComponent implements OnInit {
       lastuser: 'ali',
       owner: 'ali'
     }; */
+  }
+
+  onHide(event) {
+    if (this.showNewDialoge) {
+      this.dialogVisible = false;
+    }
   }
 
   hideNewDialoge() {

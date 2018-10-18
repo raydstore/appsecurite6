@@ -9,16 +9,72 @@
     </span>
   </div>
 
-  <p-treeTable [value]="data" [style]="{'margin-top':'50px'}" var="node" labelExpand="Expand">
-    <!-- <p-header>WorkSheet Templating</p-header> -->
-    <!-- <p-column field="id" header="id" ></p-column> -->
+  <p-treeTable [value]="data">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th >
+                titre
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr [ngClass]="{'row-class': rowData.kind == 'C', 'row-group': rowData.kind == 'G', 'row-item': rowData.kind == 'I'}">
+            <td  ttEditableColumn>
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.id}} - <p-treeTableCellEditor>
+                  <ng-template pTemplate="input">
+                      <!-- <input type="text" [(ngModel)]="rowData.name"> -->
+                      <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
+            (blur)="setDefaultColor(in)" [ngClass]="{'row-edit': 1 == 1}">
+            <span class="sptool" style="width:20%">
+                <button class="btn btn-outline-primary btn-sm" (click)="updateBit(rowData)">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+              </span>
+                   </ng-template>
+                  <ng-template pTemplate="output">
+                    {{rowData.name}}
+                    <span class="sptool" style="width:20%">
+                        <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(rowData)">
+                          <i class="fa fa-minus" aria-hidden="false"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" (click)="addBit(rowData)" *ngIf="rowData.kind === 'I' ? false : true">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                      </span>
+ 
+                  </ng-template>
+              </p-treeTableCellEditor>
+                <!-- {{rowData.id}} -  {{rowData.name}} -->
+                <!-- <div class="clsheet">
+        <ng-template let-node="rowData" pTemplate="body">
+          {{rowData.id}} -  <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
+            (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
+          <span class="alright" style="width:20%">
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(rowData)">
+              <i class="fa fa-minus" aria-hidden="false"></i>
+            </button>
+            <button class="btn btn-outline-primary btn-sm" (click)="updateBit(rowData)">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" (click)="addBit(rowData)" *ngIf="rowData.kind === 'I' ? false : true">
+              <i class="fa fa-plus"></i>
+            </button>
+          </span>
+        </ng-template>
+      </div> -->
+            </td>
+        </tr>            
+    </ng-template>
+</p-treeTable> 
+
+  <!-- <p-treeTable [value]="data" [style]="{'margin-top':'50px'}" var="node" labelExpand="Expand">
     <p-column field="name" header="titre" styleClass="clsheet">
       <div class="clsheet">
         <ng-template let-node="rowData" pTemplate="body">
           {{node.data.id}} -  <input type="text" [(ngModel)]="node.data.name" #in [ngClass]="node.styleClass" maxlength="128" (focus)="setFocusColor(in)"
             (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
           <span class="alright" style="width:20%">
-            <!-- <ng-template let-m="rowData" pTemplate=dy ""bo> -->
             <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(node)">
               <i class="fa fa-minus" aria-hidden="false"></i>
             </button>
@@ -28,15 +84,16 @@
             <button class="btn btn-outline-secondary btn-sm" (click)="addBit(node)" *ngIf="node.data.kind === 'I' ? false : true">
               <i class="fa fa-plus"></i>
             </button>
-            <!-- </ng-template> -->
           </span>
         </ng-template>
       </div>
 
     </p-column>
 
-  </p-treeTable>
+  </p-treeTable> -->
 </div>
+
+
 <p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
   width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newBit">
@@ -53,7 +110,6 @@
         <label *ngIf="kind.id === 'C' ? false : true">
           <input type="radio" [(ngModel)]="newBit.kind" [value]="kind.id"> {{kind.name}}
         </label>
-        <!-- (change)="onChangeRadio($event)" -->
       </div>
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="createBit()">Valider</button>

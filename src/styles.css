@@ -69,6 +69,14 @@ body {
    height: 40px; */
 }
 
+.sptool {
+    float: right;
+   /*  background-color: #dfe6e9; */
+    width: 62px !important;
+/*     border: none !important;
+    border-radius: .2rem!important; */
+}
+
 .cardtitle {
     height: 70px;
     margin-top: 15px;

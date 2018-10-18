@@ -20,8 +20,32 @@
 
   </div>
   <div class="card-body">
+      
     <div class="ui-g ui-fluid">
-      <ng-container *ngFor="let bitclass of bitclasss">
+        <span class="ui-fluid">
+        <p-autoComplete [(ngModel)]="rBits" [suggestions]="filteredBitsMultiple" (completeMethod)="filterBitMultiple($event)"  
+          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1" placeholder="Bit" field="name" [multiple]="true" [dropdown]="true">
+          <ng-template let-value pTemplate="selectedItem">
+              <!-- <div class="alert alw" [class.alert-primary]="value.bitclass == 'A'" [class.alert-success]="value.bitclass == 'B'" [class.alert-danger]="value.bitclass == 'C'"
+                 [class.alert-warning]="value.bitclass == 'D'">
+                 {{value.name}}
+              </div> -->
+              <p style="font-size:18px">{{value.id}}</p>
+          </ng-template>
+        </p-autoComplete>
+        </span>
+        <!-- <ul> -->
+            <!-- <li *ngFor="let bit of rBits">{{bit.name}}</li> -->
+            <div  *ngFor="let value of rBits" class="alert" [class.alert-primary]="value.idbitclass == 'A'" [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
+                 [class.alert-warning]="value.idbitclass == 'D'">
+                 {{getFullName(value)}}
+              </div>
+        <!-- </ul> -->
+
+
+<!--       <ng-container *ngFor="let bitclass of bitclasss"> -->
+
+
         <!-- <div class="ui-g-12 ui-md-4"> -->
 
         <!-- <div class="ui-inputgroup btgroup">
@@ -30,11 +54,11 @@
               <button pButton type="button" icon="pi pi-check" class="ui-button-success"></button>     
               <button pButton type="button" icon="pi pi-close" class="ui-button-danger"></button>      
           </div> -->
-        <ng-container *ngIf="getBitStatus(bitclass.id)"  >
-        <div class="alert alw" [class.alert-primary]="bitclass.id == 'A'" [class.alert-success]="bitclass.id == 'B'" [class.alert-danger]="bitclass.id == 'C'"
+
+
+<!--         <ng-container *ngIf="getBitStatus(bitclass.id)"  >
+        <div class="alert" [class.alert-primary]="bitclass.id == 'A'" [class.alert-success]="bitclass.id == 'B'" [class.alert-danger]="bitclass.id == 'C'"
           [class.alert-warning]="bitclass.id == 'D'">
-          <!-- <span class="labelbit">{{bitclass.name}}</span>
-          <input type="text" pInputText placeholder="Vote"> -->
           <label class="labelbit">{{bitclass.name}} : </label>
           <div class="col-sm-10">
             <app-autocomplete [i_item]="resultBit" [functionName]="displayName" [args]="['name']" [service]="listBits"
@@ -43,10 +67,10 @@
           <button type="button" class="btn btn-success"> + </button>
           <button type="button" class="btn btn-danger"> - </button>
         </div>
-      </ng-container>
+      </ng-container> -->
 
         <!-- </div> -->
-      </ng-container>
+      <!-- </ng-container> -->
     </div>
     <!-- <div class="input-group" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
       <div class="input-group-prepend">

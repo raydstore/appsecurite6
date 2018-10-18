@@ -42,3 +42,30 @@
     border-color: green;
     border-style: solid!important;
 }
+
+
+.row-class {
+  color: white !important;
+  background-color: #636e72 !important;
+  border-color: #f5c6cb !important;
+}
+
+.row-group {
+  color: white !important;
+  background-color: #b2bec3 !important;
+  border-color: #ffeeba !important;
+}
+
+.row-item {
+  color: rgb(145, 84, 84) !important;
+  background-color: #dfe6e9 !important;
+  border-color: #b8daff !important;
+  /* font-weight: bold;  */
+}
+
+.row-edit {
+  color: #818182 !important;
+  background-color: #fefefe !important;
+  border-color: #fdfdfe !important;
+  width: 70% !important;
+}

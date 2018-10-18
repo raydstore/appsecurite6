@@ -1,7 +1,11 @@
+<div class="alert alert-primary" role="alert">
+    <p-checkbox [(ngModel)]="expandAll" binary="true" (click)="ExpandedRow()"></p-checkbox>{{ titleExpandAll }}
+    <p-checkbox [(ngModel)]="showLabel" binary="true" (click)="ShowLabels()"></p-checkbox>{{ titleShowLabel }}
+</div>
 <p-table [columns]="cols" [value]="vwgridforaccidents" dataKey="id" [expandedRowKeys]="expandedRows" expandableRows="true">
     <ng-template pTemplate="header" let-columns>
         <tr class="trheader">
-            <th colspan="1" class="clcolgroup" style="width: 2.25em" [class.clwhite]="expandAll"><p-checkbox [(ngModel)]="expandAll" binary="true" (click)="ExpandedRow()">Expand</p-checkbox></th>
+            <th colspan="1" class="clcolgroup" style="width: 2.25em" [class.clwhite]="expandAll"></th>
             <th colspan="3" class="clcolgroup">Dommages aux personnes</th>
             <th colspan="3" class="clcolgroup">Dommages aux biens</th>
             <th colspan="1" class="clcolgroup">Dommages à l'envirenement</th>
@@ -16,15 +20,17 @@
     <ng-template pTemplate="body" let-grid let-rowData let-expanded="expanded" let-columns="columns" expanded="true">
         <tr expanded="true">
             <td class="rexpand">
-               <!--  <a href="#" [pRowToggler]="rowData">
+                <!--  <a href="#" [pRowToggler]="rowData">
                     <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">{{grid.id}}</i>
                 </a> -->
                 {{grid.id}}
             </td>
             <td *ngFor="let col of columns; let i = index" [class.selheader]="indexheader == (i + 1)" [class.colred]="grid[col.field].iddamage != 0">
-                <p-rating [(ngModel)]="grid[col.field].rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid[col.field])"
-                    (onCancel)="deleteAN($event)"></p-rating>
-                {{grid[col.field].name}}
+                <ng-container *ngIf="showLabel || grid[col.field].rate == 1">
+                    <p-rating [(ngModel)]="grid[col.field].rate" stars="1" (onRate)="newAN($event)" (click)="clicked(grid[col.field])"
+                        (onCancel)="deleteAN($event)"></p-rating>
+                    {{grid[col.field].name}}
+                </ng-container>
             </td>
         </tr>
     </ng-template>
@@ -33,8 +39,8 @@
         <tr *ngIf="grid[cols[indexheader - 1].field].iddamage != 0">
             <td [attr.colspan]="8">
                 <div class="container" style="font-size:16px;padding:20px">
-                    <app-elementswitch [iddamage]="grid[cols[indexheader - 1].field].iddamage" [idgrid]="grid[cols[indexheader - 1].field].idgrid" [titlelist]="getTitle(grid,indexheader)"
-                        [accidentdomain]="indexheader"></app-elementswitch>
+                    <app-elementswitch [iddamage]="grid[cols[indexheader - 1].field].iddamage" [idgrid]="grid[cols[indexheader - 1].field].idgrid"
+                        [titlelist]="getTitle(grid,indexheader)" [accidentdomain]="indexheader"></app-elementswitch>
                 </div>
             </td>
         </tr>

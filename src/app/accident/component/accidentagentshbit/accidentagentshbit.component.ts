@@ -19,7 +19,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
 
 export class AccidentagentshbitComponent implements OnInit {
   @Input() iddamage: number;
-  @Input() idagent:  string;
+  @Input() idagent: string;
   @Input() idgrid: number;
   vw$accidentagentshbits: Vw$accidentagentshbit[];
   bitclasss: Bitclass[];
@@ -28,14 +28,17 @@ export class AccidentagentshbitComponent implements OnInit {
   b_bits: Bit[] = null;
   c_bits: Bit[] = null;
   d_bits: Bit[] = null;
+  filteredBitsMultiple: Bit[];
+  rBits: Bit[];
   // bitStatus: BitStatus;
   resultBit: Vw$accidentagentshbit;
   listBits: Bit[];
   item: Accidentagentshbit;
 
+
   constructor(private service: Vw$accidentagentshbitService,
-     private accidentagentshbitService: AccidentagentshbitService, private bitclassService: BitclassService, 
-     private bitService: BitService) { }
+    private accidentagentshbitService: AccidentagentshbitService, private bitclassService: BitclassService,
+    private bitService: BitService) { }
 
   ngOnInit() {
     this.loadDataBit();
@@ -58,27 +61,66 @@ export class AccidentagentshbitComponent implements OnInit {
       });
   }
 
-  getBitStatus(bitclass: string): boolean{
+  getBitStatus(bitclass: string): boolean {
     this.resultBit = this.vw$accidentagentshbits.find(bit => bit.idbitclass === bitclass);
-    switch(bitclass) {
-      case 'B' : {
+    switch (bitclass) {
+      case 'B': {
         this.listBits = this.b_bits;
         break;
       }
-      case 'C' : {
+      case 'C': {
         this.listBits = this.c_bits;
         break;
       }
-      case 'D' : {
+      case 'D': {
         this.listBits = this.d_bits;
         break;
       }
-      case 'default' : {
+      case 'default': {
         this.listBits = this.a_bits;
         break;
       }
     }
     return !isNullOrUndefined(this.resultBit);
+  }
+
+  getFullName(value): string {
+    return value.id + ' - ' + value.name + `     `;
+  }
+
+  filterBitMultiple(event) {
+    let query = event.query;
+    this.filteredBitsMultiple = this.filterBit(query, this.bits);
+  }
+
+  onSelect(value) {
+    console.log('value onSelect = ' + JSON.stringify(value));
+  }
+
+  onUnselect(value) {
+    console.log('value onUnselect = ' + JSON.stringify(value));
+  }
+
+
+  filterBit(query, bits: Bit[]): Bit[] {
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: Bit[] = [];
+    for (let i = 0; i < bits.length; i++) {
+      let bit = bits[i];
+      if (bit.name.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+        filtered.push(bit);
+      }
+    }
+    return filtered;
+  }
+
+  isAssignedBitclass(bit: Bit): boolean {
+    let result: boolean = false;
+    for (let i = 0; i < this.rBits.length; i++) {
+      result = this.rBits[i].idbitclass === bit.idbitclass;
+      if (result) { break; }
+    }
+    return result;
   }
 
 

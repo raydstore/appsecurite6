@@ -66,6 +66,9 @@ export class VwgridforaccidentComponent implements OnInit {
 
   cols: any[];
   expandAll = false;
+  showLabel = false;
+  titleExpandAll = `Tous déveloper      `;
+  titleShowLabel = `Affiché les libéllé `;
 
   constructor(private service: VwgridforaccidentService, private damageService: DamageService,
     private vwnotnatureofaccidentService: VwnotnatureofaccidentService, private accidentnatureService: AccidentnatureService) { }
@@ -129,6 +132,10 @@ ExpandedRow()   {
       this.expandedRows = {};
       console.log('false');
   }
+}
+
+ShowLabels() {
+
 }
 
 StringToCellGrid(col): CellGrid {

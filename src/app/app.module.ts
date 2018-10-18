@@ -1,3 +1,4 @@
+import { InspectionModule } from './inspection/inspection.module';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { OrganizationChartModule } from 'primeng/primeng';
@@ -37,7 +38,8 @@ import { TypeObjectComponent } from 'shared/component/type-object/type-object.co
 import { TypeOperationComponent } from 'shared/component/type-operation/type-operation.component';
 import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.component';
 import { SharedModule } from './shared/shared.module';
-import { TreeTableModule, TreeNode } from 'primeng/primeng';
+/* import { TreeTableModule } from 'primeng/primeng';
+import { TreeNode } from 'primeng/api'; */
 
 
 
@@ -62,8 +64,9 @@ import { TreeTableModule, TreeNode } from 'primeng/primeng';
     SharedModule,
     AdminModule,
     AccidentModule,
+    InspectionModule,
     CoreModule,
-    TreeTableModule,
+    // TreeTableModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'object', component: ObjectComponent },

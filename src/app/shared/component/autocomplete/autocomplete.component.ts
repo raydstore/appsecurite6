@@ -10,11 +10,27 @@ import { isUndefined, isNullOrUndefined } from 'util';
 })
 
 export class AutocompleteComponent implements OnInit {
+  /* private _i_item: any; */
   @Input() i_item: any;
   @Input() service: any;
   @Input() functionName: TFunctionName;
   @Input() args: string[];
   @Output() changeItem = new EventEmitter();
+
+  /* get i_item() {
+    return this._i_item;
+  }
+  @Input()
+  set i_item(value: any) {
+    console.log('i_item = ' + JSON.stringify(value));
+    this._i_item = value;
+    this.item.item = this._i_item;
+    if (!isNullOrUndefined(value)) {
+        this.item.name = this.functionName(this.item.item, this.args);
+    } else {
+      this.item.name = '';
+    }
+  } */
   item: IItem = {
     item: null,
     name: ''
@@ -28,6 +44,11 @@ export class AutocompleteComponent implements OnInit {
     this.item.name = this.functionName(this.item.item, this.args);
   }
 
+  /* set I_item(value: any) {
+    this.item.item = this.i_item;
+    this.item.name = this.functionName(this.item.item, this.args);
+  }
+ */
   getProperty<T, K extends keyof T>(obj: T, key: K) {
     return obj[key];
   }
