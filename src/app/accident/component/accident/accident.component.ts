@@ -63,8 +63,8 @@ export class AccidentComponent implements OnInit {
   newAccident: Accident;
   dialogVisible = false;
   newMode = false;
-  mInsert: Mode.insert;
-  mUpdate: Mode.update;
+  mInsert: Mode.insert = 0;
+  mUpdate: Mode.update = 1;
  // expanded = true;
 
   lastids: any[];
@@ -112,8 +112,8 @@ export class AccidentComponent implements OnInit {
       { field: 'Classification',    header: 'Classification' },
       { field: 'date',              header: 'curdate' },
       { field: 'time',              header: 'time' },
-      { field: 'idsiteparent.name', header: 'site' },
-      { field: 'idsiteparent.name', header: 'lieu' },
+      { field: 'idsite.name',       header: 'site' },
+      { field: 'place',             header: 'lieu' },
       { field: 'description',       header: 'description' }
   ];
   }
@@ -145,7 +145,11 @@ export class AccidentComponent implements OnInit {
       classification: 'A',
       sitedescription: '',
       event: '',
-      idsiteparent: null,
+      place: '',
+      persondamage: '',
+      propertydamage: '',
+      envirenementdamage: '',
+      obviouscause: '',
       idsite: null,
       curdate: new Date(),
       tabindex: 1,
@@ -300,7 +304,7 @@ export class AccidentComponent implements OnInit {
   performAction(eventArgs: EventArgs) {
     console.log(JSON.stringify(eventArgs));
     switch (eventArgs.mode) {
-      case 1: {
+      case this.mInsert: {
     
                            this.dialogVisible = eventArgs.dialogVisible;
                            this.createAccident();

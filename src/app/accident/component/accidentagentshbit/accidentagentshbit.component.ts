@@ -107,7 +107,7 @@ export class AccidentagentshbitComponent implements OnInit {
     let filtered: Bit[] = [];
     for (let i = 0; i < bits.length; i++) {
       let bit = bits[i];
-      if (bit.name.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+      if (bit.id.toLowerCase().indexOf(query.toLowerCase()) === 0) {
         filtered.push(bit);
       }
     }

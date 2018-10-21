@@ -2,14 +2,15 @@ import { isNullOrUndefined } from 'util';
 import { AgentService } from 'shared/services/agent.service';
 import { SiteService } from 'shared/services/site.service';
 import { Agent, Site, EventArgs } from 'shared/table/table';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Accident, Mode } from 'shared/table/table';
 
 
 @Component({
   selector: 'app-faccident',
   templateUrl: './faccident.component.html',
-  styleUrls: ['./faccident.component.css']
+  styleUrls: ['./faccident.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FaccidentComponent implements OnInit {
   /* private _item: Accident;
@@ -33,7 +34,7 @@ export class FaccidentComponent implements OnInit {
 
   agentDeclare: Agent;
   agentValidate: Agent;
-  siteparent: Site;
+  // siteparent: Site;
   site: Site;
 
 //   sites: Site[];

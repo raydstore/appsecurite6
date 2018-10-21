@@ -83,6 +83,14 @@
         <label for="iname">name</label>
         <input type="text" id="iname" [(ngModel)]="newEntreprise.name" placeholder="le nom de la marque">
       </span>
+      <span>
+          <label for="iid">adress : </label>
+          <input type="text" class="form-control" id="chid" [(ngModel)]="newEntreprise.id" placeholder="Identificateur" readonly>
+        </span>
+        <span>
+          <label for="iname">téléphone</label>
+          <input type="text" id="iname" [(ngModel)]="newEntreprise.name" placeholder="le nom de la marque">
+        </span>
       <div class="toolbtn">
         <button class="btn btn-primary" (click)="createEntreprise()">Submit</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>

@@ -37,6 +37,7 @@ import { VwnotnatureofaccidentComponent } from './component/vwnotnatureofacciden
 import { FaccidentComponent } from './container/faccident/faccident.component';
 import { FaccidentagentshComponent } from './container/faccidentagentsh/faccidentagentsh.component';
 import { VwgridforaccidentComponent } from './component/vwgridforaccident/vwgridforaccident.component';
+import { AggravatingfactorComponent } from './component/aggravatingfactor/aggravatingfactor.component';
 
 
 
@@ -84,6 +85,7 @@ import { VwgridforaccidentComponent } from './component/vwgridforaccident/vwgrid
     FaccidentComponent,
     FaccidentagentshComponent,
     VwgridforaccidentComponent,
+    AggravatingfactorComponent,
   ]
 })
 export class AccidentModule { }

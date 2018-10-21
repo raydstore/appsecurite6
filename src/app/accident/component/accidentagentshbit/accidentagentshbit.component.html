@@ -24,7 +24,7 @@
     <div class="ui-g ui-fluid">
         <span class="ui-fluid">
         <p-autoComplete [(ngModel)]="rBits" [suggestions]="filteredBitsMultiple" (completeMethod)="filterBitMultiple($event)"  
-          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1" placeholder="Bit" field="name" [multiple]="true" [dropdown]="true">
+          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1" placeholder="Bit" field="id" [multiple]="true" [dropdown]="true">
           <ng-template let-value pTemplate="selectedItem">
               <!-- <div class="alert alw" [class.alert-primary]="value.bitclass == 'A'" [class.alert-success]="value.bitclass == 'B'" [class.alert-danger]="value.bitclass == 'C'"
                  [class.alert-warning]="value.bitclass == 'D'">

@@ -26,7 +26,7 @@
   [totalRecords]="totalRecords" [loading]="loading" -->
 
   <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode"
-    [paginator]="true" [rows]="10" [globalFilterFields]="['id','classification', 'idsiteparent.name', 'idsite.name']">
+    [paginator]="true" [rows]="10" [globalFilterFields]="['id','classification', 'place', 'idsite.name']">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -61,8 +61,8 @@
         <td>{{rowData.classification}}</td>
         <td>{{rowData.curdate | date:'shortDate'}}</td>
         <td>{{rowData.time | date:'shortDate'}}</td>
-        <td>{{rowData.idsiteparent.name}}</td>
-        <td>{{rowData.idsite.name}}</td>
+        <td>{{rowData.idsite.name}}</td>        
+        <td>{{rowData.place}}</td>
         <td>{{rowData.description}}</td>
       </tr>
     </ng-template>
@@ -158,6 +158,11 @@
                       <app-cause [idaccident]="accident" [titlelist]="'Causes'"></app-cause>
                     </ng-template>
                   </p-tabPanel>
+                  <p-tabPanel [header]="'Facteur agravant'">
+                      <ng-template pTemplate="content">
+                        <app-aggravatingfactor [idaccident]="accident" [titlelist]="'Facteur agravant'"></app-aggravatingfactor>
+                      </ng-template>
+                    </p-tabPanel>
                   <p-tabPanel [header]="'Action / Recommandation'">
                     <ng-template pTemplate="content">
                       <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
@@ -213,8 +218,9 @@
 </div>
 
 <p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="onHide($event)"
-  width="748">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident">
+  width="890">
+  <div class="ui-g ui-fluid" style="font-size:16px;padding:20px"  *ngIf="newAccident">
+  <!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccident"> -->
     <!-- <div class="bdcontent">
       <div class="row">
         <div class="col-sm-5">

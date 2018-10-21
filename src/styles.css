@@ -142,3 +142,7 @@ body {
 .clautocomplete {
     width: 350px!important;
 }
+
+.ui-dialog.ui-widget .ui-dialog-content {
+    padding: 0px !important;
+}

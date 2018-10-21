@@ -1,3 +1,4 @@
+import { AggravatingfactorService } from './services/aggravatingfactor.service';
 import { InspectedsiteService } from './services/inspectedsite.service';
 import { InspectplanningService } from './services/inspectplanning.service';
 import { VwgridforaccidentService } from './services/vwgridforaccident.service';
@@ -24,6 +25,8 @@ import {
   RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { CardModule } from 'primeng/card';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import {TreeNode} from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { RatingModule } from 'primeng/rating';
@@ -112,6 +115,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
+import { AggravatingfactorComponent } from './component/aggravatingfactor/aggravatingfactor.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -140,6 +144,8 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     TabViewModule,
     TreeTableModule,
     RatingModule,
+    ScrollPanelModule,
+    CardModule,
     InplaceModule,
     DropdownModule,
     DialogModule,
@@ -173,6 +179,8 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     AutoCompleteModule,
     TabViewModule,
     TreeTableModule,
+    ScrollPanelModule,
+    CardModule,
     InplaceModule,
     DropdownModule,
     DialogModule,
@@ -227,7 +235,7 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     EntrepriseComponent,
     VwpropertyComponent,
     SiteNameComponent,
-    DialogModalComponent,
+    DialogModalComponent
   ],
   providers: [
     PostService,
@@ -291,7 +299,8 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     InspectedsiteService,
     InspectplanningService,
     VwsitenotinspectedService,
-    VwinspectedsiteService
+    VwinspectedsiteService,
+    AggravatingfactorService
   ]
 })
 export class SharedModule { }

@@ -231,7 +231,11 @@ export interface Accident {
     classification?: string;
     sitedescription?: string;
     event?: string;
-    idsiteparent?: any;
+    place?: string;
+    persondamage?: string;
+    propertydamage?: string;
+    envirenementdamage?: string;
+    obviouscause?: string;
     idsite?: any;
     curdate?: Date;
     time?: Date;
@@ -278,6 +282,15 @@ export interface Damage {
 }
 
 export interface Cause {
+    id?: number;
+    name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Aggravatingfactor {
     id?: number;
     name?: string;
     owner?: string;
