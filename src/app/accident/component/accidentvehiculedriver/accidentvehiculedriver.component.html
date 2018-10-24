@@ -1,0 +1,71 @@
+<p-card title="Info Chauffeur" [style]="{width: '360px'}">
+  <div class="form-group row">
+    <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
+    <div class="col-sm-11 clkind">
+      <p-radioButton name="groupcldriver" class="flex-item" id="chclassification" value="S" label="SH" [(ngModel)]="accidentvehiculedriver.membership"
+        inputId="clowner1"></p-radioButton>
+      <p-radioButton name="groupcldriver" class="flex-item" value="N" label="Non SH" [(ngModel)]="accidentvehiculedriver.membership"
+        inputId="clowner2"></p-radioButton>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chnom" class="col-sm-4 col-form-label">le nom : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chnom" [(ngModel)]="accidentvehiculedriver.name" placeholder="le nom du vehicule">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chdateofbirth" class="col-sm-4 col-form-label">né le : </label>
+    <div class="col-sm-8">
+        <app-calendar  class="clcalendar" id="chdateofbirth" [date]="accidentvehiculedriver.dateofbirth" 
+        [isTime]="false" [dateFormat]="'dd/mm/yy'" (changeDate)="onChangeDate(accidentvehiculedriver, $event)"></app-calendar>
+      <!-- <p-calendar class="clcalendar" id="chdateofbirth" [(ngModel)]="dateofbirth"
+      [monthNavigator]="true" [yearNavigator]="true" [showIcon]="true"></p-calendar> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chplaceofbirth" class="col-sm-4 col-form-label">à : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chplaceofbirth" [(ngModel)]="accidentvehiculedriver.placeofbirth"
+        placeholder="l'endroi de maissance'" #name>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chadressdriver" class="col-sm-4 col-form-label">adress : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chadressdriver" [(ngModel)]="accidentvehiculedriver.adress"
+        placeholder="l'adress'" #name>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chlicensenumber" class="col-sm-4 col-form-label">n° Permi : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chlicensenumber" [(ngModel)]="accidentvehiculedriver.licensenumber"
+        placeholder="n° de permi">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chissuedon" class="col-sm-4 col-form-label">délivré le : </label>
+    <div class="col-sm-8">
+      <app-calendar  class="clcalendar" id="chissuedon" [date]="accidentvehiculedriver.issuedon" 
+        [isTime]="false" [dateFormat]="'dd/mm/yy'" (changeDate)="onChangeIssuedon(accidentvehiculedriver, $event)"></app-calendar>
+<!--       <p-calendar class="clcalendar" id="chissuedon" [(ngModel)]="issuedon"
+        [monthNavigator]="true" [yearNavigator]="true" [showIcon]="true"></p-calendar> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chissuedby" class="col-sm-4 col-form-label">par la : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chissuedby" [(ngModel)]="accidentvehiculedriver.issuedby" placeholder="par la">
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-success" (click)="perform()">
+      <i class="fa fa-check">Valider</i>
+    </button>
+    <button class="btn btn-warning" (click)="cancelUpdate(accidentvehiculedriver)">
+      <i class="fa fa-times">Annuler</i>
+    </button>
+  </div>
+
+</p-card>

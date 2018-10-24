@@ -26,7 +26,7 @@ export class AccidentvehiculeComponent implements OnInit {
   @Input() classification: number;
   @Input() titlelist: string;
   /* @Input() accidentdomain: number; */
-  accidentvehicules: any[];
+  accidentvehicules: Accidentvehicule[];
   selectedAccidentvehicule: Accidentvehicule;
   selectedNode: TreeNode;
   // accidentvehicule: any;

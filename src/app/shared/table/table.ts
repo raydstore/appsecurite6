@@ -411,6 +411,48 @@ export interface Accidentvehicule {
     dateupdate?: Date;
 }
 
+export interface Accidentvehiculeinsurance {
+    accidentvehicule?: Accidentvehicule;
+    idaccidentvehicule?: number;
+    policynumber?: string;
+    identreprise?: Entreprise;
+    owner?: string;
+    lastuser?: string;
+    datefirst?: Date;
+    datelast?: Date;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentvehiculedriver {
+    accidentvehicule?: Accidentvehicule;
+    idaccidentvehicule?: number;
+    name?: string;
+    adress?: string;
+    membership?: string;
+    licensenumber?: string;
+    owner?: string;
+    lastuser?: string;
+    dateofbirth?: Date;
+    placeofbirth?: string;
+    issuedon?: Date;
+    issuedby?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentvehiculeowner {
+    accidentvehicule?: Accidentvehicule;
+    idaccidentvehicule?: number;
+    name?: string;
+    adress?: string;
+    phone?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
 export interface Accidentcause {
     id?: number;
     idaccident?: number;

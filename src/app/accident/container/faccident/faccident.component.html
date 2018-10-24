@@ -13,7 +13,8 @@
     </div>
     <label for="chcurdate" class="col-sm-1 col-form-label">date : </label>
     <div class="col-sm-3">
-      <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" (changeDate)="onChangeDate(item, $event)"></app-calendar>
+      <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" [dateFormat]="'    le : dd/mm/yy       à : '"
+       (changeDate)="onChangeDate(item, $event)"></app-calendar>
     </div>
   </div>
 

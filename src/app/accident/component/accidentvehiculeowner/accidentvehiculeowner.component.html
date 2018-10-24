@@ -1,0 +1,30 @@
+<p-card title="Info Propriétaire" [style]="{width: '360px'}">
+  <div class="form-group row">
+    <label for="chnomowner" class="col-sm-4 col-form-label">le nom : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chnomowner" [(ngModel)]="accidentvehiculeowner.name" placeholder="le nom du vehicule">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chadress" class="col-sm-4 col-form-label">adresse : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chadress" [(ngModel)]="accidentvehiculeowner.adress" placeholder="adresse">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="chphone" class="col-sm-4 col-form-label">téléphone : </label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="chplaceofbirth" [(ngModel)]="accidentvehiculeowner.phone" placeholder="le numéro de téléphone"
+        #name>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-success" (click)="perform()">
+      <i class="fa fa-check">Valider</i>
+    </button>
+    <button class="btn btn-warning" (click)="cancelUpdate(accidentvehiculeowner)">
+      <i class="fa fa-times">Annuler</i>
+    </button>
+  </div>
+
+</p-card>

@@ -146,3 +146,13 @@ body {
 .ui-dialog.ui-widget .ui-dialog-content {
     padding: 0px !important;
 }
+
+.ui-card-title {
+    margin-bottom: .8em !important;
+    border-bottom: solid darkblue 3px !important;
+    padding-left: 5px !important;
+}
+
+.clcalendar .clpcalendar input {
+    width: 175px !important;
+}

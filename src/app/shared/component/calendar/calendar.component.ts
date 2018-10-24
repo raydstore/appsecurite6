@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CalendarComponent implements OnInit {
   @Input() date: any;
   @Input() isTime: Boolean;
+  @Input() dateFormat: string;
   @Output() changeDate = new EventEmitter();
   // newDate: Date;
   constructor() { }

@@ -1,3 +1,7 @@
+import { DataService } from 'shared/services/data.service';
+import { AccidentvehiculeownerService } from './services/accidentvehiculeowner.service';
+import { AccidentvehiculeinsuranceService } from './services/accidentvehiculeinsurance.service';
+import { AccidentvehiculedriverService } from './services/accidentvehiculedriver.service';
 import { AggravatingfactorService } from './services/aggravatingfactor.service';
 import { InspectedsiteService } from './services/inspectedsite.service';
 import { InspectplanningService } from './services/inspectplanning.service';
@@ -11,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   OrganizationChartModule,
-  CalendarModule,
   CheckboxModule,
   CodeHighlighterModule,
   DataGridModule,
@@ -25,6 +28,7 @@ import {
   RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import {TreeNode} from 'primeng/api';
@@ -115,7 +119,6 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
-import { AggravatingfactorComponent } from './component/aggravatingfactor/aggravatingfactor.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -300,7 +303,10 @@ import { AggravatingfactorComponent } from './component/aggravatingfactor/aggrav
     InspectplanningService,
     VwsitenotinspectedService,
     VwinspectedsiteService,
-    AggravatingfactorService
+    AggravatingfactorService,
+    AccidentvehiculedriverService,
+    AccidentvehiculeinsuranceService,
+    AccidentvehiculeownerService
   ]
 })
 export class SharedModule { }

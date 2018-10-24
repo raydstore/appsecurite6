@@ -2,3 +2,49 @@
     color: brown;
     padding: 10px 0 0 10px;
 }
+
+.ca {
+    /* background-color: blue !important; */
+    width: 400px !important;
+    /* float: right; */
+}
+
+.clleft {
+   /*  float: left; */
+}
+
+.clright {
+   /*  float: right; */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 1150px !important;
+    /* background-color: brown; */
+   /*  flex-wrap: wrap; */
+    justify-content: space-evenly;
+}
+
+.clcolumn {
+    display: flex;
+    flex-direction: row;
+    /* margin-bottom: 20px!important;
+    background-color: red; */
+}
+
+.clkind {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 360px;
+    background-color: #e9ecef;
+    opacity: 1;
+    margin-left: 10px;
+    padding: 10px 0 10px 10px;
+}
+
+.clkind > .flex-item {
+    padding-right: 7px;
+}
+
