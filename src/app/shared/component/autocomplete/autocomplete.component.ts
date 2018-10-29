@@ -1,6 +1,6 @@
 import { TFunctionName } from 'shared/table/table';
 import { DataService } from 'shared/services/data.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
@@ -9,7 +9,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
   styleUrls: ['./autocomplete.component.css']
 })
 
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, AfterViewChecked {
   /* private _i_item: any; */
   @Input() i_item: any;
   @Input() service: any;
@@ -39,7 +39,19 @@ export class AutocompleteComponent implements OnInit {
 
   constructor() { }
 
+  ngAfterViewChecked() {
+   /*  console.log('entred = ');
+    this.item.item = this.i_item;
+    this.item.name = this.functionName(this.item.item, this.args); */
+    /* if (!(isNullOrUndefined(this.item))) { 
+      this.item.name = this.functionName(this.item.item, this.args);
+    } else {
+      this.item.name = '';
+    } */
+  }
+
   ngOnInit() {
+    // console.log('entred = ');
     this.item.item = this.i_item;
     this.item.name = this.functionName(this.item.item, this.args);
   }
@@ -65,6 +77,7 @@ export class AutocompleteComponent implements OnInit {
 
 
   filterItem(event) {
+    console.log('filter');
     let query = event.query;
     this.filteredList = this.filter(query, this.service);
     /* this.service.getAll().subscribe(items => {
@@ -74,6 +87,7 @@ export class AutocompleteComponent implements OnInit {
 
 
   filter<T>(query, items: T[] = this.service): IItem[] {
+    console.log('filtered');
     // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
     let filtered: IItem[] = [];
     if (!isNullOrUndefined(items)) {
@@ -92,6 +106,9 @@ export class AutocompleteComponent implements OnInit {
     return filtered;
   }
 
+  onClear() {
+    //
+  }
 }
 
 

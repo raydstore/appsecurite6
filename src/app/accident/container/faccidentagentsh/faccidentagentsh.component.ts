@@ -35,6 +35,14 @@ export class FaccidentagentshComponent implements OnInit {
       });
   } */
 
+  showcountstop(): boolean {
+    let res = false;
+    if (!(isNullOrUndefined(this.item))) {
+      res = !([1, 5, 9].includes(this.item.idgrid));
+    }
+    return res;
+  }
+
   onChangeItem(item: Accidentagentsh, field: string, event) {
     /* passe choise agent to field item on accidentagent */
     this.item[field] = <Agent>event.item;

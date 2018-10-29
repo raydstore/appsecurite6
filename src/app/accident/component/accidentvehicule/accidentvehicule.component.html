@@ -66,25 +66,25 @@
                             <label for="chkind" class="col-sm-1 col-form-label">type</label>
                             <div class="col-sm-11 clkind">
                                 <p-radioButton name="groupkind" class="flex-item" id="chkind" value="TK" label="Camion"
-                                    [(ngModel)]="item.classification" inputId="k3"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k3"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="TR" label="Tracteur"
-                                    [(ngModel)]="item.classification" inputId="k7"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k7"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="BU" label="Bus" [(ngModel)]="item.classification"
                                     inputId="k6"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="MN" label="Mini bus"
-                                    [(ngModel)]="item.classification" inputId="k4"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k4"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="MC" label="Micro bus"
-                                    [(ngModel)]="item.classification" inputId="k5"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k5"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="UT" label="Utilitaire"
-                                    [(ngModel)]="item.classification" inputId="k1"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k1"></p-radioButton>
 
                                 <p-radioButton name="groupkind" class="flex-item" value="TO" label="Touristique"
-                                    [(ngModel)]="item.classification" inputId="k2"></p-radioButton>
+                                    [(ngModel)]="item.kind" inputId="k2"></p-radioButton>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -113,22 +113,25 @@
                     </p-card>
                 </div>
                 <div class="ca flex-item">
-                    <app-accidentvehiculedriver [idaccidentvehicule]="item.id"></app-accidentvehiculedriver>
+                    <app-accidentvehiculedriver [accidentvehiculedriver]="getAccidentvehiculedriver(item)"
+                        [mode]="modedriver" (operation)="performAccidentvehiculedriver($event)"></app-accidentvehiculedriver>
                 </div>
             </div>
             <div class="flex-item clcolumn">
                 <div class="ca flex-item">
-                    <app-accidentvehiculeinsurance [idaccidentvehicule]="item.id"></app-accidentvehiculeinsurance>
+                    <app-accidentvehiculeinsurance [accidentvehiculeinsurance]="getAccidentvehiculeinsurance(item)"
+                    [mode]="modeinsurance" (operation)="performAcccidentvehiculeinsurance($event)"></app-accidentvehiculeinsurance>
                 </div>
                 <div class="ca flex-item">
-                    <app-accidentvehiculeowner [idaccidentvehicule]="item.id"></app-accidentvehiculeowner>
+                    <app-accidentvehiculeowner [accidentvehiculeowner]="getAccidentvehiculeowner(item)"
+                    [mode]="modeowner" (operation)="performAcccidentvehiculeowner($event)"></app-accidentvehiculeowner>
                 </div>
             </div>
         </div>
     </ng-template>
 </p-dataTable>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+<p-dialog header="Nouveau vehicule" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
     width="450">
     <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentvehicule">
         <div class="bdcontent">
@@ -179,14 +182,14 @@
                     [resultTemplate]="ma" [inputFormatter]="formatter" />
             </span>
             <span>
-                <label for="ichsource">source : </label>
+                <label for="ichsource">Venant de : </label>
                 <input type="text" class="form-control" id="ichsource" [(ngModel)]="newAccidentvehicule.source"
-                    placeholder="source">
+                    placeholder="Venant de">
             </span>
             <span>
-                <label for="ichmatricule">destination : </label>
+                <label for="ichmatricule">allant à : </label>
                 <input type="text" class="form-control" id="ichdestination" [(ngModel)]="newAccidentvehicule.destination"
-                    placeholder="destination">
+                    placeholder="allant à">
             </span>
             <div class="toolbtn">
                 <button class="btn btn-primary" (click)="createAccidentvehicule()">Valider</button>

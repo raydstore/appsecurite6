@@ -99,7 +99,7 @@
         <label for="ifunction">fonction : </label>
         <input type="text" class="form-control" id="chfunction" [(ngModel)]="newAccidentagentee.function" placeholder="fonction">
       </span>
-      <span>
+      <span *ngIf="showcountstop()">
         <label for="icountstopwork">nbj d'arrêt</label>
         <input type="text" id="icountstopwork" [(ngModel)]="newAccidentagentee.countstopwork" placeholder="nombre de jour d'arrêt">
       </span>

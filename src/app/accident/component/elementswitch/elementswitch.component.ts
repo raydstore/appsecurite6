@@ -11,10 +11,12 @@ export class ElementswitchComponent implements OnInit {
   @Input() titlelist: string;
   @Input() accidentdomain: number;
   id: number;
+  showcountstop: boolean;
   constructor() { }
 
   ngOnInit() {
     this.id = this.iddamage;
+    this.showcountstop = this.idgrid in [1, 5, ];
     console.log('es ig = '  + this.idgrid);
   }
 

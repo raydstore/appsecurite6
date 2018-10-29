@@ -397,14 +397,16 @@ export interface Accidentvehicule {
     iddamage?: number;
     idgrid: number;
     accidentdomain?: number;
-    identreprise?: any;
     idmark?: any;
     name?: string;
     source?: string;
     destination?: string;
-    classification: string;
-    kind: string;
-    matricule: string;
+    classification?: string;
+    kind?: string;
+    matricule?: string;
+    accidentvehiculedriver?: Accidentvehiculedriver;
+    accidentvehiculeinsurance?: Accidentvehiculeinsurance;
+    accidentvehiculeowner?: Accidentvehiculeowner;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -412,7 +414,6 @@ export interface Accidentvehicule {
 }
 
 export interface Accidentvehiculeinsurance {
-    accidentvehicule?: Accidentvehicule;
     idaccidentvehicule?: number;
     policynumber?: string;
     identreprise?: Entreprise;
@@ -425,7 +426,6 @@ export interface Accidentvehiculeinsurance {
 }
 
 export interface Accidentvehiculedriver {
-    accidentvehicule?: Accidentvehicule;
     idaccidentvehicule?: number;
     name?: string;
     adress?: string;
@@ -442,7 +442,6 @@ export interface Accidentvehiculedriver {
 }
 
 export interface Accidentvehiculeowner {
-    accidentvehicule?: Accidentvehicule;
     idaccidentvehicule?: number;
     name?: string;
     adress?: string;

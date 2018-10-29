@@ -28,6 +28,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { LazyLoadEvent } from 'primeng/api';
+import { DatePipe } from '@angular/common';
 
 
 /**
@@ -61,6 +62,7 @@ export class AccidentComponent implements OnInit {
   selectedAccident: Accident;
   selectedNode: TreeNode;
   newAccident: Accident;
+  _newAccident: Accident;
   dialogVisible = false;
   newMode = false;
   mInsert: Mode.insert = 0;
@@ -78,6 +80,7 @@ export class AccidentComponent implements OnInit {
   cols: any[];
 
   loading: boolean;
+  datePipe: DatePipe;
 
 
 
@@ -103,6 +106,8 @@ export class AccidentComponent implements OnInit {
     this.loadSite();
     this.loadAgent();
     this.loading = true;
+    this.datePipe = new DatePipe('en-US');
+
     /* this.accidents.forEach(function(accident) {
       thisRef.expandedRows[accident.id] = 1;
     }); */
@@ -162,6 +167,7 @@ export class AccidentComponent implements OnInit {
       owner: 'ali'
     };
     this.newAccident = <Accident> a;
+    this._newAccident = Object.assign({}, this.newAccident);
   }
 
   loadData() {
@@ -302,12 +308,17 @@ export class AccidentComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs) {
-    console.log(JSON.stringify(eventArgs));
+    /* console.log(JSON.stringify(eventArgs)); */
+    let _accident: Accident = <Accident>eventArgs.item;
+    let value = this.datePipe.transform(_accident.curdate, 'yyMMddHHmmss');
+    _accident.id = +value;
+    console.log('value = ' + value);
+    console.log('_accident.id = ' + _accident.id);
     switch (eventArgs.mode) {
       case this.mInsert: {
-    
                            this.dialogVisible = eventArgs.dialogVisible;
                            this.createAccident();
+                           this.newAccident = Object.assign({}, this._newAccident);
                            break;
                          }
       case this.mUpdate: {
@@ -327,7 +338,7 @@ export class AccidentComponent implements OnInit {
     console.log(JSON.stringify(this.newAccident));
     this.service.create(this.newAccident)
       .subscribe(newAccident => {
-        this.loadData();
+       /*  this.loadData(); */
       }, (error: AppError) => {
         this.accidents.splice(0, 1);
         if (error instanceof BadInput) {

@@ -1,10 +1,11 @@
+import { Mode, EventArgs } from './../../../shared/table/table';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
 import { NotFoundError } from '../../../core/component/common/not-found-error';
 import { AppError } from '../../../core/component/common/app-error';
 import { BadInput } from '../../../core/component/common/bad-input';
 import { AccidentvehiculeownerService } from 'shared/services/accidentvehiculeowner.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accidentvehiculeowner } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
@@ -17,7 +18,6 @@ import { isUndefined, isNullOrUndefined } from 'util';
   styleUrls: ['./accidentvehiculeowner.component.css']
 })
 export class AccidentvehiculeownerComponent implements OnInit {
-  accidentvehiculeowner: Accidentvehiculeowner;
   selectedAccidentvehiculeowner: Accidentvehiculeowner;
   selectedNode: TreeNode;
 
@@ -25,7 +25,6 @@ export class AccidentvehiculeownerComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     idaccidentvehicule: 0,
-    accidentvehicule: null,
     adress: '',
     phone: '',
     lastuser: 'ali',
@@ -38,36 +37,36 @@ export class AccidentvehiculeownerComponent implements OnInit {
   lastids: any[];
   lastid: any;
   titlelist = 'Chauffeur';
-  @Input() idaccidentvehicule: number;
+
+  @Input() accidentvehiculeowner: Accidentvehiculeowner;
+  @Input() mode: Mode;
+  @Output() operation = new EventEmitter();
 
   constructor(private service: AccidentvehiculeownerService, private lastidService: LastidService) {
   }
 
   ngOnInit() {
-    this.loadData();
+    this.selectedAccidentvehiculeowner = Object.assign({}, this.accidentvehiculeowner);
+    // this.loadData();
   }
 
   loadData() {
-    this.service.getItem(this.idaccidentvehicule)
-      .subscribe(accidentvehiculeowner => {
-        if (isNullOrUndefined(accidentvehiculeowner)) {
-          this.accidentvehiculeowner = this.newAccidentvehiculeowner;
-          this.newMode = true;
-        } else {
-          this.accidentvehiculeowner = accidentvehiculeowner;
-          this.newMode = false;
-        }
-      });
+/*     this.service.getItem(this.idaccidentvehicule)
+        .subscribe(accidentvehiculeowner => {
+          if (!isNullOrUndefined(accidentvehiculeowner)) {
+            this.accidentvehiculeowner = accidentvehiculeowner;
+          } else {
+            this.accidentvehiculeowner = this.accidentvehiculeowner;
+          }
+        }); */
   }
 
-  perform () {
-    if (this.newMode) {
-      this.createAccidentvehiculeowner();
-    } else {
-      console.log(JSON.stringify(this.accidentvehiculeowner));
-      this.updateAccidentvehiculeowner();
-    }
- }
+  perform(event) {
+    let eventargs: EventArgs;
+    eventargs = this.mode === Mode.insert ? { item: this.accidentvehiculeowner, mode: Mode.insert, dialogVisible: false }
+                                         : { item: this.accidentvehiculeowner, mode: Mode.update, dialogVisible: false };
+    this.operation.emit(eventargs);
+  }
 
   createAccidentvehiculeowner() {
     this.dialogVisible = false;
@@ -103,14 +102,14 @@ export class AccidentvehiculeownerComponent implements OnInit {
   }
 
   updateAccidentvehiculeowner() {
-    this.service.update(this.accidentvehiculeowner)
+    this.service.updatebyid(this.accidentvehiculeowner, 'idaccidentvehicule')
       .subscribe(updateaccidentvehiculeowner => {
         this.loadData();
       });
   }
 
   cancelUpdate(_accidentvehiculeowner) {
-    //
+    this.accidentvehiculeowner = Object.assign({}, this.selectedAccidentvehiculeowner);
   }
 
 }

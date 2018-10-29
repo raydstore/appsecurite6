@@ -7,9 +7,7 @@ import { environment } from '../../../environments/environment';
 
 const urlService = environment.urlService;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class InspectedsiteService extends DataService<InspectedSite> {
   constructor(http: HttpClient) {
     super(urlService + '/inspectedsite', http);

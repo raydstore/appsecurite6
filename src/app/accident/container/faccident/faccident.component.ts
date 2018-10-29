@@ -36,6 +36,7 @@ export class FaccidentComponent implements OnInit {
   agentValidate: Agent;
   // siteparent: Site;
   site: Site;
+  newid: string;
 
 //   sites: Site[];
   // agents: Agent[];
@@ -73,10 +74,8 @@ export class FaccidentComponent implements OnInit {
 
   perform(event) {
     let eventargs: EventArgs;
-/*     this._item.idagentdeclare  = this.agentDeclare;
-    this._item.idagentvalidate = this.agentValidate;
-    this._item.idsite          = this.site;
-    this._item.idsiteparent    = this.siteparent; */
+    /* console.log('newid = ' + this.newid); */
+    /* console.log('event = ' + event); */
     eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false }
                                          : { item: this.item, mode: Mode.update, dialogVisible: false };
     this.operation.emit(eventargs);
@@ -85,14 +84,14 @@ export class FaccidentComponent implements OnInit {
   
 
   cancel(item) {
-    console.log('cancel');
+    console.log('cancel = ' + JSON.stringify(this.item));
     let eventargs: EventArgs = { item: this.item, mode: Mode.delete, dialogVisible: false };
     this.operation.emit(eventargs);
   }
 
   displayNameAgent(item: any, args: string[]): string {
     let result = '';
-    console.log('agt = ' + JSON.stringify(item));
+   /*  */
     if (!isNullOrUndefined(item))  {
       if (args.length > 0) {
         result = item[args[0]];

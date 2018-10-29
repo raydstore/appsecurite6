@@ -1,10 +1,11 @@
+import { Mode, EventArgs } from './../../../shared/table/table';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
 import { NotFoundError } from '../../../core/component/common/not-found-error';
 import { AppError } from '../../../core/component/common/app-error';
 import { BadInput } from '../../../core/component/common/bad-input';
 import { AccidentvehiculedriverService } from 'shared/services/accidentvehiculedriver.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accidentvehiculedriver } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
@@ -17,7 +18,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
   styleUrls: ['./accidentvehiculedriver.component.css']
 })
 export class AccidentvehiculedriverComponent implements OnInit {
-  accidentvehiculedriver: Accidentvehiculedriver;
+  /* accidentvehiculedriver: Accidentvehiculedriver; */
   selectedAccidentvehiculedriver: Accidentvehiculedriver;
   selectedNode: TreeNode;
 
@@ -25,7 +26,6 @@ export class AccidentvehiculedriverComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     idaccidentvehicule: 0,
-    accidentvehicule: null,
     adress: '',
     membership: '',
     licensenumber: '',
@@ -47,27 +47,29 @@ export class AccidentvehiculedriverComponent implements OnInit {
   /* private _dateofbirth: Date; */
   // private _issuedon: any;
 
-  @Input() idaccidentvehicule: number;
+  /* @Input() idaccidentvehicule: number; */
+  @Input() accidentvehiculedriver: Accidentvehiculedriver;
+  @Input() mode: Mode;
+  @Output() operation = new EventEmitter();
 
 
   constructor(private service: AccidentvehiculedriverService) {
   }
 
   ngOnInit() {
-    this.loadData();
+    this.selectedAccidentvehiculedriver = Object.assign({}, this.accidentvehiculedriver);
+   // this.loadData();
   }
 
   loadData() {
-    this.service.getItem(this.idaccidentvehicule)
-      .subscribe(accidentvehiculedriver => {
-        if (isNullOrUndefined(accidentvehiculedriver)) {
-          this.accidentvehiculedriver = this.newAccidentvehiculedriver;
-          this.newMode = true;
-        } else {
-          this.accidentvehiculedriver = accidentvehiculedriver;
-          this.newMode = false;
-        }
-      });
+    /* this.service.getItem(this.idaccidentvehicule)
+        .subscribe(accidentvehiculedriver => {
+          if (!isNullOrUndefined(accidentvehiculedriver)) {
+            this.accidentvehiculedriver = accidentvehiculedriver;
+          } else {
+            this.accidentvehiculedriver = this.accidentvehiculedriver;
+          }
+        }); */
   }
 
   /* get dateofbirth(): Date {
@@ -86,16 +88,17 @@ export class AccidentvehiculedriverComponent implements OnInit {
     this.accidentvehiculedriver.issuedon = new Date(value);
   } */
 
-  perform() {
-    this.updateAccidentvehiculedriver();
-    /* if (this.newMode) {
-      this.createAccidentvehiculedriver();
-    } else {
-      console.log(JSON.stringify(this.accidentvehiculedriver));
-      this.updateAccidentvehiculedriver();
-    } */
+  perform(event) {
+    let eventargs: EventArgs;
+    eventargs = this.mode === Mode.insert ? { item: this.accidentvehiculedriver, mode: Mode.insert, dialogVisible: false }
+                                          : { item: this.accidentvehiculedriver, mode: Mode.update, dialogVisible: false };
+    this.operation.emit(eventargs);
   }
 
+/*   perform(_accidentvehiculedriver: Accidentvehiculedriver) {
+    this.updateAccidentvehiculedriver(_accidentvehiculedriver);
+  }
+ */
   onChangeDate(item: Accidentvehiculedriver, event) {
     item.dateofbirth = event;
   }
@@ -138,14 +141,27 @@ export class AccidentvehiculedriverComponent implements OnInit {
       );
   }
 
-  updateAccidentvehiculedriver() {
-    this.service.update(this.accidentvehiculedriver)
-      .subscribe(updateaccidentvehiculedriver => {
-        this.loadData();
+  updateAccidentvehiculedriver(_accidentvehiculedriver: Accidentvehiculedriver) {
+    this.service.updatebyid(this.accidentvehiculedriver, 'idaccidentvehicule')
+      .subscribe(() => {
+//         this.loadData();
+      },
+      (error: Response) => {
+
+        if (error instanceof NotFoundError) {
+          alert('this post has already been deleted');
+        } else {
+          throw error;
+        }
       });
+    /* console.log(JSON.stringify(_accidentvehiculedriver));
+    this.service.updatebyid(_accidentvehiculedriver, 'idaccidentvehicule')
+      .subscribe(updateaccidentvehiculedriver => {
+        // this.loadData();
+      }); */
   }
 
   cancelUpdate(_accidentvehiculedriver) {
-    //
+    this.accidentvehiculedriver = Object.assign({}, this.selectedAccidentvehiculedriver);
   }
 }

@@ -1,13 +1,14 @@
 import { BadInput } from '../../core/component/common/bad-input';
 import { NotFoundError } from '../../core/component/common/not-found-error';
 import { AppError } from '../../core/component/common/app-error';
-import { Http } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import * as _ from 'lodash';
+
 
 @Injectable()
 export class DataService<T> {
@@ -26,6 +27,7 @@ export class DataService<T> {
         // return this.getAll()
         console.log(this.url + '/' + id);
         return this.http.get<T>(this.url + '/' + id)
+          //     .map(data => _.values(data))
        // .map(items => items.find(item => item.id === id))
             .catch(this.handleError);
     }
@@ -48,6 +50,11 @@ export class DataService<T> {
 
     update(resource) {
         return this.http.put(this.url + '/' + resource.id, resource, { headers: this.headers })
+            .catch(this.handleError);
+    }
+
+    updatebyid(resource, id) {
+        return this.http.put(this.url + '/' + resource['' + id + ''], resource, { headers: this.headers })
             .catch(this.handleError);
     }
 

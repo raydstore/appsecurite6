@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -70,6 +71,14 @@ export class AccidentagenteeComponent implements OnInit {
         .subscribe(entreprises => {
           this.entreprises = entreprises;
         });
+  }
+
+  showcountstop(): boolean {
+    let res = false;
+    if (!(isNullOrUndefined(this.newAccidentagentee))) {
+      res = !([1, 5, 9].includes(this.newAccidentagentee.idgrid));
+    }
+    return res;
   }
 
   loadLastId() {

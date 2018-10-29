@@ -2,7 +2,7 @@ import { NotFoundError } from './../../core/component/common/not-found-error';
 import { BadInput } from './../../core/component/common/bad-input';
 import { AppError } from './../../core/component/common/app-error';
 import { LastidService } from 'shared/services/lastid.service';
-import { InspectedsiteService } from 'shared/services/Inspectedsite.service';
+import { InspectedsiteService } from 'shared/services/inspectedsite.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { InspectedSite } from 'shared/table/table';

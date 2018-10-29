@@ -1,3 +1,7 @@
+import { AccidentvehiculeownerService } from './../../../shared/services/accidentvehiculeowner.service';
+import { AccidentvehiculeinsuranceService } from './../../../shared/services/accidentvehiculeinsurance.service';
+import { AccidentvehiculedriverService } from './../../../shared/services/accidentvehiculedriver.service';
+import { Mode } from './../../../shared/table/table';
 import { MarkService } from 'shared/services/mark.service';
 import { EntrepriseService } from 'shared/services/entreprise.service';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +13,7 @@ import { AppError } from '../../../core/component/common/app-error';
 import { LastidService } from 'shared/services/lastid.service';
 import { AccidentvehiculeService } from 'shared/services/accidentvehicule.service';
 import { TreeNode } from 'primeng/primeng';
-import { Accidentvehicule } from 'shared/table/table';
+import { Accidentvehicule, Accidentvehiculeinsurance, Accidentvehiculedriver, Accidentvehiculeowner, EventArgs } from 'shared/table/table';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { isUndefined, isNullOrUndefined } from 'util';
@@ -42,7 +46,6 @@ export class AccidentvehiculeComponent implements OnInit {
     lastuser: 'ali',
     kind: '',
     classification: '',
-    identreprise: null,
     idmark: null,
     source: '',
     destination: '',
@@ -57,18 +60,77 @@ export class AccidentvehiculeComponent implements OnInit {
   marks: any[];
   entreprises: any[];
   // titlelist = 'Marque';
+  newAccidentvehiculedriver: Accidentvehiculedriver = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    idaccidentvehicule: 0,
+    adress: '',
+    membership: 'S',
+    licensenumber: '',
+    dateofbirth: new Date(),
+    placeofbirth: '',
+    issuedon: new Date(),
+    issuedby: '',
+    lastuser: 'ali',
+    name: '',
+    owner: 'ali'
+  };
+  newAccidentvehiculeinsurance: Accidentvehiculeinsurance = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    idaccidentvehicule: 0,
+    identreprise: null,
+    policynumber: '',
+    datefirst: new Date(),
+    datelast: new Date(),
+    lastuser: 'ali',
+    owner: 'ali'
+    };
+  newAccidentvehiculeowner: Accidentvehiculeowner = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    idaccidentvehicule: 0,
+    adress: '',
+    phone: '',
+    lastuser: 'ali',
+    name: '',
+    owner: 'ali'
+  };
+
+  modedriver: Mode = Mode.update;
+  modeinsurance: Mode = Mode.update;
+  modeowner: Mode = Mode.update;
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
   constructor(private service: AccidentvehiculeService, private lastidService: LastidService,
-    private markService: MarkService, private entrepriseService: EntrepriseService) {
+    private markService: MarkService, private entrepriseService: EntrepriseService,
+    private accidentvehiculedriverservice: AccidentvehiculedriverService,
+    private accidentvehiculeinsuranceservice: AccidentvehiculeinsuranceService,
+    private accidentvehiculeownerservice: AccidentvehiculeownerService) {
   }
 
   ngOnInit() {
     this.loadData();
     // this.loadLastId(); 
+  }
+
+  initAccidentvehiculeinsurance()  {
+    let a = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    idaccidentvehicule: 0,
+    accidentvehicule: null,
+    identreprise: null,
+    policynumber: '',
+    datefirst: new Date(),
+    datelast: new Date(),
+    lastuser: 'ali',
+    owner: 'ali'
+    };
+    this.newAccidentvehiculeinsurance = <Accidentvehiculeinsurance> a;
   }
 
   loadData() {
@@ -108,6 +170,117 @@ export class AccidentvehiculeComponent implements OnInit {
     if (!isNullOrUndefined(item)) {
       return item.name;
     }
+  }
+
+  performAccidentvehiculedriver(eventArgs: EventArgs) {
+    const _accidentvehiculedriver: Accidentvehiculedriver = <Accidentvehiculedriver>eventArgs.item;
+    switch (eventArgs.mode.valueOf()) {
+      case Mode.insert.valueOf(): {
+
+                           this.dialogVisible = eventArgs.dialogVisible;
+                           this.createAccidentvehiculedriver(_accidentvehiculedriver);
+                           break;
+                         }
+      case Mode.update.valueOf(): {
+                           this.updateAccidentvehiculedriver(_accidentvehiculedriver);
+                           break;
+                         }
+    }
+  }
+
+  performAcccidentvehiculeinsurance(eventArgs: EventArgs) {
+    const _accidentvehiculeinsurance: Accidentvehiculeinsurance = <Accidentvehiculeinsurance> eventArgs.item;
+    switch (eventArgs.mode.valueOf()) {
+      case Mode.insert.valueOf(): {
+
+                           this.dialogVisible = eventArgs.dialogVisible;
+                           this.createAccidentvehiculeinsurance(_accidentvehiculeinsurance);
+                           break;
+                         }
+      case Mode.update.valueOf(): {
+                           this.updateAccidentvehiculeinsurance(_accidentvehiculeinsurance);
+                           break;
+                         }
+    }
+  }
+
+  performAcccidentvehiculeowner(eventArgs: EventArgs) {
+    const _accidentvehiculeowner: Accidentvehiculeowner = <Accidentvehiculeowner> eventArgs.item;
+    switch (eventArgs.mode.valueOf()) {
+      case Mode.insert.valueOf(): {
+
+                           this.dialogVisible = eventArgs.dialogVisible;
+                           this.createAccidentvehiculeowner(_accidentvehiculeowner);
+                           break;
+                         }
+      case Mode.update.valueOf(): {
+                           this.updateAccidentvehiculeowner(_accidentvehiculeowner);
+                           break;
+                         }
+    }
+  }
+
+  createAccidentvehiculedriver(accidentvehiculedriver: Accidentvehiculedriver) {
+    this.accidentvehiculedriverservice.create(accidentvehiculedriver)
+      .subscribe(() => {
+/*         this.loadData();
+ */      }, (error: AppError) => {
+        //
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
+        } else {
+          throw error;
+        }
+      });
+  }
+
+  updateAccidentvehiculedriver(_accidentvehiculedriver: Accidentvehiculedriver) {
+    this.accidentvehiculedriverservice.updatebyid(_accidentvehiculedriver, 'idaccidentvehicule')
+      .subscribe(() => {
+        // this.loadData();
+      });
+  }
+
+  createAccidentvehiculeinsurance(accidentvehiculeinsurance: Accidentvehiculeinsurance) {
+    this.accidentvehiculeinsuranceservice.create(accidentvehiculeinsurance)
+      .subscribe(() => {
+/*         this.loadData();
+ */      }, (error: AppError) => {
+        //
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
+        } else {
+          throw error;
+        }
+      });
+  }
+
+  updateAccidentvehiculeinsurance(_accidentvehiculeinsurance: Accidentvehiculeinsurance) {
+    this.accidentvehiculeinsuranceservice.updatebyid(_accidentvehiculeinsurance, 'idaccidentvehicule')
+      .subscribe(() => {
+        // this.loadData();
+      });
+  }
+
+  createAccidentvehiculeowner(accidentvehiculeowner: Accidentvehiculeowner) {
+    this.accidentvehiculeownerservice.create(accidentvehiculeowner)
+      .subscribe(() => {
+/*         this.loadData();
+ */      }, (error: AppError) => {
+        //
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
+        } else {
+          throw error;
+        }
+      });
+  }
+
+  updateAccidentvehiculeowner(_accidentvehiculeowner: Accidentvehiculeowner) {
+    this.accidentvehiculeownerservice.updatebyid(_accidentvehiculeowner, 'idaccidentvehicule')
+      .subscribe(() => {
+        // this.loadData();
+      });
   }
 
 
@@ -171,11 +344,11 @@ export class AccidentvehiculeComponent implements OnInit {
       );
   }
 
-  updateAccidentvehicule(_accidentvehicule) {
+  updateAccidentvehicule(_accidentvehicule: Accidentvehicule) {
     // _accidentvehicule.samury = inputSamury.value;
     this.service.update(_accidentvehicule)
-      .subscribe(updateaccidentvehicule => {
-        this.loadData();
+      .subscribe(() => {
+        // this.loadData();
       });
   }
 
@@ -198,7 +371,6 @@ export class AccidentvehiculeComponent implements OnInit {
       lastuser: 'ali',
       kind: 'UT',
       classification: 'S',
-      identreprise: null,
       idmark: null,
       source: '',
       destination: '',
@@ -258,6 +430,39 @@ export class AccidentvehiculeComponent implements OnInit {
     // display name for classification vehicule (sh or non sh)
     if (!isNullOrUndefined(value)) {
       return value === 'S' ? 'Vehicule SH' : 'Vehicule non SH';
+    }
+  }
+
+  getAccidentvehiculedriver(accidentvehicule: Accidentvehicule): Accidentvehiculedriver {
+    if (!isNullOrUndefined(accidentvehicule.accidentvehiculedriver)) {
+      this.modedriver = Mode.update;
+      return accidentvehicule.accidentvehiculedriver;
+    } else {
+      this.modedriver = Mode.insert;
+      this.newAccidentvehiculedriver.idaccidentvehicule = accidentvehicule.id;
+      return this.newAccidentvehiculedriver;
+    }
+  }
+
+  getAccidentvehiculeinsurance(accidentvehicule: Accidentvehicule): Accidentvehiculeinsurance {
+    if (!isNullOrUndefined(accidentvehicule.accidentvehiculeinsurance)) {
+      this.modeinsurance = Mode.update;
+      return accidentvehicule.accidentvehiculeinsurance;
+    } else {
+      this.modeinsurance = Mode.insert;
+      this.newAccidentvehiculeinsurance.idaccidentvehicule = accidentvehicule.id;
+      return this.newAccidentvehiculeinsurance;
+    }
+  }
+
+  getAccidentvehiculeowner(accidentvehicule: Accidentvehicule): Accidentvehiculeowner {
+    if (!isNullOrUndefined(accidentvehicule.accidentvehiculeowner)) {
+      this.modeowner = Mode.update;
+      return accidentvehicule.accidentvehiculeowner;
+    } else {
+      this.modeowner = Mode.insert;
+      this.newAccidentvehiculeowner.idaccidentvehicule = accidentvehicule.id;
+      return this.newAccidentvehiculeowner;
     }
   }
 }
