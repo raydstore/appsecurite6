@@ -75,17 +75,23 @@
         <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" [idgrid]="idgrid"></app-accidentagentshbit>
       </ng-template>
     </div> -->
+    <div class="container">
+        <div class="ca flex-item">
     <app-faccidentagentsh [item]="item" [mode]="mUpdate" [agents]="agents" (operation)="performAction($event)" ></app-faccidentagentsh>
+    </div>
+    </div>
     <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
       <ng-template #showAccidentagentshBit>
         <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" [idgrid]="idgrid"></app-accidentagentshbit>
       </ng-template>
   </ng-template>
 </p-dataTable>
-
-<p-dialog header="Agent Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="800">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
-    <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mInsert" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
+<!-- ui-grid ui-grid-responsive ui-grid-pad  -->
+<p-dialog header="Nouveaux Agent" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="380">
+  <div class="container" *ngIf="newAccidentagentsh">
+    <div class="ca flex-item">
+       <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mInsert" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
+    </div>
   </div>
 </p-dialog>
   <!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">

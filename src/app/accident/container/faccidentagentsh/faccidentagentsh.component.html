@@ -1,19 +1,20 @@
-<!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="item"> -->
-  <div class="container">
+<p-card title="" [style]="{width: '360px'}">
     <div class="form-group row">
-      <label for="chidagentdeclare" class="col-sm-2 col-form-label">Agent : </label>
-      <div class="col-sm-10">
+      <label for="chidagentdeclare" class="col-sm-4 col-form-label">Agent : </label>
+      <div class="col-sm-8">
         <app-autocomplete [i_item]="item.agent" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agents"
           (changeItem)="onChangeItem(item, 'agent', $event)"></app-autocomplete>
       </div>
     </div>
     <div class="form-group row" *ngIf="showcountstop()">
-      <label for="icountstopwork">nombre de jour arrêt</label>
+      <label for="icountstopwork" class="col-sm-4 col-form-label">nombre de jour arrêt</label>
+      <div class="col-sm-8">
       <input type="text" id="icountstopwork" [(ngModel)]="item.countstopwork" placeholder="nombre de jour arrêt">
     </div>
+    </div>
     <div class="form-group row">
-      <label for="chevent" class="col-sm-2 col-form-label">Observation</label>
-      <div class="col-sm-10">
+      <label for="chevent" class="col-sm-1 col-form-label">Observation</label>
+      <div class="col-sm-11 clkind">
         <textarea rows="5" cols="40" pInputTextarea [(ngModel)]="item.samury"></textarea>
       </div>
     </div>
@@ -21,5 +22,86 @@
       <button class="btn btn-primary" (click)="perform($event)">Valider</button>
       <button class="btn btn-warning" (click)="cancel(item)">Annuler</button>
     </div>
-  </div>
-<!-- </div> -->
+  </p-card>
+
+  
+<!--       <p-card title="Info Vehicule" [style]="{width: '360px'}">
+          <div class="form-group row">
+              <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
+              <div class="col-sm-11 clkind">
+                  <p-radioButton name="groupcl" class="flex-item" id="chclassification" value="S" label="SH"
+                      [(ngModel)]="item.classification" inputId="cl1"></p-radioButton>
+                  <p-radioButton name="groupcl" class="flex-item" value="N" label="Non SH" [(ngModel)]="item.classification"
+                      inputId="cl2"></p-radioButton>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chnom" class="col-sm-4 col-form-label">le nom : </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="chnom" [(ngModel)]="item.name" placeholder="le nom du vehicule">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chmatricule" class="col-sm-4 col-form-label">matricule : </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="chmatricule" [(ngModel)]="item.matricule"
+                      placeholder="matricule">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chmarque" class="col-sm-4 col-form-label">marque</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="chmarque" [(ngModel)]="item.idmark['name']"
+                      placeholder="le nom de la marque" #name>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chkind" class="col-sm-1 col-form-label">type</label>
+              <div class="col-sm-11 clkind">
+                  <p-radioButton name="groupkind" class="flex-item" id="chkind" value="TK" label="Camion"
+                      [(ngModel)]="item.kind" inputId="k3"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="TR" label="Tracteur"
+                      [(ngModel)]="item.kind" inputId="k7"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="BU" label="Bus" [(ngModel)]="item.classification"
+                      inputId="k6"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="MN" label="Mini bus"
+                      [(ngModel)]="item.kind" inputId="k4"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="MC" label="Micro bus"
+                      [(ngModel)]="item.kind" inputId="k5"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="UT" label="Utilitaire"
+                      [(ngModel)]="item.kind" inputId="k1"></p-radioButton>
+
+                  <p-radioButton name="groupkind" class="flex-item" value="TO" label="Touristique"
+                      [(ngModel)]="item.kind" inputId="k2"></p-radioButton>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chsource" class="col-sm-4 col-form-label">venant de : </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="chsource" [(ngModel)]="item.source"
+                      placeholder="venant de">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="chdestination" class="col-sm-4 col-form-label">allant à : </label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" id="chdestination" [(ngModel)]="item.destination"
+                      placeholder="allant à">
+              </div>
+          </div>
+          <div>
+              <button class="btn btn-success" (click)="updateAccidentvehicule(item)">
+                  <i class="fa fa-check">Valider</i>
+              </button>
+              <button class="btn btn-warning" (click)="cancelUpdate(item)">
+                  <i class="fa fa-times">Annuler</i>
+              </button>
+          </div>
+
+      </p-card> -->
+  

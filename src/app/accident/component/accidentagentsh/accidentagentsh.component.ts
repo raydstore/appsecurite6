@@ -132,12 +132,16 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs) {
-    switch (eventArgs.mode) {
-      case Mode.insert: this.dialogVisible = eventArgs.dialogVisible;
-                         this.createAccidentagentsh();
-        break;
-      case Mode.update: this.updateAccidentagentsh(<Accidentagentsh>eventArgs.item);
-        break;
+    switch (eventArgs.mode.valueOf()) {
+      case Mode.insert.valueOf(): {
+                          this.dialogVisible = eventArgs.dialogVisible;
+                          this.createAccidentagentsh();
+                          break;
+                        }
+      case Mode.update.valueOf(): {
+                          this.updateAccidentagentsh(<Accidentagentsh>eventArgs.item);
+                          break;
+                        }
     }
   }
 

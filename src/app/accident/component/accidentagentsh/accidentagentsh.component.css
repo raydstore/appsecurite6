@@ -1,0 +1,8 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 10px;
+    height: 420px;
+    background-color: lightgray !important;
+}

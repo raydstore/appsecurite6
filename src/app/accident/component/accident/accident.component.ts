@@ -307,7 +307,7 @@ export class AccidentComponent implements OnInit {
     return this.selectedNode === event.node ? true : false;
   }
 
-  performAction(eventArgs: EventArgs) {
+  performAction(eventArgs: EventArgs, table: any) {
     /* console.log(JSON.stringify(eventArgs)); */
     let _accident: Accident = <Accident>eventArgs.item;
     let value = this.datePipe.transform(_accident.curdate, 'yyMMddHHmmss');
@@ -318,6 +318,8 @@ export class AccidentComponent implements OnInit {
       case this.mInsert: {
                            this.dialogVisible = eventArgs.dialogVisible;
                            this.createAccident();
+                           table.toggleRow(this.newAccident);
+                           this.selectedAccident = this.accidents[1];
                            this.newAccident = Object.assign({}, this._newAccident);
                            break;
                          }

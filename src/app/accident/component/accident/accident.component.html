@@ -25,7 +25,7 @@
   <!-- [lazy]="true" (onLazyLoad)="loadAccidentsLazy($event)" 
   [totalRecords]="totalRecords" [loading]="loading" -->
 
-  <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode"
+  <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedAccident"
     [paginator]="true" [rows]="10" [globalFilterFields]="['id','classification', 'place', 'idsite.name']">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
@@ -51,8 +51,8 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
-      <tr>
-        <td [pSelectableRow]="rowData">
+      <tr [pSelectableRow]="rowData">
+        <td>
           <a href="#" [pRowToggler]="rowData ">
             <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
           </a>
@@ -60,7 +60,7 @@
         <td>{{rowData.id}}</td>
         <td>{{rowData.classification}}</td>
         <td>{{rowData.curdate | date:'shortDate'}}</td>
-        <td>{{rowData.time | date:'shortDate'}}</td>
+        <td>{{rowData.time | date:'HH:mm'}}</td>
         <td>{{rowData.idsite.name}}</td>        
         <td>{{rowData.place}}</td>
         <td>{{rowData.description}}</td>
@@ -146,7 +146,7 @@
               <div class="accidentd-body">
                 <p-tabView>
                   <p-tabPanel [selected]="true" [header]="'Détail'">
-                    <app-faccident [item]="accident" [mode]="mUpdate" [agents]="agents" [sites]="sites" (operation)="performAction($event)"></app-faccident>
+                    <app-faccident [item]="accident" [mode]="mUpdate" [agents]="agents" [sites]="sites" (operation)="performAction($event, dt)"></app-faccident>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Dégât'" headerStyleClass="greenText">
                     <ng-template pTemplate="content">
@@ -312,5 +312,5 @@
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div> -->
-    <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites" (operation)="performAction($event)"></app-faccident>
+    <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites" (operation)="performAction($event, dt)"></app-faccident>
   </div>

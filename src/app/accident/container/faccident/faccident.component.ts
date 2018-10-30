@@ -72,12 +72,12 @@ export class FaccidentComponent implements OnInit {
   }
 
 
-  perform(event) {
+  perform(event, _table) {
     let eventargs: EventArgs;
     /* console.log('newid = ' + this.newid); */
     /* console.log('event = ' + event); */
-    eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false }
-                                         : { item: this.item, mode: Mode.update, dialogVisible: false };
+    eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false, table: _table }
+                                          : { item: this.item, mode: Mode.update, dialogVisible: false, table: _table };
     this.operation.emit(eventargs);
   }
 

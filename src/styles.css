@@ -156,3 +156,8 @@ body {
 .clcalendar .clpcalendar input {
     width: 175px !important;
 }
+
+.ui-dialog.ui-widget .ui-dialog-titlebar {
+	padding: .5em 1.5em !important;
+	height: 60px !important;
+}

@@ -3,7 +3,8 @@ export enum Mode {insert = 0, update = 1, delete = 2}
 export interface EventArgs {
     item: any;
     mode: Mode;
-    dialogVisible: boolean;
+    dialogVisible?: boolean;
+    table?: any;
 }
 
 export interface Activity {
