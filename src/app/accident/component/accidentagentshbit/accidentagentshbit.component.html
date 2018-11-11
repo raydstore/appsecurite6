@@ -1,108 +1,24 @@
-<!-- <div class="ui-g-12 ui-md-4" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
-  <div class="ui-inputgroup">
-    <span class="ui-inputgroup-addon">{{vw$accidentagentshbit.classname}}</span>
-    <input type="text" pInputText [ngModel]="vw$accidentagentshbit.name" placeholder="vw$accidentagentshbit.name">
-    <button pButton type="button" label="Valider"></button>
-  </div>
-</div>
- -->
 <div class="card text-white bg-secondary">
   <div class="card-header">
     Bit d'agent
-    <!--  <p-button (click)="newNature()" label="Nature"></p-button>
-    
-    <p-button (click)="newSiege()" icon="fa fa-fw fa-check" label="Siège"></p-button>
-    
-    <p-button (click)="newForme()" icon="fa fa-fw fa-check" iconPos="right" label="Forme"></p-button>
-    
-    <p-button (click)="newMateriel()" icon="fa fa-fw fa-check" [disabled]="true" label="Matériel"></p-button> -->
-
-
   </div>
   <div class="card-body">
-      
     <div class="ui-g ui-fluid">
-        <span class="ui-fluid">
-        <p-autoComplete [(ngModel)]="rBits" [suggestions]="filteredBitsMultiple" (completeMethod)="filterBitMultiple($event)"  
-          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1" placeholder="Bit" field="id" [multiple]="true" [dropdown]="true">
+      <span class="ui-fluid">
+        <p-autoComplete [(ngModel)]="rBits" [suggestions]="filteredBitsMultiple" (completeMethod)="filterBitMultiple($event)"
+          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1"
+          placeholder="Bit" field="id" [multiple]="true" [dropdown]="true">
           <ng-template let-value pTemplate="selectedItem">
-              <!-- <div class="alert alw" [class.alert-primary]="value.bitclass == 'A'" [class.alert-success]="value.bitclass == 'B'" [class.alert-danger]="value.bitclass == 'C'"
-                 [class.alert-warning]="value.bitclass == 'D'">
-                 {{value.name}}
-              </div> -->
-              <p style="font-size:18px">{{value.id}}</p>
+            <p style="font-size:18px">{{value.id}}</p>
           </ng-template>
         </p-autoComplete>
-        </span>
-        <!-- <ul> -->
-            <!-- <li *ngFor="let bit of rBits">{{bit.name}}</li> -->
-            <div  *ngFor="let value of rBits" class="alert" [class.alert-primary]="value.idbitclass == 'A'" [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
-                 [class.alert-warning]="value.idbitclass == 'D'">
-                 {{getFullName(value)}}
-              </div>
-        <!-- </ul> -->
-
-
-<!--       <ng-container *ngFor="let bitclass of bitclasss"> -->
-
-
-        <!-- <div class="ui-g-12 ui-md-4"> -->
-
-        <!-- <div class="ui-inputgroup btgroup">
-              <span class="ui-inputgroup-addon labelbit">{{bitclass.name}}</span>
-              <input type="text" pInputText placeholder="Vote">  
-              <button pButton type="button" icon="pi pi-check" class="ui-button-success"></button>     
-              <button pButton type="button" icon="pi pi-close" class="ui-button-danger"></button>      
-          </div> -->
-
-
-<!--         <ng-container *ngIf="getBitStatus(bitclass.id)"  >
-        <div class="alert" [class.alert-primary]="bitclass.id == 'A'" [class.alert-success]="bitclass.id == 'B'" [class.alert-danger]="bitclass.id == 'C'"
-          [class.alert-warning]="bitclass.id == 'D'">
-          <label class="labelbit">{{bitclass.name}} : </label>
-          <div class="col-sm-10">
-            <app-autocomplete [i_item]="resultBit" [functionName]="displayName" [args]="['name']" [service]="listBits"
-              (changeItem)="onChangeItem(resultBit, '', $event)"></app-autocomplete>
-          </div>
-          <button type="button" class="btn btn-success"> + </button>
-          <button type="button" class="btn btn-danger"> - </button>
-        </div>
-      </ng-container> -->
-
-        <!-- </div> -->
-      <!-- </ng-container> -->
+      </span>
     </div>
-    <!-- <div class="input-group" *ngFor="let vw$accidentagentshbit of vw$accidentagentshbits">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">{{vw$accidentagentshbit.classname}}</span>
+    <div>
+      <div *ngFor="let value of vw$accidentagentshbits" class="alert" [class.alert-primary]="value.idbitclass == 'A'"
+        [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
+        [class.alert-warning]="value.idbitclass == 'D'">
+        {{getFullName(value)}}
       </div>
-      <input type="text" class="form-control" [ngModel]="vw$accidentagentshbit.name" aria-describedby="basic-addon1">
-      <button type="button" class="btn btn-primary">Valider</button>
-    </div> -->
-
-    <!-- <div class="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
-      </div>
-      <div class="alert alert-secondary" role="alert">
-        A simple secondary alert—check it out!
-      </div>
-      <div class="alert alert-success" role="alert">
-        A simple success alert—check it out!
-      </div>
-      <div class="alert alert-danger" role="alert">
-        A simple danger alert—check it out!
-      </div>
-      <div class="alert alert-warning" role="alert">
-        A simple warning alert—check it out!
-      </div>
-      <div class="alert alert-info" role="alert">
-        A simple info alert—check it out!
-      </div>
-      <div class="alert alert-light" role="alert">
-        A simple light alert—check it out!
-      </div>
-      <div class="alert alert-dark" role="alert">
-        A simple dark alert—check it out!
-      </div> -->
+    </div>
   </div>
-</div>

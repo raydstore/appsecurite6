@@ -30,7 +30,10 @@ export class FaccidentComponent implements OnInit {
   @Input() mode: Mode;
   @Input() sites: Site[];
   @Input() agents: Agent[];
+  /* @Input() table: any; */
   @Output() operation = new EventEmitter();
+
+  table: any = {};
 
   agentDeclare: Agent;
   agentValidate: Agent;
@@ -72,12 +75,15 @@ export class FaccidentComponent implements OnInit {
   }
 
 
-  perform(event, _table) {
+/*   perform(event, _table) { */
+  perform(event) {
+/*     console.log('table = ' + JSON.stringify(this.table)); */
+  //  console.log('dt = ' + JSON.stringify(_table));
     let eventargs: EventArgs;
     /* console.log('newid = ' + this.newid); */
     /* console.log('event = ' + event); */
-    eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false, table: _table }
-                                          : { item: this.item, mode: Mode.update, dialogVisible: false, table: _table };
+    eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false, table: this.table }
+                                          : { item: this.item, mode: Mode.update, dialogVisible: false, table: this.table };
     this.operation.emit(eventargs);
   }
 

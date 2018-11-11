@@ -14,9 +14,9 @@
   (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
   <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
   <p-column field="accidentagentshPK.idagent" header="id"></p-column>
-  <p-column field="accidentagentshPK" header="name">
+  <p-column field="agent" header="name">
     <ng-template let-col let-m="rowData" pTemplate="body">
-      {{getName(m[col.field].agent)}}
+      {{getName(m[col.field])}}
     </ng-template>
   </p-column>
   <p-column field="countstopwork" header="nb jour arrêt de travail"></p-column>
@@ -82,7 +82,8 @@
     </div>
     <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
       <ng-template #showAccidentagentshBit>
-        <app-accidentagentshbit [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" [idgrid]="idgrid"></app-accidentagentshbit>
+          <!-- [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" -->
+        <app-accidentagentshbit [accidentagentsh]="item" [idgrid]="idgrid"></app-accidentagentshbit>
       </ng-template>
   </ng-template>
 </p-dataTable>

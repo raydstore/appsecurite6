@@ -1,3 +1,4 @@
+import { Accidentagentsh } from 'shared/table/table';
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
 export enum Mode {insert = 0, update = 1, delete = 2}
 export interface EventArgs {
@@ -349,17 +350,17 @@ export interface AccidentagenttpPK {
 }
 
 export interface Accidentagentsh {
-    accidentagentshPK: AccidentagentshPK;
-    accidentdomain: number;
+    accidentagentshPK?: AccidentagentshPK;
+    accidentdomain?: number;
     agent?: Agent;
-    countstopwork: number;
+    countstopwork?: number;
     datecreate?: Date;
     dateupdate?: Date;
-    idgrid: number;
+    idgrid?: number;
     owner?: string;
     lastuser?: string;
-    samury: string;
-    typeaccident: string;
+    samury?: string;
+    typeaccident?: string;
 }
 
 export interface Accidentagentee {
@@ -468,8 +469,8 @@ export interface Accidentcause {
 
 export interface Accidentagentshbit {
     id?: number;
-    iddamage: number;
-    idagent: string;
+    accidentagentsh: Accidentagentsh;
+    idgrid: number;
     idbit: string;
     idbitclass: string;
     kind: string;

@@ -1,9 +1,11 @@
+import { BadInput } from './../../../core/component/common/bad-input';
+import { AppError } from './../../../core/component/common/app-error';
 import { BitService } from './../../../shared/services/bit.service';
 import { BitclassService } from 'shared/services/bitclass.service';
 import { AccidentagentshbitService } from 'shared/services/accidentagentshbit.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Vw$accidentagentshbitService } from 'shared/services/vw$accidentagentshbit.service';
-import { Vw$accidentagentshbit, Bitclass, Bit, Accidentagentshbit } from 'shared/table/table';
+import { Vw$accidentagentshbit, Bitclass, Bit, Accidentagentshbit, Accidentagentsh } from 'shared/table/table';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
@@ -18,9 +20,10 @@ import { isUndefined, isNullOrUndefined } from 'util';
 } */
 
 export class AccidentagentshbitComponent implements OnInit {
-  @Input() iddamage: number;
-  @Input() idagent: string;
+  /* @Input() iddamage: number;
+  @Input() idagent: string; */
   @Input() idgrid: number;
+  @Input() accidentagentsh: Accidentagentsh;
   vw$accidentagentshbits: Vw$accidentagentshbit[];
   bitclasss: Bitclass[];
   bits: Bit[];
@@ -41,13 +44,14 @@ export class AccidentagentshbitComponent implements OnInit {
     private bitService: BitService) { }
 
   ngOnInit() {
-    this.loadDataBit();
     this.loadDataBitClass();
     this.loadData();
+    this.loadDataBit();
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.iddamage, 'idagent': this.idagent, 'idgrid': this.idgrid })
+    this.service.getByQueryParam({ 'iddamage': this.accidentagentsh.accidentagentshPK.iddamage,
+                                   'idagent': this.accidentagentsh.accidentagentshPK.idagent, 'idgrid': this.idgrid })
       .subscribe(vw$accidentagentshbits => {
         this.vw$accidentagentshbits = vw$accidentagentshbits;
       });
@@ -58,6 +62,17 @@ export class AccidentagentshbitComponent implements OnInit {
     this.bitclassService.getAll()
       .subscribe(bitclasss => {
         this.bitclasss = bitclasss;
+      });
+  }
+
+  loadDataBit() {
+    this.bitService.getAll()
+      .subscribe(bits => {
+        this.bits = this.getBitNotClassAssigned(bits);
+        this.a_bits = bits.filter(bit => (bit.idbitclass === 'A') && (bit.kind === 'I'));
+        this.b_bits = bits.filter(bit => (bit.idbitclass === 'B') && (bit.kind === 'I'));
+        this.c_bits = bits.filter(bit => (bit.idbitclass === 'C') && (bit.kind === 'I'));
+        this.d_bits = bits.filter(bit => (bit.idbitclass === 'D') && (bit.kind === 'I'));
       });
   }
 
@@ -85,16 +100,45 @@ export class AccidentagentshbitComponent implements OnInit {
   }
 
   getFullName(value): string {
-    return value.id + ' - ' + value.name + `     `;
+    return value.idbitclass + ' - ' + value.classname + ' : ' + value.name + `     `;
   }
 
   filterBitMultiple(event) {
-    let query = event.query;
+    const query = event.query;
     this.filteredBitsMultiple = this.filterBit(query, this.bits);
   }
 
-  onSelect(value) {
+  onSelect(value: Bit) {
     console.log('value onSelect = ' + JSON.stringify(value));
+    const newAccidentagentshbit: Accidentagentshbit = {
+      id: 0,
+      accidentagentsh: this.accidentagentsh,
+      idgrid: this.idgrid,
+      idbit: '',
+      idbitclass: '',
+      kind: '',
+      owner: 'ali',
+      lastuser: 'ali',
+      datecreate: new Date(),
+      dateupdate: new Date()
+    };
+    /* this.rBits = [value, ...this.rBits]; */
+    newAccidentagentshbit.idbit = value.id;
+    newAccidentagentshbit.idbitclass = value.idbitclass;
+    newAccidentagentshbit.kind = value.kind;
+    console.log('newAccidentagentshbit onSelect = ' + JSON.stringify(newAccidentagentshbit));
+    this.accidentagentshbitService.create(newAccidentagentshbit)
+      .subscribe(accidentagentshbit => {
+        this.rBits = [];
+        this.loadData();
+        this.bits = this.getBitNotClassAssigned(this.bits);
+      }, (error: AppError) => {
+       // this.rBits.splice(0, 1);
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
+        } else {
+        }
+      });
   }
 
   onUnselect(value) {
@@ -114,8 +158,20 @@ export class AccidentagentshbitComponent implements OnInit {
     return filtered;
   }
 
-  isAssignedBitclass(bit: Bit): boolean {
-    let result: boolean = false;
+  getBitNotClassAssigned(bits: Bit[]): Bit[] {
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: Bit[] = [];
+    for (let i = 0; i < bits.length; i++) {
+      let bit = bits[i];
+      if (!this.isAssignedBitclass(bit) && (bit.kind === 'I')) {
+        filtered.push(bit);
+      }
+    }
+    return filtered;
+  }
+
+  isAssignedBitclassold(bit: Bit): boolean {
+    let result = false;
     for (let i = 0; i < this.rBits.length; i++) {
       result = this.rBits[i].idbitclass === bit.idbitclass;
       if (result) { break; }
@@ -123,17 +179,15 @@ export class AccidentagentshbitComponent implements OnInit {
     return result;
   }
 
-
-  loadDataBit() {
-    this.bitService.getAll()
-      .subscribe(bits => {
-        this.bits = bits;
-        this.a_bits = bits.filter(bit => (bit.idbitclass === 'A') && (bit.kind === 'I'));
-        this.b_bits = bits.filter(bit => (bit.idbitclass === 'B') && (bit.kind === 'I'));
-        this.c_bits = bits.filter(bit => (bit.idbitclass === 'C') && (bit.kind === 'I'));
-        this.d_bits = bits.filter(bit => (bit.idbitclass === 'D') && (bit.kind === 'I'));
-      });
+  isAssignedBitclass(bit: Bit): boolean {
+    let result = false;
+    for (let i = 0; i < this.vw$accidentagentshbits.length; i++) {
+      result = this.vw$accidentagentshbits[i].idbitclass === bit.idbitclass;
+      if (result) { break; }
+    }
+    return result;
   }
+
 
   displayName(item: any, args: string[]): string {
     let result = '';

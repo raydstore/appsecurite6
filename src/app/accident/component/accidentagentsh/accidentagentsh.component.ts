@@ -47,7 +47,7 @@ export class AccidentagentshComponent implements OnInit {
     idgrid: this.idgrid,
     lastuser: 'ali',
     owner: 'ali',
-    samury: '',
+    samury: ' ',
     typeaccident: 'L'
   };
   dialogVisible = false;
@@ -153,8 +153,10 @@ export class AccidentagentshComponent implements OnInit {
     console.log('aa = ' + JSON.stringify(this.newAccidentagentsh));
     this.service.create(this.newAccidentagentsh)
       .subscribe(newAccidentagentsh => {
+        console.log('aa = enter');
         this.loadData();
       }, (error: AppError) => {
+        console.log('aa = erreur');
         this.accidentagentshs.splice(0, 1);
         if (error instanceof BadInput) {
           // this.form.setErrors(originalError);
@@ -206,7 +208,7 @@ export class AccidentagentshComponent implements OnInit {
       idgrid: this.idgrid,
       lastuser: 'ali',
       owner: 'ali',
-      samury: '',
+      samury: ' ',
       typeaccident: 'L'
     };
   }

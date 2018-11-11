@@ -77,20 +77,35 @@ body {
     border-radius: .2rem!important; */
 }
 
-.cardtitle {
+/* .cardtitle {
     height: 70px;
     margin-top: 15px;
     margin-bottom: 15px!important;
     padding-left: 7px;
     padding-top: 25px!important;
     width: 450px;
+} */
+
+.cardtitle {
+	height: 70px;
+	margin-top: 15px;
+	margin-bottom: 15px !important;
+	padding-left: 7px;
+	padding-top: 25px !important;
+	width: 100%;
+	height: auto;
+	background-color: #cce5ff !important;
 }
 
 .titleform {
-    width: 350px;
-    /* left: 50px;/* 
-    /* background-color: red; */
+	width: 100%;
+	font-size: 1.4rem;
+	color: #004085;
 }
+
+/* .titleform {
+    width: 350px;
+} */
 
 .alleft {
     float: left;
