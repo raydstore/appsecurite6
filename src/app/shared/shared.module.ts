@@ -14,7 +14,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
-  OrganizationChartModule,
   CheckboxModule,
   CodeHighlighterModule,
   DataGridModule,
@@ -28,10 +27,12 @@ import {
   RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { FieldsetModule } from 'primeng/fieldset';
+import { OrganizationChartModule } from 'primeng/organizationchart';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
-import {TreeNode} from 'primeng/api';
+import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { RatingModule } from 'primeng/rating';
 import { CarouselModule } from 'primeng/carousel';
@@ -135,6 +136,7 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     FormGroup,
     Validators, */
     MatStepperModule,
+    FieldsetModule,
     OrganizationChartModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -171,6 +173,8 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     /* FormBuilder,
     FormGroup,
     Validators, */
+    FieldsetModule,
+    OrganizationChartModule,
     MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule,

@@ -1,9 +1,9 @@
 
-.a {
-            width: 500px!important;
+ .a {
+            width: 500px!important; 
             display: block;
         }
-.company.ui-organizationchart .ui-organizationchart-node-content.stparent {
+.Acompany.ui-organizationchart .ui-organizationchart-node-content.stparent {
             padding: 0;
             border: 0 none;
         }
@@ -33,11 +33,27 @@
         .node-content {
             text-align: center;
             border: 1px solid #495ebb;
+        } 
+
+        .panel-scroll3 {
+            overflow-x:auto;
+            overflow-y:scroll; 
+            width: 800px;
+             height: 100%;
         }
 
-        .panel-scroll {
-            overflow-x:auto;
-            overflow-y:scroll;
-           /*  width: 800px; */
-            height: 100%;
+        .custombar2 .ui-scrollpanel-wrapper {
+            border-right: 9px solid #757575;
+            border-bottom: 9px solid #757575;
+        }
+            
+        .custombar2 .ui-scrollpanel-bar {
+            background-color: #68C77D;
+            border-radius: 0;
+            opacity: 1;
+            transition: background-color .3s;
+        }
+            
+        .custombar2:hover .ui-scrollpanel-bar {
+            background-color: #46A55A;
         }

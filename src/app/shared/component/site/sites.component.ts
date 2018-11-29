@@ -5,9 +5,9 @@ import { AppError } from '../../../core/component/common/app-error';
 import { BadInput } from '../../../core/component/common/bad-input';
 /* import { Site } from './../../table/site'; */
 import { SiteService } from 'shared/services/site.service';
-import { TreeNode } from 'primeng/primeng';
+import { TreeNode } from 'primeng/api';
 import { PanelModule } from 'primeng/primeng';
-import { OrganizationChartModule } from 'primeng/primeng';
+import {OrganizationChartModule} from 'primeng/organizationchart';
 import { Component, OnInit, ViewEncapsulation, Attribute } from '@angular/core';
 import { DataGridModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
@@ -25,9 +25,12 @@ import { InfoSite } from 'shared/component/dialog-modal/dialog-modal.component';
 })
 export class SitesComponent implements OnInit {
   sites: Site[] = [];
+  selectedSite: Site;
   data: TreeNode[] = [];
   lastids: any[];
   lastid: any;
+  titlelist = 'Site';
+  cols: any[];
  /*  ltLabels: Label[] = [];
   labels: any[] = [{ label: 'Select Label', value: null }];
   selectedLabel: Label;
@@ -40,6 +43,16 @@ export class SitesComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.cols = [
+      { field: 'id',               header: 'id' },
+      { field: 'name',             header: 'name' },
+      { field: 'idlabel.name',     header: 'nature' },
+      { field: 'idparent.name',    header: 'localisation' },
+      { field: 'datecreate',       header: 'datecreate' },
+      { field: 'dateupdate',       header: 'dateupdate' },
+      { field: 'owner',            header: 'owner' },
+      { field: 'lastuser',         header: 'lastuser' }
+  ];
   }
 
   loadData() {
@@ -75,20 +88,21 @@ export class SitesComponent implements OnInit {
      }
   }
 
-  getChilds(siteParent: Site): TreeNode[] {
+  getChilds(siteParent: Site, _expanded: boolean): TreeNode[] {
     let result: TreeNode[] = [];
     for (let site of this.sites) {
       if (site.idparent !== undefined) {
        if (site.idparent['id'] === siteParent['id']) {
         let value: any;
-        let childs: TreeNode[] = this.getChilds(site);
+        let childs: TreeNode[] = this.getChilds(site, false);
          if (childs.length !== 0) {
          value = {
           label: site.name,
           type: 'branch',
           data: site,
-          children: childs,
-          expanded: true,
+          children: null,
+          childs: childs,
+          expanded: _expanded,
           styleClass: 'stparent'
         };
       } else {
@@ -96,7 +110,7 @@ export class SitesComponent implements OnInit {
             label: site.name,
             type: 'sheet',
             data: site,
-            expanded: true,
+            expanded: false,
             styleClass: 'stchild'
           };
       }
@@ -113,7 +127,7 @@ export class SitesComponent implements OnInit {
        label: siteRoot.name,
        type: 'branch',
        data: siteRoot,
-       children: this.getChilds(siteRoot),
+       children: this.getChilds(siteRoot, false),
        expanded: true,
        partialSelected: true,
        styleClass: 'stparent'
@@ -175,6 +189,25 @@ export class SitesComponent implements OnInit {
         }
       }
       );
+  }
+
+  expandChilds(node: TreeNode) {
+    node.children = node['childs'];
+    node.expanded = true;
+    console.log('sites = ' + JSON.stringify(this.sites));
+  }
+
+
+  showNewDialoge() {
+
+  }
+
+  updateSite(item, name) {
+
+  }
+
+  cancelUpdate() {
+
   }
 
 

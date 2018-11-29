@@ -66,7 +66,7 @@ export interface UnitMeasure {
 export interface Site {
     id?: number;
     name?: string;
-    idlabel?: any;
+    idlabel?: Label;
     idparent?: Site;
     owner?: string;
     lastuser?: string;

@@ -1,18 +1,118 @@
-<div class="panel-scroll">
-  <p-organizationChart [value]="data" expanded="true" styleClass="company" class="a">
-    <ng-template let-node pTemplate="sheet" styleClass="stchild">
-      {{node.label}}
-      <div class="toolbtn">
-        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
-        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
-      </div>
-    </ng-template>
-    <ng-template let-node pTemplate="branch" styleClass="stparent">
-      <div class="node-header ui-corner-top">{{node.label}}</div>
-      <div class="toolbtn">
-        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
-        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
-      </div>
-    </ng-template>
-  </p-organizationChart>
-</div>
+<!-- <p-tabView> -->
+<!-- <p-tabPanel header="Detail"> -->
+  <div class="sited bg-light">
+    <div class="sited-header alCenter sitedtitle">
+
+      <h4 class="titleform">
+        <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+      </h4>
+
+      <button class="btn btn-success btnright" (click)="showNewDialoge()">
+        <i class="fa fa-plus"></i>
+      </button>
+
+    </div>
+    <p-table #dt [columns]="cols" [value]="sites" dataKey="id" rowExpandMode="single" selectionMode="single"
+      [(selection)]="selectedSite" [paginator]="true" [rows]="10" [globalFilterFields]="['id','name', 'idlabel.name', 'idparent.name']">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            style="width:auto">
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 2.25em"></th>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
+        <tr [pSelectableRow]="rowData">
+          <td>
+            <a href="#" [pRowToggler]="rowData ">
+              <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
+            </a>
+          </td>
+          <td>{{rowData.id}}</td>
+          <td>{{rowData.name}}</td>
+          <td>{{rowData.idlabel.name}}</td>
+          <td>{{rowData.idparent.name}}</td>
+          <td>{{rowData.datecreate | date:'shortDate'}}</td>
+          <td>{{rowData.dateupdate | date:'shortDate'}}</td>
+          <td>{{rowData.owner}}</td>
+          <td>{{rowData.lastuser}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-site>
+        <tr>
+          <td [attr.colspan]="9">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+              <!-- <div class="sited text-white bg-info mb-3">
+                      <div class="sited-header">Info Site</div>
+                      <div class="sited-body"> -->
+              <div class="container">
+                <div class="form-group row">
+                  <label for="chid" class="col-sm-2 col-form-label">id : </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chid" [value]="site.id" placeholder="Identificateur"
+                      readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chname" class="col-sm-2 col-form-label">name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="chname" [value]="site.name" placeholder="le nom du site"
+                      #name>
+                  </div>
+                </div>
+                <div class="clupdate">
+                  <button class="btn btn-success" (click)="updateSite(item, name)">
+                    <i class="fa fa-check">Valider</i>
+                  </button>
+                  <button class="btn btn-warning" (click)="cancelUpdate(item)">
+                    <i class="fa fa-times">Annuler</i>
+                  </button>
+                </div>
+                <p-fieldset [toggleable]="true" [transitionOptions]="'0ms'">
+                    <p-header>Organigramme</p-header>
+                  <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custombar2">
+                    <div style="padding:1em;line-height:1.5;width:600px;">
+                      <p-organizationChart [value]="data" expanded="true" styleClass="company" class="a">
+                        <ng-template let-node pTemplate="sheet" styleClass="stchild">
+                          {{node.label}}
+                          <div class="toolbtn">
+                            <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+                            <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+                          </div>
+                        </ng-template>
+                        <ng-template let-node pTemplate="branch" styleClass="stparent">
+                          <div class="node-header ui-corner-top">{{node.label}}</div>
+                          <button type="button" (click)="expandChilds(node)"></button>
+                          <div class="toolbtn">
+                            <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+                            <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+                          </div>
+                        </ng-template>
+                      </p-organizationChart>
+                    </div>
+                  </p-scrollPanel>
+                </p-fieldset>
+              </div>
+            </div>
+            <!-- </div>
+                  </div> -->
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- </p-tabPanel>
+  <p-tabPanel header="Organigramme"> -->
+  <!-- </p-tabPanel>
+</p-tabView> -->
