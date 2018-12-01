@@ -47,7 +47,7 @@ export class SitesComponent implements OnInit {
       { field: 'id',               header: 'id' },
       { field: 'name',             header: 'name' },
       { field: 'idlabel.name',     header: 'nature' },
-      { field: 'idparent.name',    header: 'localisation' },
+      { field: 'idparent',   header: 'localisation' },
       { field: 'datecreate',       header: 'datecreate' },
       { field: 'dateupdate',       header: 'dateupdate' },
       { field: 'owner',            header: 'owner' },
@@ -59,7 +59,7 @@ export class SitesComponent implements OnInit {
     this.service.getAll()
       .subscribe(sites => {
         this.sites = sites;
-        this.buildSites();
+        /* this.buildSites(); */
       });
   }
 

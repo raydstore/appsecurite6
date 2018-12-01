@@ -27,6 +27,7 @@ import {
   RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { CalendarModule } from 'primeng/calendar';
@@ -120,6 +121,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
+import { OrgsiteComponent } from './component/orgsite/orgsite.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -136,6 +138,7 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     FormGroup,
     Validators, */
     MatStepperModule,
+    OverlayPanelModule,
     FieldsetModule,
     OrganizationChartModule,
     ReactiveFormsModule,
@@ -173,6 +176,7 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     /* FormBuilder,
     FormGroup,
     Validators, */
+    OverlayPanelModule,
     FieldsetModule,
     OrganizationChartModule,
     MatStepperModule,
@@ -242,7 +246,8 @@ import { VwinspectedsiteService } from './services/vwinspectedsite.service';
     EntrepriseComponent,
     VwpropertyComponent,
     SiteNameComponent,
-    DialogModalComponent
+    DialogModalComponent,
+    OrgsiteComponent
   ],
   providers: [
     PostService,
