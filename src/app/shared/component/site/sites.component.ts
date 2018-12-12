@@ -69,10 +69,6 @@ export class SitesComponent implements OnInit {
         this.sites = sites;
         /* this.buildSites(); */
       });
-    this.labelService.getAll()
-      .subscribe(labels => {
-        this.labels = labels;
-      });
   }
 
 
@@ -171,29 +167,31 @@ export class SitesComponent implements OnInit {
   }
 
   createSite(event) {
+    /* close Dialog */
     this.dialogVisible = false;
-    const nsite = Object.assign({}, <Site> event);
-    // const nsite = Object.assign({}, this.newSite);
-    this.newSite = Object.assign({}, this._newSite);
-    this.sites = [nsite, ...this.sites];
-
-
-    this.service.create(nsite)
-      .subscribe(newSite => {
-        this.loadData();
-        console.log('new site = ' + JSON.stringify(this.newSite));
-        this.newSite.name = ' test .';
-        console.log('new site after = ' + JSON.stringify(this.newSite));
-      }, (error: AppError) => {
-        this.sites.splice(0, 1);
-        if (error instanceof BadInput) {
-          // this.form.setErrors(originalError);
-        } else {
-          throw error;
-        }
-      });
-      console.log('new site last = ' + JSON.stringify(this.newSite));
+    /* refresh data */
+    if (!event.cancelDialog) {
+      console.log('site inserted is = ' + JSON.stringify(event.newSite))
+      this.loadData();
+    }
   }
+
+  /*
+  const nsite = Object.assign({}, <Site>event);
+      this.newSite = Object.assign({}, this._newSite);
+      this.sites = [nsite, ...this.sites];
+      this.service.create(nsite)
+        .subscribe(newSite => {
+          this.loadData();
+        }, (error: AppError) => {
+          this.sites.splice(0, 1);
+          if (error instanceof BadInput) {
+            // this.form.setErrors(originalError);
+          } else {
+            throw error;
+          }
+        });
+  */
 
   hideNewDialog() {
 

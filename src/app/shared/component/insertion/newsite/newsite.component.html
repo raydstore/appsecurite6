@@ -9,23 +9,23 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="iname" class="col-sm-3 col-form-label">name : </label>
+        <label for="iname" class="col-sm-3 col-form-label">nom : </label>
         <div class="col-sm-7">
           <input type="text" class="form-control" id="iname" [(ngModel)]="newSite.name" placeholder="le nom du site">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="chidsite" class="col-sm-3 col-form-label">site : {{newSite.name}}</label>
-        <div class="col-sm-9">
-          <app-autocomplete [i_item]="newSite.idparent" [service]="sites" [functionName]="displayName" [args]="['name']"
-            (changeItem)="onChangeItem(newSite, 'idparent', $event)"></app-autocomplete>
         </div>
       </div>
       <div class="form-group row">
         <label for="chidlabel" class="col-sm-3 col-form-label">represente : </label>
         <div class="col-sm-9">
           <app-autocomplete [i_item]="newSite.idlabel" [service]="labels" [functionName]="displayName" [args]="['name']"
-            (changeItem)="onChangeItemLabel(newSite, 'idlabel', $event)"></app-autocomplete>
+            (changeItem)="setIdLabelToSite(newSite, 'idlabel', $event)"></app-autocomplete>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="chidsite" class="col-sm-3 col-form-label">Emplacement : </label>
+        <div class="col-sm-9">
+          <app-autocomplete [i_item]="newSite.idparent" [service]="sites" [functionName]="displayName" [args]="['name']"
+            (changeItem)="setIdSiteParentToSite(newSite, 'idparent', $event)"></app-autocomplete>
         </div>
       </div>
       <div class="clupdate">

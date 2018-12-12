@@ -1,35 +1,81 @@
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import { LabelService } from 'shared/services/label.service';
+import { BadInput } from './../../../../core/component/common/bad-input';
+import { AppError } from './../../../../core/component/common/app-error';
+import { SiteService } from 'shared/services/site.service';
 import { Site, Label } from 'shared/table/table';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-newsite',
   templateUrl: './newsite.component.html',
   styleUrls: ['./newsite.component.css']
 })
-export class NewsiteComponent implements OnInit {
+export class NewsiteComponent implements OnInit, OnChanges {
 
-  @Input() newSite: Site;
+ /*  @Input() newSite: Site; */
   @Input() dialogVisible: boolean;
-  @Input() sites: Site [];
-  @Input() labels: Label [];
-  @Output() createItem = new EventEmitter();
-  @Output() hide = new EventEmitter();
-  
+  @Output() closeDialog = new EventEmitter();
+  /* @Output() createItem = new EventEmitter();
+  @Output() hide = new EventEmitter(); */
 
+  sites: Site [];
+  labels: Label [];
 
-  constructor() { }
+  _newSite: Site = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    id: 0,
+    name: '',
+    idparent: null,
+    idlabel: null,
+    lastuser: 'ali',
+    owner: 'ali'
+  };
+  newSite: Site;
+
+  constructor(private service: SiteService, private labelService: LabelService) { }
 
   ngOnInit() {
   }
 
+  ngOnChanges() {
+    this.newSite = Object.assign({}, this._newSite);
+    this.loadData();
+  }
+
+  loadData() {
+    this.service.getAll().subscribe(
+      sites => {
+        this.sites = sites;
+      }
+    );
+    this.labelService.getAll()
+      .subscribe(labels => {
+        this.labels = labels;
+      }
+    );
+  }
+
+  create() {
+    const nsite = Object.assign({}, this.newSite);
+    this.newSite = Object.assign({}, this._newSite);
+    this.service.create(nsite)
+      .subscribe(newSite => {
+        this.closeDialog.emit({newSite: nsite, cancelDialog: false});
+      }, (error: AppError) => {
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
+        } else {
+          throw error;
+        }
+      });
+  }
+
   hideNewDialoge() {
-    // this.dialogVisible = false;
-    this.hide.emit(false);
+    this.closeDialog.emit({newSite: null, cancelDialog: true});
   }
 
   displayName(item: any, args: string[]): string {
-    console.log('enter displayname = ' + JSON.stringify(item));
     let result = '';
     if (item !== null) {
       if (args.length > 0) {
@@ -39,31 +85,17 @@ export class NewsiteComponent implements OnInit {
     return result;
   }
 
-  
-  onChangeItem(item: Site, field: string, event) {
-    console.log('enter on change site = ' + JSON.stringify(item));
-    console.log('enter on change site event = ' + JSON.stringify(event));
+  setIdSiteParentToSite(item: Site, field: string, event) {
     item[field] = <Site>event;
   }
 
-  onChangeItemLabel(item: Label, field: string, event) {
-    console.log('enter on change label = ' + JSON.stringify(item));
+  setIdLabelToSite(item: Site, field: string, event) {
     item[field] = <Label>event;
   }
 
-  create(event) {
-    console.log('ns = ' + JSON.stringify(this.newSite));
-    this.createItem.emit(this.newSite);
-  }
-
-  hideDialog(event) {
-    
-  }
-
+  /* when dialog is close with X button */
   onHide() {
-    this.hide.emit(false);
+    this.closeDialog.emit({newSite: null, cancelDialog: true});
   }
-
-
 
 }
