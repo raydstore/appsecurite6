@@ -70,7 +70,7 @@ export class AccidentvehiculeshComponent implements OnInit {
 
   loadData() {
     this.service.getAll()
-    //.getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'S' })
+    // .getByQueryParam({ 'iddamage': this.iddamage, 'idgrid': this.idgrid, 'accidentdomain': 6, 'classification': 'S' })
       .subscribe(accidentvehiculeshs => {
         this.accidentvehiculeshs = accidentvehiculeshs;
       });

@@ -84,7 +84,7 @@ import { AccidentvehiculeownerComponent } from './component/accidentvehiculeowne
     ActionassignmentComponent,
     AccidentfileComponent,
     CalendarComponent,
-    AutocompleteComponent,
+    /* AutocompleteComponent, */
     FaccidentComponent,
     FaccidentagentshComponent,
     VwgridforaccidentComponent,

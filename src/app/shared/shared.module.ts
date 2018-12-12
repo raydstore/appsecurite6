@@ -1,3 +1,4 @@
+import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
 import { DataService } from 'shared/services/data.service';
 import { AccidentvehiculeownerService } from './services/accidentvehiculeowner.service';
 import { AccidentvehiculeinsuranceService } from './services/accidentvehiculeinsurance.service';
@@ -18,7 +19,6 @@ import {
   CodeHighlighterModule,
   DataGridModule,
   DataTableModule,
-  DialogModule,
   DropdownModule,
   GrowlModule,
   InplaceModule,
@@ -27,6 +27,7 @@ import {
   RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { OrganizationChartModule } from 'primeng/organizationchart';
@@ -122,6 +123,7 @@ import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
 import { OrgsiteComponent } from './component/orgsite/orgsite.component';
+import { NewsiteComponent } from './component/insertion/newsite/newsite.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -224,6 +226,7 @@ import { OrgsiteComponent } from './component/orgsite/orgsite.component';
     VwpropertyComponent,
     SiteNameComponent,
     DialogModalComponent,
+    AutocompleteComponent,
     CarouselModule,
   ],
   declarations: [
@@ -246,8 +249,10 @@ import { OrgsiteComponent } from './component/orgsite/orgsite.component';
     EntrepriseComponent,
     VwpropertyComponent,
     SiteNameComponent,
+    AutocompleteComponent,
     DialogModalComponent,
-    OrgsiteComponent
+    OrgsiteComponent,
+    NewsiteComponent
   ],
   providers: [
     PostService,

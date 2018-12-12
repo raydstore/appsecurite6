@@ -40,11 +40,15 @@ body {
    position: relative;
    right: 100px; */
    /* float: right; */
-   position: relative;
    /* align-self: flex-end!important; 
    background-color: blue; */
+
+   /* position: relative;
    width: 250px;
-   left: 350px;
+   left: 350px;*/
+
+   display: flex;
+   flex-direction: row-reverse;
 }
 
 .container {

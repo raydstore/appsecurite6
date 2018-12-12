@@ -1,5 +1,6 @@
+import { InfoSite } from './../../table/table';
 import { LabelService } from 'shared/services/label.service';
-import { TreeNode } from 'primeng/primeng';
+import { TreeNode } from 'primeng/api';
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Label } from 'shared/table/table';
 
@@ -58,8 +59,4 @@ export class DialogModalComponent implements OnInit {
 
 }
 
-export interface InfoSite {
-   node: TreeNode;
-   name?: string;
-   label: Label;
-}
+

@@ -1,26 +1,22 @@
 <h3>Organigramme</h3>
- <!-- <i class="pi pi-search" (mouseenter)="op2.show($event)" style="font-size:24px"></i> -->
-
-     <div class="ui-g-12 ui-md-12">
-              <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custombar2">
-                <!-- <div style="padding:1em;line-height:1.5;width:600px;"> -->
-                  <p-organizationChart [value]="data" expanded="true" styleClass="company" class="a">
-                    <ng-template let-node pTemplate="sheet" styleClass="stchild">
-                      {{node.label}}
-                      <div class="toolbtn">
-                        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
-                        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
-                      </div>
-                    </ng-template>
-                    <ng-template let-node pTemplate="branch" styleClass="stparent">
-                      <div class="node-header ui-corner-top">{{node.label}}</div>
-                      <button type="button" (click)="expandChilds(node)"></button>
-                      <div class="toolbtn">
-                        <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
-                        <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
-                      </div>
-                    </ng-template>
-                  </p-organizationChart>
-                <!-- </div> -->
-              </p-scrollPanel>
-              </div>
+<!-- <div class="ui-g-12 ui-md-12">
+  <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custombar2"> -->
+    <p-organizationChart [value]="data" expanded="true" styleClass="company" class="a">
+      <ng-template let-node pTemplate="sheet" styleClass="stchild">
+        {{node.label}}
+        <div class="toolbtn">
+          <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+          <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+        </div>
+      </ng-template>
+      <ng-template let-node pTemplate="branch" styleClass="stparent">
+        <div class="node-header ui-corner-top">{{node.label}}</div>
+        <button type="button" (click)="expandChilds(node)"></button>
+        <div class="toolbtn">
+          <app-dialog-modal [inode]="node" (okClicked)="newSite($event)"></app-dialog-modal>
+          <button type="button" icon="fa-minus-square" pButton (click)="deleteSite(node)"></button>
+        </div>
+      </ng-template>
+    </p-organizationChart>
+  <!-- </p-scrollPanel>
+</div> -->

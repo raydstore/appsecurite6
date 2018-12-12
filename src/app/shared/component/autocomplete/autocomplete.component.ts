@@ -1,6 +1,7 @@
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TFunctionName } from 'shared/table/table';
 import { DataService } from 'shared/services/data.service';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewChecked, ViewEncapsulation, OnChanges, ViewChild } from '@angular/core';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
@@ -9,13 +10,15 @@ import { isUndefined, isNullOrUndefined } from 'util';
   styleUrls: ['./autocomplete.component.css']
 })
 
-export class AutocompleteComponent implements OnInit, AfterViewChecked {
+export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChanges {
   /* private _i_item: any; */
   @Input() i_item: any;
   @Input() service: any;
   @Input() functionName: TFunctionName;
   @Input() args: string[];
   @Output() changeItem = new EventEmitter();
+//  @ViewChild('autocomplete') ac: AutoCompleteModule;
+  
 
   /* get i_item() {
     return this._i_item;
@@ -31,11 +34,15 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked {
       this.item.name = '';
     }
   } */
-  item: IItem = {
+  /* _item: IItem = {
     item: null,
     name: ''
   };
-  filteredList: IItem[];
+  item: IItem = {
+    item: null,
+    name: ''
+  }; */
+  filteredList: any[];
 
   constructor() { }
 
@@ -50,10 +57,22 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked {
     } */
   }
 
+  ngOnChanges() {
+/*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
+  //  this.item.item = this.i_item;
+ /*    this.item.name = this.functionName(this.item.item, this.args);
+    this.item = null; */
+   // this.onClear(null);
+    // this.ac.el.nativeElement.onsearch = (event) => {
+      // handling model reset
+  // };
+  }
+
   ngOnInit() {
     // console.log('entred = ');
-    this.item.item = this.i_item;
-    this.item.name = this.functionName(this.item.item, this.args);
+   // this.item = Object.assign({}, this._item);
+  /*   this.item.item = this.i_item;
+    this.item.name = this.functionName(this.item.item, this.args); */
   }
 
   /* set I_item(value: any) {
@@ -70,7 +89,9 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked {
   }
 
   onSelect(event) {
+    console.log('b on select');
     console.log(event);
+    console.log('e on select');
     this.changeItem.emit(event);
   }
 
@@ -85,10 +106,33 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked {
     }); */
   }
 
+  clearValue()
+{
+    this.filteredList = null;
+}
 
-  filter<T>(query, items: T[] = this.service): IItem[] {
+
+filter<T>(query, items: T[] = this.service): T[] {
+  console.log('filtered');
+  const filtered: T[] = [];
+  if (!isNullOrUndefined(items)) {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const displayName = this.functionName(item, this.args);
+      if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+        /* let item: T = {
+          item: item,
+          name: displayName
+        }; */
+        filtered.push(item);
+      }
+    }
+  }
+  return filtered;
+}
+
+ /*  filter<T>(query, items: T[] = this.service): IItem[] {
     console.log('filtered');
-    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
     let filtered: IItem[] = [];
     if (!isNullOrUndefined(items)) {
       for (let i = 0; i < items.length; i++) {
@@ -104,10 +148,13 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked {
       }
     }
     return filtered;
-  }
+  } */
 
-  onClear() {
-    //
+  onClear(event) {
+    this.filteredList = null;
+    console.log('on clear = ');
+    // console.log(event);
+    console.log('end clear');
   }
 }
 

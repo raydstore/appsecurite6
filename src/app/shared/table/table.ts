@@ -1,4 +1,7 @@
-import { Accidentagentsh } from 'shared/table/table';
+// import { Accidentagentsh } from 'shared/table/table';
+
+import { TreeNode } from 'primeng/api';
+
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
 export enum Mode {insert = 0, update = 1, delete = 2}
 export interface EventArgs {
@@ -73,6 +76,12 @@ export interface Site {
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface InfoSite {
+    node: TreeNode;
+    name?: string;
+    label: Label;
+ }
 
 
 export interface Titletask {

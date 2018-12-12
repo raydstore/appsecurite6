@@ -1,21 +1,13 @@
+import { InfoSite } from './../../table/table';
 import { NotFoundError } from '../../../core/component/common/not-found-error';
-/* import { Label } from './../../table/label'; */
 import { LabelService } from 'shared/services/label.service';
 import { AppError } from '../../../core/component/common/app-error';
 import { BadInput } from '../../../core/component/common/bad-input';
-/* import { Site } from './../../table/site'; */
 import { SiteService } from 'shared/services/site.service';
 import { TreeNode } from 'primeng/api';
-import { PanelModule } from 'primeng/primeng';
-import {OrganizationChartModule} from 'primeng/organizationchart';
-import { Component, OnInit, ViewEncapsulation, Attribute } from '@angular/core';
-import { DataGridModule } from 'primeng/primeng';
-import { DropdownModule } from 'primeng/primeng';
-import { DialogModule } from 'primeng/primeng';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Site, Label } from 'shared/table/table';
 
-import {Site} from 'shared/table/table';
-import { LastidService } from 'shared/services/lastid.service';
-import { InfoSite } from 'shared/component/dialog-modal/dialog-modal.component';
 
 @Component({
   selector: 'app-site',
@@ -25,34 +17,50 @@ import { InfoSite } from 'shared/component/dialog-modal/dialog-modal.component';
 })
 export class SitesComponent implements OnInit {
   sites: Site[] = [];
+  labels: Label[] = [];
   selectedSite: Site;
   data: TreeNode[] = [];
   lastids: any[];
   lastid: any;
   titlelist = 'Site';
   cols: any[];
- /*  ltLabels: Label[] = [];
-  labels: any[] = [{ label: 'Select Label', value: null }];
-  selectedLabel: Label;
-  display = false;
-  nodec: TreeNode; */
+  _newSite: Site = {
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    id: 0,
+    name: '',
+    idparent: null,
+    idlabel: null,
+    lastuser: 'ali',
+    owner: 'ali'
+  };
+  newSite: Site;
 
-  
-  constructor(private service: SiteService, private lbService: LabelService, private lastidService: LastidService) {
+  dialogVisible = false;
+  newMode = false;
+  /*  ltLabels: Label[] = [];
+   labels: any[] = [{ label: 'Select Label', value: null }];
+   selectedLabel: Label;
+   display = false;
+   nodec: TreeNode; */
+
+
+  constructor(private service: SiteService, private labelService: LabelService) {
   }
 
   ngOnInit() {
+    this.newSite = Object.assign({}, this._newSite);
     this.loadData();
     this.cols = [
-      { field: 'id',               header: 'id' },
-      { field: 'name',             header: 'name' },
-      { field: 'idlabel.name',     header: 'nature' },
-      { field: 'idparent',   header: 'localisation' },
-      { field: 'datecreate',       header: 'datecreate' },
-      { field: 'dateupdate',       header: 'dateupdate' },
-      { field: 'owner',            header: 'owner' },
-      { field: 'lastuser',         header: 'lastuser' }
-  ];
+      { field: 'id', header: 'id' },
+      { field: 'name', header: 'name' },
+      { field: 'idlabel.name', header: 'nature' },
+      { field: 'idparent', header: 'localisation' },
+      { field: 'datecreate', header: 'datecreate' },
+      { field: 'dateupdate', header: 'dateupdate' },
+      { field: 'owner', header: 'owner' },
+      { field: 'lastuser', header: 'lastuser' }
+    ];
   }
 
   loadData() {
@@ -61,82 +69,70 @@ export class SitesComponent implements OnInit {
         this.sites = sites;
         /* this.buildSites(); */
       });
-  }
-
-  loadLastId() {
-    this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids);
-  }
-
-  getLastid(name) {
-    let lts: any[];
-    this.loadLastId();
-    for (let lid of this.lastids) {
-      if (lid.id === name) {
-        return lid['count'];
-      }
-    }
-    return 0;
+    this.labelService.getAll()
+      .subscribe(labels => {
+        this.labels = labels;
+      });
   }
 
 
   getSiteRoot(): Site {
-     for (let site of this.sites) {
+    for (const site of this.sites) {
       if (site.idparent == null) {
-           return site;
-         }
-     }
+        return site;
+      }
+    }
   }
 
   getChilds(siteParent: Site, _expanded: boolean): TreeNode[] {
-    let result: TreeNode[] = [];
-    for (let site of this.sites) {
+    const result: TreeNode[] = [];
+    for (const site of this.sites) {
       if (site.idparent !== undefined) {
-       if (site.idparent['id'] === siteParent['id']) {
-        let value: any;
-        let childs: TreeNode[] = this.getChilds(site, false);
-         if (childs.length !== 0) {
-         value = {
-          label: site.name,
-          type: 'branch',
-          data: site,
-          children: null,
-          childs: childs,
-          expanded: _expanded,
-          styleClass: 'stparent'
-        };
-      } else {
-           value = {
-            label: site.name,
-            type: 'sheet',
-            data: site,
-            expanded: false,
-            styleClass: 'stchild'
-          };
+        if (site.idparent['id'] === siteParent['id']) {
+          let value: any;
+          const childs: TreeNode[] = this.getChilds(site, false);
+          if (childs.length !== 0) {
+            value = {
+              label: site.name,
+              type: 'branch',
+              data: site,
+              children: null,
+              childs: childs,
+              expanded: _expanded,
+              styleClass: 'stparent'
+            };
+          } else {
+            value = {
+              label: site.name,
+              type: 'sheet',
+              data: site,
+              expanded: false,
+              styleClass: 'stchild'
+            };
+          }
+          result.push(value);
+        }
       }
-        result.push(value);
-       }
-      }
-     }
-     return result;
+    }
+    return result;
   }
 
   buildSites() {
-     let siteRoot = this.getSiteRoot();
-      let value: any = {
-       label: siteRoot.name,
-       type: 'branch',
-       data: siteRoot,
-       children: this.getChilds(siteRoot, false),
-       expanded: true,
-       partialSelected: true,
-       styleClass: 'stparent'
-     };
-     this.data.push(value);
+    const siteRoot = this.getSiteRoot();
+    const value: any = {
+      label: siteRoot.name,
+      type: 'branch',
+      data: siteRoot,
+      children: this.getChilds(siteRoot, false),
+      expanded: true,
+      partialSelected: true,
+      styleClass: 'stparent'
+    };
+    this.data.push(value);
   }
 
-  newSite(infoSite: InfoSite) {
-    let siteChild = {
+  newSiteNode(infoSite: InfoSite) {
+    const siteChild = {
       id: 0,
       name: infoSite.name,
       idlabel: infoSite.label,
@@ -146,7 +142,7 @@ export class SitesComponent implements OnInit {
       owner: 'ali',
       lastuser: 'ali'
     };
-    let nd: TreeNode = {
+    const nd: TreeNode = {
       label: infoSite.name,
       type: 'sheet',
       data: siteChild,
@@ -159,10 +155,10 @@ export class SitesComponent implements OnInit {
     }
     infoSite.node.children.splice(0, 0, nd);
     this.service.create(siteChild)
-        .subscribe(nd => {
-          this.data = [];
-          this.sites = [];
-          this.loadData();
+      .subscribe(nd => {
+        this.data = [];
+        this.sites = [];
+        this.loadData();
       }, (error: AppError) => {
         infoSite.node.children.splice(0, 1);
 
@@ -174,20 +170,60 @@ export class SitesComponent implements OnInit {
       });
   }
 
-  deleteSite(node: TreeNode) {
-    let index = this.sites.indexOf(node.data);
-    this.sites.splice(index, 1);
-    this.service.delete((<Site> node.data).id)
-      .subscribe(
-      () => { this.loadData(); },
-      (error: Response) => {
-        this.sites.splice(index, 0, node.data);
-        if (error instanceof NotFoundError) {
-          alert('se site est deja supprimer !');
+  createSite(event) {
+    this.dialogVisible = false;
+    const nsite = Object.assign({}, <Site> event);
+    // const nsite = Object.assign({}, this.newSite);
+    this.newSite = Object.assign({}, this._newSite);
+    this.sites = [nsite, ...this.sites];
+
+
+    this.service.create(nsite)
+      .subscribe(newSite => {
+        this.loadData();
+        console.log('new site = ' + JSON.stringify(this.newSite));
+        this.newSite.name = ' test .';
+        console.log('new site after = ' + JSON.stringify(this.newSite));
+      }, (error: AppError) => {
+        this.sites.splice(0, 1);
+        if (error instanceof BadInput) {
+          // this.form.setErrors(originalError);
         } else {
           throw error;
         }
+      });
+      console.log('new site last = ' + JSON.stringify(this.newSite));
+  }
+
+  hideNewDialog() {
+
+  }
+
+  displayName(item: any, args: string[]): string {
+    console.log('enter displayname = ' + JSON.stringify(item));
+    let result = '';
+    if (item !== null) {
+      if (args.length > 0) {
+        result = item[args[0]];
       }
+    }
+    return result;
+  }
+
+  deleteSite(node: TreeNode) {
+    const index = this.sites.indexOf(node.data);
+    this.sites.splice(index, 1);
+    this.service.delete((<Site>node.data).id)
+      .subscribe(
+        () => { this.loadData(); },
+        (error: Response) => {
+          this.sites.splice(index, 0, node.data);
+          if (error instanceof NotFoundError) {
+            alert('se site est deja supprimer !');
+          } else {
+            throw error;
+          }
+        }
       );
   }
 
@@ -198,8 +234,14 @@ export class SitesComponent implements OnInit {
   }
 
 
-  showNewDialoge() {
+  hideNewDialoge() {
+    this.dialogVisible = false;
+  }
 
+  showDialogToAdd() {
+    this.newSite = Object.assign({}, this._newSite);
+    this.newMode = true;
+    this.dialogVisible = true;
   }
 
   updateSite(item, name) {
@@ -208,6 +250,16 @@ export class SitesComponent implements OnInit {
 
   cancelUpdate() {
 
+  }
+
+  onChangeItem(item: Site, field: string, event) {
+    console.log('enter on change site = ' + JSON.stringify(item));
+    item[field] = <Site>event.item;
+  }
+
+  onChangeItemLabel(item: Site, field: string, event) {
+    console.log('enter on change label = ' + JSON.stringify(item));
+    item[field] = <Label>event.item;
   }
 
 

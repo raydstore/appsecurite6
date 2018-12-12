@@ -1,8 +1,8 @@
+import { InfoSite } from './../../table/table';
 import { Site } from 'shared/table/table';
 import { NotFoundError } from './../../../core/component/common/not-found-error';
 import { BadInput } from './../../../core/component/common/bad-input';
 import { AppError } from './../../../core/component/common/app-error';
-import { InfoSite } from 'shared/component/dialog-modal/dialog-modal.component';
 import { TreeNode } from 'primeng/api';
 import { Component, OnInit, Input } from '@angular/core';
 
