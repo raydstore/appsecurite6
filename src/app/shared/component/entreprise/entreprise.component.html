@@ -72,7 +72,9 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Entreprise Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<app-newentreprise [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newentreprise>
+
+<!-- <p-dialog header="Entreprise Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newEntreprise">
     <div class="bdcontent">
       <span>
@@ -96,4 +98,4 @@
         <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
       </div>
     </div>
-  </div>
+  </div> -->

@@ -67,7 +67,15 @@ export class OperationComponent implements OnInit {
     return a;
   }
 
-
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+    //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
+      this.loadData();
+    }
+  }
 
   createOperation() {
     this.dialogVisible = false;

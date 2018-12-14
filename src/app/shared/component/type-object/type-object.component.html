@@ -72,7 +72,9 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<app-newtypeobject [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newtypeobject>
+
+<!-- <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newTypeObject">
     <div class="bdcontent">
       <span>
@@ -89,4 +91,4 @@
       </div>
     </div>
   </div>
-</p-dialog>
+</p-dialog> -->

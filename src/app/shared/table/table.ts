@@ -2,6 +2,11 @@
 
 import { TreeNode } from 'primeng/api';
 
+export interface InputData<T> {
+    data: T;
+    cancelDialog: boolean;
+}
+
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
 export enum Mode {insert = 0, update = 1, delete = 2}
 export interface EventArgs {
@@ -41,6 +46,25 @@ export interface Label {
 export interface TypeObject {
     id?: number;
     name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface TypeFormation {
+    id?: number;
+    name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Formation {
+    id?: number;
+    name?: string;
+    idtypeformation?: TypeFormation;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

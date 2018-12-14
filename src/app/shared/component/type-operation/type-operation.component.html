@@ -72,21 +72,4 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newTypeOperation">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newTypeOperation.id" placeholder="Identificateur" readonly>
-      </span>
-      <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newTypeOperation.name" placeholder="le nom de la marque">
-      </span>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createTypeOperation()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
-      </div>
-    </div>
-  </div>
-</p-dialog>
+<app-newtypeoperation [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newtypeoperation>

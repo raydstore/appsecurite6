@@ -124,6 +124,20 @@ import { VwsitenotinspectedService } from './services/vwsitenotinspected.service
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
 import { OrgsiteComponent } from './component/orgsite/orgsite.component';
 import { NewsiteComponent } from './component/insertion/newsite/newsite.component';
+import { NewlabelComponent } from './component/insertion/newlabel/newlabel.component';
+import { NewmarkComponent } from './component/insertion/newmark/newmark.component';
+import { NewunitmeasureComponent } from './component/insertion/newunitmeasure/newunitmeasure.component';
+import { NewtypeobjectComponent } from './component/insertion/newtypeobject/newtypeobject.component';
+import { NewtypeformationComponent } from './component/insertion/newtypeformation/newtypeformation.component';
+import { NewformationComponent } from './component/insertion/newformation/newformation.component';
+import { NewnatureComponent } from './component/insertion/newnature/newnature.component';
+import { NewoperationComponent } from './component/insertion/newoperation/newoperation.component';
+import { NewobjectComponent } from './component/insertion/newobject/newobject.component';
+import { NewpropertyComponent } from './component/insertion/newproperty/newproperty.component';
+import { NewentrepriseComponent } from './component/insertion/newentreprise/newentreprise.component';
+import { NewstructureComponent } from './component/insertion/newstructure/newstructure.component';
+import { NewtypeoperationComponent } from './component/insertion/newtypeoperation/newtypeoperation.component';
+import { NewactivityComponent } from './component/insertion/newactivity/newactivity.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -252,7 +266,21 @@ import { NewsiteComponent } from './component/insertion/newsite/newsite.componen
     AutocompleteComponent,
     DialogModalComponent,
     OrgsiteComponent,
-    NewsiteComponent
+    NewsiteComponent,
+    NewlabelComponent,
+    NewmarkComponent,
+    NewunitmeasureComponent,
+    NewtypeobjectComponent,
+    NewtypeformationComponent,
+    NewformationComponent,
+    NewnatureComponent,
+    NewoperationComponent,
+    NewobjectComponent,
+    NewpropertyComponent,
+    NewentrepriseComponent,
+    NewstructureComponent,
+    NewtypeoperationComponent,
+    NewactivityComponent
   ],
   providers: [
     PostService,

@@ -61,7 +61,15 @@ export class UnitmeasureComponent implements OnInit {
   }
 
 
-
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+      this.loadData();
+    }
+  }
+  
   createUnitmeasure() {
     this.dialogVisible = false;
     this.unitMeasures = [this.newUnitMeasure, ...this.unitMeasures];

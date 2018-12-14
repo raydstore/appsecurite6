@@ -72,7 +72,9 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Actifity Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
+<app-newactivity [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newactivity>
+
+<!-- <p-dialog header="Actifity Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newActivity">
     <div class="bdcontent">
       <span>
@@ -89,4 +91,4 @@
       </div>
     </div>
   </div>
-</p-dialog>
+</p-dialog> -->

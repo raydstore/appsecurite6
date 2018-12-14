@@ -72,22 +72,4 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Unite de mesure Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newUnitMeasure">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newUnitMeasure.id" placeholder="Identificateur" readonly>
-      </span>
-      <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newUnitMeasure.name" placeholder="le nom de l'unité">
-      </span>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createUnitmeasure()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
-      </div>
-    </div>
-  </div>
-</p-dialog>
+<app-newunitmeasure [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newunitmeasure>

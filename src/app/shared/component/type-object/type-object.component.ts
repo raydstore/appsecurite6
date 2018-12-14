@@ -37,12 +37,16 @@ export class TypeObjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getAll()
-      .subscribe(typeObjects => {
-        this.typeObjects = typeObjects;
-      });
+    this.loadData();
     /* this.lastidService.getAll()
       .subscribe(lastids => this.lastids = lastids); */
+  }
+
+  loadData() {
+    this.service.getAll()
+    .subscribe(typeObjects => {
+      this.typeObjects = typeObjects;
+    });
   }
 
   getLastid(name) {
@@ -56,6 +60,14 @@ export class TypeObjectComponent implements OnInit {
     return a;
   }
 
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+      this.loadData();
+    }
+  }
 
 
   createTypeObject() {

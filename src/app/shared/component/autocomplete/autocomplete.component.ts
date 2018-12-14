@@ -1,3 +1,4 @@
+import { Agent } from './../../table/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TFunctionName } from 'shared/table/table';
 import { DataService } from 'shared/services/data.service';
@@ -17,6 +18,8 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   @Input() functionName: TFunctionName;
   @Input() args: string[];
   @Output() changeItem = new EventEmitter();
+
+  displayValue: '';
 //  @ViewChild('autocomplete') ac: AutoCompleteModule;
   
 
@@ -58,6 +61,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   }
 
   ngOnChanges() {
+    this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
 /*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
   //  this.item.item = this.i_item;
  /*    this.item.name = this.functionName(this.item.item, this.args);
@@ -66,6 +70,10 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
     // this.ac.el.nativeElement.onsearch = (event) => {
       // handling model reset
   // };
+  }
+
+  public dsname(a: Agent): string {
+    return a.firstname + ' ' + a.lastname;
   }
 
   ngOnInit() {
@@ -99,7 +107,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   filterItem(event) {
     console.log('filter');
-    let query = event.query;
+    const query = event.query;
     this.filteredList = this.filter(query, this.service);
     /* this.service.getAll().subscribe(items => {
       this.filteredList = this.filter(query, items);

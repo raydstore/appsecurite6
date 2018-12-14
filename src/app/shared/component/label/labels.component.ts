@@ -37,10 +37,14 @@ export class LabelsComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.loadData();
+    }
+
+    loadData() {
         this.service.getAll()
             .subscribe(labels => {
-                this.labels = labels;
-            });
+            this.labels = labels;
+        });
     }
 
     getLastid(name) {
@@ -56,7 +60,7 @@ export class LabelsComponent implements OnInit {
 
 
 
-    createLabel() {
+ /*    createLabel() {
         this.dialogVisible = false;
         this.labels = [this.newLabel, ...this.labels];
 
@@ -70,7 +74,17 @@ export class LabelsComponent implements OnInit {
                     throw error;
                 }
             });
-    }
+    } */
+
+    createLabel(event) {
+        /* close Dialog */
+        this.dialogVisible = false;
+        /* refresh data */
+        if (!event.cancelDialog) {
+        //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
+          this.loadData();
+        }
+      }
 
     deleteLabel(_label: Label) {
         let index = this.labels.indexOf(_label);

@@ -60,7 +60,14 @@ export class TypeOperationComponent implements OnInit {
     return a;
   }
 
-
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+      this.loadData();
+    }
+  }
 
   createTypeOperation() {
     this.dialogVisible = false;

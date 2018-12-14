@@ -61,6 +61,16 @@ export class ActivityComponent implements OnInit {
   }
 
 
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+    //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
+      this.loadData();
+    }
+  }
+
 
   createActivity() {
     this.dialogVisible = false;

@@ -176,6 +176,14 @@ export class SitesComponent implements OnInit {
     }
   }
 
+  setIdSiteParentToSite(item: Site, field: string, event) {
+    item[field] = <Site>event;
+  }
+
+  setIdLabelToSite(item: Site, field: string, event) {
+    item[field] = <Label>event;
+  }
+
   /*
   const nsite = Object.assign({}, <Site>event);
       this.newSite = Object.assign({}, this._newSite);

@@ -1,0 +1,27 @@
+<p-dialog header="Nouveaux Structure" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="500" (onHide)="onHide()">
+  <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newT">
+    <div class="container">
+      <div class="form-group row">
+        <label for="iid" class="col-sm-3 col-form-label">id : </label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="iid" [(ngModel)]="newT.id" placeholder="Identificateur"
+            readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="iname" class="col-sm-3 col-form-label">nom : </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="iname" [(ngModel)]="newT.name" placeholder="le nom du structure">
+        </div>
+      </div>
+      <div class="clupdate">
+        <button class="btn btn-warning" (click)="hideNewDialoge()">
+          <i class="fa fa-times">Annuler</i>
+        </button>
+        <button class="btn btn-success" (click)="create($event)">
+          <i class="fa fa-check">Valider</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

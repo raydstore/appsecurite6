@@ -71,7 +71,7 @@ export class FaccidentComponent implements OnInit {
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    item[field] = <Agent>event.item;
+    item[field] = <Agent>event;
   }
 
 

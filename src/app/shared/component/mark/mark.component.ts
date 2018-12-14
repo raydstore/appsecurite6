@@ -72,9 +72,18 @@ export class MarkComponent implements OnInit {
   isSelected(event) {
     return this.selectedNode === event.node ? true : false;
   }
+  
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+    //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
+      this.loadData();
+    }
+  }
 
-
-  createMark() {
+  /* createMark() {
     this.dialogVisible = false;
     this.marks = [this.newMark, ...this.marks];
 
@@ -90,7 +99,7 @@ export class MarkComponent implements OnInit {
           throw error;
         }
       });
-  }
+  } */
 
   deleteMark(_mark: Mark) {
     let index = this.marks.indexOf(_mark);

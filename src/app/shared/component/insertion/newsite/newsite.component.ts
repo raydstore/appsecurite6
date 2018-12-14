@@ -3,7 +3,7 @@ import { BadInput } from './../../../../core/component/common/bad-input';
 import { AppError } from './../../../../core/component/common/app-error';
 import { SiteService } from 'shared/services/site.service';
 import { Site, Label } from 'shared/table/table';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-newsite',
@@ -12,11 +12,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges } 
 })
 export class NewsiteComponent implements OnInit, OnChanges {
 
- /*  @Input() newSite: Site; */
   @Input() dialogVisible: boolean;
   @Output() closeDialog = new EventEmitter();
-  /* @Output() createItem = new EventEmitter();
-  @Output() hide = new EventEmitter(); */
 
   sites: Site [];
   labels: Label [];

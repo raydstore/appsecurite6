@@ -74,6 +74,16 @@ export class EntrepriseComponent implements OnInit {
     return this.selectedNode === event.node ? true : false;
   }
 
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+    //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
+      this.loadData();
+    }
+  }
+
 
   createEntreprise() {
     this.dialogVisible = false;
