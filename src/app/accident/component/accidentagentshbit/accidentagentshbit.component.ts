@@ -1,3 +1,4 @@
+import { NotFoundError } from './../../../core/component/common/not-found-error';
 import { BadInput } from './../../../core/component/common/bad-input';
 import { AppError } from './../../../core/component/common/app-error';
 import { BitService } from './../../../shared/services/bit.service';
@@ -20,212 +21,186 @@ import { isUndefined, isNullOrUndefined } from 'util';
 } */
 
 export class AccidentagentshbitComponent implements OnInit {
-  /* @Input() iddamage: number;
-  @Input() idagent: string; */
   @Input() idgrid: number;
   @Input() accidentagentsh: Accidentagentsh;
-  vw$accidentagentshbits: Vw$accidentagentshbit[];
-  bitclasss: Bitclass[];
-  bits: Bit[];
-  a_bits: Bit[] = null;
-  b_bits: Bit[] = null;
-  c_bits: Bit[] = null;
-  d_bits: Bit[] = null;
-  filteredBitsMultiple: Bit[];
-  rBits: Bit[];
-  // bitStatus: BitStatus;
-  resultBit: Vw$accidentagentshbit;
-  listBits: Bit[];
-  item: Accidentagentshbit;
+  accidentagentshbits: Accidentagentshbit[];
+  bits: Bit[] = [];
+  vwaccidentagentshbits: Vw$accidentagentshbit[];
+  selectedVwaccidentagentshbit: Vw$accidentagentshbit;
+  titlelist = 'Accident agent sh bit';
+  cols: any[];
+  _accidentagentshbit: Accidentagentshbit = {
+    accidentagentsh: this.accidentagentsh,
+    datecreate: new Date(),
+    dateupdate: new Date(),
+    id: 0,
+    kind: '',
+    idgrid: this.idgrid,
+    name: '',
+    idbitclass: '',
+    idbit: '',
+    lastuser: 'ali',
+    owner: 'ali'
+  };
+  newSite: Site;
+
+  dialogVisible = false;
+  newMode = false;
 
 
-  constructor(private service: Vw$accidentagentshbitService,
-    private accidentagentshbitService: AccidentagentshbitService, private bitclassService: BitclassService,
-    private bitService: BitService) { }
+  constructor(private service: AccidentagentshbitService,
+    private vwaccidentagentshbitService: Vw$accidentagentshbitService, private bitService: BitService) { }
+
 
   ngOnInit() {
-    this.loadDataBitClass();
     this.loadData();
     this.loadDataBit();
+    this.bits = this.getBitNotClassAssigned(this.bits);
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'iddamage': this.accidentagentsh.accidentagentshPK.iddamage,
-                                   'idagent': this.accidentagentsh.accidentagentshPK.idagent, 'idgrid': this.idgrid })
-      .subscribe(vw$accidentagentshbits => {
-        this.vw$accidentagentshbits = vw$accidentagentshbits;
-      });
-  }
-
-
-  loadDataBitClass() {
-    this.bitclassService.getAll()
-      .subscribe(bitclasss => {
-        this.bitclasss = bitclasss;
+    this.vwaccidentagentshbitService.getByQueryParam({
+      'iddamage': this.accidentagentsh.accidentagentshPK.iddamage,
+      'idagent': this.accidentagentsh.accidentagentshPK.idagent, 'idgrid': this.idgrid
+    })
+      .subscribe(vwaccidentagentshbits => {
+        this.vwaccidentagentshbits = vwaccidentagentshbits;
+        for (const item of this.vwaccidentagentshbits) {
+          if (!('name' in item)) {
+            item.name = '';
+          }
+        }
       });
   }
 
   loadDataBit() {
     this.bitService.getAll()
       .subscribe(bits => {
-        this.bits = this.getBitNotClassAssigned(bits);
-        this.a_bits = bits.filter(bit => (bit.idbitclass === 'A') && (bit.kind === 'I'));
-        this.b_bits = bits.filter(bit => (bit.idbitclass === 'B') && (bit.kind === 'I'));
-        this.c_bits = bits.filter(bit => (bit.idbitclass === 'C') && (bit.kind === 'I'));
-        this.d_bits = bits.filter(bit => (bit.idbitclass === 'D') && (bit.kind === 'I'));
+        this.bits = bits;
       });
-  }
-
-  getBitStatus(bitclass: string): boolean {
-    this.resultBit = this.vw$accidentagentshbits.find(bit => bit.idbitclass === bitclass);
-    switch (bitclass) {
-      case 'B': {
-        this.listBits = this.b_bits;
-        break;
-      }
-      case 'C': {
-        this.listBits = this.c_bits;
-        break;
-      }
-      case 'D': {
-        this.listBits = this.d_bits;
-        break;
-      }
-      case 'default': {
-        this.listBits = this.a_bits;
-        break;
-      }
-    }
-    return !isNullOrUndefined(this.resultBit);
-  }
-
-  getFullName(value): string {
-    return value.idbitclass + ' - ' + value.classname + ' : ' + value.name + `     `;
-  }
-
-  filterBitMultiple(event) {
-    const query = event.query;
-    this.filteredBitsMultiple = this.filterBit(query, this.bits);
-  }
-
-  onSelect(value: Bit) {
-    console.log('value onSelect = ' + JSON.stringify(value));
-    const newAccidentagentshbit: Accidentagentshbit = {
-      id: 0,
-      accidentagentsh: this.accidentagentsh,
-      idgrid: this.idgrid,
-      idbit: '',
-      idbitclass: '',
-      kind: '',
-      owner: 'ali',
-      lastuser: 'ali',
-      datecreate: new Date(),
-      dateupdate: new Date()
-    };
-    /* this.rBits = [value, ...this.rBits]; */
-    newAccidentagentshbit.idbit = value.id;
-    newAccidentagentshbit.idbitclass = value.idbitclass;
-    newAccidentagentshbit.kind = value.kind;
-    console.log('newAccidentagentshbit onSelect = ' + JSON.stringify(newAccidentagentshbit));
-    this.accidentagentshbitService.create(newAccidentagentshbit)
-      .subscribe(accidentagentshbit => {
-        this.rBits = [];
-        this.loadData();
-        this.bits = this.getBitNotClassAssigned(this.bits);
-      }, (error: AppError) => {
-       // this.rBits.splice(0, 1);
-        if (error instanceof BadInput) {
-          // this.form.setErrors(originalError);
-        } else {
-        }
-      });
-  }
-
-  onUnselect(value) {
-    console.log('value onUnselect = ' + JSON.stringify(value));
-  }
-
-
-  filterBit(query, bits: Bit[]): Bit[] {
-    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered: Bit[] = [];
-    for (let i = 0; i < bits.length; i++) {
-      let bit = bits[i];
-      if (bit.id.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-        filtered.push(bit);
-      }
-    }
-    return filtered;
   }
 
   getBitNotClassAssigned(bits: Bit[]): Bit[] {
+    console.log('enter b n a =');
     // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    let filtered: Bit[] = [];
-    for (let i = 0; i < bits.length; i++) {
-      let bit = bits[i];
-      if (!this.isAssignedBitclass(bit) && (bit.kind === 'I')) {
-        filtered.push(bit);
+    const filtered: Bit[] = [];
+    if (bits != null) {
+      for (let i = 0; i < bits.length; i++) {
+        const bit = bits[i];
+        if (!this.isAssignedBitclass(bit) && (bit.kind === 'I')) {
+          filtered.push(bit);
+        }
       }
+      console.log('b n a =' + JSON.stringify(filtered));
     }
     return filtered;
-  }
-
-  isAssignedBitclassold(bit: Bit): boolean {
-    let result = false;
-    for (let i = 0; i < this.rBits.length; i++) {
-      result = this.rBits[i].idbitclass === bit.idbitclass;
-      if (result) { break; }
-    }
-    return result;
   }
 
   isAssignedBitclass(bit: Bit): boolean {
     let result = false;
-    for (let i = 0; i < this.vw$accidentagentshbits.length; i++) {
-      result = this.vw$accidentagentshbits[i].idbitclass === bit.idbitclass;
+    for (let i = 0; i < this.vwaccidentagentshbits.length; i++) {
+      result = this.vwaccidentagentshbits[i].idbitclass === bit.idbitclass;
       if (result) { break; }
     }
     return result;
   }
 
+  createItem(event) {
+    /* close Dialog */
+    this.dialogVisible = false;
+    /* refresh data */
+    if (!event.cancelDialog) {
+      console.log('accidentagentshbit inserted is = ' + JSON.stringify(event.newAccidentshbit))
+      this.loadData();
+    }
+  }
 
-  displayName(item: any, args: string[]): string {
+  /*   setIdSiteParentToSite(item: Site, field: string, event) {
+      item[field] = <Site>event;
+    }
+
+    setIdLabelToSite(item: Site, field: string, event) {
+      item[field] = <Label>event;
+    }
+ */
+  /*
+  const nsite = Object.assign({}, <Site>event);
+      this.newSite = Object.assign({}, this._newSite);
+      this.sites = [nsite, ...this.sites];
+      this.service.create(nsite)
+        .subscribe(newSite => {
+          this.loadData();
+        }, (error: AppError) => {
+          this.sites.splice(0, 1);
+          if (error instanceof BadInput) {
+            // this.form.setErrors(originalError);
+          } else {
+            throw error;
+          }
+        });
+  */
+
+  gdisplayName(item: any, args: string[]): string {
+    console.log('enter displayname = ' + JSON.stringify(item));
     let result = '';
     if (item !== null) {
       if (args.length > 0) {
         result = item[args[0]];
       }
-      for (let i = 1; i < args.length; i++) {
-        result = result + ' ' + item[args[i]];
-      }
     }
     return result;
   }
 
+  deleteAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit) {
+    const index = this.vwaccidentagentshbits.indexOf(_vwaccidentagentshbit);
+    this.vwaccidentagentshbits.splice(index, 1);
+    this.vwaccidentagentshbits = [...this.vwaccidentagentshbits];
+    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit);
+    this.service.delete(accidentagentshbit.id)
+      .subscribe(
+        () => { this.loadData(); },
+        (error: Response) => {
+          this.vwaccidentagentshbits.splice(index, 0, _vwaccidentagentshbit);
 
-  onChangeItem(item: Accidentagentshbit, field: string, event) {
-    /* passe choise agent to field item on accidentagent */
-    this.item = <Accidentagentshbit>event.item;
-    // this.item.accidentagentshPK.idagent = (<Agent>event.item).id;
+          if (error instanceof NotFoundError) {
+            alert('this post has already been deleted');
+          } else {
+            throw error;
+          }
+        }
+      );
   }
 
-
-  newNature() {
-
-
-
+  cloneAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit): Accidentagentshbit {
+    const accidentagentshbit: Accidentagentshbit = Object.assign({}, this._accidentagentshbit);
+    accidentagentshbit.idbitclass = _vwaccidentagentshbit.idbitclass;
+    accidentagentshbit.idbit = _vwaccidentagentshbit.idbit;
+    accidentagentshbit.kind = _vwaccidentagentshbit.kind;
+    accidentagentshbit.name = _vwaccidentagentshbit.name;
+    return accidentagentshbit;
   }
 
-  newSiege() {
-
+  updateAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit) {
+    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit);
+    this.service.update(accidentagentshbit)
+      .subscribe(() => {
+        this.loadData();
+      });
   }
 
-  newForme() {
-
+  cancelUpdate(_accidentagentshbit) {
+    //
   }
 
-  newMateriel() {
+  showDialogToAdd() {
+    // this.newSite = Object.assign({}, this._newSite);
+    this.newMode = true;
+    this.dialogVisible = true;
+  }
 
+  onChangeItemLabel(item: Site, field: string, event) {
+    console.log('enter on change label = ' + JSON.stringify(item));
+    item[field] = <Label>event;
   }
 
 }

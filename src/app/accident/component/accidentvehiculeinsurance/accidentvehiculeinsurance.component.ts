@@ -142,7 +142,7 @@ export class AccidentvehiculeinsuranceComponent implements OnInit {
   }
 
   onChangeItem(item: Accidentvehiculeinsurance, field: string, event) {
-    item[field] = <Entreprise> event.item;
+    item[field] = <Entreprise> event;
   }
 
   onChangeDatefirst(accidentvehiculeinsurance: Accidentvehiculeinsurance, event) {

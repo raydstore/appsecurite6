@@ -260,12 +260,12 @@ export class SitesComponent implements OnInit {
 
   onChangeItem(item: Site, field: string, event) {
     console.log('enter on change site = ' + JSON.stringify(item));
-    item[field] = <Site>event.item;
+    item[field] = <Site>event;
   }
 
   onChangeItemLabel(item: Site, field: string, event) {
     console.log('enter on change label = ' + JSON.stringify(item));
-    item[field] = <Label>event.item;
+    item[field] = <Label>event;
   }
 
 

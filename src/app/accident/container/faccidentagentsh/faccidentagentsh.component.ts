@@ -45,8 +45,8 @@ export class FaccidentagentshComponent implements OnInit {
 
   onChangeItem(item: Accidentagentsh, field: string, event) {
     /* passe choise agent to field item on accidentagent */
-    this.item[field] = <Agent>event.item;
-    this.item.accidentagentshPK.idagent = (<Agent>event.item).id;
+    this.item[field] = <Agent> event;
+    this.item.accidentagentshPK.idagent = (<Agent>event).id;
   }
 
 

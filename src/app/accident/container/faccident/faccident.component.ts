@@ -72,18 +72,34 @@ export class FaccidentComponent implements OnInit {
 
   onChangeItem(item: Accident, field: string, event) {
     item[field] = <Agent>event;
+    console.log('en Agent = ' + JSON.stringify(event));
+  }
+
+  onChangeSiteOfItem(item: Accident, field: string, event) {
+    item[field] = <Site>event;
+    console.log('en Site = ' + JSON.stringify(event));
   }
 
 
 /*   perform(event, _table) { */
-  perform(event) {
+  perform(item: Accident, event) {
+    console.log('perform accident = ' + JSON.stringify(item));
 /*     console.log('table = ' + JSON.stringify(this.table)); */
   //  console.log('dt = ' + JSON.stringify(_table));
+  const loockUp = ['idsite', 'idagentdeclare', 'idagentvalidate'];
+  for (const elmnt of loockUp) {
+    if (item[elmnt] != null) {
+      if ('_displayname' in item[elmnt]) {
+        delete item[elmnt]._displayname;
+      }
+    }
+  }
     let eventargs: EventArgs;
     /* console.log('newid = ' + this.newid); */
     /* console.log('event = ' + event); */
-    eventargs = this.mode === Mode.insert ? { item: this.item, mode: Mode.insert, dialogVisible: false, table: this.table }
-                                          : { item: this.item, mode: Mode.update, dialogVisible: false, table: this.table };
+    eventargs = this.mode === Mode.insert ? { item: item, mode: Mode.insert, dialogVisible: false, table: this.table }
+                                          : { item: item, mode: Mode.update, dialogVisible: false, table: this.table };
+    console.log('eventargs = ' + JSON.stringify(eventargs));
     this.operation.emit(eventargs);
   }
 
@@ -91,7 +107,7 @@ export class FaccidentComponent implements OnInit {
 
   cancel(item) {
     console.log('cancel = ' + JSON.stringify(this.item));
-    let eventargs: EventArgs = { item: this.item, mode: Mode.delete, dialogVisible: false };
+    const eventargs: EventArgs = { item: this.item, mode: Mode.delete, dialogVisible: false };
     this.operation.emit(eventargs);
   }
 

@@ -19,9 +19,12 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   @Input() args: string[];
   @Output() changeItem = new EventEmitter();
 
+  _dialog: String = '<app-activity></app-activity>';
+  _displayname = '_displayname';
+
   displayValue: '';
-//  @ViewChild('autocomplete') ac: AutoCompleteModule;
-  
+  //  @ViewChild('autocomplete') ac: AutoCompleteModule;
+
 
   /* get i_item() {
     return this._i_item;
@@ -50,9 +53,9 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   constructor() { }
 
   ngAfterViewChecked() {
-   /*  console.log('entred = ');
-    this.item.item = this.i_item;
-    this.item.name = this.functionName(this.item.item, this.args); */
+    /*  console.log('entred = ');
+     this.item.item = this.i_item;
+     this.item.name = this.functionName(this.item.item, this.args); */
     /* if (!(isNullOrUndefined(this.item))) { 
       this.item.name = this.functionName(this.item.item, this.args);
     } else {
@@ -62,14 +65,24 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   ngOnChanges() {
     this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
-/*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
-  //  this.item.item = this.i_item;
- /*    this.item.name = this.functionName(this.item.item, this.args);
-    this.item = null; */
-   // this.onClear(null);
+    console.log('on change = ' + JSON.stringify(this.i_item));
+    if (this.i_item != null) {
+      if (!(typeof this.i_item === 'string')) {
+      if (!(this._displayname in this.i_item)) {
+        this.i_item[this._displayname] = this.functionName(this.i_item, this.args);
+      }
+    } else {
+      this._displayname = this.args[0];
+    }
+    }
+    /*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
+    //  this.item.item = this.i_item;
+    /*    this.item.name = this.functionName(this.item.item, this.args);
+       this.item = null; */
+    // this.onClear(null);
     // this.ac.el.nativeElement.onsearch = (event) => {
-      // handling model reset
-  // };
+    // handling model reset
+    // };
   }
 
   public dsname(a: Agent): string {
@@ -78,9 +91,9 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   ngOnInit() {
     // console.log('entred = ');
-   // this.item = Object.assign({}, this._item);
-  /*   this.item.item = this.i_item;
-    this.item.name = this.functionName(this.item.item, this.args); */
+    // this.item = Object.assign({}, this._item);
+    /*   this.item.item = this.i_item;
+      this.item.name = this.functionName(this.item.item, this.args); */
   }
 
   /* set I_item(value: any) {
@@ -99,10 +112,30 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   onSelect(event) {
     console.log('b on select');
     console.log(event);
-    console.log('e on select');
+    
+    if (event != null) {
+      if ('_displayname' in event) {
+        delete event._displayname;
+      }
+    }
+    console.log('a on select');
+    console.log(event);
     this.changeItem.emit(event);
   }
 
+
+  onKeyUp(event) {
+    if (event.key === 'Enter') {
+      console.log('is entred = ');
+      console.log(event);
+      console.log('---entred----');
+      console.log(event.target.value);
+    } else {
+      console.log('is not entred');
+      console.log(event);
+      console.log('-----is not entred------');
+    }
+  }
 
 
   filterItem(event) {
@@ -114,49 +147,60 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
     }); */
   }
 
-  clearValue()
-{
+  clearValue() {
     this.filteredList = null;
-}
-
-
-filter<T>(query, items: T[] = this.service): T[] {
-  console.log('filtered');
-  const filtered: T[] = [];
-  if (!isNullOrUndefined(items)) {
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const displayName = this.functionName(item, this.args);
-      if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-        /* let item: T = {
-          item: item,
-          name: displayName
-        }; */
-        filtered.push(item);
-      }
-    }
   }
-  return filtered;
-}
 
- /*  filter<T>(query, items: T[] = this.service): IItem[] {
+
+  filter<T>(query, items: T[] = this.service): T[] {
     console.log('filtered');
-    let filtered: IItem[] = [];
+    const filtered: T[] = [];
     if (!isNullOrUndefined(items)) {
       for (let i = 0; i < items.length; i++) {
-        let item = items[i];
-        let displayName = this.functionName(item, this.args);
+        const item = items[i];
+        const displayName = this.functionName(item, this.args);
+        console.log('displayName = ' + displayName);
         if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-          let iitem: IItem = {
+          /* let item: T = {
             item: item,
             name: displayName
-          };
-          filtered.push(iitem);
+          }; */
+         /*  if (!(typeof this.i_item === 'string')) {
+            if (!(this._displayname in this.i_item)) {
+              this.i_item[this._displayname] = '';
+            }
+          } else {
+            this._displayname = this.args[0];
+          } */
+          /* if (!('_displayname' in item)) {
+            item['_displayname'] = '';
+          }
+          item['_displayname'] = displayName; */
+          filtered.push(item);
         }
       }
     }
     return filtered;
-  } */
+  }
+
+  /*  filter<T>(query, items: T[] = this.service): IItem[] {
+     console.log('filtered');
+     let filtered: IItem[] = [];
+     if (!isNullOrUndefined(items)) {
+       for (let i = 0; i < items.length; i++) {
+         let item = items[i];
+         let displayName = this.functionName(item, this.args);
+         if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+           let iitem: IItem = {
+             item: item,
+             name: displayName
+           };
+           filtered.push(iitem);
+         }
+       }
+     }
+     return filtered;
+   } */
 
   onClear(event) {
     this.filteredList = null;

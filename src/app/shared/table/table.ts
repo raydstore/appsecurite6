@@ -502,11 +502,12 @@ export interface Accidentcause {
 
 export interface Accidentagentshbit {
     id?: number;
-    accidentagentsh: Accidentagentsh;
-    idgrid: number;
-    idbit: string;
-    idbitclass: string;
-    kind: string;
+    accidentagentsh?: Accidentagentsh;
+    idgrid?: number;
+    idbit?: string;
+    idbitclass?: string;
+    name?: string;
+    kind?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -526,9 +527,13 @@ export interface Bitclass {
 export interface Vw$accidentagentshbit {
     iddamage: number;
     idagent: string;
+    idgrid?: number;
     idbitclass?: string;
     classname?: string;
+    idbit?: string;
+    kind?: string;
     name?: string;
+    bitname?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

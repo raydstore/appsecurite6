@@ -49,22 +49,6 @@ export class MarkComponent implements OnInit {
       });
   }
 
-  loadLastId() {
-    this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids);
-  }
-
-  getLastid(name) {
-    let lts: any[] ;
-    this.loadLastId(); 
-    for (let lid of this.lastids)  {
-        if (lid.id === name) {
-           return lid['count'] ;
-        }
-    }
-    return 0;
-  }
-
   nodeExpand(event) {
     this.selectedNode = event.node;
   }
@@ -72,7 +56,7 @@ export class MarkComponent implements OnInit {
   isSelected(event) {
     return this.selectedNode === event.node ? true : false;
   }
-  
+
   createItem(event) {
     /* close Dialog */
     this.dialogVisible = false;
@@ -132,7 +116,7 @@ export class MarkComponent implements OnInit {
     //
   }
 
-  showNewDialoge() {
+ /*  showNewDialoge() {
     this.dialogVisible = true;
     this.newMode = true;
     this.newMark = {
@@ -148,13 +132,13 @@ export class MarkComponent implements OnInit {
   hideNewDialoge() {
     this.dialogVisible = false;
   }
-
+ */
   showDialogToAdd() {
     this.newMode = true;
     this.dialogVisible = true;
   }
 
-  save() {
+/*   save() {
     let marks = [...this.marks];
     if (this.newMode) {
       marks.push(this.newMark);
@@ -184,7 +168,7 @@ export class MarkComponent implements OnInit {
 
   findSelectedMarkIndex(): number {
     return this.marks.indexOf(this.selectedMark);
-  }
+  } */
 }
 
 

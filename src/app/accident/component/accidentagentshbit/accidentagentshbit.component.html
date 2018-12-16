@@ -1,24 +1,107 @@
-<div class="card text-white bg-secondary">
-  <div class="card-header">
-    Bit d'agent
+<!-- <div class="card bg-light"> -->
+  <div class="card-header cardtitle">
+
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
+
+    <button class="btn btn-success btnright" (click)="showDialogToAdd()">
+      <i class="fa fa-plus"></i>
+    </button>
+
   </div>
-  <div class="card-body">
-    <div class="ui-g ui-fluid">
-      <span class="ui-fluid">
-        <p-autoComplete [(ngModel)]="rBits" [suggestions]="filteredBitsMultiple" (completeMethod)="filterBitMultiple($event)"
-          (onSelect)="onSelect($event)" (onUnselect)="onUnselect($event)" styleClass="wid100" [minLength]="1"
-          placeholder="Bit" field="id" [multiple]="true" [dropdown]="true">
-          <ng-template let-value pTemplate="selectedItem">
-            <p style="font-size:18px">{{value.id}}</p>
-          </ng-template>
-        </p-autoComplete>
-      </span>
-    </div>
-    <div>
-      <div *ngFor="let value of vw$accidentagentshbits" class="alert" [class.alert-primary]="value.idbitclass == 'A'"
+  <div *ngFor="let value of vwaccidentagentshbits" class="alert" [class.alert-primary]="value.idbitclass == 'A'"
         [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
         [class.alert-warning]="value.idbitclass == 'D'">
-        {{getFullName(value)}}
+        <div class="form-group row">
+            <label for="chname" class="col-sm-6 col-form-label">
+              {{value.idbitclass + ') ' + value.classname + ': ' + value.idbit + ') ' + value.bitname + ': '}}
+            </label>
+            <div class="col-sm-6">
+              <input type="text" readonly="readonly" class="form-control" id="chname" [value]="value.name"
+                placeholder="le nom de libelé">
+            </div>
+          </div>
       </div>
-    </div>
-  </div>
+<!--   
+  <p-table #dt [columns]="cols" [value]="vwaccidentagentshbits" dataKey="id" rowExpandMode="single" selectionMode="single"
+    [(selection)]="selectedVwaccidentagentshbit" [paginator]="true" [rows]="10" [globalFilterFields]="['id','name', 'idlabel.name']">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 2.25em"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+            ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <a href="#" [pRowToggler]="rowData ">
+            <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
+          </a>
+        </td>
+        <td>{{rowData.idbitclass}} ) {{rowData.classname}} : </td>
+        <td>{{rowData.idbit}} ) {{rowData.bitname}} : </td>
+        <td>{{rowData.name}}</td>
+        <td>
+          <ng-template let-m="rowData" pTemplate="body">
+            <button class="btn btn-danger" (click)="deleteAccidentagentshbit(m)">
+              <i class="fa fa-minus"></i>
+            </button>
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-item>
+      <tr>
+        <td [attr.colspan]="5">
+          <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+            <div class="container">
+              <div class="form-group row">
+                <label for="chclassname" class="col-sm-2 col-form-label">Classe {{item.idbitclass}}</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly="readonly" class="form-control" id="chclassname" [value]="item.classname"
+                    placeholder="le nom de la classe">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="chbitname" class="col-sm-2 col-form-label">Bit {{item.idbitclass}}</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly="readonly" class="form-control" id="chbitname" [value]="item.bitname"
+                    placeholder="le nom du bit">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="chname" class="col-sm-2 col-form-label">libelé</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly="readonly" class="form-control" id="chname" [value]="item.name"
+                    placeholder="le nom de libelé">
+                </div>
+              </div>
+              <div class="clupdate">
+                <button class="btn btn-success" (click)="updateAccidentagentshbit(item)">
+                  <i class="fa fa-check">Valider</i>
+                </button>
+                <button class="btn btn-warning" (click)="cancelUpdate(item)">
+                  <i class="fa fa-times">Annuler</i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> -->
+<app-newaccidentagentshbit [dialogVisible]="dialogVisible" [bits]="bits" (closeDialog)="createItem($event)"></app-newaccidentagentshbit>

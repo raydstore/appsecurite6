@@ -15,7 +15,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
-  CheckboxModule,
   CodeHighlighterModule,
   DataGridModule,
   DataTableModule,
@@ -23,10 +22,12 @@ import {
   GrowlModule,
   InplaceModule,
   ListboxModule,
-  PanelModule,
-  RadioButtonModule,
   TabViewModule,
 } from 'primeng/primeng';
+
+import { CheckboxModule } from 'primeng/checkbox';
+import { PanelModule } from 'primeng/panel';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -138,6 +139,7 @@ import { NewentrepriseComponent } from './component/insertion/newentreprise/newe
 import { NewstructureComponent } from './component/insertion/newstructure/newstructure.component';
 import { NewtypeoperationComponent } from './component/insertion/newtypeoperation/newtypeoperation.component';
 import { NewactivityComponent } from './component/insertion/newactivity/newactivity.component';
+import { NewaccidentagentshbitComponent } from './component/insertion/newaccidentagentshbit/newaccidentagentshbit.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -228,6 +230,7 @@ import { NewactivityComponent } from './component/insertion/newactivity/newactiv
     OperationComponent,
     ActivityComponent,
     SitesComponent,
+    NewaccidentagentshbitComponent,
     UnitmeasureComponent,
     TypeFormationComponent,
     NatureComponent,
@@ -280,7 +283,8 @@ import { NewactivityComponent } from './component/insertion/newactivity/newactiv
     NewentrepriseComponent,
     NewstructureComponent,
     NewtypeoperationComponent,
-    NewactivityComponent
+    NewactivityComponent,
+    NewaccidentagentshbitComponent
   ],
   providers: [
     PostService,

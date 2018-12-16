@@ -76,26 +76,28 @@
       </ng-template>
     </div> -->
     <div class="container">
-        <div class="ca flex-item">
-    <app-faccidentagentsh [item]="item" [mode]="mUpdate" [agents]="agents" (operation)="performAction($event)" ></app-faccidentagentsh>
+      <div class="ca flex-item">
+        <app-faccidentagentsh [item]="item" [mode]="mUpdate" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
+        <app-accidentagentshbit [accidentagentsh]="item" [idgrid]="item.idgrid"></app-accidentagentshbit>
+      </div>
     </div>
-    </div>
-    <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
+    <!--     <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
       <ng-template #showAccidentagentshBit>
-          <!-- [iddamage]="item.accidentagentshPK.iddamage" [idagent]="item.accidentagentshPK.idagent" -->
         <app-accidentagentshbit [accidentagentsh]="item" [idgrid]="idgrid"></app-accidentagentshbit>
       </ng-template>
+ -->
   </ng-template>
 </p-dataTable>
 <!-- ui-grid ui-grid-responsive ui-grid-pad  -->
-<p-dialog header="Nouveaux Agent" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="380">
+<p-dialog header="Nouveaux Agent" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+  width="380">
   <div class="container" *ngIf="newAccidentagentsh">
     <div class="ca flex-item">
-       <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mInsert" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
+      <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mInsert" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
     </div>
   </div>
 </p-dialog>
-  <!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
+<!-- <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAccidentagentsh">
     <div class="bdcontent">
       <span>
         <ng-template #rt let-r="result" let-t="term">

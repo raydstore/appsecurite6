@@ -14,7 +14,7 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Accident } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
-import {CheckboxModule} from 'primeng/checkbox';
+import { CheckboxModule } from 'primeng/checkbox';
 import { AgentService } from 'shared/services/agent.service';
 
 
@@ -53,7 +53,7 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class AccidentComponent implements OnInit {
- // @Input() displayValue;
+  // @Input() displayValue;
   accidents: Accident[];
   _accidents: Accident[];
 
@@ -67,14 +67,14 @@ export class AccidentComponent implements OnInit {
   newMode = false;
   mInsert: Mode.insert = 0;
   mUpdate: Mode.update = 1;
- // expanded = true;
+  // expanded = true;
 
   lastids: any[];
   lastid: any;
   titlelist = 'Accident';
   selectedNatures: string[];
   filteredAgentsSingle: IAgent[];
- // expandedRows: {} = {};
+  // expandedRows: {} = {};
   totalRecords: number;
 
   cols: any[];
@@ -100,7 +100,7 @@ export class AccidentComponent implements OnInit {
 
 
   ngOnInit() {
- //   const thisRef = this;
+    //   const thisRef = this;
     this.initAccident();
     this.loadData();
     this.loadSite();
@@ -113,14 +113,14 @@ export class AccidentComponent implements OnInit {
     }); */
 
     this.cols = [
-      { field: 'id',                header: 'id' },
-      { field: 'Classification',    header: 'Classification' },
-      { field: 'date',              header: 'curdate' },
-      { field: 'time',              header: 'time' },
-      { field: 'idsite.name',       header: 'site' },
-      { field: 'place',             header: 'lieu' },
-      { field: 'description',       header: 'description' }
-  ];
+      { field: 'id', header: 'id' },
+      { field: 'Classification', header: 'Classification' },
+      { field: 'date', header: 'curdate' },
+      { field: 'time', header: 'time' },
+      { field: 'idsite.name', header: 'site' },
+      { field: 'place', header: 'lieu' },
+      { field: 'description', header: 'description' }
+    ];
   }
 
   loadAccidentsLazy(event: LazyLoadEvent) {
@@ -135,12 +135,12 @@ export class AccidentComponent implements OnInit {
 
     // imitate db connection over a network
     setTimeout(() => {
-        if (this.accidents) {
-            this._accidents = this.accidents.slice(event.first, (event.first + event.rows));
-            this.loading = false;
-        }
+      if (this.accidents) {
+        this._accidents = this.accidents.slice(event.first, (event.first + event.rows));
+        this.loading = false;
+      }
     }, 1000);
-}
+  }
 
 
 
@@ -166,7 +166,7 @@ export class AccidentComponent implements OnInit {
       lastuser: 'ali',
       owner: 'ali'
     };
-    this.newAccident = <Accident> a;
+    this.newAccident = <Accident>a;
     this._newAccident = Object.assign({}, this.newAccident);
   }
 
@@ -283,7 +283,7 @@ export class AccidentComponent implements OnInit {
 
   getLastid(name) {
     this.loadLastId();
-      for (let lid of this.lastids) {
+    for (let lid of this.lastids) {
       if (lid.id === name) {
         return lid['count'];
       }
@@ -294,10 +294,10 @@ export class AccidentComponent implements OnInit {
   get today() {
     return new Date();
   }
-/* 
-  getDate(date): Date {
-     return new Date(date);
-  } */
+  /* 
+    getDate(date): Date {
+       return new Date(date);
+    } */
 
   nodeExpand(event) {
     this.selectedNode = event.node;
@@ -308,25 +308,31 @@ export class AccidentComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs, table: any) {
-    /* console.log(JSON.stringify(eventArgs)); */
-    let _accident: Accident = <Accident>eventArgs.item;
-    let value = this.datePipe.transform(_accident.curdate, 'yyMMddHHmmss');
-    _accident.id = +value;
-    console.log('value = ' + value);
-    console.log('_accident.id = ' + _accident.id);
+    console.log('arg arived eventargs = ' + JSON.stringify(eventArgs));
+    console.log('mu = ' + JSON.stringify(this.mUpdate));
+    console.log('mi = ' + JSON.stringify(this.mInsert));
+    console.log('eventArgs.mode = ' + JSON.stringify(eventArgs.mode));
+
     switch (eventArgs.mode) {
       case this.mInsert: {
-                           this.dialogVisible = eventArgs.dialogVisible;
-                           this.createAccident();
-                           table.toggleRow(this.newAccident);
-                           this.selectedAccident = this.accidents[1];
-                           this.newAccident = Object.assign({}, this._newAccident);
-                           break;
-                         }
+        console.log('insertion = ');
+        const _accident: Accident = <Accident>eventArgs.item;
+        const value = this.datePipe.transform(_accident.curdate, 'yyMMddHHmmss');
+        _accident.id = +value;
+        console.log('value = ' + value);
+        console.log('_accident.id = ' + _accident.id);
+        this.dialogVisible = eventArgs.dialogVisible;
+        this.createAccident();
+        table.toggleRow(this.newAccident);
+        this.selectedAccident = this.accidents[1];
+        this.newAccident = Object.assign({}, this._newAccident);
+        break;
+      }
       case this.mUpdate: {
-                           this.updateAccident(<Accident>eventArgs.item);
-                           break;
-                         }
+        console.log('update = ' + JSON.stringify(eventArgs.item));
+        this.updateAccident(<Accident>eventArgs.item);
+        break;
+      }
       /* default: {
              this.dialogVisible = false;
              this.initAccident();
@@ -340,7 +346,7 @@ export class AccidentComponent implements OnInit {
     console.log(JSON.stringify(this.newAccident));
     this.service.create(this.newAccident)
       .subscribe(newAccident => {
-       /*  this.loadData(); */
+        /*  this.loadData(); */
       }, (error: AppError) => {
         this.accidents.splice(0, 1);
         if (error instanceof BadInput) {
@@ -359,22 +365,22 @@ export class AccidentComponent implements OnInit {
     this.accidents = [...this.accidents];
     this.service.delete(_accident.id)
       .subscribe(
-      () => { this.loadData(); },
-      (error: Response) => {
-        this.accidents.splice(index, 0, _accident);
+        () => { this.loadData(); },
+        (error: Response) => {
+          this.accidents.splice(index, 0, _accident);
 
-        if (error instanceof NotFoundError) {
-          alert('this post has already been deleted');
-        } else {
-          throw error;
+          if (error instanceof NotFoundError) {
+            alert('this post has already been deleted');
+          } else {
+            throw error;
+          }
         }
-      }
       );
   }
 
   updateAccident(_accident) {
-   // _accident.name = input.value;
-   console.log(_accident);
+    // _accident.name = input.value;
+    console.log(_accident);
     this.service.update(_accident)
       .subscribe(updateaccident => {
         this.loadData();
@@ -384,7 +390,7 @@ export class AccidentComponent implements OnInit {
   cancelUpdate(_accident) {
     //
   }
-  
+
 
   showNewDialoge() {
     console.log('a');
@@ -451,7 +457,7 @@ export class AccidentComponent implements OnInit {
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    item[field] = <Agent> event.item;
+    item[field] = <Agent>event;
   }
 
   onSelect(event) {
