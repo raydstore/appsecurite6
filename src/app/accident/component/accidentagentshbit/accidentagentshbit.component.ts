@@ -25,6 +25,7 @@ export class AccidentagentshbitComponent implements OnInit {
   @Input() accidentagentsh: Accidentagentsh;
   accidentagentshbits: Accidentagentshbit[];
   bits: Bit[] = [];
+  filteredBit: Bit[] = [];
   vwaccidentagentshbits: Vw$accidentagentshbit[];
   selectedVwaccidentagentshbit: Vw$accidentagentshbit;
   titlelist = 'Accident agent sh bit';
@@ -54,8 +55,8 @@ export class AccidentagentshbitComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.loadDataBit();
-    this.bits = this.getBitNotClassAssigned(this.bits);
+   /*  this.loadDataBit();
+    this.getBitNotClassAssigned(); */
   }
 
   loadData() {
@@ -70,6 +71,7 @@ export class AccidentagentshbitComponent implements OnInit {
             item.name = '';
           }
         }
+        this.loadDataBit();
       });
   }
 
@@ -77,23 +79,25 @@ export class AccidentagentshbitComponent implements OnInit {
     this.bitService.getAll()
       .subscribe(bits => {
         this.bits = bits;
+        this.getBitNotClassAssigned();
       });
   }
 
-  getBitNotClassAssigned(bits: Bit[]): Bit[] {
+  getBitNotClassAssigned() {
     console.log('enter b n a =');
     // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-    const filtered: Bit[] = [];
-    if (bits != null) {
-      for (let i = 0; i < bits.length; i++) {
-        const bit = bits[i];
+    this.filteredBit = [];
+    console.log('bits = ' + JSON.stringify(this.bits));
+    console.log('this.vwaccidentagentshbits = ' + JSON.stringify(this.vwaccidentagentshbits));
+    if (this.bits != null) {
+      for (let i = 0; i < this.bits.length; i++) {
+        const bit = this.bits[i];
         if (!this.isAssignedBitclass(bit) && (bit.kind === 'I')) {
-          filtered.push(bit);
+          this.filteredBit.push(bit);
         }
       }
-      console.log('b n a =' + JSON.stringify(filtered));
+      console.log('b n a =' + JSON.stringify(this.filteredBit));
     }
-    return filtered;
   }
 
   isAssignedBitclass(bit: Bit): boolean {
@@ -140,7 +144,7 @@ export class AccidentagentshbitComponent implements OnInit {
         });
   */
 
-  gdisplayName(item: any, args: string[]): string {
+  displayName(item: any, args: string[]): string {
     console.log('enter displayname = ' + JSON.stringify(item));
     let result = '';
     if (item !== null) {

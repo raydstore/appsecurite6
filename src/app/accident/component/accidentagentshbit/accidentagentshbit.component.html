@@ -5,7 +5,7 @@
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
     </h4>
 
-    <button class="btn btn-success btnright" (click)="showDialogToAdd()">
+    <button *ngIf="filteredBit" class="btn btn-success btnright" (click)="showDialogToAdd()">
       <i class="fa fa-plus"></i>
     </button>
 
@@ -104,4 +104,5 @@
     </ng-template>
   </p-table>
 </div> -->
-<app-newaccidentagentshbit [dialogVisible]="dialogVisible" [bits]="bits" (closeDialog)="createItem($event)"></app-newaccidentagentshbit>
+<app-newaccidentagentshbit [dialogVisible]="dialogVisible" [bits]="filteredBit" 
+       (closeDialog)="createItem($event)" [accidentagentsh]="accidentagentsh"></app-newaccidentagentshbit>

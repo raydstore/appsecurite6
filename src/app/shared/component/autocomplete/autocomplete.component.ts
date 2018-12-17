@@ -65,7 +65,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   ngOnChanges() {
     this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
-    console.log('on change = ' + JSON.stringify(this.i_item));
+    console.log('on change = ' + typeof this.i_item);
     if (this.i_item != null) {
       if (!(typeof this.i_item === 'string')) {
       if (!(this._displayname in this.i_item)) {
@@ -158,6 +158,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
     if (!isNullOrUndefined(items)) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
+        console.log('item = ' + JSON.stringify(item));
         const displayName = this.functionName(item, this.args);
         console.log('displayName = ' + displayName);
         if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {

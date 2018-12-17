@@ -22,6 +22,7 @@ export class NewData<T> {
     create() {
         const nT = Object.assign({}, this.newT);
         this.newT = Object.assign({}, this._newT);
+        console.log('nt = ' + JSON.stringify(nT));
         this.service.create(nT)
             .subscribe(() => {
                 const inputdata: InputData<T> = { data: nT, cancelDialog: false };

@@ -46,31 +46,45 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
 
   ngOnInit() {
     console.log('on init = ' + JSON.stringify(this.bits));
-    _newAccidentagentshbit.accidentagentsh = this.accidentagentsh;
+    // _newAccidentagentshbit.accidentagentsh = this.accidentagentsh;
   }
 
   onChangeItem(item: Accidentagentshbit, field: string, event) {
     console.log('enter on change accidentagentshbit = ' + JSON.stringify(event));
-    item[field] = <string>event;
+    const bit: Bit = <Bit> event;
+    item[field] = bit.id;
+    item['idbitclass'] = bit.idbitclass;
+    item['kind']       = bit.kind;
+    console.log('enter on change accidentagentshbit item = ' + JSON.stringify(item));
   }
 
-  tdisplayName(item: any, args: string[]): string {
-    console.log('1');
+  displayName(item: any, args: string[]): string {
     let result = '';
-    console.log('2');
-    if (!isNullOrUndefined(item) && (!isNullOrUndefined(this.bits))) {
-      console.log('3');
-    for (const bit of this.bits) {
+    console.log('i--- = ' + JSON.stringify(item));
+    if (!isNullOrUndefined(item)) {
+      result = item.id + ') ' + item.name;
+    /* for (const bit of this.bits) {
       if (bit.id === this.newT.idbit) {
         result = bit.name;
         this.newT.idbitclass = bit.idbitclass;
         this.newT.kind = bit.kind;
         break;
-      }
+      } 
     }
-    console.log('4');
+    console.log('4');*/
   }
   return result;
+}
+
+createItem() {
+  console.log('11111');
+  const _accidentagentsh: Accidentagentsh = Object.assign({}, this.accidentagentsh);
+  if ('_displayname' in _accidentagentsh.agent) {
+   delete _accidentagentsh.agent['_displayname'];
+  }
+  this.newT.accidentagentsh = _accidentagentsh;
+  this.newT.idgrid          = _accidentagentsh.idgrid;
+  this.create();
 }
 
 }
