@@ -55,6 +55,7 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
     item[field] = bit.id;
     item['idbitclass'] = bit.idbitclass;
     item['kind']       = bit.kind;
+    item['name']       = bit.name;
     console.log('enter on change accidentagentshbit item = ' + JSON.stringify(item));
   }
 

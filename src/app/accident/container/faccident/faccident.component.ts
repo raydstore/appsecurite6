@@ -76,8 +76,17 @@ export class FaccidentComponent implements OnInit {
   }
 
   onChangeSiteOfItem(item: Accident, field: string, event) {
-    item[field] = <Site>event;
-    console.log('en Site = ' + JSON.stringify(event));
+    console.log(event);
+/*     
+    if ('_displayname' in event) {
+      console.log('123');
+      const v = event._displayname; */
+      item[field] = <Site> event;
+      item[field]._displayname = this.displayNameSite(event, ['name']);
+/*     } else {
+      item[field] = event;
+    } */
+    console.log('------- = ' + JSON.stringify(item[field]));
   }
 
 

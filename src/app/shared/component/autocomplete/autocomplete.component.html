@@ -1,6 +1,6 @@
 <p-autoComplete #autocomplete class="clautocomplete" [(ngModel)]="i_item" [suggestions]="filteredList" (completeMethod)="filterItem($event)"
   [size]="30" placeholder="" [minLength]="1" [dropdown]="true" [field]="_displayname" 
-  (onSelect)="onSelect($event)" [forceSelection]="true">
+  (onSelect)="onSelect($event)">
   <!-- (onKeyUp)="onKeyUp($event)" -->
   <!-- [forceSelection]="true" (onClear)="onClear($event)" [immutable]="false" -->
   <ng-template let-i_item pTemplate="item">

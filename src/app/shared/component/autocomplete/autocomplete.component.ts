@@ -65,15 +65,19 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   ngOnChanges() {
     this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
-    console.log('on change = ' + typeof this.i_item);
+    console.log('on change = ' + JSON.stringify(this.i_item));
     if (this.i_item != null) {
+      console.log('123');
       if (!(typeof this.i_item === 'string')) {
-      if (!(this._displayname in this.i_item)) {
-        this.i_item[this._displayname] = this.functionName(this.i_item, this.args);
-      }
-    } else {
-      this._displayname = this.args[0];
-    }
+        console.log('456');
+        if (!(this._displayname in this.i_item)) {
+          console.log('789');
+          this.i_item[this._displayname] = this.functionName(this.i_item, this.args);
+        }
+      } /* else {
+        console.log('10');
+        this._displayname = this.args[0];
+      } */
     }
     /*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
     //  this.item.item = this.i_item;
@@ -90,6 +94,9 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   }
 
   ngOnInit() {
+    if (typeof this.i_item === 'string') {
+      this._displayname = this.args[0];
+    }
     // console.log('entred = ');
     // this.item = Object.assign({}, this._item);
     /*   this.item.item = this.i_item;
@@ -112,12 +119,11 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   onSelect(event) {
     console.log('b on select');
     console.log(event);
-    
-    if (event != null) {
-      if ('_displayname' in event) {
-        delete event._displayname;
-      }
-    }
+    /*  if (event != null) {
+       if ('_displayname' in event) {
+         delete event._displayname;
+       }
+     } */
     console.log('a on select');
     console.log(event);
     this.changeItem.emit(event);
@@ -153,26 +159,33 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
 
   filter<T>(query, items: T[] = this.service): T[] {
-    console.log('filtered');
+    /*  console.log('filtered'); */
     const filtered: T[] = [];
     if (!isNullOrUndefined(items)) {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        console.log('item = ' + JSON.stringify(item));
+        /*    console.log('item = ' + JSON.stringify(item)); */
         const displayName = this.functionName(item, this.args);
-        console.log('displayName = ' + displayName);
+        if (!(typeof this.i_item === 'string')) {
+          console.log('19');
+          if (!('_displayname' in item)) {
+            item['_displayname'] = '';
+          }
+          item['_displayname'] = displayName;
+        }
+        /*    console.log('displayName = ' + displayName); */
         if (displayName.toLowerCase().indexOf(query.toLowerCase()) === 0) {
           /* let item: T = {
             item: item,
             name: displayName
           }; */
-         /*  if (!(typeof this.i_item === 'string')) {
-            if (!(this._displayname in this.i_item)) {
-              this.i_item[this._displayname] = '';
-            }
-          } else {
-            this._displayname = this.args[0];
-          } */
+          /*  if (!(typeof this.i_item === 'string')) {
+             if (!(this._displayname in this.i_item)) {
+               this.i_item[this._displayname] = '';
+             }
+           } else {
+             this._displayname = this.args[0];
+           } */
           /* if (!('_displayname' in item)) {
             item['_displayname'] = '';
           }

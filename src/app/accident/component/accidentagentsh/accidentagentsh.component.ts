@@ -55,8 +55,8 @@ export class AccidentagentshComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  mUpdate = Mode.update;
-  mInsert = Mode.insert;
+  mInsert: Mode.insert = 0;
+  mUpdate: Mode.update = 1;
 
   @ViewChild('instance') instance: NgbTypeahead;
   focus$ = new Subject<String>();
@@ -132,13 +132,13 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs) {
-    switch (eventArgs.mode.valueOf()) {
-      case Mode.insert.valueOf(): {
+    switch (eventArgs.mode) {
+      case this.mInsert: {
                           this.dialogVisible = eventArgs.dialogVisible;
                           this.createAccidentagentsh();
                           break;
                         }
-      case Mode.update.valueOf(): {
+      case this.mUpdate: {
                           this.updateAccidentagentsh(<Accidentagentsh>eventArgs.item);
                           break;
                         }
