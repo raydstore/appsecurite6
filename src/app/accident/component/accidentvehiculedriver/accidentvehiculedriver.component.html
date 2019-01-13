@@ -8,7 +8,14 @@
         inputId="clowner2"></p-radioButton>
     </div>
   </div>
-  <div class="form-group row">
+  <div *ngIf="accidentvehiculedriver.membership === 'S'; then driversh else driverns"></div>
+  <ng-template #driversh>
+    <app-accidentvehiculedriversh [accidentvehiculedriversh]="accidentvehiculedriver.accidentvehiculedriversh"></app-accidentvehiculedriversh>
+  </ng-template>
+  <ng-template #driverns>
+    <app-accidentvehiculedriverns [accidentvehiculedriverns]="accidentvehiculedriver.accidentvehiculedriverns"></app-accidentvehiculedriverns>
+  </ng-template>
+ <!--  <div class="form-group row">
     <label for="chnom" class="col-sm-4 col-form-label">le nom : </label>
     <div class="col-sm-8">
       <input type="text" class="form-control" id="chnom" [(ngModel)]="accidentvehiculedriver.name" placeholder="le nom du vehicule">
@@ -35,6 +42,8 @@
         placeholder="l'adress'" #name>
     </div>
   </div>
+ -->
+
   <div class="form-group row">
     <label for="chlicensenumber" class="col-sm-4 col-form-label">n° Permi : </label>
     <div class="col-sm-8">

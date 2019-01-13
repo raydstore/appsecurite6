@@ -1,0 +1,44 @@
+<div class="form-group row">
+  <label for="chmatriculeagt" class="col-sm-2 col-form-label">matricule : </label>
+  <!-- <div class="col-sm-8">
+    <input type="text" class="form-control" id="chnom" [(ngModel)]="accidentvehiculedriversh.agent.id" placeholder="le nom du vehicule">
+  </div> -->
+  <div class="col-sm-10">
+    <app-autocomplete id="chmatriculeagt" [i_item]="accidentvehiculedriversh.idagent" [service]="agents" [functionName]="displayName" [args]="['id', 'firstname', 'lastname']"
+      (changeItem)="onChangeItem(accidentvehiculedriversh, 'agent', $event)"></app-autocomplete>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="chnom" class="col-sm-4 col-form-label">nom : </label>
+  <div class="col-sm-8">
+    <input type="text" class="form-control" id="chnom" readonly="readonly" [(ngModel)]="accidentvehiculedriversh.idagent.firstname" placeholder="le nom du chauffeur">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="chprenom" class="col-sm-4 col-form-label">prénom : </label>
+  <div class="col-sm-8">
+    <input type="text" class="form-control" id="chprenom" readonly="readonly" [(ngModel)]="accidentvehiculedriversh.idagent.lastname" placeholder="le prénom du chauffeur">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="chdateofbirth" class="col-sm-4 col-form-label">né le : </label>
+  <div class="col-sm-8">
+    <input type="text" class="form-control" id="chdateofbirth" readonly="readonly" [(ngModel)]="accidentvehiculedriversh.idagent.dateofbirth" placeholder="né le">
+  </div>
+
+</div>
+<div class="form-group row">
+  <label for="chplaceofbirth" class="col-sm-4 col-form-label">à : </label>
+  <div class="col-sm-8">
+    <input type="text" class="form-control" id="chplaceofbirth" readonly="readonly" [(ngModel)]="accidentvehiculedriversh.idagent.placeofbirth"
+      placeholder="l'endroi de maissance'" #placeofbirth>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="chadressdriver" class="col-sm-4 col-form-label">adress : </label>
+  <div class="col-sm-8">
+    <input type="text" class="form-control" id="chadressdriver" readonly="readonly" [(ngModel)]="accidentvehiculedriversh.idagent.adress"
+      placeholder="l'adress'" #adress>
+  </div>
+</div>

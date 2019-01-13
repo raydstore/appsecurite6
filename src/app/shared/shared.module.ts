@@ -1,3 +1,5 @@
+import { CalendarComponent } from './component/calendar/calendar.component';
+import { VwagentService } from './services/vwagent.service';
 import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
 import { DataService } from 'shared/services/data.service';
 import { AccidentvehiculeownerService } from './services/accidentvehiculeowner.service';
@@ -245,6 +247,7 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     DialogModalComponent,
     AutocompleteComponent,
     CarouselModule,
+    CalendarComponent
   ],
   declarations: [
     NotFoundComponent,
@@ -284,7 +287,8 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     NewstructureComponent,
     NewtypeoperationComponent,
     NewactivityComponent,
-    NewaccidentagentshbitComponent
+    NewaccidentagentshbitComponent,
+    CalendarComponent
   ],
   providers: [
     PostService,
@@ -352,7 +356,8 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     AggravatingfactorService,
     AccidentvehiculedriverService,
     AccidentvehiculeinsuranceService,
-    AccidentvehiculeownerService
+    AccidentvehiculeownerService,
+    VwagentService
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import { Site, Agent, IAgent, TFunctionName, Mode, EventArgs } from 'shared/table/table';
+import { Site, Agent, IAgent, TFunctionName, Mode, EventArgs, Vwagent } from 'shared/table/table';
 import { SiteService } from 'shared/services/site.service';
 import { VwdamageaccidentnatureService } from 'shared/services/vwdamageaccidentnature.service';
 import { VwelementdamageService } from 'shared/services/vwelementdamage.service';
@@ -29,6 +29,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { LazyLoadEvent } from 'primeng/api';
 import { DatePipe } from '@angular/common';
+import { VwagentService } from 'shared/services/vwagent.service';
 
 
 /**
@@ -93,8 +94,7 @@ export class AccidentComponent implements OnInit {
 
   constructor(private service: AccidentService,
     public siteService: SiteService,
-    public agentService: AgentService,
-    private lastidService: LastidService) {
+    public agentService: AgentService) {
   }
 
 
@@ -275,21 +275,6 @@ export class AccidentComponent implements OnInit {
     return filtered;
   }
 
-
-  loadLastId() {
-    this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids);
-  }
-
-  getLastid(name) {
-    this.loadLastId();
-    for (let lid of this.lastids) {
-      if (lid.id === name) {
-        return lid['count'];
-      }
-    }
-    return 0;
-  }
 
   get today() {
     return new Date();

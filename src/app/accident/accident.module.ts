@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AutocompleteComponent } from 'shared/component/autocomplete/autocomplete.component';
-import { CalendarComponent } from 'shared/component/calendar/calendar.component';
+// import { CalendarComponent } from 'shared/component/calendar/calendar.component';
 import { GridComponent } from 'shared/component/grid/grid.component';
 import { RankComponent } from 'shared/component/rank/rank.component';
 
@@ -41,6 +41,8 @@ import { AggravatingfactorComponent } from './component/aggravatingfactor/aggrav
 import { AccidentvehiculeinsuranceComponent } from './component/accidentvehiculeinsurance/accidentvehiculeinsurance.component';
 import { AccidentvehiculedriverComponent } from './component/accidentvehiculedriver/accidentvehiculedriver.component';
 import { AccidentvehiculeownerComponent } from './component/accidentvehiculeowner/accidentvehiculeowner.component';
+import { AccidentvehiculedrivershComponent } from './component/accidentvehiculedriversh/accidentvehiculedriversh.component';
+import { AccidentvehiculedrivernsComponent } from './component/accidentvehiculedriverns/accidentvehiculedriverns.component';
 
 
 
@@ -83,7 +85,7 @@ import { AccidentvehiculeownerComponent } from './component/accidentvehiculeowne
     DamagedefinitionComponent,
     ActionassignmentComponent,
     AccidentfileComponent,
-    CalendarComponent,
+    /* CalendarComponent, */
     /* AutocompleteComponent, */
     FaccidentComponent,
     FaccidentagentshComponent,
@@ -92,6 +94,8 @@ import { AccidentvehiculeownerComponent } from './component/accidentvehiculeowne
     AccidentvehiculeinsuranceComponent,
     AccidentvehiculedriverComponent,
     AccidentvehiculeownerComponent,
+    AccidentvehiculedrivershComponent,
+    AccidentvehiculedrivernsComponent,
   ]
 })
 export class AccidentModule { }

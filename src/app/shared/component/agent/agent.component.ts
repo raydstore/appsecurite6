@@ -1,3 +1,4 @@
+import { Vwagent } from './../../table/table';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
 import { NotFoundError } from '../../../core/component/common/not-found-error';
@@ -9,6 +10,7 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Agent } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
+import { VwagentService } from 'shared/services/vwagent.service';
 
 @Component({
   selector: 'app-agent',
@@ -16,7 +18,7 @@ import { Http, Response } from '@angular/http';
   styleUrls: ['./agent.component.css']
 })
 export class AgentComponent implements OnInit {
-  agents: any[];
+  agents: Vwagent[];
   selectedAgent: Agent;
   selectedNode: TreeNode;
   // agent: any;
@@ -27,45 +29,41 @@ export class AgentComponent implements OnInit {
     lastuser: 'ali',
     firstname: '',
     lastname: '',
-    hiredate: new Date(),
+    dateofbirth: new Date(),
     owner: 'ali'
   };
   dialogVisible = false;
   newMode = false;
+  cols: any[];
 
   lastids: any[];
   lastid: any;
-  titlelist = 'Marque';
+  titlelist = 'Agent';
 
-  constructor(private service: AgentService, private lastidService: LastidService) {
+  constructor(private service: AgentService, private vwagentService: VwagentService) {
   }
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
+    this.cols = [
+      { field: 'id', header: 'Matricule' },
+      { field: 'firstname', header: 'Nom' },
+      { field: 'lastname', header: 'Prénom' },
+      { field: 'dateofbirth', header: 'Né le' },
+      { field: 'placofbirth', header: 'Né a' },
+      { field: 'datecreate', header: 'datecreate' },
+      { field: 'dateupdate', header: 'dateupdate' },
+      { field: 'owner', header: 'owner' },
+      { field: 'lastuser', header: 'lastuser' }
+    ];
+    // this.loadLastId();
   }
 
   loadData() {
-    this.service.getAll()
+    this.vwagentService.getAll()
       .subscribe(agents => {
         this.agents = agents;
       });
-  }
-
-  loadLastId() {
-    this.lastidService.getAll()
-      .subscribe(lastids => this.lastids = lastids);
-  }
-
-  getLastid(name) {
-    let lts: any[];
-    this.loadLastId();
-    for (let lid of this.lastids) {
-      if (lid.id === name) {
-        return lid['count'];
-      }
-    }
-    return 0;
   }
 
   nodeExpand(event) {
@@ -94,7 +92,7 @@ export class AgentComponent implements OnInit {
   }
 
   deleteAgent(_agent: Agent) {
-    let index = this.agents.indexOf(_agent);
+    const index = this.agents.indexOf(_agent);
     this.agents.splice(index, 1);
     this.agents = [...this.agents];
     this.service.delete(_agent.id)
@@ -136,7 +134,7 @@ export class AgentComponent implements OnInit {
       lastuser: 'ali',
       firstname: '',
       lastname: '',
-      hiredate: new Date(),
+      dateofbirth: new Date(),
       owner: 'ali'
     };
   }
@@ -163,7 +161,7 @@ export class AgentComponent implements OnInit {
   }
 
   delete() {
-    let index = this.findSelectedAgentIndex();
+    const index = this.findSelectedAgentIndex();
     this.agents = this.agents.filter((val, i) => i !== index);
     this.newAgent = null;
     this.dialogVisible = false;
@@ -180,6 +178,10 @@ export class AgentComponent implements OnInit {
 
   findSelectedAgentIndex(): number {
     return this.agents.indexOf(this.selectedAgent);
+  }
+
+  onChangeDate(event) {
+
   }
 }
 

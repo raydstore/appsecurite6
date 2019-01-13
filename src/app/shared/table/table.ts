@@ -360,7 +360,46 @@ export interface Agent {
     id?: string;
     firstname?: string;
     lastname?: string;
-    hiredate?: Date;
+    dateofbirth?: Date;
+    familysituation?: string;
+    adress?: string;
+    placeofbirth?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Detailagent {
+    agent?: Agent;
+    daterecruitment?: Date;
+    category?: string;
+    idstructure?: string;
+    idfunction?: string;
+    namefunction?: string;
+    worksystem?: string;
+    pointingsystem?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Vwagent {
+    id?: string;
+    firstname?: string;
+    lastname?: string;
+    dateofbirth?: Date;
+    familysituation?: string;
+    adress?: string;
+    placeofbirth?: string;
+    daterecruitment?: Date;
+    category?: string;
+    idstructure?: string;
+    idfunction?: string;
+    namefunction?: string;
+    worksystem?: string;
+    pointingsystem?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -472,6 +511,31 @@ export interface Accidentvehiculedriver {
     placeofbirth?: string;
     issuedon?: Date;
     issuedby?: string;
+    accidentvehiculedriversh?: Accidentvehiculedriversh;
+    accidentvehiculedriverns?: Accidentvehiculedriverns;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentvehiculedriversh {
+    idaccidentvehicule?: number;
+    idagent?: Agent;
+    membership?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentvehiculedriverns {
+    idaccidentvehicule?: number;
+    name?: string;
+    adress?: string;
+    membership?: string;
+    owner?: string;
+    lastuser?: string;
+    dateofbirth?: Date;
+    placeofbirth?: string;
     datecreate?: Date;
     dateupdate?: Date;
 }

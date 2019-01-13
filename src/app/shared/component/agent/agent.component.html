@@ -11,33 +11,116 @@
 
   </div>
 
-  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-  <p-dataTable [value]="agents" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
-    rowExpandMode="single" [responsive]="true">
-    <p-column expander="true" styleClass="col-icon"></p-column>
+  <!-- <p-dataTable [value]="agents" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
+    rowExpandMode="single" [responsive]="true"> -->
+
+    <p-table #dt [columns]="cols" [value]="agents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedNode"
+    [paginator]="true" [rows]="10" [globalFilterFields]="['id','firstname', 'lastname']">
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 2.25em"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-expanded="expanded" let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td>
+          <a href="#" [pRowToggler]="rowData ">
+            <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="font-size: 1.25em"></i>
+          </a>
+        </td>
+        <td>{{rowData.id}}</td>
+        <td>{{rowData.firstname}}</td>
+        <td>{{rowData.lastname}}</td>
+        <td>{{rowData.dateofbirth | date:'shortDate'}}</td>
+        <td>{{rowData.placeofbith}}</td>        
+        <td>{{rowData.datecreate | date:'shortDate'}}</td>
+        <td>{{rowData.datepdate | date:'shortDate'}}</td>
+        <td>{{rowData.owner}}</td>
+        <td>{{rowData.lastuser}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-item>
+      <tr>
+        <td [attr.colspan]="10">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+            <div class="container">
+                <div class="form-group row">
+                  <label for="chid" class="col-sm-2 col-form-label">id : </label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="chid" [value]="item.id" placeholder="Identificateur" readonly>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chfirstname" class="col-sm-2 col-form-label">nom</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="chfirstname" [value]="item.firstname" placeholder="le nom de l'agent" #firstname>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chlastname" class="col-sm-2 col-form-label">prenom</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="chlastname" [value]="item.lastname" placeholder="le prenom de l'agent" #lastname>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chdateofbirth" class="col-sm-2 col-form-label">né le :</label>
+                  <div class="col-sm-4">
+                    <app-calendar id="chdateofbirth" [date]="item.dateofbirth" [dateFormat]="'dd/mm/yy'" [isTime]="false" (changeDate)="onChangeDate($event)"></app-calendar>
+                   <!--  <input type="date" class="form-control" id="chdateofbirth" [value]="item.dateofbirth  | date:'shortDate'" placeholder="date de naissance" #dateofbirth> -->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="chplaceofbirth" class="col-sm-2 col-form-label">à :</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="chplaceofbirth" [value]="item.placeofbirth" placeholder="lieu de naissance" #placeofbirth>
+                  </div>
+                </div>
+                <!-- <div class="clupdate">
+                  <button class="btn btn-success" (click)="updateAgent(item, firstname, lastname, dateofbirth)">
+                    <i class="fa fa-check">Valider</i>
+                  </button>
+                  <button class="btn btn-warning" (click)="cancelUpdate(item)">
+                    <i class="fa fa-times">Annuler</i>
+                  </button>
+                </div> -->
+              </div>
+              </div>
+</td>
+</tr>
+</ng-template>
+</p-table>
+</div>
+
+
+<!--     <p-column expander="true" styleClass="col-icon"></p-column>
     <p-column field="id" header="Id"></p-column>
     <p-column field="firstname" header="nom"></p-column>
     <p-column field="lastname" header="prenom"></p-column>
     <p-column field="hiredate" header="Date de naissance">
       <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
       </ng-template>
     </p-column>
     <p-column field="datecreate" header="Crée le">
       <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
       </ng-template>
     </p-column>
     <p-column field="owner" header="par"></p-column>
     <p-column field="dateupdate" header="Modifier le">
       <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
         {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
       </ng-template>
     </p-column>
     <p-column field="lastuser" header="par"></p-column>
@@ -49,8 +132,6 @@
       </ng-template>
     </p-column>
     <ng-template let-item pTemplate="rowexpansion">
-      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
-      <!-- <div class="ui-grid-row"> -->
       <div class="container">
         <div class="form-group row">
           <label for="chid" class="col-sm-2 col-form-label">id : </label>
@@ -70,12 +151,12 @@
             <input type="text" class="form-control" id="chlastname" [value]="item.lastname" placeholder="le prenom de l'agent" #lastname>
           </div>
         </div>
-        <!-- <div class="form-group row">
+        <div class="form-group row">
           <label for="chhiredate" class="col-sm-2 col-form-label">né le :</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" id="chhiredate" [value]="item.hiredate" placeholder="date de naissance" #hiredate>
+            <input type="date" class="form-control" id="chhiredate" [value]="item.dateofbirth" placeholder="date de naissance" #hiredate>
           </div>
-        </div> -->
+        </div>
         <div class="clupdate">
           <button class="btn btn-success" (click)="updateAgent(item, firstname, lastname, hiredate)">
             <i class="fa fa-check">Valider</i>
@@ -85,12 +166,9 @@
           </button>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
     </ng-template>
   </p-dataTable>
-  <!-- </div> -->
-</div>
+</div> -->
 
 <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAgent">

@@ -10,10 +10,11 @@ import { BadInput } from '../../../core/component/common/bad-input';
 import { AccidentagentshService } from 'shared/services/accidentagentsh.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Accidentagentsh, AccidentagentshPK, Agent, EventArgs, Mode } from 'shared/table/table';
+import { Accidentagentsh, AccidentagentshPK, Agent, EventArgs, Mode, Vwagent } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import { isUndefined, isNullOrUndefined } from 'util';
+import { VwagentService } from 'shared/services/vwagent.service';
 
 
 
@@ -258,7 +259,9 @@ export class AccidentagentshComponent implements OnInit {
     this.filteredAgents = [];
     for (let i = 0; i < this.agents.length; i++) {
       let agent = this.agents[i];
-      if (agent.firstname.toLowerCase().indexOf(event.query.toLowerCase()) === 0) {
+      if ((agent.firstname.toLowerCase().indexOf(event.query.toLowerCase()) === 0) ||
+          (agent.lastname.toLowerCase().indexOf(event.query.toLowerCase()) === 0)  ||
+          (agent.id.toLowerCase().indexOf(event.query.toLowerCase()) === 0)) {
         this.filteredAgents.push(agent);
       }
     }
