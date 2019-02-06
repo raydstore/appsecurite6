@@ -1,3 +1,4 @@
+import { PrintService } from 'shared/services/print.service';
 import { Site, Agent, IAgent, TFunctionName, Mode, EventArgs, Vwagent } from 'shared/table/table';
 import { SiteService } from 'shared/services/site.service';
 import { VwdamageaccidentnatureService } from 'shared/services/vwdamageaccidentnature.service';
@@ -27,9 +28,10 @@ import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { VwagentService } from 'shared/services/vwagent.service';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 
 /**
@@ -46,6 +48,7 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
     return date ? new Date(date.year, date.month - 1, date.day) : null;
   }
 }
+
 
 @Component({
   selector: 'app-accident',
@@ -82,7 +85,9 @@ export class AccidentComponent implements OnInit {
 
   loading: boolean;
   datePipe: DatePipe;
-
+  pdffile: any;
+  items: MenuItem[];
+  urlPrint: String = 'http://10.1.0.150:8080/HseWebService/wsrv/printCommande';
 
 
 
@@ -94,7 +99,8 @@ export class AccidentComponent implements OnInit {
 
   constructor(private service: AccidentService,
     public siteService: SiteService,
-    public agentService: AgentService) {
+    public agentService: AgentService,
+    private printService: PrintService) {
   }
 
 
@@ -176,6 +182,61 @@ export class AccidentComponent implements OnInit {
         this.accidents = accidents;
         this.totalRecords = this.accidents.length;
       });
+   /*  this.printService.print()
+      .subscribe(pdffile => this.pdffile = pdffile); */
+      this.items = [
+        {label: 'print',
+      items:[
+        {
+            label: 'Compte rendu',
+            icon: 'pi pi-fw pi-file',
+            target: '_blanK',
+            url: '',
+            command: (event) => this.setItems(this.selectedAccident.id)
+        },
+        {
+          label: 'déclaration accident de travail',
+          icon: 'pi pi-fw pi-file',
+          target: '',
+          url: '',
+          command: (event) => this.setItems(this.selectedAccident.id)
+        },
+        {
+          label: 'Déclaration incident sur vehicule',
+          icon: 'pi pi-fw pi-file',
+          target: '',
+          url: '',
+          command: (event) => this.setItems(this.selectedAccident.id)
+        }
+    ]}
+  ];
+  }
+
+  getItemMenu(idaccident): MenuItem[] {
+    if (!isNullOrUndefined(this.items)) {
+      let _items: MenuItem[] = Object.assign({}, this.items);
+      if (!isNullOrUndefined(idaccident)) {
+        const printList: Array<any> = _items[0].items;
+        for (const item of printList) {
+
+          item.url = this.urlPrint + '?idaccident=' + idaccident;
+        }
+      }
+      this.items = Object.assign({}, _items);
+      return this.items;
+    } else {
+      return this.items;
+    }
+  // return this.items;
+  }
+
+  setItems(idaccident) {
+   if (!isNullOrUndefined(idaccident)) {
+        const printList: Array<any> = this.items[0].items;
+        for (const item of printList) {
+          item.url = this.urlPrint + '?idaccident=' + idaccident;
+        }
+      }
   }
 
   displayNameAgent(item: any, args: string[]): string {
@@ -449,11 +510,16 @@ export class AccidentComponent implements OnInit {
     console.log(event);
   }
 
+  print(param) {
+
+
+  }
+
   onRowSelect(event) {
   }
 
   cloneAccident(c: Accident): Accident {
-    let accident: Accident;
+    const accident: Accident = c;
     return accident;
   }
 

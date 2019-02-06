@@ -43,6 +43,15 @@ export class DataService<T> {
             .catch(this.handleError);
     }
 
+    print(): Observable<any> {
+        // return this.getAll()
+      //  console.log(this.url + '/' + id);
+        return this.http.get<any>(this.url)
+          //     .map(data => _.values(data))
+       // .map(items => items.find(item => item.id === id))
+            .catch(this.handleError);
+    }
+
     create(resource) {
         return this.http.post(this.url, resource, { headers: this.headers })
             .catch(this.handleError);

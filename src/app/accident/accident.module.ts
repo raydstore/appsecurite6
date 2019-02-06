@@ -43,6 +43,7 @@ import { AccidentvehiculedriverComponent } from './component/accidentvehiculedri
 import { AccidentvehiculeownerComponent } from './component/accidentvehiculeowner/accidentvehiculeowner.component';
 import { AccidentvehiculedrivershComponent } from './component/accidentvehiculedriversh/accidentvehiculedriversh.component';
 import { AccidentvehiculedrivernsComponent } from './component/accidentvehiculedriverns/accidentvehiculedriverns.component';
+import { PrintComponent } from './component/print/print.component';
 
 
 
@@ -96,6 +97,7 @@ import { AccidentvehiculedrivernsComponent } from './component/accidentvehiculed
     AccidentvehiculeownerComponent,
     AccidentvehiculedrivershComponent,
     AccidentvehiculedrivernsComponent,
+    PrintComponent,
   ]
 })
 export class AccidentModule { }

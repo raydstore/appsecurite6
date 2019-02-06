@@ -26,7 +26,11 @@ import {
   ListboxModule,
   TabViewModule,
 } from 'primeng/primeng';
-
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { MenuItem } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -118,6 +122,7 @@ import { VwgridService } from 'shared/services/vwgrid.service';
 import { VwnotelementofnatureaccidentService } from 'shared/services/vwnotelementofnatureaccident.service';
 import { VwnotnatureofaccidentService } from 'shared/services/vwnotnatureofaccident.service';
 import { VwpropertyService } from 'shared/services/vwproperty.service';
+import { PrintService } from 'shared/services/print.service';
 
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
@@ -182,6 +187,10 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     TableModule,
     CheckboxModule,
     CodeHighlighterModule,
+    ToolbarModule,
+    PanelMenuModule,
+    ContextMenuModule,
+    TieredMenuModule,
     PdfViewerModule,
     CalendarModule,
     CarouselModule,
@@ -221,6 +230,10 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     TableModule,
     CheckboxModule,
     CodeHighlighterModule,
+    ToolbarModule,
+    PanelMenuModule,
+    ContextMenuModule,
+    TieredMenuModule,
     PdfViewerModule,
     CalendarModule,
     NgbModule.forRoot().ngModule,
@@ -357,7 +370,8 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     AccidentvehiculedriverService,
     AccidentvehiculeinsuranceService,
     AccidentvehiculeownerService,
-    VwagentService
+    VwagentService,
+    PrintService
   ]
 })
 export class SharedModule { }
