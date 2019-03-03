@@ -4,6 +4,7 @@ import { SiteService } from 'shared/services/site.service';
 import { Agent, Site, EventArgs } from 'shared/table/table';
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Accident, Mode } from 'shared/table/table';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -71,8 +72,14 @@ export class FaccidentComponent implements OnInit {
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    item[field] = <Agent>event;
-    console.log('en Agent = ' + JSON.stringify(event));
+    console.log(event);
+    const agent = <Agent> event;
+    agent['_displayname'] = this.displayNameAgent(event, ['name']);
+    this.item[field] = agent;
+    /* this.item[field]._displayname = this.displayNameAgent(event, ['name']); */
+    // item[field] = <Agent>event;
+    console.log(field + ' = ' + JSON.stringify(agent));
+    console.log('accident = ' + JSON.stringify(this.item));
   }
 
   onChangeSiteOfItem(item: Accident, field: string, event) {
@@ -81,12 +88,12 @@ export class FaccidentComponent implements OnInit {
     if ('_displayname' in event) {
       console.log('123');
       const v = event._displayname; */
-      item[field] = <Site> event;
-      item[field]._displayname = this.displayNameSite(event, ['name']);
+      this.item[field] = <Site> event;
+      this.item[field]._displayname = this.displayNameSite(event, ['name']);
 /*     } else {
       item[field] = event;
     } */
-    console.log('------- = ' + JSON.stringify(item[field]));
+    console.log('------- = ' + JSON.stringify(this.item[field]));
   }
 
 

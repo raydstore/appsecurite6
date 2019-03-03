@@ -54,7 +54,9 @@ export class AccidentagentshbitComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log('loaddata bit enter');
     this.loadData();
+    console.log('loaddata bit exit');
    /*  this.loadDataBit();
     this.getBitNotClassAssigned(); */
   }

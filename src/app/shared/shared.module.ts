@@ -1,3 +1,6 @@
+import { AccidentpictureService } from './services/accidentpicture.service';
+import { ActionaccidentService } from './services/actionaccident.service';
+import { Actionaccident } from './table/table';
 import { CalendarComponent } from './component/calendar/calendar.component';
 import { VwagentService } from './services/vwagent.service';
 import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
@@ -26,6 +29,8 @@ import {
   ListboxModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { FileUploadModule } from 'primeng/fileupload';
+import { AccordionModule } from 'primeng/accordion';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -147,6 +152,8 @@ import { NewstructureComponent } from './component/insertion/newstructure/newstr
 import { NewtypeoperationComponent } from './component/insertion/newtypeoperation/newtypeoperation.component';
 import { NewactivityComponent } from './component/insertion/newactivity/newactivity.component';
 import { NewaccidentagentshbitComponent } from './component/insertion/newaccidentagentshbit/newaccidentagentshbit.component';
+import { VwagentfinderService } from './services/vwagentfinder.service';
+import { VwactionaccidentService } from './services/vwactionaccident.service';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -190,10 +197,12 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     ToolbarModule,
     PanelMenuModule,
     ContextMenuModule,
+    AccordionModule,
     TieredMenuModule,
     PdfViewerModule,
     CalendarModule,
     CarouselModule,
+    FileUploadModule,
     NgbModule.forRoot(),
   ],
   exports: [
@@ -233,6 +242,7 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     ToolbarModule,
     PanelMenuModule,
     ContextMenuModule,
+    AccordionModule,
     TieredMenuModule,
     PdfViewerModule,
     CalendarModule,
@@ -260,7 +270,8 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     DialogModalComponent,
     AutocompleteComponent,
     CarouselModule,
-    CalendarComponent
+    CalendarComponent,
+    FileUploadModule
   ],
   declarations: [
     NotFoundComponent,
@@ -371,6 +382,10 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
     AccidentvehiculeinsuranceService,
     AccidentvehiculeownerService,
     VwagentService,
+    VwagentfinderService,
+    ActionaccidentService,
+    VwactionaccidentService,
+    AccidentpictureService,
     PrintService
   ]
 })

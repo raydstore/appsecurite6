@@ -2,17 +2,21 @@ import { Agent } from './../../table/table';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TFunctionName } from 'shared/table/table';
 import { DataService } from 'shared/services/data.service';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewChecked, ViewEncapsulation, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewChecked, ViewEncapsulation, OnChanges, ViewChild, SimpleChanges } from '@angular/core';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.css']
+  styleUrls: ['./autocomplete.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChanges {
+/* , AfterViewChecked */
+
+export class AutocompleteComponent implements OnInit, OnChanges {
   /* private _i_item: any; */
+
   @Input() i_item: any;
   @Input() service: any;
   @Input() functionName: TFunctionName;
@@ -21,6 +25,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   _dialog: String = '<app-activity></app-activity>';
   _displayname = '_displayname';
+  item: any;
 
   displayValue: '';
   //  @ViewChild('autocomplete') ac: AutoCompleteModule;
@@ -52,7 +57,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
 
   constructor() { }
 
-  ngAfterViewChecked() {
+ /*  ngAfterViewChecked() { */
     /*  console.log('entred = ');
      this.item.item = this.i_item;
      this.item.name = this.functionName(this.item.item, this.args); */
@@ -61,24 +66,59 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
     } else {
       this.item.name = '';
     } */
-  }
+/*   } */
 
-  ngOnChanges() {
+
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    // const a
+    console.log('SimpleChanges = ' + JSON.stringify(changes));
     this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
+    console.log('on change = ' + JSON.stringify(this.i_item));
+    if (this.i_item != null) {
+      const _item: any = Object.assign({}, this.i_item);
+      console.log('123');
+      console.log(typeof _item);
+      console.log(_item);
+      console.log(JSON.stringify(_item));
+      console.log('Object.getOwnPropertyNames(_item).length = ' + Object.getOwnPropertyNames(_item).length);
+      if (!(typeof _item === 'string') && (Object.getOwnPropertyNames(_item).length > 1)) {
+        console.log('456 = ' + this._displayname);
+        console.log('before agt = ' + JSON.stringify(this.i_item));
+        if (!(_item.hasOwnProperty(this._displayname)) ? true : isUndefined(_item[this._displayname])) {
+          console.log('789');
+          _item[this._displayname] = this.functionName(this.i_item, this.args);
+          this.i_item = Object.assign({}, _item);
+          console.log('end');
+          console.log('after change SimpleChanges = ' + JSON.stringify(changes));
+        } else {
+          console.log(_item[this._displayname]);
+        }
+        console.log('after agt = ' + JSON.stringify(this.i_item));
+      }
+      this.item = Object.assign({}, _item);
+    console.log('item = ' + JSON.stringify(this.item));
+    }
+   /*  this.item = Object.assign({}, _item);
+    console.log('item = ' + JSON.stringify(this.item)); */
+
+   /*  this.displayValue = this.i_item != null ? this.functionName(this.i_item, this.args) : '';
     console.log('on change = ' + JSON.stringify(this.i_item));
     if (this.i_item != null) {
       console.log('123');
       if (!(typeof this.i_item === 'string')) {
-        console.log('456');
-        if (!(this._displayname in this.i_item)) {
+        console.log('456 = ' + this._displayname);
+        console.log('before agt = ' + JSON.stringify(this.i_item));
+        if (!(this.i_item.hasOwnProperty(this._displayname))) {
           console.log('789');
           this.i_item[this._displayname] = this.functionName(this.i_item, this.args);
         }
-      } /* else {
-        console.log('10');
-        this._displayname = this.args[0];
-      } */
-    }
+        console.log('after agt = ' + JSON.stringify(this.i_item));
+      }
+    } */
+
+
     /*     console.log('enter ngOnchange = ' + JSON.stringify(this.item)) */
     //  this.item.item = this.i_item;
     /*    this.item.name = this.functionName(this.item.item, this.args);
@@ -94,9 +134,11 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
   }
 
   ngOnInit() {
+    /* console.log(JSON.stringify(this.service)); */
     if (typeof this.i_item === 'string') {
       this._displayname = this.args[0];
     }
+    this.item = Object.assign({}, this.i_item);
     // console.log('entred = ');
     // this.item = Object.assign({}, this._item);
     /*   this.item.item = this.i_item;
@@ -166,7 +208,7 @@ export class AutocompleteComponent implements OnInit, AfterViewChecked, OnChange
         const item = items[i];
         /*    console.log('item = ' + JSON.stringify(item)); */
         const displayName = this.functionName(item, this.args);
-        if (!(typeof this.i_item === 'string')) {
+        if (!(typeof this.item === 'string')) {
           console.log('19');
           if (!('_displayname' in item)) {
             item['_displayname'] = '';

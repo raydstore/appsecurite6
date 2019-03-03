@@ -270,6 +270,10 @@ export interface Accident {
     persondamage?: string;
     propertydamage?: string;
     envirenementdamage?: string;
+    pevent?: string;
+    ppersondamage?: string;
+    ppropertydamage?: string;
+    penvirenementdamage?: string;
     obviouscause?: string;
     idsite?: any;
     curdate?: Date;
@@ -277,6 +281,17 @@ export interface Accident {
     tabindex?: number;
     idagentdeclare?: Agent;
     idagentvalidate?: Agent;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Accidentpicture {
+    id?: number;
+    idaccident?: Accident;
+    name?: string;
+    image?: File;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -294,9 +309,8 @@ export interface AccidentnaturePK {
 }
 
 export interface Accidentnature {
-    accidentnaturePK?: AccidentnaturePK;
-    accident?: any;
-    idaccident?: any;
+    accident: Accident;
+    accidentnaturePK: AccidentnaturePK;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -386,6 +400,27 @@ export interface Detailagent {
 }
 
 export interface Vwagent {
+    id?: string;
+    firstname?: string;
+    lastname?: string;
+    dateofbirth?: Date;
+    familysituation?: string;
+    adress?: string;
+    placeofbirth?: string;
+    daterecruitment?: Date;
+    category?: string;
+    idstructure?: string;
+    idfunction?: string;
+    namefunction?: string;
+    worksystem?: string;
+    pointingsystem?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Vwagentfinder {
     id?: string;
     firstname?: string;
     lastname?: string;
@@ -606,7 +641,29 @@ export interface Vw$accidentagentshbit {
 
 export interface Action {
     id?: number;
-    idparent?: number;
+    kind?: string;
+    state?: string;
+    name: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Actionaccident {
+    idaccident?: Accident;
+    idaction?: number;
+    kind?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface VwactionAccident {
+    id?: string;
+    idaccident?: number;
+    idaction?: number;
     kind?: string;
     state?: string;
     name: string;

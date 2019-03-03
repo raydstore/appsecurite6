@@ -8,23 +8,18 @@
   <div class="form-group row">
     <label for="chclassification" class="col-sm-2 col-form-label">classification : </label>
     <div class="col-sm-4">
-      <p-radioButton name="grClassification" value="A" label="Accident  " [(ngModel)]="item.classification"></p-radioButton>
-      <p-radioButton name="grClassification" value="I" label="Incident  " [(ngModel)]="item.classification"></p-radioButton>
+      <p-radioButton name="grClassification" value="A" label="Accident  " [(ngModel)]="item.classification">
+      </p-radioButton>
+      <p-radioButton name="grClassification" value="I" label="Incident  " [(ngModel)]="item.classification">
+      </p-radioButton>
     </div>
     <label for="chcurdate" class="col-sm-1 col-form-label">date : </label>
     <div class="col-sm-3">
       <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" [dateFormat]="'    le : dd/mm/yy       à : '"
-       (changeDate)="onChangeDate(item, $event)"></app-calendar>
-       <input type="hidden" [(ngModel)]="newid" value="item.curdate | date : 'yyMMddHHmmss'">
+        (changeDate)="onChangeDate(item, $event)"></app-calendar>
+      <input type="hidden" [(ngModel)]="newid" value="item.curdate | date : 'yyMMddHHmmss'">
     </div>
   </div>
-
-  <!-- <div class="form-group row">
-    <label for="chcurdate" class="col-sm-2 col-form-label">date : </label>
-    <div class="col-sm-10">
-      <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" (changeDate)="onChangeDate(item, $event)"></app-calendar>
-    </div>
-  </div> -->
   <div class="form-group row">
     <label for="chidsite" class="col-sm-2 col-form-label">site : </label>
     <div class="col-sm-10">
@@ -38,48 +33,96 @@
       <input type="text" class="form-control" id="chplace" [(ngModel)]="item.place" placeholder="lieu" #place>
     </div>
   </div>
-  <!-- <div class="form-group row">
-    <label for="chidsite" class="col-sm-2 col-form-label">lieu : </label>
-    <div class="col-sm-10">
-      <app-autocomplete [i_item]="item.idsite" [service]="sites" [functionName]="displayNameSite" [args]="['name']" (changeItem)="onChangeItem(item, 'idsite', $event)"></app-autocomplete>
-    </div>
-  </div> -->
   <div class="form-group row">
     <label for="chdescription" class="col-sm-2 col-form-label">description lieu</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="chdescription" [(ngModel)]="item.sitedescription" placeholder="la description du site"
-        #name>
+      <input type="text" class="form-control" id="chdescription" [(ngModel)]="item.sitedescription"
+        placeholder="la description du site" #name>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
-    <div class="col-sm-10">
-      <textarea rows="3" cols="70" pInputTextarea [(ngModel)]="item.event"></textarea>
-    </div>
-  </div>
-  <div class="form-group row">
+
+  <!-- <div class="form-group row">
     <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
-    <div class="form-group row col-sm-10" id="chdamage">
-      <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-        <div class="card-header">
-          Personnes
+    <div class="form-group row col-sm-10" id="chdamage"> -->
+  <p-tabView>
+    <p-tabPanel header="Préliminaire">
+      <div class="form-group row">
+        <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
+        <div class="col-sm-8">
+          <textarea rows="3" cols="65" pInputTextarea [(ngModel)]="item.pevent"></textarea>
         </div>
-        <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.persondamage"></textarea>
       </div>
-      <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-        <div class="card-header">
-          Biens
+      <!-- <div class="form-group row">
+                    <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
+                    <div class="form-group row col-sm-10" id="chdamage"> -->
+                        <h5 class="">Description des dommages avérés et potentiels</h5>                
+      <div class="carddamage">
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Personnes
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.ppersondamage"></textarea>
         </div>
-        <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.propertydamage"></textarea>
-      </div>
-      <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-        <div class="card-header">
-          Envirenement
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Biens
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.ppropertydamage"></textarea>
         </div>
-        <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.envirenementdamage"></textarea>
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Envirenement
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.penvirenementdamage"></textarea>
+        </div>
       </div>
-    </div>
-    <!-- <p-card class="ui-g-12 ui-md-4" >
+    </p-tabPanel>
+    <p-tabPanel header="Approfondé" *ngIf="mode === 1">
+        <div class="form-group row">
+          <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
+          <div class="col-sm-10">
+            <textarea rows="3" cols="65" pInputTextarea [(ngModel)]="item.event"></textarea>
+          </div>
+        </div>
+        <!-- <div class="form-group row">
+                      <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
+                      <div class="form-group row col-sm-10" id="chdamage"> -->
+                          <h5 class="">Description des dommages avérés et potentiels</h5>
+        <div class="carddamage">
+          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+            <div class="card-header">
+              Personnes
+            </div>
+            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.persondamage"></textarea>
+          </div>
+          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+            <div class="card-header">
+              Biens
+            </div>
+            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.propertydamage"></textarea>
+          </div>
+          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+            <div class="card-header">
+              Envirenement
+            </div>
+            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.envirenementdamage"></textarea>
+          </div>
+        </div>
+      
+      </p-tabPanel>
+    <p-tabPanel header="Cause évidante">
+      <div class="form-group row" id="chobiousecause">
+        <div class="card text-white bg-secondary col-sm-12" style="height: 160px;">
+          <div class="card-header">
+            liste
+          </div>
+          <textarea rows="3" cols="60" pInputTextarea [(ngModel)]="item.obviouscause"></textarea>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+  <!-- </div> -->
+  <!-- <p-card class="ui-g-12 ui-md-4" >
           <p-header>
               Dommage aux personnes
           </p-header>
@@ -97,47 +140,49 @@
           </p-header>
         <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.envirenementdamage"></textarea>
       </p-card> -->
-    <!-- </div> -->
-  </div>
-  <div class="form-group row">
-    <div class="form-group row">
-      <label for="chobiousecause" class="col-sm-2 col-form-label">Cause évidantes</label>
+  <!-- </div> -->
+  <!-- </div> -->
+  <!--  <div class="form-group row">
+    <div class="form-group row"> -->
+  <!-- <label for="chobiousecause" class="col-sm-2 col-form-label">Cause évidantes</label>
       <div class="form-group row col-sm-10" id="chobiousecause">
         <div class="card text-white bg-secondary col-sm-8" style="height: 160px;">
           <div class="card-header">
             liste
           </div>
           <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.obviouscause"></textarea>
-        </div>
-        <div class="form-group col">
-          <div class="row-sm-1">
-            <label for="chidagentdeclare" class="col-form-label">déclarateur : </label>
-            <div>
-              <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"
-                [service]="agents" (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
-            </div>
-          </div>
-          <div class="row-sm-1">
-            <label for="chidagentvalidate" class="col-form-label">Validateur : </label>
-            <div>
-              <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']"
-                [service]="agents" (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="form-group row">
+        </div> -->
+  <div class="form-group row cldecval">
+    <!-- <div class="row-sm-1"> -->
+      <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
+      <div class="col-sm-4">
+        <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent"
+          [args]="['firstname', 'lastname']" [service]="agents"
+          (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
+      </div>
+    <!-- </div> -->
+    <!-- <div class="row-sm-1"> -->
+      <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
+      <div class="col-sm-4">
+        <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent"
+          [args]="['firstname', 'lastname']" [service]="agents"
+          (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
+      </div>
+    <!-- </div> -->
+  </div>
+  <!-- <div class="form-group row">
     <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
     <div class="col-sm-10">
       <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent" [args]="['firstname', 'lastname']" [service]="agents"
         (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
     </div>
   </div> -->
-        <div class="clupdate">
-          <button class="btn btn-success" (click)="perform(item, $event)">
-            <i class="fa fa-check">Valider</i>
-          </button>
-          <button class="btn btn-warning" (click)="cancel(item)">
-            <i class="fa fa-times">Annuler</i>
-          </button>
-        </div>
-      </div>
+  <div class="clupdate">
+    <button class="btn btn-success" (click)="perform(item, $event)">
+      <i class="fa fa-check">Valider</i>
+    </button>
+    <button class="btn btn-warning" (click)="cancel(item)">
+      <i class="fa fa-times">Annuler</i>
+    </button>
+  </div>
+  <!-- </div> -->

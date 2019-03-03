@@ -2,13 +2,14 @@ import { BadInput } from '../../../core/component/common/bad-input';
 import { AppError } from '../../../core/component/common/app-error';
 import { AgentService } from 'shared/services/agent.service';
 import { Accidentagentsh, Mode, Agent, EventArgs } from 'shared/table/table';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { isUndefined, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-faccidentagentsh',
   templateUrl: './faccidentagentsh.component.html',
-  styleUrls: ['./faccidentagentsh.component.css']
+  styleUrls: ['./faccidentagentsh.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FaccidentagentshComponent implements OnInit {
 

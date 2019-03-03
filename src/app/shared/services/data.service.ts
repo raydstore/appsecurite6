@@ -19,14 +19,14 @@ export class DataService<T> {
      }
 
     getAll(): Observable<T[]> {
-        return this.http.get<T[]>(this.url)
+        return this.http.get<T[]>(this.url, { headers: this.headers })
             .catch(this.handleError);
     }
 
     getItem(id): Observable<T> {
         // return this.getAll()
         console.log(this.url + '/' + id);
-        return this.http.get<T>(this.url + '/' + id)
+        return this.http.get<T>(this.url + '/' + id, { headers: this.headers })
           //     .map(data => _.values(data))
        // .map(items => items.find(item => item.id === id))
             .catch(this.handleError);
@@ -39,7 +39,7 @@ export class DataService<T> {
         query += op + param + '=' + listParam[param];
             op = op === '?' ? '&&' : '&&';
         }
-        return this.http.get<T[]>(this.url + query)
+        return this.http.get<T[]>(this.url + query, { headers: this.headers })
             .catch(this.handleError);
     }
 
@@ -52,23 +52,23 @@ export class DataService<T> {
             .catch(this.handleError);
     }
 
-    create(resource) {
-        return this.http.post(this.url, resource, { headers: this.headers })
+    create(resource): Observable<T> {
+        return this.http.post<T>(this.url, resource, { headers: this.headers })
             .catch(this.handleError);
     }
 
-    update(resource) {
-        return this.http.put(this.url + '/' + resource.id, resource, { headers: this.headers })
+    update(resource): Observable<T> {
+        return this.http.put<T>(this.url + '/' + resource.id, resource, { headers: this.headers })
             .catch(this.handleError);
     }
 
-    updatebyid(resource, id) {
-        return this.http.put(this.url + '/' + resource['' + id + ''], resource, { headers: this.headers })
+    updatebyid(resource, id): Observable<T> {
+        return this.http.put<T>(this.url + '/' + resource['' + id + ''], resource, { headers: this.headers })
             .catch(this.handleError);
     }
 
-    delete(id) {
-        return this.http.delete(this.url + '/' + id, {headers: this.headers})
+    delete(id): Observable<T> {
+        return this.http.delete<T>(this.url + '/' + id, {headers: this.headers})
             .catch(this.handleError);
     }
 

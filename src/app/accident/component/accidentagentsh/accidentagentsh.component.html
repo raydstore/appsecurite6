@@ -9,6 +9,7 @@
   </button>
 
 </div>
+<app-damagedescription [iddamage]="iddamage"></app-damagedescription>
 
 <p-dataTable [value]="accidentagentshs" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
   (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">

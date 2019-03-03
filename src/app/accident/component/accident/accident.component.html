@@ -71,7 +71,7 @@
         <td [attr.colspan]="9">
           <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
             <div class="accidentd text-white bg-info mb-3">
-              <div class="accidentd-header">Info Accident</div>
+              <!-- <div class="accidentd-header">Info Accident</div> -->
               <div class="accidentd-body">
                 <p-tabView>
                   <p-tabPanel [selected]="true" [header]="'Détail'">
@@ -94,7 +94,7 @@
                     </p-tabPanel>
                   <p-tabPanel [header]="'Action / Recommandation'">
                     <ng-template pTemplate="content">
-                      <app-action [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-action>
+                      <app-vwactionaccident [idaccident]="accident" [titlelist]="'Action / Recommandation'"></app-vwactionaccident>
                     </ng-template>
                   </p-tabPanel>
                   <p-tabPanel [header]="'Investigation'">
@@ -104,7 +104,8 @@
                   </p-tabPanel>
                   <p-tabPanel [header]="'Fichier attaché'">
                     <ng-template pTemplate="content">
-                      <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile>
+                      <!-- <app-accidentfile [idaccident]="accident" [titlelist]="'Fichier attaché'"></app-accidentfile> -->
+                      <app-accidentpicture [accident]="accident" [titlelist]="'Fichier attaché'"></app-accidentpicture>
                     </ng-template>
                   </p-tabPanel>
                 </p-tabView>
@@ -115,7 +116,7 @@
       </tr>
     </ng-template>
   </p-table>  
-  <p-contextMenu #cm [model]="items"  [style]="{'width':'300px'}"></p-contextMenu>
+  <p-contextMenu #cm [model]="items"  appendTo="body" [style]="{'width':'300px'}"></p-contextMenu>
 </div>
 
 <p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="onHide($event)"

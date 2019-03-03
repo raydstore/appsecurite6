@@ -27,3 +27,58 @@
 .custombar2:hover .ui-scrollpanel-bar {
     background-color: #46A55A;
 }
+
+ui-tabview.ui-widget-content {
+    background-color: lightslategrey;
+}
+
+.ui-tabview-panel {
+    display: grid;
+}
+
+.carddamage {
+    display: flex;
+}
+
+.ui-tabview-panels {
+    background-color: lightgray;
+    /* #ffffff;
+    #186ba0 */
+}
+
+/* .accidentd-header {
+    display: none;
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+} */
+
+textarea {
+    border-radius: 5px;
+    border: solid aliceblue;
+}
+
+.form-group.cldecval {
+    margin-top: 20px;
+    background-color: #e9ecef;
+    padding-top: 5px;
+}
+
+ui-tabview.ui-widget-content {
+    background-color: #e9ecef!important;
+}
+
+.ui-tabview ul.ui-tabview-nav {
+    /* background-color: #186ba0 !important; */
+    background-color: #e9ecef !important;
+    /* color: #f8f9fa !important; */
+}
+
+.ui-tabview .ui-tabview-nav > li.ui-state-active {
+	background: #3f97b9;
+	/* font-weight: normal; */
+	/* color: #fbf5f4 !important; */
+}
+
+.ui-tabview .ui-tabview-nav > li.ui-state-active span.ui-tabview-title {
+	color: white;
+}

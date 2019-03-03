@@ -42,6 +42,7 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
   ngOnChanges() {
     this.onChange();
     console.log('on init change = ' + JSON.stringify(this.bits));
+    console.log('new error accidentagentsh = ' + JSON.stringify(this.accidentagentsh));
   }
 
   ngOnInit() {
@@ -63,7 +64,9 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
     let result = '';
     console.log('i--- = ' + JSON.stringify(item));
     if (!isNullOrUndefined(item)) {
+      console.log('i 11111 ');
       result = item.id + ') ' + item.name;
+      console.log('i 22222 ');
     /* for (const bit of this.bits) {
       if (bit.id === this.newT.idbit) {
         result = bit.name;

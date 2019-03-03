@@ -1,11 +1,11 @@
-<p-autoComplete #autocomplete class="clautocomplete" [(ngModel)]="i_item" [suggestions]="filteredList" (completeMethod)="filterItem($event)"
-  [size]="30" placeholder="" [minLength]="1" [dropdown]="true" [field]="_displayname" 
+<p-autoComplete #autocomplete class="clautocomplete" [(ngModel)]="item" [suggestions]="filteredList" (completeMethod)="filterItem($event)"
+  [size]="30" placeholder="" [minLength]="1" [field]="_displayname" 
   (onSelect)="onSelect($event)">
-  <!-- (onKeyUp)="onKeyUp($event)" -->
+  <!-- (onKeyUp)="onKeyUp($event)"  [dropdown]="true"   (onClear)="clearValue()"  -->
   <!-- [forceSelection]="true" (onClear)="onClear($event)" [immutable]="false" -->
-  <ng-template let-i_item pTemplate="item">
+  <ng-template let-item pTemplate="item">
     <div class="ui-helper-clearfix">
-      <div>{{functionName(i_item, args)}}</div>
+      <div>{{functionName(item, args)}}</div>
       <!-- *ngIf="item.item != null" -->
     </div>
   </ng-template>

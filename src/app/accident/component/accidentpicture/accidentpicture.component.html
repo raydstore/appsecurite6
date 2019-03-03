@@ -1,0 +1,22 @@
+<h1>selection Image</h1>
+<input type="file" style="display: none" (change)="onSelectedFile($event)" #inputFile>
+<button type="button" (click)="inputFile.click()"></button>
+<button type="button" (click)="onUpload()">upload</button>
+<div *ngFor="let accidentpicture of accidentPictures">
+    <img [src]="accidentpicture.image">
+</div>
+<div>
+    <img [src]="imageUrl" style="width:500px;height:500px">
+    <input type="file" #Image accept="image/*" (change)="handleFileToUpload($event.target.files)">
+    <button type="button" (click)="saveImage()">Submit</button>
+</div>
+
+<!-- <p-fileUpload name="demo[]" url="http://10.1.0.150:8080/HseWebService/wsrv/accidentpicture" (onUpload)="onUpload($event)"
+        multiple="multiple" accept="image/*" maxFileSize="1000000"> -->
+<p-fileUpload name="myfile[]" url="http://10.1.0.150:8080/HseWebService/wsrv/accidentpicture" customUpload="true" (uploadHandler)="myUploader($event)">
+    <ng-template pTemplate="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </ng-template>
+</p-fileUpload>

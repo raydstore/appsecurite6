@@ -87,7 +87,7 @@ export class AccidentComponent implements OnInit {
   datePipe: DatePipe;
   pdffile: any;
   items: MenuItem[];
-  urlPrint: String = 'http://10.1.0.150:8080/HseWebService/wsrv/printCommande';
+  urlPrint: String = 'http://10.1.0.150:8080/HseWebService/wsrv/print';
 
 
 
@@ -185,41 +185,41 @@ export class AccidentComponent implements OnInit {
    /*  this.printService.print()
       .subscribe(pdffile => this.pdffile = pdffile); */
       this.items = [
-        {label: 'print',
-      items:[
+   /*      {label: 'print',
+      items:[ */
         {
             label: 'Compte rendu',
             icon: 'pi pi-fw pi-file',
             target: '_blanK',
             url: '',
-            command: (event) => this.setItems(this.selectedAccident.id)
+            command: (event) => this.setItems('rptCompteRenduCirculation', this.selectedAccident.id)
         },
         {
-          label: 'déclaration accident de travail',
+          label: 'Compte rendu circulation',
           icon: 'pi pi-fw pi-file',
-          target: '',
+          target: '_blanK',
           url: '',
-          command: (event) => this.setItems(this.selectedAccident.id)
+          command: (event) => this.setItems('rptAccidentTravail', this.selectedAccident.id)
         },
         {
-          label: 'Déclaration incident sur vehicule',
+          label: 'incident sur vehicule',
           icon: 'pi pi-fw pi-file',
-          target: '',
+          target: '_blanK',
           url: '',
-          command: (event) => this.setItems(this.selectedAccident.id)
+          command: (event) => this.setItems('rptIncidentVehicule', this.selectedAccident.id)
         }
-    ]}
+    /* ]} */
   ];
   }
 
-  getItemMenu(idaccident): MenuItem[] {
+  getItemMenu(reportname, idaccident): MenuItem[] {
     if (!isNullOrUndefined(this.items)) {
       let _items: MenuItem[] = Object.assign({}, this.items);
       if (!isNullOrUndefined(idaccident)) {
-        const printList: Array<any> = _items[0].items;
+        const printList: Array<any> = _items; //[0].items;
         for (const item of printList) {
 
-          item.url = this.urlPrint + '?idaccident=' + idaccident;
+          item.url = this.urlPrint + '?reportname=' + reportname + '&&p=' + idaccident;
         }
       }
       this.items = Object.assign({}, _items);
@@ -230,11 +230,11 @@ export class AccidentComponent implements OnInit {
   // return this.items;
   }
 
-  setItems(idaccident) {
+  setItems(reportname, idaccident) {
    if (!isNullOrUndefined(idaccident)) {
-        const printList: Array<any> = this.items[0].items;
+        const printList: Array<any> = this.items; // [0].items;
         for (const item of printList) {
-          item.url = this.urlPrint + '?idaccident=' + idaccident;
+          item.url = this.urlPrint + '?reportname=' + reportname + '&&p=' + idaccident;
         }
       }
   }
@@ -390,6 +390,10 @@ export class AccidentComponent implements OnInit {
     this.dialogVisible = false;
     this.accidents = [this.newAccident, ...this.accidents];
     console.log(JSON.stringify(this.newAccident));
+    this.newAccident.event = this.newAccident.pevent;
+    this.newAccident.persondamage = this.newAccident.ppersondamage;
+    this.newAccident.propertydamage = this.newAccident.ppropertydamage;
+    this.newAccident.envirenementdamage = this.newAccident.penvirenementdamage;
     this.service.create(this.newAccident)
       .subscribe(newAccident => {
         /*  this.loadData(); */
