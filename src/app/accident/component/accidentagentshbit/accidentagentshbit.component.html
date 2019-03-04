@@ -1,4 +1,4 @@
-<!-- <div class="card bg-light"> -->
+<div class="card bg-light">
   <div class="card-header cardtitle">
 
     <h4 class="titleform">
@@ -11,19 +11,20 @@
 
   </div>
   <div *ngFor="let value of vwaccidentagentshbits" class="alert" [class.alert-primary]="value.idbitclass == 'A'"
-        [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
-        [class.alert-warning]="value.idbitclass == 'D'">
-        <div class="form-group row">
-            <label for="chname" class="col-sm-6 col-form-label">
-              {{value.idbitclass + ') ' + value.classname + ': ' + value.idbit + ') ' + value.bitname + ': '}}
-            </label>
-            <div class="col-sm-6">
-              <input type="text" readonly="readonly" class="form-control" id="chname" [value]="value.name"
-                placeholder="le nom de libelé">
-            </div>
-          </div>
+    [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
+    [class.alert-warning]="value.idbitclass == 'D'">
+    <div class="form-group row">
+      <label for="chname" class="col-sm-6 col-form-label">
+        {{value.idbitclass + ') ' + value.classname + ': ' + value.idbit + ') ' + value.bitname + ': '}}
+      </label>
+      <div class="col-sm-6">
+        <input type="text" readonly="readonly" class="form-control" id="chname" [value]="value.name"
+          placeholder="le nom de libelé">
       </div>
-<!--   
+    </div>
+  </div>
+</div>  
+  <!--   
   <p-table #dt [columns]="cols" [value]="vwaccidentagentshbits" dataKey="id" rowExpandMode="single" selectionMode="single"
     [(selection)]="selectedVwaccidentagentshbit" [paginator]="true" [rows]="10" [globalFilterFields]="['id','name', 'idlabel.name']">
     <ng-template pTemplate="caption">
@@ -106,5 +107,5 @@
 </div> -->
 
 
-<app-newaccidentagentshbit [dialogVisible]="dialogVisible" [bits]="filteredBit" 
-       (closeDialog)="createItem($event)" [accidentagentsh]="accidentagentsh"></app-newaccidentagentshbit>
+  <app-newaccidentagentshbit [dialogVisible]="dialogVisible" [bits]="filteredBit" (closeDialog)="createItem($event)"
+    [accidentagentsh]="accidentagentsh"></app-newaccidentagentshbit>

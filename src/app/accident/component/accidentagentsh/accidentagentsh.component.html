@@ -79,8 +79,8 @@
     <div class="container">
       <div class="ca flex-item">
         <app-faccidentagentsh [item]="item" [mode]="mUpdate" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>
-        <app-accidentagentshbit [accidentagentsh]="item" [idgrid]="item.idgrid"></app-accidentagentshbit>
       </div>
+      <app-accidentagentshbit [accidentagentsh]="item" [idgrid]="item.idgrid"></app-accidentagentshbit>
     </div>
     <!--     <div *ngIf = "isAccptedGrid(idgrid); then showAccidentagentshBit"></div>
       <ng-template #showAccidentagentshBit>

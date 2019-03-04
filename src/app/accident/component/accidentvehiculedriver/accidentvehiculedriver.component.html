@@ -2,19 +2,34 @@
   <div class="form-group row">
     <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
     <div class="col-sm-11 clkind">
-      <p-radioButton name="groupcldriver" class="flex-item" id="chclassification" value="S" label="SH" [(ngModel)]="accidentvehiculedriver.membership"
+      <p-radioButton name="groupcldriver" class="flex-item" id="chclassification" readonly value="S" label="SH" [(ngModel)]="accidentvehiculedriver.membership"
         inputId="clowner1"></p-radioButton>
-      <p-radioButton name="groupcldriver" class="flex-item" value="N" label="Non SH" [(ngModel)]="accidentvehiculedriver.membership"
+      <p-radioButton name="groupcldriver" class="flex-item" readonly value="N" label="Non SH" [(ngModel)]="accidentvehiculedriver.membership"
         inputId="clowner2"></p-radioButton>
+        <button class="btn btn-info clclf" (click)="setClassification()">
+          <i class="fa fa-check">Modifier</i>
+        </button>
     </div>
+   <!--  <div>
+      
+    </div> -->
   </div>
-  <div *ngIf="accidentvehiculedriver.membership === 'S'; then driversh else driverns"></div>
+  <!-- <div *ngIf="!modeChangeClassification === true; showdiv"> -->
+  <div *ngIf="(accidentvehiculedriver.membership === 'S')&&(isNullOrUndefinedProperty(accidentvehiculedriver.accidentvehiculedriversh)) ; then driversh" #showdiv></div>
   <ng-template #driversh>
-    <app-accidentvehiculedriversh [accidentvehiculedriversh]="accidentvehiculedriver.accidentvehiculedriversh"></app-accidentvehiculedriversh>
+    <app-accidentvehiculedriversh [accidentvehiculedriversh]="accidentvehiculedriver.accidentvehiculedriversh"
+                                  (changeItem)="changeInfoDriver($event, accidentvehiculedriver.accidentvehiculedriversh)"></app-accidentvehiculedriversh>
   </ng-template>
+  <div *ngIf="(accidentvehiculedriver.membership === 'N')&&(isNullOrUndefinedProperty(accidentvehiculedriver.accidentvehiculedriverns)) ; then driverns" #showdiv></div>
   <ng-template #driverns>
     <app-accidentvehiculedriverns [accidentvehiculedriverns]="accidentvehiculedriver.accidentvehiculedriverns"></app-accidentvehiculedriverns>
   </ng-template>
+
+
+
+
+
+<!-- </div> -->
  <!--  <div class="form-group row">
     <label for="chnom" class="col-sm-4 col-form-label">le nom : </label>
     <div class="col-sm-8">
