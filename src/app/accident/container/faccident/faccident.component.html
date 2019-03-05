@@ -45,6 +45,55 @@
     <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
     <div class="form-group row col-sm-10" id="chdamage"> -->
   <p-tabView>
+    <p-tabPanel header="Victime / l'objet">
+      <div class="form-group row">
+        <label for="chplace" class="col-sm-2 col-form-label">l'objet</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="chplace" [(ngModel)]="item.subject" placeholder="objet">
+        </div>
+      </div>
+      <div class="form-group row" id="chobiousecause">
+        <div class="card text-white bg-secondary col-sm-12" style="height: 160px;">
+          <div class="card-header">
+            Victimes
+          </div>
+          <textarea rows="3" cols="60" pInputTextarea [(ngModel)]="item.victim"></textarea>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Approfondé" *ngIf="mode === 1">
+      <div class="form-group row">
+        <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
+        <div class="col-sm-10">
+          <textarea rows="3" cols="65" pInputTextarea [(ngModel)]="item.event"></textarea>
+        </div>
+      </div>
+      <!-- <div class="form-group row">
+                      <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
+                      <div class="form-group row col-sm-10" id="chdamage"> -->
+      <h5 class="">Description des dommages avérés et potentiels</h5>
+      <div class="carddamage">
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Personnes
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.persondamage"></textarea>
+        </div>
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Biens
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.propertydamage"></textarea>
+        </div>
+        <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
+          <div class="card-header">
+            Envirenement
+          </div>
+          <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.envirenementdamage"></textarea>
+        </div>
+      </div>
+
+    </p-tabPanel>
     <p-tabPanel header="Préliminaire">
       <div class="form-group row">
         <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
@@ -53,9 +102,9 @@
         </div>
       </div>
       <!-- <div class="form-group row">
-                    <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
-                    <div class="form-group row col-sm-10" id="chdamage"> -->
-                        <h5 class="">Description des dommages avérés et potentiels</h5>                
+                      <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
+                      <div class="form-group row col-sm-10" id="chdamage"> -->
+      <h5 class="">Description des dommages avérés et potentiels</h5>
       <div class="carddamage">
         <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
           <div class="card-header">
@@ -77,39 +126,6 @@
         </div>
       </div>
     </p-tabPanel>
-    <p-tabPanel header="Approfondé" *ngIf="mode === 1">
-        <div class="form-group row">
-          <label for="chevent" class="col-sm-2 col-form-label">description evenement</label>
-          <div class="col-sm-10">
-            <textarea rows="3" cols="65" pInputTextarea [(ngModel)]="item.event"></textarea>
-          </div>
-        </div>
-        <!-- <div class="form-group row">
-                      <label for="chdamage" class="col-sm-2 col-form-label">description des Dommages</label>
-                      <div class="form-group row col-sm-10" id="chdamage"> -->
-                          <h5 class="">Description des dommages avérés et potentiels</h5>
-        <div class="carddamage">
-          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-            <div class="card-header">
-              Personnes
-            </div>
-            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.persondamage"></textarea>
-          </div>
-          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-            <div class="card-header">
-              Biens
-            </div>
-            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.propertydamage"></textarea>
-          </div>
-          <div class="card text-white bg-secondary col-sm-4" style="height: 160px;">
-            <div class="card-header">
-              Envirenement
-            </div>
-            <textarea rows="3" cols="20" pInputTextarea [(ngModel)]="item.envirenementdamage"></textarea>
-          </div>
-        </div>
-      
-      </p-tabPanel>
     <p-tabPanel header="Cause évidante">
       <div class="form-group row" id="chobiousecause">
         <div class="card text-white bg-secondary col-sm-12" style="height: 160px;">
@@ -154,20 +170,20 @@
         </div> -->
   <div class="form-group row cldecval">
     <!-- <div class="row-sm-1"> -->
-      <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
-      <div class="col-sm-4">
-        <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent"
-          [args]="['firstname', 'lastname']" [service]="agents"
-          (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
-      </div>
+    <label for="chidagentdeclare" class="col-sm-2 col-form-label">déclarateur : </label>
+    <div class="col-sm-4">
+      <app-autocomplete [i_item]="item.idagentdeclare" [functionName]="displayNameAgent"
+        [args]="['firstname', 'lastname']" [service]="agents"
+        (changeItem)="onChangeItem(item, 'idagentdeclare', $event)"></app-autocomplete>
+    </div>
     <!-- </div> -->
     <!-- <div class="row-sm-1"> -->
-      <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
-      <div class="col-sm-4">
-        <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent"
-          [args]="['firstname', 'lastname']" [service]="agents"
-          (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
-      </div>
+    <label for="chidagentvalidate" class="col-sm-2 col-form-label">Validateur : </label>
+    <div class="col-sm-4">
+      <app-autocomplete [i_item]="item.idagentvalidate" [functionName]="displayNameAgent"
+        [args]="['firstname', 'lastname']" [service]="agents"
+        (changeItem)="onChangeItem(item, 'idagentvalidate', $event)"></app-autocomplete>
+    </div>
     <!-- </div> -->
   </div>
   <!-- <div class="form-group row">

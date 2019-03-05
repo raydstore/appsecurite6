@@ -161,8 +161,8 @@ export class AccidentagentshbitComponent implements OnInit {
     const index = this.vwaccidentagentshbits.indexOf(_vwaccidentagentshbit);
     this.vwaccidentagentshbits.splice(index, 1);
     this.vwaccidentagentshbits = [...this.vwaccidentagentshbits];
-    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit);
-    this.service.delete(accidentagentshbit.id)
+    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit, _vwaccidentagentshbit.name);
+    this.service.delete(_vwaccidentagentshbit.idaccidentbit)
       .subscribe(
         () => { this.loadData(); },
         (error: Response) => {
@@ -177,17 +177,20 @@ export class AccidentagentshbitComponent implements OnInit {
       );
   }
 
-  cloneAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit): Accidentagentshbit {
+  cloneAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit, name): Accidentagentshbit {
     const accidentagentshbit: Accidentagentshbit = Object.assign({}, this._accidentagentshbit);
+    accidentagentshbit.id         = _vwaccidentagentshbit.idaccidentbit;
     accidentagentshbit.idbitclass = _vwaccidentagentshbit.idbitclass;
     accidentagentshbit.idbit = _vwaccidentagentshbit.idbit;
     accidentagentshbit.kind = _vwaccidentagentshbit.kind;
-    accidentagentshbit.name = _vwaccidentagentshbit.name;
+    accidentagentshbit.idgrid = _vwaccidentagentshbit.idgrid;
+    accidentagentshbit.accidentagentsh = this.accidentagentsh;
+    accidentagentshbit.name = name;
     return accidentagentshbit;
   }
 
-  updateAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit) {
-    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit);
+  updateAccidentagentshbit(_vwaccidentagentshbit: Vw$accidentagentshbit, name) {
+    const accidentagentshbit: Accidentagentshbit = this.cloneAccidentagentshbit(_vwaccidentagentshbit, name);
     this.service.update(accidentagentshbit)
       .subscribe(() => {
         this.loadData();
@@ -207,6 +210,10 @@ export class AccidentagentshbitComponent implements OnInit {
   onChangeItemLabel(item: Site, field: string, event) {
     console.log('enter on change label = ' + JSON.stringify(item));
     item[field] = <Label>event;
+  }
+
+  updateBitforAgent() {
+
   }
 
 }

@@ -3,7 +3,7 @@ import { Bit } from 'shared/table/table';
 import { InputData, Accidentagentshbit, Accidentagentsh } from './../../../table/table';
 import { AccidentagentshbitService } from 'shared/services/accidentagentshbit.service';
 import { NewData } from './../newData';
-import { Component, OnInit, EventEmitter, Input, Output, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, OnChanges, ViewEncapsulation, ViewChild } from '@angular/core';
 import { isUndefined, isNullOrUndefined } from 'util';
 /* import { Accidentagentshbit } from 'shared/table/table'; */
 
@@ -26,12 +26,16 @@ const _newAccidentagentshbit: Accidentagentshbit = {
   selector: 'app-newaccidentagentshbit',
   templateUrl: './newaccidentagentshbit.component.html',
   styleUrls: ['./newaccidentagentshbit.component.css']
+  /* ,
+  encapsulation: ViewEncapsulation.None */
 })
 export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> implements OnInit, OnChanges {
   @Input() dialogVisible: boolean;
   @Input() accidentagentsh: Accidentagentsh;
   @Input() bits: Bit[];
   @Output() closeDialog = new EventEmitter<InputData<Accidentagentshbit>>();
+
+  @ViewChild('selBit') selBit: Bit = null;
 
   constructor(service: AccidentagentshbitService) {
     // _newAccidentagentshbit.name = this.accidentagentsh;
@@ -53,6 +57,9 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
   onChangeItem(item: Accidentagentshbit, field: string, event) {
     console.log('enter on change accidentagentshbit = ' + JSON.stringify(event));
     const bit: Bit = <Bit> event;
+    console.log('midle on change accidentagentshbit bit = ' + JSON.stringify(bit));
+    this.selBit = Object.assign({}, bit);
+    console.log('midle on change accidentagentshbit selbit = ' + JSON.stringify(this.selBit));
     item[field] = bit.id;
     item['idbitclass'] = bit.idbitclass;
     item['kind']       = bit.kind;
@@ -63,9 +70,21 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
   displayName(item: any, args: string[]): string {
     let result = '';
     console.log('i--- = ' + JSON.stringify(item));
+    console.log('typeof = ' + typeof(item));
+    console.log('this.selBit = ' + this.selBit);
     if (!isNullOrUndefined(item)) {
       console.log('i 11111 ');
-      result = item.id + ') ' + item.name;
+      // this.selBit
+      if (typeof(item) === 'string') {
+        if (!isNullOrUndefined(this.selBit)) {
+          result = this.selBit.id + ') ' + this.selBit.name;
+        } else {
+          result = item;
+        }
+      } else {
+        result = item.id + ') ' + item.name;
+      }
+      
       console.log('i 22222 ');
     /* for (const bit of this.bits) {
       if (bit.id === this.newT.idbit) {

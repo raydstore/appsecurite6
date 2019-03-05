@@ -14,13 +14,21 @@
     [class.alert-success]="value.idbitclass == 'B'" [class.alert-danger]="value.idbitclass == 'C'"
     [class.alert-warning]="value.idbitclass == 'D'">
     <div class="form-group row">
-      <label for="chname" class="col-sm-6 col-form-label">
+      <label for="chname" class="col-sm-5 col-form-label">
         {{value.idbitclass + ') ' + value.classname + ': ' + value.idbit + ') ' + value.bitname + ': '}}
       </label>
-      <div class="col-sm-6">
-        <input type="text" readonly="readonly" class="form-control" id="chname" [value]="value.name"
-          placeholder="le nom de libelé">
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="chname" [value]="value.name"
+          placeholder="le nom de libelé" #nameofbit>
       </div>
+      <div class="col-sm-2">
+      <button class="btn btn-success" (click)="updateAccidentagentshbit(value, nameofbit.value)">
+        <i class="fa fa-check"></i>
+      </button>
+      <button class="btn btn-danger" (click)="deleteAccidentagentshbit(value)">
+        <i class="fa fa-minus"></i>
+      </button>
+    </div>
     </div>
   </div>
 </div>  

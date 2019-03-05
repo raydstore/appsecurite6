@@ -275,6 +275,8 @@ export interface Accident {
     ppropertydamage?: string;
     penvirenementdamage?: string;
     obviouscause?: string;
+    victim?: string;
+    subject?: string;
     idsite?: any;
     curdate?: Date;
     time?: Date;
@@ -624,6 +626,7 @@ export interface Bitclass {
 }
 
 export interface Vw$accidentagentshbit {
+    idaccidentbit?: number;
     iddamage: number;
     idagent: string;
     idgrid?: number;

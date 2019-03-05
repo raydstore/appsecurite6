@@ -1,7 +1,7 @@
 <h1>selection Image</h1>
 <input type="file" style="display: none" (change)="onSelectedFile($event)" #inputFile>
 <button type="button" (click)="inputFile.click()"></button>
-<button type="button" (click)="onUpload()">upload</button>
+<button type="button" (click)="myUploader($event)">upload</button>
 <div *ngFor="let accidentpicture of accidentPictures">
     <img [src]="accidentpicture.image">
 </div>

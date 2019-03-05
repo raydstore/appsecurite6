@@ -119,13 +119,13 @@ export class AccidentComponent implements OnInit {
     }); */
 
     this.cols = [
-      { field: 'id', header: 'id' },
-      { field: 'Classification', header: 'Classification' },
-      { field: 'date', header: 'curdate' },
-      { field: 'time', header: 'time' },
-      { field: 'idsite.name', header: 'site' },
-      { field: 'place', header: 'lieu' },
-      { field: 'description', header: 'description' }
+      { field: 'id',             header: 'id',          width: '7.75em' },
+      { field: 'Classification', header: 'Type',        width: '2.25em' },
+      { field: 'date',           header: 'curdate',     width: '5em' },
+      { field: 'time',           header: 'time',        width: '3.25em' },
+      { field: 'idsite.name',    header: 'site',        width: 'auto' },
+      { field: 'place',          header: 'lieu',        width: 'auto' },
+      { field: 'description',    header: 'description', width: 'auto' }
     ];
   }
 
@@ -161,6 +161,8 @@ export class AccidentComponent implements OnInit {
       propertydamage: '',
       envirenementdamage: '',
       obviouscause: '',
+      victim: '',
+      subject: '',
       idsite: null,
       curdate: new Date(),
       tabindex: 1,
