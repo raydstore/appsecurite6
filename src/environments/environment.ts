@@ -6,6 +6,8 @@
 export const environment = {
   production: false,
   // URL of data service
+  // test python restfull
+  // urlService: 'http://127.0.0.1:8000/wsrv',
   urlService: 'http://10.1.0.150:8080/HseWebService/wsrv',
   urlPrintService: 'http://10.1.0.150:8080/HseWebService/wsrv/print'
 };

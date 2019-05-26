@@ -249,6 +249,7 @@ export interface CellGrid {
   }
 
 export interface VwGridForAccident {
+    idw?: string;
     id?: number;
     idaccident?: number;
     col1?: CellGrid;

@@ -190,25 +190,39 @@ export class AccidentComponent implements OnInit {
    /*      {label: 'print',
       items:[ */
         {
-            label: 'Compte rendu',
+            label: 'Compte rendu d’accident / incident',
             icon: 'pi pi-fw pi-file',
             target: '_blanK',
             url: '',
-            command: (event) => this.setItems('rptCompteRenduCirculation', this.selectedAccident.id)
+            command: (event) => this.setItems('rptCompteRenduAccident', this.selectedAccident.id)
         },
         {
-          label: 'Compte rendu circulation',
+          label: 'Declaration d’accident d travail',
           icon: 'pi pi-fw pi-file',
           target: '_blanK',
           url: '',
           command: (event) => this.setItems('rptAccidentTravail', this.selectedAccident.id)
         },
         {
-          label: 'incident sur vehicule',
+          label: 'Déclaration d’incident sur véhicule',
           icon: 'pi pi-fw pi-file',
           target: '_blanK',
           url: '',
           command: (event) => this.setItems('rptIncidentVehicule', this.selectedAccident.id)
+        },
+        {
+          label: 'Bilan des accidents de travail',
+          icon: 'pi pi-fw pi-file',
+          target: '_blanK',
+          url: '',
+          command: (event) => this.setItems('rptBilTravAccident', this.selectedAccident.id)
+        },
+        {
+          label: 'Rapport préliminaire',
+          icon: 'pi pi-fw pi-file',
+          target: '_blanK',
+          url: '',
+          command: (event) => this.setItems('rptRapportAccident', this.selectedAccident.id)
         }
     /* ]} */
   ];
@@ -218,7 +232,7 @@ export class AccidentComponent implements OnInit {
     if (!isNullOrUndefined(this.items)) {
       let _items: MenuItem[] = Object.assign({}, this.items);
       if (!isNullOrUndefined(idaccident)) {
-        const printList: Array<any> = _items; //[0].items;
+        const printList: Array<any> = _items; // [0].items;
         for (const item of printList) {
 
           item.url = this.urlPrint + '?reportname=' + reportname + '&&p=' + idaccident;

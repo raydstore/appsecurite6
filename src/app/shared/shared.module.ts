@@ -154,6 +154,7 @@ import { NewactivityComponent } from './component/insertion/newactivity/newactiv
 import { NewaccidentagentshbitComponent } from './component/insertion/newaccidentagentshbit/newaccidentagentshbit.component';
 import { VwagentfinderService } from './services/vwagentfinder.service';
 import { VwactionaccidentService } from './services/vwactionaccident.service';
+import { LogonComponent } from './component/logon/logon.component';
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -312,7 +313,8 @@ import { VwactionaccidentService } from './services/vwactionaccident.service';
     NewtypeoperationComponent,
     NewactivityComponent,
     NewaccidentagentshbitComponent,
-    CalendarComponent
+    CalendarComponent,
+    LogonComponent
   ],
   providers: [
     PostService,
