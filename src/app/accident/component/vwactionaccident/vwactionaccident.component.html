@@ -4,32 +4,41 @@
         <h4 class="titleform">
           <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
         </h4>
-    
-        <button class="btn btn-success btnright" (click)="showNewDialoge()">
-          <i class="fa fa-plus"></i>
+        <div class="btn-toolbar btnright" role="toolbar" aria-label="Toolbar with button groups">
+        <button class="btn btn-success" (click)="showNewDialoge('Nouvelle Recommandation', 'R')">
+          <i class="fa fa-plus">  Recommandation</i>
         </button>
-    
+
+        <button class="btn btn-success" (click)="showNewDialoge('Nouvelle Action', 'A')">
+          <i class="fa fa-plus">  Action</i> 
+        </button>
+      </div>
       </div>
     
     
       <p-dataTable [value]="actions" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
-        (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
-        <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
+        (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" rowGroupMode="subheader"
+        groupField="kind" sortField="kind">
+        
+    <ng-template pTemplate="rowgroupheader" let-rowData>
+        <h4 class="colgroup decal4">{{ getNameOfKind(rowData.kind) }}</h4>
+    </ng-template>
+        <p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>
         <p-column field="name" header="Name"></p-column>
-        <p-column field="kind" header="nature"></p-column>
-        <p-column field="datecreate" header="Crée le">
+        <!-- <p-column field="kind" header="nature"></p-column> -->
+        <p-column field="datecreate" header="Crée le"  [style]="{'width':'80px'}">
           <ng-template let-col let-m="rowData" pTemplate="body">
             {{m[col.field] | date:'shortDate'}}
           </ng-template>
         </p-column>
-        <p-column field="owner" header="par"></p-column>
-        <p-column field="dateupdate" header="Modifier le">
+        <p-column field="owner" header="par" [style]="{'width':'100px'}"></p-column>
+        <p-column field="dateupdate" header="Modifier le" [style]="{'width':'80px'}">
           <ng-template let-col let-m="rowData" pTemplate="body">
             {{m[col.field] | date:'shortDate'}}
           </ng-template>
         </p-column>
-        <p-column field="lastuser" header="par"></p-column>
-        <p-column styleClass="col-button" [style]="{'width':'70px'}">
+        <p-column field="lastuser" header="par" [style]="{'width':'100px'}"></p-column>
+        <p-column styleClass="col-button" [style]="{'width':'60px'}">
           <ng-template let-m="rowData" pTemplate="body">
             <button class="btn btn-danger" (click)="deleteAction(m)">
               <i class="fa fa-minus"></i>
@@ -68,19 +77,22 @@
       <!-- </div> -->
     </div>
     
-    <p-dialog header="Nouvelle action" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
-      <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newAction">
-        <div class="bdcontent">
-          <span>
-            <label for="iid">id : </label>
-            <input type="text" class="form-control" id="chid" [(ngModel)]="newAction.id" placeholder="Identificateur" readonly>
-          </span>
-          <span>
-            <label for="iname">name</label>
-            <input type="text" id="iname" [(ngModel)]="newAction.name" placeholder="l'action">
-          </span>
-          <!--  <div class="col-sm-5"> -->
-          <div class="alert alert-secondary" role="alert">
+    <p-dialog [header]="titledialog" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="600">
+      <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newAction">
+        <div class="container">
+          <div class="form-group row">
+            <label  for="iid" class="col-sm-1 col-form-label">id : </label>
+            <div class="col-sm-2">
+               <input type="text" class="form-control" id="chid" [(ngModel)]="newAction.id" placeholder="Identificateur" readonly>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label  for="iname" class="col-sm-1 col-form-label">name</label>
+            <div class="col-sm-11">
+              <input type="text" id="iname" class="form-control" [(ngModel)]="newAction.name" placeholder="l'action">
+            </div>
+          </div>
+          <!-- <div class="alert alert-secondary" role="alert">
             <h5 class="alert-heading">nature :</h5>
             <hr class="hrline">
             <div class="radio">
@@ -95,7 +107,7 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- </div> -->
           <div class="toolbtn">
             <button class="btn btn-primary" (click)="createAction()">Valider</button>
@@ -103,4 +115,5 @@
           </div>
         </div>
       </div>
+      </p-dialog>
   

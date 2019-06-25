@@ -52,7 +52,7 @@ export class VwactionaccidentComponent implements OnInit {
   newMode = false;
 
   datePipe: DatePipe;
-  // titlelist = 'Marque';
+  titledialog: string;
 
   constructor(private service: VwactionaccidentService, private serviceAction: ActionService,
     private actionaccidentService: ActionaccidentService) {
@@ -88,11 +88,12 @@ export class VwactionaccidentComponent implements OnInit {
     this.serviceAction.create(this.newAction)
       .subscribe(newAction => {
         this.newActionaccident.idaccident = this.idaccident;
-        this.newActionaccident.idaction = this.newAction.id;
+        this.newActionaccident.idaction   = this.newAction.id;
+        this.newActionaccident.kind       = this.newAction.kind;
         this.newActionaccident.datecreate = this.newAction.datecreate;
         this.newActionaccident.dateupdate = this.newAction.dateupdate;
-        this.newActionaccident.owner = this.newAction.owner;
-        this.newActionaccident.lastuser = this.newAction.lastuser;
+        this.newActionaccident.owner      = this.newAction.owner;
+        this.newActionaccident.lastuser   = this.newAction.lastuser;
         console.log('action = ' + JSON.stringify(this.newAction));
         console.log('newActionaccident = ' + JSON.stringify(this.newActionaccident));
         this.actionaccidentService.create(this.newActionaccident)
@@ -112,6 +113,12 @@ export class VwactionaccidentComponent implements OnInit {
         }
       });
 
+  }
+
+  getNameOfKind(kind: string): string {
+    let name: string;
+    kind === 'R' ? name = `        Recomandation` : name = `        Action`;
+    return name;
   }
 
   deleteAction(_action: VwactionAccident) {
@@ -153,7 +160,8 @@ export class VwactionaccidentComponent implements OnInit {
     //
   }
 
-  showNewDialoge() {
+  showNewDialoge(title, kind) {
+    this.titledialog = title;
     this.dialogVisible = true;
     this.newMode = true;
     this.newAction = {
@@ -161,7 +169,7 @@ export class VwactionaccidentComponent implements OnInit {
       dateupdate: new Date(),
       id: 0,
       /* idaccident: this.idaccident, */
-      kind: 'R',
+      kind: kind,
       state: 'C',
       lastuser: 'ali',
       name: '',
