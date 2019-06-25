@@ -19,18 +19,18 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./action.component.css']
 })
 export class ActionComponent implements OnInit {
-  @Input() idaccident: Accident;
-  @Input() titlelist: string;
+  /* @Input() idaccident: Accident; */
+  titlelist = 'Action';
   actions: any[];
   selectedAction: Action;
   selectedNode: TreeNode;
   // action: any;
-  newAction: any = {
+  newAction: Action = {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
-    idparent: this.idaccident,
-    kind: 'R',
+ /*    idparent: this.idaccident, */
+    kind: 'M',
     state: 'C',
     lastuser: 'ali',
     name: '',
@@ -49,11 +49,13 @@ export class ActionComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.datePipe = new DatePipe('en-US');
     // this.loadLastId(); 
   }
 
   loadData() {
-    this.service.getByQueryParam({ 'idparent': this.idaccident.id })
+/*     this.service.getByQueryParam({ 'idparent': this.idaccident.id }) */
+      this.service.getAll()
       .subscribe(actions => {
         this.actions = actions;
       });
@@ -67,9 +69,36 @@ export class ActionComponent implements OnInit {
     return this.selectedNode === event.node ? true : false;
   }
 
+  getNameOfKind(kind: string): string {
+    let name: string;
+    switch (kind) {
+      case 'R': {
+        name = `        Recomandation - accident`;
+        break;
+      }
+      case 'A': {
+        name = `        Action - accident`;
+        break;
+      }
+      case 'M': {
+        name = `        Action - manuel`;
+        break;
+      }
+      case 'O': {
+        name = `        Ops card`;
+        break;
+      }
+      case 'I': {
+        name = `       Investigation - accident`;
+        break;
+      }
+    }
+    return name;
+  }
+
 
   createAction() {
-    this.newAction.idaccident = this.idaccident;
+/*     this.newAction.idaccident = this.idaccident; */
     const value = this.datePipe.transform(this.newAction.datecreate, 'yyMMddHHmmss');
     this.newAction.id = +value;
     this.dialogVisible = false;
@@ -124,8 +153,8 @@ export class ActionComponent implements OnInit {
       datecreate: new Date(),
       dateupdate: new Date(),
       id: 0,
-      idparent: this.idaccident,
-      kind: 'R',
+      /* idparent: this.idaccident, */
+      kind: 'M',
       state: 'C',
       lastuser: 'ali',
       name: '',

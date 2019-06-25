@@ -61,7 +61,7 @@ export class VwactionaccidentComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.datePipe = new DatePipe('en-US');
-    // this.loadLastId(); 
+    // this.loadLastId();
   }
 
   loadData() {

@@ -55,6 +55,7 @@ import { AccidentpictureComponent } from './component/accidentpicture/accidentpi
     SharedModule,
     RouterModule.forChild([
       { path: 'accident', component: AccidentComponent },
+      { path: 'action', component: ActionComponent },
 /*       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: '**', component: NotFoundComponent } */
     ])
