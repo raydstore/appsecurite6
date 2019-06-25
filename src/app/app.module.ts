@@ -38,6 +38,7 @@ import { TypeObjectComponent } from 'shared/component/type-object/type-object.co
 import { TypeOperationComponent } from 'shared/component/type-operation/type-operation.component';
 import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.component';
 import { SharedModule } from './shared/shared.module';
+import { OpscardModule } from './opscard/opscard.module';
 /* import { TreeTableModule } from 'primeng/primeng';
 import { TreeNode } from 'primeng/api'; */
 
@@ -58,7 +59,6 @@ import { TreeNode } from 'primeng/api'; */
     InstanceObjectComponent,
     CaseagentComponent,
     ListagentComponent,
-    OpscardComponent,
   ],
   imports: [
     SharedModule,
@@ -66,6 +66,7 @@ import { TreeNode } from 'primeng/api'; */
     AccidentModule,
     InspectionModule,
     CoreModule,
+    OpscardModule,
     // TreeTableModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},

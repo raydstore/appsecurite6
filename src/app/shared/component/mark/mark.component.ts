@@ -20,7 +20,7 @@ export class MarkComponent implements OnInit {
   selectedMark: Mark;
   selectedNode: TreeNode;
 
-  newMark: any = {
+  newMark: Mark = {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
@@ -31,11 +31,9 @@ export class MarkComponent implements OnInit {
   dialogVisible = false;
   newMode = false;
 
-  lastids: any[];
-  lastid: any;
   titlelist = 'Marque';
 
-  constructor(private service: MarkService, private lastidService: LastidService) {
+  constructor(private service: MarkService) {
   }
 
   ngOnInit() {
@@ -62,31 +60,13 @@ export class MarkComponent implements OnInit {
     this.dialogVisible = false;
     /* refresh data */
     if (!event.cancelDialog) {
-    //  console.log('site inserted is = ' + JSON.stringify(event.newSite))
       this.loadData();
     }
   }
 
-  /* createMark() {
-    this.dialogVisible = false;
-    this.marks = [this.newMark, ...this.marks];
-
-
-    this.service.create(this.newMark)
-      .subscribe(newMark => {
-        this.loadData();
-      }, (error: AppError) => {
-        this.marks.splice(0, 1);
-        if (error instanceof BadInput) {
-          // this.form.setErrors(originalError);
-        } else {
-          throw error;
-        }
-      });
-  } */
 
   deleteMark(_mark: Mark) {
-    let index = this.marks.indexOf(_mark);
+    const index = this.marks.indexOf(_mark);
     this.marks.splice(index, 1);
     this.marks = [...this.marks] ;
     this.service.delete(_mark.id)
@@ -116,59 +96,12 @@ export class MarkComponent implements OnInit {
     //
   }
 
- /*  showNewDialoge() {
-    this.dialogVisible = true;
-    this.newMode = true;
-    this.newMark = {
-      datecreate: new Date(),
-      dateupdate: new Date(),
-      id: 0,
-      lastuser: 'ali',
-      name: '',
-      owner: 'ali'
-    };
-  }
-
-  hideNewDialoge() {
-    this.dialogVisible = false;
-  }
- */
   showDialogToAdd() {
     this.newMode = true;
     this.dialogVisible = true;
   }
 
-/*   save() {
-    let marks = [...this.marks];
-    if (this.newMode) {
-      marks.push(this.newMark);
-    } else {
-      marks[this.findSelectedMarkIndex()] = this.newMark;
-    }
-    this.marks = marks;
-    this.newMark = null;
-    this.dialogVisible = false;
-  }
 
-  delete() {
-    let index = this.findSelectedMarkIndex();
-    this.marks = this.marks.filter((val, i) => i !== index);
-    this.newMark = null;
-    this.dialogVisible = false;
-  }
-
-  onRowSelect(event) {
-  }
-
-  cloneMark(c: Mark): Mark {
-    let mark: Mark;
-    mark = c;
-    return mark;
-  }
-
-  findSelectedMarkIndex(): number {
-    return this.marks.indexOf(this.selectedMark);
-  } */
 }
 
 

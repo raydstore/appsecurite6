@@ -779,5 +779,22 @@ export interface InspectPlanning {
     dateupdate?: Date;
 }
 
+export interface Opscard {
+    id?: number;
+    observer?: string;
+    curdate?: Date;
+    site?: string;
+    measure?: string;
+    description?: string;
+    kind?: string;
+    degree?: string;
+    state?: string;
+    jobsite?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
 
 // *****************************************
