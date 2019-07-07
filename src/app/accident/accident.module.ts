@@ -47,6 +47,8 @@ import { PrintComponent } from './component/print/print.component';
 import { DamagedescriptionComponent } from './component/damagedescription/damagedescription.component';
 import { VwactionaccidentComponent } from './component/vwactionaccident/vwactionaccident.component';
 import { AccidentpictureComponent } from './component/accidentpicture/accidentpicture.component';
+import { SendactionComponent } from './component/sendaction/sendaction.component';
+
 
 
 
@@ -56,6 +58,7 @@ import { AccidentpictureComponent } from './component/accidentpicture/accidentpi
     RouterModule.forChild([
       { path: 'accident', component: AccidentComponent },
       { path: 'action', component: ActionComponent },
+      { path: 'sendaction', component: SendactionComponent },
 /*       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: '**', component: NotFoundComponent } */
     ])
@@ -106,6 +109,7 @@ import { AccidentpictureComponent } from './component/accidentpicture/accidentpi
     DamagedescriptionComponent,
     VwactionaccidentComponent,
     AccidentpictureComponent,
+    SendactionComponent,
   ]
 })
 export class AccidentModule { }

@@ -26,9 +26,10 @@ import {
   DropdownModule,
   GrowlModule,
   InplaceModule,
-  ListboxModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { PickListModule } from 'primeng/picklist';
+import { ListboxModule } from 'primeng/listbox';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AccordionModule } from 'primeng/accordion';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -128,10 +129,12 @@ import { VwnotelementofnatureaccidentService } from 'shared/services/vwnotelemen
 import { VwnotnatureofaccidentService } from 'shared/services/vwnotnatureofaccident.service';
 import { VwpropertyService } from 'shared/services/vwproperty.service';
 import { PrintService } from 'shared/services/print.service';
+import { SendactionService } from 'shared/services/sendaction.service';
+import { VwactionsendedService } from 'shared/services/vwactionsended.service';
 
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
@@ -155,6 +158,7 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
 import { VwagentfinderService } from './services/vwagentfinder.service';
 import { VwactionaccidentService } from './services/vwactionaccident.service';
 import { LogonComponent } from './component/logon/logon.component';
+
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
 //
@@ -180,6 +184,7 @@ import { LogonComponent } from './component/logon/logon.component';
     DataGridModule,
     GrowlModule,
     ListboxModule,
+    PickListModule,
     PanelModule,
     AutoCompleteModule,
     TabViewModule,
@@ -225,6 +230,7 @@ import { LogonComponent } from './component/logon/logon.component';
     DataGridModule,
     GrowlModule,
     ListboxModule,
+    PickListModule,
     PanelModule,
     AutoCompleteModule,
     TabViewModule,
@@ -362,6 +368,8 @@ import { LogonComponent } from './component/logon/logon.component';
     AccidentagentshbitService,
     Vw$accidentagentshbitService,
     ActionService,
+    SendactionService,
+    VwactionsendedService,
     OpscardService,
     VwelementgridService,
     VwnotelementofnatureaccidentService,

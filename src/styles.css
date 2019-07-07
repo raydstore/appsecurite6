@@ -180,3 +180,20 @@ body {
 	padding: .5em 1.5em !important;
 	height: 60px !important;
 }
+
+.ui-listbox {
+    width: 300px !important;
+    height: 350px !important;
+}
+
+.ui-picklist-source-controls {
+    display: none !important;
+  }
+  
+  .ui-picklist-target-controls {
+    display: none !important;
+  }
+  
+  .ui-picklist-listwrapper {
+    width: 45% !important;
+  }

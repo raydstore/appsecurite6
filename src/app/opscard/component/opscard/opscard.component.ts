@@ -29,7 +29,7 @@ export class OpscardComponent implements OnInit {
     kind: 'S',
     degree: 'L',
     state: 'C',
-    jobsite: 'S',
+    jobsite: 'L',
     lastuser: 'ali',
     owner: 'ali'
   };
@@ -130,7 +130,7 @@ export class OpscardComponent implements OnInit {
       kind: 'S',
       degree: 'L',
       state: 'C',
-      jobsite: 'S',
+      jobsite: 'L',
       lastuser: 'ali',
       owner: 'ali'
     };

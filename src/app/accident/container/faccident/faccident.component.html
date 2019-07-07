@@ -14,7 +14,8 @@
       </p-radioButton>
     </div>
     <label for="chcurdate" class="col-sm-1 col-form-label">date : </label>
-    <div class="col-sm-3">
+    <div class="col-sm-5">
+        <!-- '    le : dd/mm/yy       à : ' -->
       <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true" [dateFormat]="'    le : dd/mm/yy       à : '"
         (changeDate)="onChangeDate(item, $event)"></app-calendar>
       <input type="hidden" [(ngModel)]="newid" value="item.curdate | date : 'yyMMddHHmmss'">

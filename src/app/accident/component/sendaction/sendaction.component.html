@@ -1,0 +1,154 @@
+<div class="card bg-light">
+  <div class="card-header alCenter cardtitle">
+
+    <h4 class="titleform">
+      <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+    </h4>
+
+    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+      <i class="fa fa-plus"></i>
+    </button>
+
+  </div>
+
+
+  <p-dataTable [value]="vwactionsendeds" expandableRows="true" selectionMode="single" immuable="true"
+    [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true"
+    sortField="kind" rowGroupMode="subheader" groupField="namestructure">
+    <ng-template pTemplate="rowgroupheader" let-rowData>
+      <h4 class="colgroup decal4">{{ rowData.namestructure }}</h4>
+    </ng-template>
+    <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
+    <p-column field="curdate" header="envoi le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        {{m[col.field] | date:'shortDate'}}
+      </ng-template>
+    </p-column>
+    <p-column field="namestructure" header="Structure"></p-column>
+    <p-column field="nameaction" header="Action"></p-column>
+    <p-column field="state" header="Status"></p-column>
+    <p-column field="datecreate" header="Crée le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        {{m[col.field] | date:'shortDate'}}
+      </ng-template>
+    </p-column>
+    <p-column field="owner" header="par"></p-column>
+    <p-column field="dateupdate" header="Modifier le">
+      <ng-template let-col let-m="rowData" pTemplate="body">
+        {{m[col.field] | date:'shortDate'}}
+      </ng-template>
+    </p-column>
+    <p-column field="lastuser" header="par"></p-column>
+    <!-- <p-column field="kind" header="nature"></p-column> -->
+    <!--     <p-column field="datecreate" header="Crée le">
+        <ng-template let-col let-m="rowData" pTemplate="body">
+          {{m[col.field] | date:'shortDate'}}
+        </ng-template>
+      </p-column>
+      <p-column field="owner" header="par"></p-column>
+      <p-column field="dateupdate" header="Modifier le">
+        <ng-template let-col let-m="rowData" pTemplate="body">
+          {{m[col.field] | date:'shortDate'}}
+        </ng-template>
+      </p-column>
+      <p-column field="lastuser" header="par"></p-column> -->
+    <p-column styleClass="col-button" [style]="{'width':'70px'}">
+      <ng-template let-m="rowData" pTemplate="body">
+        <button class="btn btn-danger" (click)="deleteSendaction(m)" *ngIf="m.kind === 'M'">
+          <i class="fa fa-minus"></i>
+        </button>
+      </ng-template>
+    </p-column>
+    <ng-template let-item pTemplate="rowexpansion">
+      <div class="container">
+        <div class="form-group row">
+          <label for="chname" class="col-sm-2 col-form-label">name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="l'action" #name>
+          </div>
+        </div>
+        <div class="clupdate" *ngIf="item.kind === 'M'">
+          <button class="btn btn-success" (click)="updateSendaction(item)">
+            <i class="fa fa-check">Valider</i>
+          </button>
+          <button class="btn btn-warning" (click)="cancelUpdate(item)">
+            <i class="fa fa-times">Annuler</i>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataTable>
+</div>
+
+<p-dialog header="Bordereaux d'action (nouveaux)" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
+  width="1000">
+  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newSendaction">
+    <div class="container">
+      <!-- <div class="form-group row">
+          <label  for="iname" class="col-sm-1 col-form-label">name</label>
+          <div class="col-sm-11">
+            <input type="text" id="iname" class="form-control" [(ngModel)]="newSendaction.name" placeholder="l'action">
+          </div>
+        </div> -->
+      <div class="flex">
+        <div class="card bg-light mb-3 flex-item" style="max-width: 35rem;">
+          <div class="card-header">Structures</div>
+          <div class="card-body">
+            <p-pickList [source]="structures" [target]="selectedStructures" sourceHeader="Available"
+              targetHeader="Selected" [responsive]="true" filterBy="name" dragdrop="true"
+              sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand"
+              [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" showSourceControls="false"
+              showTargetControls="false">
+              <ng-template let-structure pTemplate="item">
+                <div class="ui-helper-clearfix">
+                  <div style="font-size:16px;margin:15px 5px 0 0">
+                    <i class="fa fa-minus"></i>  
+                    {{structure.name}}
+                  </div>
+                </div>
+              </ng-template>
+            </p-pickList>
+          </div>
+        </div>
+        <div class="card bg-light mb-3 flex-item" style="max-width: 35rem;">
+          <div class="card-header">Actions</div>
+          <div class="card-body">
+            <p-pickList [source]="actions" [target]="selectedActions" sourceHeader="Available" targetHeader="Selected"
+              [responsive]="true" filterBy="name" dragdrop="true" sourceFilterPlaceholder="Search by brand"
+              targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}"
+              [targetStyle]="{'height':'300px'}" showSourceControls="false" showTargetControls="false">
+              <ng-template let-action pTemplate="item">
+                <div class="ui-helper-clearfix">
+                  <div style="font-size:16px;margin:15px 5px 0 15px">
+                    <i class="fa fa-minus"></i>
+                    {{action.name}}
+                  </div>
+                </div>
+              </ng-template>
+            </p-pickList>
+          </div>
+        </div>
+      </div>
+       <!-- <div class="flex">
+        <p-listbox class="flex-item" [options]="structures" [(ngModel)]="selectedStructures" multiple="multiple" checkbox="checkbox"
+          filter="filter" optionLabel="name" [listStyle]="{'max-height':'250px'}" width="300" height="250">
+          <p-header>
+            <i class="fas fa-cog"></i>
+            Structures
+          </p-header>
+        </p-listbox>
+     
+        <p-listbox class="flex-item" [options]="actions" [(ngModel)]="selectedActions" multiple="multiple" checkbox="checkbox"
+          filter="filter" optionLabel="name" [listStyle]="{'max-height':'250px'}" width="300" height="250">
+          <p-header>
+            <i class="fab fa-amilia"></i>
+            Action
+          </p-header>
+        </p-listbox>
+      </div>  -->
+      <div class="toolbtn">
+        <button class="btn btn-primary" (click)="createSendaction()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
+      </div>
+    </div>
+  </div>

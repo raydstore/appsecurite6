@@ -1,11 +1,11 @@
-.colgroup {
+/* .colgroup {
     color: brown;
     padding: 10px 0 0 10px;
-}
+} */
 
 .ca {
     /* background-color: blue !important; */
-    width: 400px !important;
+ /*    width: 400px !important; */
     /* float: right; */
 }
 
@@ -16,24 +16,28 @@
 .clright {
    /*  float: right; */
 }
-
+/* 
 .container {
     display: flex;
     flex-direction: column;
     height: 1150px !important;
+
+    justify-content: space-evenly;
+} */
+
     /* background-color: brown; */
    /*  flex-wrap: wrap; */
-    justify-content: space-evenly;
-}
 
-.clcolumn {
+/* .clcolumn {
     display: flex;
     flex-direction: row;
-    /* margin-bottom: 20px!important;
-    background-color: red; */
-}
+   
+} */
 
-.clkind {
+ /* margin-bottom: 20px!important;
+    background-color: red; */
+
+/* .clkind {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -48,3 +52,23 @@
     padding-right: 7px;
 }
 
+ */
+
+ .container {
+     display: flex;
+     padding-top: 10px;
+     border-radius: 0px;
+ }
+
+ .flex-item {
+     width: 500px;
+ }
+
+ .clcara {
+    /*  height: 340px; */
+ }
+
+ .toolbtn {
+    float: right;
+    /* padding-bottom: 15px; */
+}

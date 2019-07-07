@@ -645,14 +645,49 @@ export interface Vw$accidentagentshbit {
 
 export interface Action {
     id?: number;
+    name?: string;
     kind?: string;
     state?: string;
-    name: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
 }
+
+export interface Sendaction {
+    id?: number;
+    curdate?: Date;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Actionsended {
+    idsendaction?: number;
+    curdate?: Date;
+    idaction?: number;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Vwactionsended {
+    idsendaction?: number;
+    curdate?: Date;
+    idaction?: number;
+    nameaction?: string;
+    kind?: string;
+    state?: string;
+    idstructure?: number;
+    namestructure?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
 
 export interface Actionaccident {
     idaccident?: Accident;
@@ -678,9 +713,9 @@ export interface VwactionAccident {
 }
 
 export interface Actionassignment {
+    idsendaction?: number;
     idaction?: number;
     idstructure?: number;
-    sendin?: Date;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -689,7 +724,7 @@ export interface Actionassignment {
 
 export interface Structure {
     id?: number;
-    name: string;
+    name?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -698,7 +733,7 @@ export interface Structure {
 
 export interface Entreprise {
     id?: number;
-    name: string;
+    name?: string;
     adress: string;
     phone: string;
     fiscalenumber: string;
