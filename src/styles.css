@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~@fontawesome/fontawesome-free/css/all.css";  */
+
 body {
     margin-left: 100px!important;
     margin-right: 100px!important;

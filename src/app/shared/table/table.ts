@@ -616,6 +616,15 @@ export interface Accidentagentshbit {
     dateupdate?: Date;
 }
 
+export interface Typeaccident {
+    id?: number;
+    name?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
 export interface Bitclass {
     id?: string;
     kind: string;
@@ -657,6 +666,7 @@ export interface Action {
 export interface Sendaction {
     id?: number;
     curdate?: Date;
+    idstructure?: number;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -674,11 +684,13 @@ export interface Actionsended {
 }
 
 export interface Vwactionsended {
+    id?: number;
     idsendaction?: number;
     curdate?: Date;
     idaction?: number;
     nameaction?: string;
     kind?: string;
+    stateaction?: string;
     state?: string;
     idstructure?: number;
     namestructure?: string;
@@ -686,6 +698,18 @@ export interface Vwactionsended {
     lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
+    aaowner?: string;
+    aalastuser?: string;
+    aadatecreate?: Date;
+    aadateupdate?: Date;
+    aowner?: string;
+    alastuser?: string;
+    adatecreate?: Date;
+    adateupdate?: Date;
+    stowner?: string;
+    stlastuser?: string;
+    stdatecreate?: Date;
+    stdateupdate?: Date;
 }
 
 
@@ -712,10 +736,16 @@ export interface VwactionAccident {
     dateupdate?: Date;
 }
 
-export interface Actionassignment {
+export interface ActionassignmentPK {
     idsendaction?: number;
     idaction?: number;
-    idstructure?: number;
+}
+
+export interface Actionassignment {
+    sendaction?: Sendaction;
+    action?: Action;
+    actionassignmentPK: ActionassignmentPK;
+    state?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;

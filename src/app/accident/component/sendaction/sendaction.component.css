@@ -1,17 +1,35 @@
 
 .flex {
     display: inline-flex;
+    width: 970px !important;
     /* width: 600px!important; */
+}
+
+.mat-stepper-horizontal {
+    width: 1020px;
 }
 
 .card-header {
     font-size: 20px;
     color: #fff;
     text-align: center;
-    background-color: #007bff;
+    background-color: #3f51b5;;
 }
 
 .toolbtn {
     float: right;
     padding-bottom: 15px;
+}
+
+.container {
+    padding-top: 15px;
+}
+
+.row-group {
+    background-color: aliceblue;
+}
+
+.title-group {
+    margin-left: 30px;
+    font-size: 25px;
 }

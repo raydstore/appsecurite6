@@ -1,3 +1,4 @@
+import { ActionassignmentService } from 'shared/services/actionassignment.service';
 import { AccidentpictureService } from './services/accidentpicture.service';
 import { ActionaccidentService } from './services/actionaccident.service';
 import { Actionaccident } from './table/table';
@@ -28,6 +29,7 @@ import {
   InplaceModule,
   TabViewModule,
 } from 'primeng/primeng';
+import { TreeModule } from 'primeng/tree';
 import { PickListModule } from 'primeng/picklist';
 import { ListboxModule } from 'primeng/listbox';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -135,6 +137,7 @@ import { VwactionsendedService } from 'shared/services/vwactionsended.service';
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule, MatButtonModule } from '@angular/material';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
@@ -158,6 +161,7 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
 import { VwagentfinderService } from './services/vwagentfinder.service';
 import { VwactionaccidentService } from './services/vwactionaccident.service';
 import { LogonComponent } from './component/logon/logon.component';
+/* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
 
@@ -174,7 +178,10 @@ import { LogonComponent } from './component/logon/logon.component';
     /* FormBuilder,
     FormGroup,
     Validators, */
+    TreeModule,
     MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
     OverlayPanelModule,
     FieldsetModule,
     OrganizationChartModule,
@@ -217,6 +224,7 @@ import { LogonComponent } from './component/logon/logon.component';
     FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
+    TreeModule,
     /* FormBuilder,
     FormGroup,
     Validators, */
@@ -224,6 +232,8 @@ import { LogonComponent } from './component/logon/logon.component';
     FieldsetModule,
     OrganizationChartModule,
     MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
@@ -369,6 +379,7 @@ import { LogonComponent } from './component/logon/logon.component';
     Vw$accidentagentshbitService,
     ActionService,
     SendactionService,
+    ActionassignmentService,
     VwactionsendedService,
     OpscardService,
     VwelementgridService,

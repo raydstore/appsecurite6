@@ -11,8 +11,135 @@
 
   </div>
 
+  <p-tabView>
+    <p-tabPanel header="Action envoyer" leftIcon="pi pi-calendar">
+      <p-table [value]="vwactionsendeds" dataKey="namestructure" sortField="namestructure" sortMode="single" (onSort)="onSort(vwactionsendeds)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>action</th>
+                <th>envoyer le</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr class="ui-widget-header row-group" *ngIf="showItem(rowData.namestructure, rowIndex)">
+              <!-- rowGroupMetadata[rowData.namestructure].index === rowIndex -->
+              <td colspan="3">
+                  <span  class="title-group" style="font-weight:bold">{{rowData.namestructure}}</span>
+              </td>
+          </tr>
+          <tr>
+            <td>{{rowData.nameaction}}</td>
+            <td>{{rowData.curdate | date:'shortDate'}}</td>
+            <td>
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
+                        <button pButton type="button" label="Réalisé" (click)="perform(rowData, 'R')"></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Action réalisé" leftIcon="pi pi-inbox">
+      <p-table [value]="vwactionrealizeds" dataKey="namestructure" sortField="namestructure" sortMode="single" (onSort)="onSort(vwactionrealizeds)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>action</th>
+                <th>envoyer le</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr class="ui-widget-header row-group" *ngIf="showItem(rowData.namestructure, rowIndex)">
+              <!-- rowGroupMetadata[rowData.namestructure].index === rowIndex -->
+              <td colspan="3">
+                  <span  class="title-group" style="font-weight:bold">{{rowData.namestructure}}</span>
+              </td>
+          </tr>
+          <tr>
+            <td>{{rowData.nameaction}}</td>
+            <td>{{rowData.curdate | date:'shortDate'}}</td>
+            <td>
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                    <button pButton type="button" label="terminé" 
+                    (click)="perform(rowData, 'T')" ></button>
+                    <button pButton type="button"  class="ui-button-danger" label="terminé" 
+                    (click)="perform(rowData, 'A')" ></button>
+                </div>
+            </div>
+            </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Action terminé" leftIcon="pi pi-user" rightIcon="pi pi-star">
+      <p-table [value]="vwactionterminateds" dataKey="namestructure" sortField="namestructure" sortMode="single" (onSort)="onSort(vwactionterminateds)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>action</th>
+                <th>envoyer le</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr class="ui-widget-header row-group" *ngIf="showItem(rowData.namestructure, rowIndex)">
+              <!-- rowGroupMetadata[rowData.namestructure].index === rowIndex -->
+              <td colspan="3">
+                  <span  class="title-group" style="font-weight:bold">{{rowData.namestructure}}</span>
+              </td>
+          </tr>
+          <tr>
+            <td>{{rowData.nameaction}}</td>
+            <td>{{rowData.curdate | date:'shortDate'}}</td>
+            <td>
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-inputgroup">
+                    <!-- <span class="ui-inputgroup-addon">
+                      <p-checkbox [(ngModel)]="rowData.state" label="Réalisé" value="T"></p-checkbox>
+                    </span> -->
+                    <button pButton type="button" label="Valider" ></button>
+                    <!-- <input type="text" pInputText placeholder="Username">   [disabled]="rowData.state === 'T'"       -->
+                </div>
+            </div>
+            </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Action annuler" leftIcon="pi pi-user" rightIcon="pi pi-star">
+      <p-table [value]="vwactionaborteds" dataKey="namestructure" sortField="namestructure" sortMode="single" (onSort)="onSort(vwactionaborteds)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>action</th>
+                <th>envoyer le</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr class="ui-widget-header row-group" *ngIf="showItem(rowData.namestructure, rowIndex)">
+              <!-- rowGroupMetadata[rowData.namestructure].index === rowIndex -->
+              <td colspan="3">
+                  <span  class="title-group" style="font-weight:bold">{{rowData.namestructure}}</span>
+              </td>
+          </tr>
+          <tr>
+            <td>{{rowData.nameaction}}</td>
+            <td>{{rowData.curdate | date:'shortDate'}}</td>
+            <td></td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </p-tabPanel>
+</p-tabView>
 
-  <p-dataTable [value]="vwactionsendeds" expandableRows="true" selectionMode="single" immuable="true"
+
+  
+
+
+  <!-- <p-dataTable [value]="vwactionsendeds" expandableRows="true" selectionMode="single" immuable="true"
     [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true"
     sortField="kind" rowGroupMode="subheader" groupField="namestructure">
     <ng-template pTemplate="rowgroupheader" let-rowData>
@@ -39,19 +166,6 @@
       </ng-template>
     </p-column>
     <p-column field="lastuser" header="par"></p-column>
-    <!-- <p-column field="kind" header="nature"></p-column> -->
-    <!--     <p-column field="datecreate" header="Crée le">
-        <ng-template let-col let-m="rowData" pTemplate="body">
-          {{m[col.field] | date:'shortDate'}}
-        </ng-template>
-      </p-column>
-      <p-column field="owner" header="par"></p-column>
-      <p-column field="dateupdate" header="Modifier le">
-        <ng-template let-col let-m="rowData" pTemplate="body">
-          {{m[col.field] | date:'shortDate'}}
-        </ng-template>
-      </p-column>
-      <p-column field="lastuser" header="par"></p-column> -->
     <p-column styleClass="col-button" [style]="{'width':'70px'}">
       <ng-template let-m="rowData" pTemplate="body">
         <button class="btn btn-danger" (click)="deleteSendaction(m)" *ngIf="m.kind === 'M'">
@@ -77,78 +191,95 @@
         </div>
       </div>
     </ng-template>
-  </p-dataTable>
+  </p-dataTable> -->
 </div>
 
-<p-dialog header="Bordereaux d'action (nouveaux)" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="1000">
+<p-dialog header="Bordereaux d'action (nouveaux)" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade"
+  [modal]="true" width="1050">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newSendaction">
     <div class="container">
-      <!-- <div class="form-group row">
-          <label  for="iname" class="col-sm-1 col-form-label">name</label>
-          <div class="col-sm-11">
-            <input type="text" id="iname" class="form-control" [(ngModel)]="newSendaction.name" placeholder="l'action">
+      <mat-horizontal-stepper #stepper linear>
+        <mat-step [completed]="completeStep[0]">
+            <ng-template matStepLabel>Choisire les structures</ng-template>
+            <div class="card bg-light mb-3 flex-item" style="max-width: 35rem;">
+              <div class="card-header">Structures</div>
+              <div class="card-body">
+                <p-pickList #pstructure [source]="structures" [target]="selectedStructures" sourceHeader="Available"
+                  targetHeader="Selected" [responsive]="true" filterBy="name" dragdrop="true"
+                  sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand"
+                  [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" showSourceControls="false"
+                  showTargetControls="false" (onMoveToTarget)="onMoveToTarget(0)"
+                  (onMoveToSource)="onMoveToSource(selectedStructures, 0)">
+                  <ng-template let-structure pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                      <div style="font-size:16px;margin:15px 5px 0 0">
+                        <i class="fa fa-minus"></i>
+                        {{structure.name}}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-pickList>
+              </div>
+            </div>
+            <div class="toolbtn">
+              <button mat-button (click)="goNext(stepper)" [disabled]="itemsIsEmpty(selectedStructures)">
+                <mat-icon fontSet="fa" fontIcon="fa-hand-point-right" inline></mat-icon>next
+              </button>
+            </div>
+        </mat-step>
+        <mat-step [completed]="completeStep[1]">
+            <ng-template matStepLabel>Choix des actions</ng-template>
+            <div class="card bg-light mb-3 flex-item"> <!--  style="max-width: 50rem;" -->
+              <div class="card-header">Actions</div>
+              <div class="card-body">
+                <p-pickList #paction [source]="actions" [target]="selectedActions" sourceHeader="Available"
+                  targetHeader="Selected" [responsive]="true" filterBy="name" dragdrop="true"
+                  sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand"
+                  [sourceStyle]="{'height':'300px', 'width':'450px'}" [targetStyle]="{'height':'300px', 'width':'450px'}" showSourceControls="false"
+                  showTargetControls="false" (onMoveToTarget)="onMoveToTarget(1)"
+                  (onMoveToSource)="onMoveToSource(selectedActions, 1)">
+                  <ng-template let-action pTemplate="item">
+                    <div class="ui-helper-clearfix">
+                      <div style="font-size:16px;margin:15px 5px 0 15px">
+                        <i class="fa fa-minus"></i>
+                        {{action.name}}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-pickList>
+              </div>
+            </div>
+            <div class="toolbtn">
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="goNext(stepper)" [disabled]="itemsIsEmpty(selectedActions)">Next</button>
+            </div>
+        </mat-step>
+        <mat-step [completed]="completeStep[2]">
+          <ng-template matStepLabel>Done</ng-template>
+          vous ête sur le point de finialisé le processus.
+          <div class="card bg-light mb-3 flex-item" >
+            <div class="card-header">Actions</div>
+            <div class="card-body">
+              <p-tree #expandingTree [value]="strActionTree" [style]="{'height':'300px', 'width':'900px'}"></p-tree>
+              <div style="margin-top: 8px">
+                <button pButton type="button" label="Expand all" (click)="expandAll()"
+                  style="margin-right: .25em"></button>
+                <button pButton type="button" label="Collapse all" (click)="collapseAll()"></button>
+              </div>
+            </div>
           </div>
-        </div> -->
-      <div class="flex">
-        <div class="card bg-light mb-3 flex-item" style="max-width: 35rem;">
-          <div class="card-header">Structures</div>
-          <div class="card-body">
-            <p-pickList [source]="structures" [target]="selectedStructures" sourceHeader="Available"
-              targetHeader="Selected" [responsive]="true" filterBy="name" dragdrop="true"
-              sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand"
-              [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" showSourceControls="false"
-              showTargetControls="false">
-              <ng-template let-structure pTemplate="item">
-                <div class="ui-helper-clearfix">
-                  <div style="font-size:16px;margin:15px 5px 0 0">
-                    <i class="fa fa-minus"></i>  
-                    {{structure.name}}
-                  </div>
-                </div>
-              </ng-template>
-            </p-pickList>
+          <div class="toolbtn">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="reset(stepper)">Reset</button>
           </div>
-        </div>
-        <div class="card bg-light mb-3 flex-item" style="max-width: 35rem;">
-          <div class="card-header">Actions</div>
-          <div class="card-body">
-            <p-pickList [source]="actions" [target]="selectedActions" sourceHeader="Available" targetHeader="Selected"
-              [responsive]="true" filterBy="name" dragdrop="true" sourceFilterPlaceholder="Search by brand"
-              targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}"
-              [targetStyle]="{'height':'300px'}" showSourceControls="false" showTargetControls="false">
-              <ng-template let-action pTemplate="item">
-                <div class="ui-helper-clearfix">
-                  <div style="font-size:16px;margin:15px 5px 0 15px">
-                    <i class="fa fa-minus"></i>
-                    {{action.name}}
-                  </div>
-                </div>
-              </ng-template>
-            </p-pickList>
-          </div>
-        </div>
-      </div>
-       <!-- <div class="flex">
-        <p-listbox class="flex-item" [options]="structures" [(ngModel)]="selectedStructures" multiple="multiple" checkbox="checkbox"
-          filter="filter" optionLabel="name" [listStyle]="{'max-height':'250px'}" width="300" height="250">
-          <p-header>
-            <i class="fas fa-cog"></i>
-            Structures
-          </p-header>
-        </p-listbox>
-     
-        <p-listbox class="flex-item" [options]="actions" [(ngModel)]="selectedActions" multiple="multiple" checkbox="checkbox"
-          filter="filter" optionLabel="name" [listStyle]="{'max-height':'250px'}" width="300" height="250">
-          <p-header>
-            <i class="fab fa-amilia"></i>
-            Action
-          </p-header>
-        </p-listbox>
-      </div>  -->
+        </mat-step>
+      </mat-horizontal-stepper>
       <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createSendaction()">Valider</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
+        <button class="btn btn-primary" (click)="createSendaction(stepper)" 
+         [disabled]="stepper.selectedIndex !== 2 || itemsIsEmpty(selectedStructures) || itemsIsEmpty(selectedActions)">
+           Valider
+        </button>
+        <button class="btn btn-warning" (click)="hideNewDialoge(stepper)">Annuler</button>
       </div>
     </div>
   </div>
