@@ -1,3 +1,4 @@
+import { TypeaccidentService } from 'shared/services/typeaccident.service';
 import { ActionassignmentService } from 'shared/services/actionassignment.service';
 import { AccidentpictureService } from './services/accidentpicture.service';
 import { ActionaccidentService } from './services/actionaccident.service';
@@ -161,6 +162,8 @@ import { NewaccidentagentshbitComponent } from './component/insertion/newacciden
 import { VwagentfinderService } from './services/vwagentfinder.service';
 import { VwactionaccidentService } from './services/vwactionaccident.service';
 import { LogonComponent } from './component/logon/logon.component';
+import { TypeaccidentComponent } from './component/typeaccident/typeaccident.component';
+import { NewtypeaccidentComponent } from './component/insertion/newtypeaccident/newtypeaccident.component';
 /* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
@@ -330,7 +333,9 @@ import { LogonComponent } from './component/logon/logon.component';
     NewactivityComponent,
     NewaccidentagentshbitComponent,
     CalendarComponent,
-    LogonComponent
+    LogonComponent,
+    TypeaccidentComponent,
+    NewtypeaccidentComponent
   ],
   providers: [
     PostService,
@@ -362,6 +367,7 @@ import { LogonComponent } from './component/logon/logon.component';
     BitService,
     AgentService,
     AccidentService,
+    TypeaccidentService,
     AccidentagentshService,
     AccidentagenteeService,
     AccidentagenttpService,
