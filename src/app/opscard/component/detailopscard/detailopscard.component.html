@@ -1,0 +1,65 @@
+<p-panel class="ppanel" header="Expert" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+  <div class="con">
+    <div *ngIf="detailopscard">
+      <div class="form-group row">
+        <label for="chidsite" class="col-sm-2 col-form-label">site : </label>
+        <div class="col-sm-10">
+          <app-autocomplete [i_item]="detailopscard.idsite" [service]="sites" [functionName]="displayNameSite"
+            [args]="['name']" (changeItem)="onChangeSiteOfdetailopscard(detailopscard, 'idsite', $event)">
+          </app-autocomplete>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="izone" class="col-sm-2 col-form-label">zone : </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="izone" [(ngModel)]="detailopscard.zone" placeholder="la zone">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="chidwork" class="col-sm-2 col-form-label">work : </label>
+        <div class="col-sm-10">
+          <app-autocomplete [i_item]="detailopscard.idwork" [service]="works" [functionName]="displayNameWork"
+            [args]="['name']" (changeItem)="onChangeWorkOfdetailopscard(detailopscard, 'idwork', $event)">
+          </app-autocomplete>
+        </div>
+      </div>
+
+      <div class="form-group row grcard">
+        <div class="card bg-light">
+          <div class="card-header">Execution</div>
+          <div class="card-body">
+            <p-radioButton name="grstarttype" value="I" label="Immediate  " [(ngModel)]="detailopscard.starttype">
+            </p-radioButton>
+            <p-radioButton name="grstarttype" value="S" label="dans un délai necessaire  "
+              [(ngModel)]="detailopscard.starttype">
+            </p-radioButton>
+          </div>
+        </div>
+        <div class="card bg-light">
+          <div class="card-header">type</div>
+          <div class="card-body">
+            <p-radioButton name="grkind" value="A" label="Acte dangereux  " [(ngModel)]="detailopscard.kind">
+            </p-radioButton>
+            <p-radioButton name="grkind" value="S" label="Situation dangereuse  " [(ngModel)]="detailopscard.kind">
+            </p-radioButton>
+            <p-radioButton name="grkind" value="N" label="Presque accident  " [(ngModel)]="detailopscard.kind">
+            </p-radioButton>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <p-footer>
+      <div class="clupdate">
+        <button class="btn btn-warning" (click)="hideNewDialoge()">
+          <i class="fa fa-times">Annuler</i>
+        </button>
+        <button class="btn btn-success" (click)="updateDetailopscard(detailopscard)">
+          <i class="fa fa-check">Valider</i>
+        </button>
+      </div>
+    </p-footer>
+</p-panel>

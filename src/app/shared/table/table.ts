@@ -850,11 +850,14 @@ export interface Opscard {
     curdate?: Date;
     site?: string;
     measure?: string;
+    action?: string;
     description?: string;
+    nameentreprise?: string;
     kind?: string;
     degree?: string;
     state?: string;
     jobsite?: string;
+    detailopscard: Detailopscard;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -863,3 +866,79 @@ export interface Opscard {
 
 
 // *****************************************
+
+export interface Work {
+    datecreate?: Date;
+    dateupdate?: Date;
+    id?: number;
+    name?: string;
+    owner?: string;
+}
+
+export interface Detailopscard {
+    datecreate?: Date;
+    dateupdate?: Date;
+    idopscard?: number;
+    idsite?: Site;
+    idwork?: Work;
+    kind?: string;
+    owner?: string;
+    starttype?: string;
+    zone?: string;
+}
+
+export interface DetailopscardstructurePK {
+    idopscard?: number;
+    idstructure?: number;
+}
+
+export interface Detailopscardstructure {
+    datecreate?: Date;
+    dateupdate?: Date;
+    detailopscard?: Detailopscard;
+    detailopscardstructurePK?: DetailopscardstructurePK;
+    lastuser?: string;
+    owner?: string;
+    structure?: Structure;
+}
+
+export interface ActionopscardPK {
+  idopscard?: number;
+  idaction?: number;
+}
+
+
+export interface Actionopscard {
+    idaction?: number;
+    idopscard?: number;
+    kind?: string;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
+export interface Vwactionopscard {
+  id?: string;
+  idopscard?: number;
+  idaction?: number;
+  kind?: string;
+  state?: string;
+  name?: string;
+  owner?: string;
+  lastuser?: string;
+  datecreate?: Date;
+  dateupdate?: Date;
+}
+
+
+export interface Vwreststructureofopscard {
+  id?: string;
+  idopscard?: number;
+  idstructure?: number;
+  name?: string;
+  owner?: string;
+  lastuser?: string;
+  datecreate?: Date;
+  dateupdate?: Date;
+}

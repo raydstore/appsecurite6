@@ -5,6 +5,7 @@ import { TreeNode } from 'primeng/api';
 import { NotFoundError } from 'app/core/component/common/not-found-error';
 import { AppError } from 'app/core/component/common/app-error';
 import { BadInput } from 'app/core/component/common/bad-input';
+import { VwopscardService } from 'shared/services/vwopscard.service';
 
 @Component({
   selector: 'app-opscard',
@@ -12,7 +13,7 @@ import { BadInput } from 'app/core/component/common/bad-input';
   styleUrls: ['./opscard.component.css']
 })
 export class OpscardComponent implements OnInit {
-  opscards: any[];
+  opscards: Opscard[];
   cols: any[];
   selectedOpscard: Opscard;
   selectedNode: TreeNode;
@@ -25,7 +26,10 @@ export class OpscardComponent implements OnInit {
     curdate: new Date(),
     site: '',
     measure: '',
+    action: '',
     description: '',
+    nameentreprise: '',
+    detailopscard: null,
     kind: 'S',
     degree: 'L',
     state: 'C',
@@ -36,9 +40,9 @@ export class OpscardComponent implements OnInit {
   dialogVisible = false;
   newMode = false;
 
-  titlelist = 'Marque';
+  titlelist = 'Ops Card';
 
-  constructor(private service: OpscardService) {
+  constructor(private vwopscardService: VwopscardService, private service: OpscardService) {
   }
 
   ngOnInit() {
@@ -58,6 +62,7 @@ export class OpscardComponent implements OnInit {
     this.service.getAll()
       .subscribe(opscards => {
         this.opscards = opscards;
+        console.log('t = ' + JSON.stringify(opscards));
       });
   }
 
@@ -98,8 +103,7 @@ export class OpscardComponent implements OnInit {
       );
   }
 
-  updateOpscard(_opscard, input: HTMLInputElement) {
-    _opscard.name = input.value;
+  updateOpscard(_opscard) {
     this.service.update(_opscard)
       .subscribe(updateopscard => {
         this.loadData();
@@ -127,6 +131,7 @@ export class OpscardComponent implements OnInit {
       site: '',
       measure: '',
       description: '',
+      detailopscard: null,
       kind: 'S',
       degree: 'L',
       state: 'C',
@@ -141,6 +146,7 @@ export class OpscardComponent implements OnInit {
   }
 
   create() {
+    this.dialogVisible = false;
     this.service.create(this.newOpscard)
     .subscribe(newOpscard => {
       this.loadData();
@@ -151,6 +157,24 @@ export class OpscardComponent implements OnInit {
         throw error;
       }
     });
+  }
+
+
+  /* updateOpscard(item) {
+    this.service.update(item).
+    subscribe(newOpscard => {
+      this.loadData();
+    }, (error: AppError) => {
+      this.opscards.splice(0, 1);
+      if (error instanceof BadInput) {
+      } else {
+        throw error;
+      }
+    });
+  } */
+
+  onChangeDate(item, event) {
+
   }
 
 }

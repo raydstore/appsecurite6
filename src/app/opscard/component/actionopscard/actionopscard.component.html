@@ -1,0 +1,90 @@
+<div class="card bg-light">
+    <div class="card-header alCenter cardtitle">
+
+      <h4 class="titleform">
+        <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
+      </h4>
+      <div class="btn-toolbar btnright" role="toolbar" aria-label="Toolbar with button groups">
+      <button class="btn btn-success" (click)="showNewDialoge()">
+        <i class="fa fa-plus">  Action</i>
+      </button>
+    </div>
+    </div>
+
+
+    <p-dataTable [value]="actionopscards" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
+      (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" rowGroupMode="subheader"
+      groupField="kind" sortField="kind">
+
+  <ng-template pTemplate="rowgroupheader" let-rowData>
+      <h4 class="colgroup decal4">{{ getNameOfKind(rowData.kind) }}</h4>
+  </ng-template>
+      <p-column expander="true" styleClass="col-icon" [style]="{'width':'30px'}"></p-column>
+      <p-column field="name" header="Name"></p-column>
+      <p-column styleClass="col-button" [style]="{'width':'60px'}">
+        <ng-template let-m="rowData" pTemplate="body">
+          <button class="btn btn-danger" (click)="deleteAction(m)">
+            <i class="fa fa-minus"></i>
+          </button>
+        </ng-template>
+      </p-column>
+      <ng-template let-item pTemplate="rowexpansion">
+        <div class="container">
+          <div class="form-group row">
+            <label for="chname" class="col-sm-2 col-form-label">name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="chname" [value]="item.name" placeholder="l'action" #name>
+            </div>
+          </div>
+          <div class="clupdate">
+            <button class="btn btn-success" (click)="updateAction(item, name)">
+              <i class="fa fa-check">Valider</i>
+            </button>
+            <button class="btn btn-warning" (click)="cancelUpdate(item)">
+              <i class="fa fa-times">Annuler</i>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataTable>
+  </div>
+
+  <p-dialog [header]="'Nouvelle action'" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="600">
+    <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newAction">
+      <div class="container">
+        <!-- <div class="form-group row">
+          <label  for="iid" class="col-sm-1 col-form-label">id : </label>
+          <div class="col-sm-2">
+             <input type="text" class="form-control" id="chid" [(ngModel)]="newAction.id" placeholder="Identificateur" readonly>
+          </div>
+        </div> -->
+        <div class="form-group row">
+          <label  for="iname" class="col-sm-1 col-form-label">name</label>
+          <div class="col-sm-11">
+            <input type="text" id="iname" class="form-control" [(ngModel)]="newAction.name" placeholder="l'action">
+          </div>
+        </div>
+        <!-- <div class="alert alert-secondary" role="alert">
+          <h5 class="alert-heading">nature :</h5>
+          <hr class="hrline">
+          <div class="radio">
+            <div>
+              <label>
+                <input [(ngModel)]="newAction.kind" type="radio" name="rb" value="A"> Action
+              </label>
+            </div>
+            <div>
+              <label>
+                <input [(ngModel)]="newAction.kind" type="radio" name="rb" value="R"> Recommendation
+              </label>
+            </div>
+          </div>
+        </div> -->
+        <!-- </div> -->
+        <div class="toolbtn">
+          <button class="btn btn-primary" (click)="createAction()">Valider</button>
+          <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
+        </div>
+      </div>
+    </div>
+    </p-dialog>

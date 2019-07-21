@@ -1,3 +1,8 @@
+import { VwactionopscardService } from './services/vwactionopscard.service';
+import { WorkService } from './services/work.service';
+import { DetailopscardstructureService } from './services/detailopscardstructure.service';
+import { DetailopscardService } from './services/detailopscard.service';
+import { ActionopscardService } from './services/actionopscard.service';
 import { TypeaccidentService } from 'shared/services/typeaccident.service';
 import { ActionassignmentService } from 'shared/services/actionassignment.service';
 import { AccidentpictureService } from './services/accidentpicture.service';
@@ -28,8 +33,8 @@ import {
   DropdownModule,
   GrowlModule,
   InplaceModule,
-  TabViewModule,
 } from 'primeng/primeng';
+import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
 import { PickListModule } from 'primeng/picklist';
 import { ListboxModule } from 'primeng/listbox';
@@ -164,6 +169,8 @@ import { VwactionaccidentService } from './services/vwactionaccident.service';
 import { LogonComponent } from './component/logon/logon.component';
 import { TypeaccidentComponent } from './component/typeaccident/typeaccident.component';
 import { NewtypeaccidentComponent } from './component/insertion/newtypeaccident/newtypeaccident.component';
+import { VwopscardService } from './services/vwopscard.service';
+import { VwreststructureofopscardService } from './services/vwreststructureofopscard.service';
 /* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
@@ -412,7 +419,14 @@ import { NewtypeaccidentComponent } from './component/insertion/newtypeaccident/
     VwagentfinderService,
     ActionaccidentService,
     VwactionaccidentService,
+    VwopscardService,
     AccidentpictureService,
+    ActionopscardService,
+    DetailopscardService,
+    DetailopscardstructureService,
+    WorkService,
+    VwactionopscardService,
+    VwreststructureofopscardService,
     PrintService
   ]
 })

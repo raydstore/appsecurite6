@@ -39,6 +39,7 @@ import { TypeOperationComponent } from 'shared/component/type-operation/type-ope
 import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.component';
 import { SharedModule } from './shared/shared.module';
 import { OpscardModule } from './opscard/opscard.module';
+import { WorkComponent } from './opscard/component/work/work.component';
 /* import { TreeTableModule } from 'primeng/primeng';
 import { TreeNode } from 'primeng/api'; */
 
@@ -88,6 +89,7 @@ import { TreeNode } from 'primeng/api'; */
       { path: 'structure', component: StructureComponent },
       { path: 'agent', component: AgentComponent },
       { path: 'entreprise', component: EntrepriseComponent },
+      { path: 'work', component: WorkComponent },
       { path: 'nature', component: NatureComponent },
       { path: 'bit', component: BitComponent },
       { path: 'rank', component: RankComponent },

@@ -16,7 +16,7 @@
 .clright {
    /*  float: right; */
 }
-/* 
+/*
 .container {
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@
 /* .clcolumn {
     display: flex;
     flex-direction: row;
-   
+
 } */
 
  /* margin-bottom: 20px!important;
@@ -58,10 +58,17 @@
      display: flex;
      padding-top: 10px;
      border-radius: 0px;
+     flex-direction: column;
+     /*background-color: red;*/
  }
 
- .flex-item {
-     width: 500px;
+ .ca {
+     width: 100%;
+     flex: 2;
+     flex-grow: 1;
+     padding-right: 0.5rem;
+     /* background-color: green; */
+
  }
 
  .clcara {
@@ -71,4 +78,13 @@
  .toolbtn {
     float: right;
     /* padding-bottom: 15px; */
+}
+
+.clcolumn {
+  display: flex;
+  /* width: 500px!important;*/
+  /*background-color: blue;*/
+  flex-grow: 1;
+  padding-top: 0.5rem;
+  align-items: stretch!important;
 }

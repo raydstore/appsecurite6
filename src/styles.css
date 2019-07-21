@@ -42,7 +42,7 @@ body {
    position: relative;
    right: 100px; */
    /* float: right; */
-   /* align-self: flex-end!important; 
+   /* align-self: flex-end!important;
    background-color: blue; */
 
    /* position: relative;
@@ -191,11 +191,24 @@ body {
 .ui-picklist-source-controls {
     display: none !important;
   }
-  
+
   .ui-picklist-target-controls {
     display: none !important;
   }
-  
+
   .ui-picklist-listwrapper {
     width: 45% !important;
   }
+
+  .grcard {
+    padding-left: 15px;
+  }
+
+  .grcard  div.card {
+    margin-right: 15px;
+  }
+
+  .ppanel .ui-panel .ui-panel-content {
+    background-color: lightblue!important;
+  }
+

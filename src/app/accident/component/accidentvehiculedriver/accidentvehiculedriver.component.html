@@ -1,4 +1,4 @@
-<p-card title="Info Chauffeur" [style]="{width: '360px'}">
+<p-card title="Info Chauffeur" >
   <div class="form-group row">
     <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
     <div class="col-sm-11 clkind">
@@ -11,7 +11,7 @@
         </button>
     </div>
    <!--  <div>
-      
+
     </div> -->
   </div>
   <!-- <div *ngIf="!modeChangeClassification === true; showdiv"> -->
@@ -39,7 +39,7 @@
   <div class="form-group row">
     <label for="chdateofbirth" class="col-sm-4 col-form-label">né le : </label>
     <div class="col-sm-8">
-        <app-calendar  class="clcalendar" id="chdateofbirth" [date]="accidentvehiculedriver.dateofbirth" 
+        <app-calendar  class="clcalendar" id="chdateofbirth" [date]="accidentvehiculedriver.dateofbirth"
         [isTime]="false" [dateFormat]="'dd/mm/yy'" (changeDate)="onChangeDate(accidentvehiculedriver, $event)"></app-calendar>
     </div>
   </div>
@@ -69,7 +69,7 @@
   <div class="form-group row">
     <label for="chissuedon" class="col-sm-4 col-form-label">délivré le : </label>
     <div class="col-sm-8">
-      <app-calendar  class="clcalendar" id="chissuedon" [date]="accidentvehiculedriver.issuedon" 
+      <app-calendar  class="clcalendar" id="chissuedon" [date]="accidentvehiculedriver.issuedon"
         [isTime]="false" [dateFormat]="'dd/mm/yy'" (changeDate)="onChangeIssuedon(accidentvehiculedriver, $event)"></app-calendar>
     </div>
   </div>

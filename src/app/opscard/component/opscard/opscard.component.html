@@ -57,48 +57,121 @@
     <ng-template pTemplate="rowexpansion" let-item>
       <tr>
         <td [attr.colspan]="6">
+          <!-- <p-tabView>
+                <p-tabPanel [selected]="true" [header]="'Détail'"> -->
           <div class="container">
-            <div class="form-group row">
-              <label for="iid" class="col-sm-3 col-form-label">id : </label>
-              <div class="col-sm-2">
-                <input type="text" class="form-control" id="iid" [(ngModel)]="item.id"
-                  placeholder="Identificateur" readonly>
+            <p-panel class="ppanel" header="Observateur" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="form-group row">
+                <label for="iid" class="col-sm-3 col-form-label">id : </label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" id="iid" [(ngModel)]="item.id" placeholder="Identificateur"
+                    readonly>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="isite" class="col-sm-3 col-form-label">site : </label>
-              <div class="col-sm-7">
-                <input type="text" class="form-control" id="isite" [(ngModel)]="item.site" placeholder="le nom du site">
+              <div class="form-group row">
+                <label for="chcurdate" class="col-sm-3 col-form-label">date : </label>
+                <div class="col-sm-5">
+                  <!-- '    le : dd/mm/yy       à : ' -->
+                  <app-calendar id="chcurdate" [date]="item.curdate" [isTime]="true"
+                    [dateFormat]="'    le : dd/mm/yy       à : '" (changeDate)="onChangeDate(item, $event)">
+                  </app-calendar>
+                  <!-- <input type="hidden" [(ngModel)]="newid" value="opscard.curdate | date : 'yyMMddHHmmss'"> -->
+                </div>
               </div>
-            </div>
-            <!--  <div class="form-group row">
-                          <label for="iname" class="col-sm-3 col-form-label">date : </label>
-                          <div class="col-sm-7">
-                            <input type="text" class="form-control" id="iname" [(ngModel)]="newOpscard.observer" placeholder="le nom du Activity">
-                          </div>
-                        </div>  -->
-            <div class="form-group row">
-              <label for="iobserver" class="col-sm-3 col-form-label">observation : </label>
-              <div class="col-sm-7">
-                <input type="text" class="form-control" id="iobserver" [(ngModel)]="item.observer"
-                  placeholder="l'observation">
+              <div class="form-group row">
+                <label for="isite" class="col-sm-3 col-form-label">site : </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="isite" [(ngModel)]="item.site"
+                    placeholder="le nom du site">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="idescription" class="col-sm-3 col-form-label">description : </label>
-              <div class="col-sm-7">
-                <input type="text" class="form-control" id="idescription" [(ngModel)]="item.description"
-                  placeholder="la description">
+              <div class="form-group row">
+                <label for="iobserver" class="col-sm-3 col-form-label">observation : </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="iobserver" [(ngModel)]="item.observer"
+                    placeholder="l'observation">
+                </div>
               </div>
-            </div>
-            <div class="clupdate">
-              <button class="btn btn-warning" (click)="hideNewDialoge()">
-                <i class="fa fa-times">Annuler</i>
-              </button>
-              <button class="btn btn-success" (click)="create($event)">
-                <i class="fa fa-check">Valider</i>
-              </button>
-            </div>
+              <div class="form-group row">
+                <label for="idescription" class="col-sm-3 col-form-label">description : </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="idescription" [(ngModel)]="item.description"
+                    placeholder="la description">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="imeasure" class="col-sm-3 col-form-label">measure : </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" id="imeasure" [(ngModel)]="item.measure"
+                    placeholder="la measure">
+                </div>
+              </div>
+              <div class="form-group row grcard">
+                <div class="card bg-light mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Sonatrach / Entreprise</div>
+                  <div class="card-body">
+                    <p-radioButton name="grjobsite" value="L" label="Local  " [(ngModel)]="item.jobsite">
+                    </p-radioButton>
+                    <p-radioButton name="grjobsite" value="E" label="Extrat  " [(ngModel)]="item.jobsite">
+                    </p-radioButton>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id="inameentreprise" [(ngModel)]="item.nameentreprise"
+                        placeholder="le nom de l'entreprise">
+                    </div>
+                  </div>
+                </div>
+                <div class="card bg-light mb-3" style="max-width: 25rem;">
+                  <div class="card-header">Situation</div>
+                  <div class="card-body">
+                    <p-radioButton name="grstate" value="C" label="Crée  " [(ngModel)]="item.state">
+                    </p-radioButton>
+                    <p-radioButton name="grstate" value="A" label="Accepté  " [(ngModel)]="item.state">
+                    </p-radioButton>
+                    <p-radioButton name="grstate" value="I" label="ignoré  " [(ngModel)]="item.state">
+                    </p-radioButton>
+                    <p-radioButton name="grstate" value="T" label="Traité  " [(ngModel)]="item.state">
+                    </p-radioButton>
+                  </div>
+                </div>
+                <div class="card bg-light mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Degrée</div>
+                  <div class="card-body">
+                    <p-radioButton name="grdegree" value="L" label="Bas  " [(ngModel)]="item.degree">
+                    </p-radioButton>
+                    <p-radioButton name="grdegree" value="E" label="Moyen  " [(ngModel)]="item.degree">
+                    </p-radioButton>
+                    <p-radioButton name="grdegree" value="E" label="Elvé  " [(ngModel)]="item.degree">
+                    </p-radioButton>
+                  </div>
+                </div>
+
+              </div>
+              <p-footer>
+                <div class="clupdate">
+                  <button class="btn btn-warning" (click)="hideNewDialoge()">
+                    <i class="fa fa-times">Annuler</i>
+                  </button>
+                  <button class="btn btn-success" (click)="updateOpscard(item)">
+                    <i class="fa fa-check">Valider</i>
+                  </button>
+                </div>
+              </p-footer>
+            </p-panel>
+
+                <app-detailopscard [idopscard]="item.id"></app-detailopscard>
+
+            <p-panel class="ppanel" header="Relation" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+              <div class="con">
+
+                <app-detailopscardstructure [detailopscard]="item.detailopscard"></app-detailopscardstructure>
+
+                <p-card class="flex-item" header="Simple Card">
+                  <div>
+                    <app-actionopscard [opscard]="item"></app-actionopscard>
+                  </div>
+                </p-card>
+              </div>
+            </p-panel>
           </div>
         </td>
       </tr>
@@ -107,7 +180,7 @@
 </div>
 
 <p-dialog header="Nouveaux Activity" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="500">
+  width="800">
   <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newOpscard">
     <div class="container">
       <div class="form-group row">
@@ -118,17 +191,19 @@
         </div>
       </div>
       <div class="form-group row">
+        <label for="chcurdate" class="col-sm-3 col-form-label">date : </label>
+        <div class="col-sm-5">
+          <app-calendar id="chcurdate" [date]="newOpscard.curdate" [isTime]="true"
+            [dateFormat]="'    le : dd/mm/yy       à : '" (changeDate)="onChangeDate(newOpscard, $event)">
+          </app-calendar>
+        </div>
+      </div>
+      <div class="form-group row">
         <label for="isite" class="col-sm-3 col-form-label">site : </label>
         <div class="col-sm-7">
           <input type="text" class="form-control" id="isite" [(ngModel)]="newOpscard.site" placeholder="le nom du site">
         </div>
       </div>
-      <!--  <div class="form-group row">
-            <label for="iname" class="col-sm-3 col-form-label">date : </label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" id="iname" [(ngModel)]="newOpscard.observer" placeholder="le nom du Activity">
-            </div>
-          </div>  -->
       <div class="form-group row">
         <label for="iobserver" class="col-sm-3 col-form-label">observation : </label>
         <div class="col-sm-7">
@@ -143,14 +218,36 @@
             placeholder="la description">
         </div>
       </div>
-      <div class="clupdate">
-        <button class="btn btn-warning" (click)="hideNewDialoge()">
-          <i class="fa fa-times">Annuler</i>
-        </button>
-        <button class="btn btn-success" (click)="create($event)">
-          <i class="fa fa-check">Valider</i>
-        </button>
+      <div class="form-group row">
+        <label for="imeasure" class="col-sm-3 col-form-label">measure : </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="imeasure" [(ngModel)]="newOpscard.measure"
+            placeholder="la measure">
+        </div>
       </div>
+      <div class="form-group row grcard">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header">Sonatrach / Entreprise</div>
+          <div class="card-body">
+            <p-radioButton name="grjobsite" value="L" label="Local  " [(ngModel)]="newOpscard.jobsite">
+            </p-radioButton>
+            <p-radioButton name="grjobsite" value="E" label="Extrat  " [(ngModel)]="newOpscard.jobsite">
+            </p-radioButton>
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="inameentreprise" [(ngModel)]="newOpscard.nameentreprise"
+                placeholder="le nom de l'entreprise">
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="clupdate">
+          <button class="btn btn-warning" (click)="hideNewDialoge()">
+            <i class="fa fa-times">Annuler</i>
+          </button>
+          <button class="btn btn-success" (click)="create($event)">
+            <i class="fa fa-check">Valider</i>
+          </button>
+        </div>
     </div>
-  </div>
+    </div>
 </p-dialog>

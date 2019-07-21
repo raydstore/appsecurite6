@@ -33,9 +33,9 @@
     </p-column>
     <ng-template let-item pTemplate="rowexpansion">
         <div class="container">
-            <div class="flex-item clcolumn">
+            <div class="clcolumn">
                 <div class="ca flex-item">
-                    <p-card title="Info Vehicule" [style]="{width: '360px'}">
+                    <p-card title="Info Vehicule" >
                         <div class="form-group row">
                             <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
                             <div class="col-sm-11 clkind">
@@ -126,7 +126,7 @@
                     </app-accidentvehiculedriver>
                 </div>
             </div>
-            <div class="flex-item clcolumn">
+            <div class="clcolumn">
                 <div class="ca flex-item">
                     <app-accidentvehiculeinsurance [accidentvehiculeinsurance]="getAccidentvehiculeinsurance(item)"
                         [mode]="modeinsurance" (operation)="performAcccidentvehiculeinsurance($event)">
@@ -232,7 +232,7 @@
                 </div>
             </div>
             <!--   <div class="flex-item">
-               
+
             </div> -->
         </div>
 
