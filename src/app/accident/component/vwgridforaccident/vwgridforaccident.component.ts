@@ -7,6 +7,7 @@ import { VwnotnatureofaccidentService } from 'shared/services/vwnotnatureofaccid
 import { DamageService } from './../../../shared/services/damage.service';
 import { VwgridforaccidentService } from './../../../shared/services/vwgridforaccident.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 enum RateButtonPressed {cancelPressed = 0, ratePressed = 1}
 interface RateStatus {
@@ -17,7 +18,20 @@ interface RateStatus {
 @Component({
   selector: 'app-vwgridforaccident',
   templateUrl: './vwgridforaccident.component.html',
-  styleUrls: ['./vwgridforaccident.component.css']
+  styleUrls: ['./vwgridforaccident.component.css'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+        state('void', style({
+            transform: 'translateX(-10%)',
+            opacity: 0
+        })),
+        state('active', style({
+            transform: 'translateX(0)',
+            opacity: 1
+        })),
+        transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+]
 })
 
 export class VwgridforaccidentComponent implements OnInit {
@@ -66,7 +80,7 @@ export class VwgridforaccidentComponent implements OnInit {
 
   cols: any[];
   expandAll = false;
-  showLabel = false;
+  showLabel = true;
   titleExpandAll = `Tous déveloper      `;
   titleShowLabel = `Affiché les libéllé `;
 
@@ -126,11 +140,9 @@ export class VwgridforaccidentComponent implements OnInit {
 
 ExpandedRow()   {
   if (this.expandAll) {
-     this.expandedRows = {"1": 1, "2": 1, "3": 1, "4": 1};
-     console.log('true');
+     this.expandedRows = {"1": true, "2": true, "3": true, "4": true};
   } else {
       this.expandedRows = {};
-      console.log('false');
   }
 }
 
@@ -221,7 +233,7 @@ StringToCellGrid(col): CellGrid {
 
   newAccidentNature(accidentnature: Accidentnature) {
     this.accidentnatureService.create(accidentnature)
-      .subscribe(newaccidentnature => { 
+      .subscribe(newaccidentnature => {
       }
       , (error: AppError) => {
         if (error instanceof BadInput) {
@@ -275,7 +287,7 @@ StringToCellGrid(col): CellGrid {
     this.accidentnatureService.getItem('id;idaccident=' + this.accident.id + ';idnature=' + idnature)
       .subscribe(accidentnature => {
         _accidentnature = accidentnature;
-      }, (error: AppError) => {  
+      }, (error: AppError) => {
         this.damages.splice(0, 1);
         if (error instanceof BadInput) {
         } else {

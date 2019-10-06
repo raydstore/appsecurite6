@@ -28,6 +28,7 @@ export class AccidentagenteeComponent implements OnInit {
   newAccidentagentee: Accidentagentee = {
     datecreate: new Date(),
     dateupdate: new Date(),
+    dateofbirth: new Date(),
     accidentagenteePK: {iddamage : this.iddamage, id: 0},
     accidentdomain: 2,
     idgrid: this.idgrid,
@@ -35,25 +36,25 @@ export class AccidentagenteeComponent implements OnInit {
     function: '',
     identreprise: null,
     lastuser: 'ali',
-    samury: '',
+    samury: null,
     countstopwork: 0,
     typeaccident: 'L',
     owner: 'ali'
   };
   dialogVisible = false;
   newMode = false;
-  
+
   entreprises: any[];
   entreprise: Entreprise;
   lastids: any[];
   lastid: any;
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
 
-  constructor(private service: AccidentagenteeService, private serviceEntreprise: EntrepriseService, 
+  constructor(private service: AccidentagenteeService, private serviceEntreprise: EntrepriseService,
     private lastidService: LastidService) {
   }
 
@@ -134,8 +135,10 @@ export class AccidentagenteeComponent implements OnInit {
 
   deleteAccidentagentee(_accidentagentee: Accidentagentee) {
     let index = this.accidentagentees.indexOf(_accidentagentee);
+    console.log('av pk = ' + JSON.stringify(_accidentagentee));
     this.accidentagentees.splice(index, 1);
     this.accidentagentees = [...this.accidentagentees];
+    console.log('ap pk = ' + JSON.stringify(_accidentagentee));
     this.service.delete(_accidentagentee.accidentagenteePK)
       .subscribe(
       () => { this.loadData(); },
@@ -151,10 +154,11 @@ export class AccidentagenteeComponent implements OnInit {
       );
   }
 
-  updateAccidentagentee(_accidentagentee, inputSamury: HTMLInputElement) {
-    _accidentagentee.samury = inputSamury.value;
+  updateAccidentagentee(_accidentagentee) {
+    /* _accidentagentee.samury = inputSamury.value;  , inputSamury: HTMLInputElement*/
     this.service.update(_accidentagentee)
       .subscribe(updateaccidentagentee => {
+        console.log('_accidentagentee = ' + JSON.stringify(_accidentagentee));
         this.loadData();
       });
   }
@@ -169,6 +173,7 @@ export class AccidentagenteeComponent implements OnInit {
     this.newAccidentagentee = {
       datecreate: new Date(),
       dateupdate: new Date(),
+      dateofbirth: new Date(),
       accidentagenteePK: {iddamage: this.iddamage, id: 0} ,
       name: '',
       idgrid: this.idgrid,
@@ -177,7 +182,7 @@ export class AccidentagenteeComponent implements OnInit {
       lastuser: 'ali',
       countstopwork: 0,
       accidentdomain: 2,
-      samury: '',
+      samury: null,
       typeaccident: 'L',
       owner: 'ali'
     };
@@ -215,7 +220,7 @@ export class AccidentagenteeComponent implements OnInit {
   }
 
   cloneAccidentagentee(c: Accidentagentee): Accidentagentee {
-    let accidentagentee: Accidentagentee; 
+    let accidentagentee: Accidentagentee;
     accidentagentee = c;
     return accidentagentee;
   }

@@ -1,9 +1,9 @@
 <div class="alert alert-primary" role="alert">
     <p-checkbox [(ngModel)]="expandAll" binary="true" (click)="ExpandedRow()"></p-checkbox>{{ titleExpandAll }}
-    <p-checkbox [(ngModel)]="showLabel" binary="true" (click)="ShowLabels()"></p-checkbox>{{ titleShowLabel }}
+   <!--  <p-checkbox [(ngModel)]="showLabel" binary="true" (click)="ShowLabels()" ></p-checkbox>{{ titleShowLabel }} -->
 </div>
 <p-table [columns]="cols" [value]="vwgridforaccidents" dataKey="id" [expandedRowKeys]="expandedRows" expandableRows="true">
-    <ng-template pTemplate="header" let-columns>
+    <ng-template pTemplate="header" let-column let-columns="columns">
         <tr class="trheader">
             <th colspan="1" class="clcolgroup" style="width: 2.25em" [class.clwhite]="expandAll"></th>
             <th colspan="3" class="clcolgroup">Dommages aux personnes</th>
@@ -12,17 +12,14 @@
         </tr>
         <tr class="trheader">
             <th></th>
-            <th *ngFor="let col of columns; let i = index" [class.selheader]="indexheader == i + 1" (click)="indexheader = i + 1">
+            <th *ngFor="let col of cols; let i = index" [class.selheader]="indexheader == i + 1" (click)="indexheader = i + 1">
                 {{col.header}}
             </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-grid let-rowData let-expanded="expanded" let-columns="columns" expanded="true">
-        <tr expanded="true">
+        <tr expanded="true" *ngIf="!expandAll">
             <td class="rexpand">
-                <!--  <a href="#" [pRowToggler]="rowData">
-                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">{{grid.id}}</i>
-                </a> -->
                 {{grid.id}}
             </td>
             <td *ngFor="let col of columns; let i = index" [class.selheader]="indexheader == (i + 1)" [class.colred]="grid[col.field].iddamage != 0">
@@ -45,18 +42,4 @@
             </td>
         </tr>
     </ng-template>
-
-    <!-- 
-        <ng-template pTemplate="rowexpansion" let-grid let-columns="columns">
-        <tr *ngIf="getIdDamage(accident.id,  (indexheader - 1)*4 + grid.id).id != -1">
-            <td [attr.colspan]="8">
-                <div class="container" style="font-size:16px;padding:20px">
-                    <app-elementswitch [iddamage]="infoDamage.id" [idgrid]="(indexheader - 1)*4 + grid.id" [titlelist]="getTitle(grid,indexheader)"
-                        [accidentdomain]="indexheader"></app-elementswitch>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-     -->
-
 </p-table>

@@ -2,7 +2,7 @@ import { InputData } from './../../../table/table';
 import { MarkService } from 'shared/services/mark.service';
 import { NewData } from './../newData';
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges } from '@angular/core';
-import { Mark } from 'shared/table/table';
+import { Mark , UserInfo} from 'shared/table/table';
 
 
 const _newMark: Mark = {
@@ -11,7 +11,7 @@ const _newMark: Mark = {
   id: 0,
   lastuser: 'ali',
   name: '',
-  owner: 'ali'
+  owner: UserInfo.name
 };
 
 @Component({

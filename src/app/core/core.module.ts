@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
+import { LoginComponent } from './component/login/login.component';
+import { NoAccessComponent } from './component/no-access/no-access.component';
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { HomeComponent } from './component/home/home.component';
   ],
   declarations: [
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    NoAccessComponent
   ],
   exports: [
     NavComponent,

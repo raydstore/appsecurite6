@@ -32,10 +32,25 @@ export class DataService<T> {
             .catch(this.handleError);
     }
 
+    getPrimaryKey(id: string | any): string {
+      let result;
+      if (Object(id) !== id) {
+        result = id;
+      } else {
+        result = 'id';
+        for (const key in id) {
+          if (id.hasOwnProperty(key)) {
+            result = result + ';' + key + '=' + id[key];
+          }
+        }
+      }
+      return result;
+    }
+
     getByQueryParam(listParam: any): Observable<T[]> {
         let query: String = '';
         let op: String = '?';
-        for (let param in listParam) {
+        for (const param in listParam) {
         query += op + param + '=' + listParam[param];
             op = op === '?' ? '&&' : '&&';
         }
@@ -68,9 +83,14 @@ export class DataService<T> {
     }
 
     delete(id): Observable<T> {
-        return this.http.delete<T>(this.url + '/' + id, {headers: this.headers})
+        return this.http.delete<T>(this.url + '/' + this.getPrimaryKey(id), {headers: this.headers})
             .catch(this.handleError);
     }
+
+    /* deleteComplex(id): Observable<T> {
+      return this.http.delete<T>(this.url + '/' + this.getPrimaryKey(id), {headers: this.headers})
+          .catch(this.handleError);
+    } */
 
     private handleError(error) {
         if (error.status === 400) {

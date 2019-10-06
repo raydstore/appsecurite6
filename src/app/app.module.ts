@@ -40,6 +40,8 @@ import { UnitmeasureComponent } from 'shared/component/unitmeasure/unitmeasure.c
 import { SharedModule } from './shared/shared.module';
 import { OpscardModule } from './opscard/opscard.module';
 import { WorkComponent } from './opscard/component/work/work.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
 /* import { TreeTableModule } from 'primeng/primeng';
 import { TreeNode } from 'primeng/api'; */
 
@@ -69,6 +71,14 @@ import { TreeNode } from 'primeng/api'; */
     CoreModule,
     OpscardModule,
     // TreeTableModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+             return     localStorage.getItem('access_token');},
+        whitelistedDomains: ['10.1.0.150:8080/Hselife'],
+        blacklistedRoutes: ['http://10.1.0.150:8080/Hselife/auth/login']
+      }
+    }),
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'object', component: ObjectComponent },

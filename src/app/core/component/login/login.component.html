@@ -1,0 +1,13 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="signeIn(f.value)">
+  <h2 class="form-signin-heading">
+    entré le nom d'utilisateur et le mot de passe
+  </h2>
+  <div *ngIf="invalidLogin" class="alert alert-danger">
+    utilisateur et/ou mot de passe incorrect
+  </div>
+  <label for="inputuser" class="sr-only">utilisateur</label>
+  <input id="inputuser" name="username" class="form-control"/>
+  <label for="inputpassword" class="sr-only">mot de passe</label>
+  <input id="inputpassword" name="password" class="form-control"/>
+  <button class="btn btn-lg btn-primary btn-block"></button>
+</form>

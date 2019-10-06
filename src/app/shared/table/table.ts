@@ -7,6 +7,13 @@ export interface InputData<T> {
     cancelDialog: boolean;
 }
 
+export let UserInfo: any = {
+  name: '',
+  group: '',
+  role: '',
+  token: ''
+};
+
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
 export enum Mode {insert = 0, update = 1, delete = 2}
 export interface EventArgs {
@@ -482,26 +489,28 @@ export interface Accidentagentee {
     accidentdomain: number;
     typeaccident: string;
     idgrid: number;
-    samury: string;
+    samury?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
+    dateofbirth?: Date;
 }
 
 export interface Accidentagenttp {
     accidentagenttpPK: AccidentagenttpPK;
     name?: string;
     function?: string;
-    countstopwork: number;
-    accidentdomain: number;
-    typeaccident: string;
-    idgrid: number;
-    samury: string;
+    countstopwork?: number;
+    accidentdomain?: number;
+    typeaccident?: string;
+    idgrid?: number;
+    samury?: string;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
     dateupdate?: Date;
+    dateofbirth?: Date;
 }
 
 export interface Accidentvehicule {

@@ -101,7 +101,7 @@ export class AccidentvehiculeComponent implements OnInit {
   modeinsurance: Mode = Mode.update;
   modeowner: Mode = Mode.update;
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
@@ -114,7 +114,7 @@ export class AccidentvehiculeComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
+    // this.loadLastId();
   }
 
   initAccidentvehiculeinsurance()  {

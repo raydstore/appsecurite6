@@ -54,7 +54,7 @@ export class PropertyComponent implements OnInit {
   lastids: any[];
   lastid: any;
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
@@ -198,7 +198,7 @@ export class PropertyComponent implements OnInit {
   }
 
   cloneProperty(c: Property): Property {
-    let property: Property; 
+    let property: Property;
     property = c;
     return property;
   }

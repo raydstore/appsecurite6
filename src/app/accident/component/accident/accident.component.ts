@@ -93,7 +93,7 @@ export class AccidentComponent implements OnInit {
 
 
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
@@ -356,7 +356,7 @@ export class AccidentComponent implements OnInit {
   get today() {
     return new Date();
   }
-  /* 
+  /*
     getDate(date): Date {
        return new Date(date);
     } */

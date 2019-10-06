@@ -1,3 +1,8 @@
+<div *ngIf="username === ''; then logon else home"></div>
+<ng-template #logon>
+<app-login></app-login>
+</ng-template>
+<ng-template #home>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="#">App Securité HSE</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -56,7 +61,7 @@
         <a class="nav-link" routerLink="/">Apropos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" routerLink="/">disable</a>
+        <a class="nav-link disabled" (click)="logOut()">logout</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -191,3 +196,5 @@
 
     </div>
   </div>
+  </div>
+</ng-template>

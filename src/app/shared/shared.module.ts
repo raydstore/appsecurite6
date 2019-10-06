@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { VwactionopscardService } from './services/vwactionopscard.service';
 import { WorkService } from './services/work.service';
 import { DetailopscardstructureService } from './services/detailopscardstructure.service';
@@ -143,7 +144,8 @@ import { VwactionsendedService } from 'shared/services/vwactionsended.service';
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatInputModule, MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '../../../node_modules/@angular/material';
 import { VwsitenotinspectedService } from './services/vwsitenotinspected.service';
 import { VwinspectedsiteService } from './services/vwinspectedsite.service';
@@ -345,6 +347,7 @@ import { VwreststructureofopscardService } from './services/vwreststructureofops
     NewtypeaccidentComponent
   ],
   providers: [
+    AuthService,
     PostService,
     LabelService,
     SiteService,

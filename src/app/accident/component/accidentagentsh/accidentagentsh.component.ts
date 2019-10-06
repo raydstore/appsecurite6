@@ -59,7 +59,7 @@ export class AccidentagentshComponent implements OnInit {
   mInsert: Mode.insert = 0;
   mUpdate: Mode.update = 1;
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
@@ -246,7 +246,7 @@ export class AccidentagentshComponent implements OnInit {
   }
 
   cloneAccidentagentsh(c: Accidentagentsh): Accidentagentsh {
-    let accidentagentsh: Accidentagentsh; 
+    let accidentagentsh: Accidentagentsh;
     accidentagentsh = c;
     return accidentagentsh;
   }

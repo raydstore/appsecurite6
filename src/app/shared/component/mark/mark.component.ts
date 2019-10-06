@@ -6,7 +6,7 @@ import { BadInput } from '../../../core/component/common/bad-input';
 import { MarkService } from 'shared/services/mark.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
-import { Mark } from 'shared/table/table';
+import { Mark, UserInfo } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 

@@ -55,7 +55,7 @@ export class AccidentvehiculeshComponent implements OnInit {
   entreprises: any[];
   // titlelist = 'Marque';
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
@@ -65,7 +65,7 @@ export class AccidentvehiculeshComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    // this.loadLastId(); 
+    // this.loadLastId();
   }
 
   loadData() {
@@ -99,7 +99,7 @@ export class AccidentvehiculeshComponent implements OnInit {
       .merge(this.click$.filter(() => !this.instance.isPopupOpen()))
       .map(term => (term === '' ? this.entreprises : this.entreprises.filter(v => v.name.toLowerCase()
         .indexOf(term.toLowerCase()) > -1)).slice(0, 10));
- 
+
   formatter = (x: { name: string }) => x.name;
 
 

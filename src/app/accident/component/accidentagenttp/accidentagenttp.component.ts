@@ -30,13 +30,14 @@ export class AccidentagenttpComponent implements OnInit {
   newAccidentagenttp: Accidentagenttp = {
     datecreate: new Date(),
     dateupdate: new Date(),
+    dateofbirth: new Date(),
     accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
     accidentdomain: 3,
     name: '',
     idgrid: this.idgrid,
     function: '',
     lastuser: 'ali',
-    samury: '',
+    samury: null,
     countstopwork: 0,
     typeaccident: 'L',
     owner: 'ali'
@@ -47,7 +48,7 @@ export class AccidentagenttpComponent implements OnInit {
   lastids: any[];
   lastid: any;
 
-  @ViewChild('instance') instance: NgbTypeahead;
+  @ViewChild('instance', { static: false }) instance: NgbTypeahead;
   focus$ = new Subject<String>();
   click$ = new Subject<String>();
 
@@ -163,6 +164,7 @@ export class AccidentagenttpComponent implements OnInit {
     this.newAccidentagenttp = {
       datecreate: new Date(),
       dateupdate: new Date(),
+      dateofbirth: new Date(),
       accidentagenttpPK: { iddamage: this.iddamage, id: 0 },
       name: '',
       idgrid: this.idgrid,
@@ -170,7 +172,7 @@ export class AccidentagenttpComponent implements OnInit {
       lastuser: 'ali',
       countstopwork: 0,
       accidentdomain: 3,
-      samury: '',
+      samury: null,
       typeaccident: 'L',
       owner: 'ali'
     };

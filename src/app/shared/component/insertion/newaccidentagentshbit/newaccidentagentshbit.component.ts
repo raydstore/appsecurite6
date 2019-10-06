@@ -35,7 +35,7 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
   @Input() bits: Bit[];
   @Output() closeDialog = new EventEmitter<InputData<Accidentagentshbit>>();
 
-  @ViewChild('selBit') selBit: Bit = null;
+  @ViewChild('selBit', { static: false }) selBit: Bit = null;
 
   constructor(service: AccidentagentshbitService) {
     // _newAccidentagentshbit.name = this.accidentagentsh;
@@ -84,7 +84,7 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
       } else {
         result = item.id + ') ' + item.name;
       }
-      
+
       console.log('i 22222 ');
     /* for (const bit of this.bits) {
       if (bit.id === this.newT.idbit) {
@@ -92,7 +92,7 @@ export class NewaccidentagentshbitComponent extends NewData<Accidentagentshbit> 
         this.newT.idbitclass = bit.idbitclass;
         this.newT.kind = bit.kind;
         break;
-      } 
+      }
     }
     console.log('4');*/
   }
