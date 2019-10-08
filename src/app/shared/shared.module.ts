@@ -1,4 +1,5 @@
 import { AuthService } from './services/auth.service';
+import { LogonService } from './services/logon.service';
 import { VwactionopscardService } from './services/vwactionopscard.service';
 import { WorkService } from './services/work.service';
 import { DetailopscardstructureService } from './services/detailopscardstructure.service';
@@ -168,7 +169,7 @@ import { NewactivityComponent } from './component/insertion/newactivity/newactiv
 import { NewaccidentagentshbitComponent } from './component/insertion/newaccidentagentshbit/newaccidentagentshbit.component';
 import { VwagentfinderService } from './services/vwagentfinder.service';
 import { VwactionaccidentService } from './services/vwactionaccident.service';
-import { LogonComponent } from './component/logon/logon.component';
+// import { LogonComponent } from '../core/component/logon/logon.component';
 import { TypeaccidentComponent } from './component/typeaccident/typeaccident.component';
 import { NewtypeaccidentComponent } from './component/insertion/newtypeaccident/newtypeaccident.component';
 import { VwopscardService } from './services/vwopscard.service';
@@ -342,7 +343,6 @@ import { VwreststructureofopscardService } from './services/vwreststructureofops
     NewactivityComponent,
     NewaccidentagentshbitComponent,
     CalendarComponent,
-    LogonComponent,
     TypeaccidentComponent,
     NewtypeaccidentComponent
   ],
@@ -430,7 +430,8 @@ import { VwreststructureofopscardService } from './services/vwreststructureofops
     WorkService,
     VwactionopscardService,
     VwreststructureofopscardService,
-    PrintService
+    PrintService,
+    LogonService
   ]
 })
 export class SharedModule { }

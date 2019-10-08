@@ -23,6 +23,18 @@ export interface EventArgs {
     table?: any;
 }
 
+export interface Users {
+  id?: number;
+  idagent?: string;
+  name?: string;
+  username?: string;
+  password?: string;
+  owner?: string;
+  lastuser?: string;
+  datecreate?: Date;
+  dateupdate?: Date;
+}
+
 export interface Activity {
     id?: number;
     name?: string;

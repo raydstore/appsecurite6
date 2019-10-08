@@ -38,96 +38,60 @@ export class FaccidentComponent implements OnInit {
 
   agentDeclare: Agent;
   agentValidate: Agent;
-  // siteparent: Site;
   site: Site;
   newid: string;
-
-//   sites: Site[];
-  // agents: Agent[];
-
-  // public siteService: SiteService, public agentService: AgentService
   constructor() { }
 
   ngOnInit() {
-//  this.loadSite();
-  //  this.loadAgent();
   }
 
-  /* loadSite() {
-    this.siteService.getAll()
-      .subscribe(sites => {
-        this.sites = sites;
-      });
-  }
-
-  loadAgent() {
-    this.agentService.getAll()
-      .subscribe(agents => {
-        this.agents = agents;
-      });
-  } */
 
   onChangeDate(item: Accident, event) {
+    console.log('1');
     item.curdate = event;
+    console.log('2');
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    console.log(event);
+    console.log('3');
     const agent = <Agent> event;
     agent['_displayname'] = this.displayNameAgent(event, ['name']);
     this.item[field] = agent;
-    /* this.item[field]._displayname = this.displayNameAgent(event, ['name']); */
-    // item[field] = <Agent>event;
-    console.log(field + ' = ' + JSON.stringify(agent));
-    console.log('accident = ' + JSON.stringify(this.item));
+    console.log('4');
   }
 
   onChangeSiteOfItem(item: Accident, field: string, event) {
-    console.log(event);
-/*     
-    if ('_displayname' in event) {
-      console.log('123');
-      const v = event._displayname; */
+    console.log('5');
       this.item[field] = <Site> event;
       this.item[field]._displayname = this.displayNameSite(event, ['name']);
-/*     } else {
-      item[field] = event;
-    } */
-    console.log('------- = ' + JSON.stringify(this.item[field]));
+      console.log('6');
   }
 
 
-/*   perform(event, _table) { */
   perform(item: Accident, event) {
-    console.log('perform accident = ' + JSON.stringify(item));
-/*     console.log('table = ' + JSON.stringify(this.table)); */
-  //  console.log('dt = ' + JSON.stringify(_table));
-  const loockUp = ['idsite', 'idagentdeclare', 'idagentvalidate'];
-  for (const elmnt of loockUp) {
-    if (item[elmnt] != null) {
-      if ('_displayname' in item[elmnt]) {
-        delete item[elmnt]._displayname;
+    console.log('7');
+    const loockUp = ['idsite', 'idagentdeclare', 'idagentvalidate'];
+    for (const elmnt of loockUp) {
+      if (item[elmnt] != null) {
+        if ('_displayname' in item[elmnt]) {
+          delete item[elmnt]._displayname;
+        }
       }
     }
-  }
     let eventargs: EventArgs;
-    /* console.log('newid = ' + this.newid); */
-    /* console.log('event = ' + event); */
     eventargs = this.mode === Mode.insert ? { item: item, mode: Mode.insert, dialogVisible: false, table: this.table }
                                           : { item: item, mode: Mode.update, dialogVisible: false, table: this.table };
-    console.log('eventargs = ' + JSON.stringify(eventargs));
     this.operation.emit(eventargs);
+    console.log('7');
   }
 
-  
-
   cancel(item) {
-    console.log('cancel = ' + JSON.stringify(this.item));
     const eventargs: EventArgs = { item: this.item, mode: Mode.delete, dialogVisible: false };
     this.operation.emit(eventargs);
   }
 
   displayNameAgent(item: any, args: string[]): string {
+    console.log('8');
     let result = '';
    /*  */
     if (!isNullOrUndefined(item))  {
@@ -139,9 +103,11 @@ export class FaccidentComponent implements OnInit {
       }
     }
     return result;
+    console.log('9');
   }
 
   displayNameSite(item: any, args: string[]): string {
+    console.log('10');
     let result = '';
     if (item !== null) {
       if (args.length > 0) {
@@ -149,6 +115,7 @@ export class FaccidentComponent implements OnInit {
       }
     }
     return result;
+    console.log('11');
   }
 
 }

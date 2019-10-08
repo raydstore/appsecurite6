@@ -1,6 +1,6 @@
-<div *ngIf="username === ''; then logon else home"></div>
+<div *ngIf="!isLoggedIn(); then logon else home"></div>
 <ng-template #logon>
-<app-login></app-login>
+<app-logon></app-logon>
 </ng-template>
 <ng-template #home>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -60,9 +60,9 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Apropos</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" (click)="logOut()">logout</a>
-      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" (click)="logOut()">logout</a>
+      </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -78,8 +78,8 @@
   <div class="row">
     <div class="col-sm-2 clplleft">
       <div class="card my-4">
-        <h5 class="card-header  bg-dark text-light">Fichies</h5>
-        <div class="card-body">
+        <h5 class="card-header  bg-dark text-light">Fichier</h5>
+        <div class="card-body cb">
           <div class="row">
             <div>
               <nav class="d-none d-sm-block bg-light sidebar mb-0">
@@ -193,7 +193,15 @@
       <router-outlet></router-outlet>
     </div>
     <div class="col-sm-2 clplright">
-
+        <div class="card" style="width: 252px;">
+            <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
+              Utilisateur
+              <button type="button" class="btn btn-info" (click)="logOut()" style="margin-left: 8px;"  > Déconnection </button> </h5>
+            <div class="card-body">
+              <h5 class="ct card-title">{{ userInfo.name }}</h5>
+              <p class="card-text">Matricule : {{ userInfo.idagent }}</p>
+            </div>
+          </div>
     </div>
   </div>
   </div>

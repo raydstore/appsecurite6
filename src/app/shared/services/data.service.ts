@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import * as _ from 'lodash';
+import { Users } from 'shared/table/table';
 
 
 @Injectable()
@@ -17,6 +18,15 @@ export class DataService<T> {
     constructor(private url, private http: HttpClient) {
         this.headers.append('Content-Type', 'application/json');
      }
+
+    getUsername(): string {
+      let result = 'sys';
+      const _user = localStorage.getItem('token');
+      if (_user) {
+        result = (JSON.parse(_user))['username'];
+      }
+      return result;
+    }
 
     getAll(): Observable<T[]> {
         return this.http.get<T[]>(this.url, { headers: this.headers })
@@ -68,16 +78,25 @@ export class DataService<T> {
     }
 
     create(resource): Observable<T> {
+        if (resource.hasOwnProperty('owner')) {
+          resource.owner = this.getUsername();
+        };
         return this.http.post<T>(this.url, resource, { headers: this.headers })
             .catch(this.handleError);
     }
 
     update(resource): Observable<T> {
-        return this.http.put<T>(this.url + '/' + resource.id, resource, { headers: this.headers })
+       if (resource.hasOwnProperty('lastuser')) {
+          resource.lastuser = this.getUsername();
+       };
+       return this.http.put<T>(this.url + '/' + resource.id, resource, { headers: this.headers })
             .catch(this.handleError);
     }
 
     updatebyid(resource, id): Observable<T> {
+        if (resource.hasOwnProperty('lastuser')) {
+          resource.lastuser = this.getUsername();
+        };
         return this.http.put<T>(this.url + '/' + resource['' + id + ''], resource, { headers: this.headers })
             .catch(this.handleError);
     }

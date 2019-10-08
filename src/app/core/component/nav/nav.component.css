@@ -1,10 +1,14 @@
 .climgheader, .clplleft, .clplright {
     background-color: rgba(0,0,0,.03)!important;
-} 
+}
+
+.clplright > .card {
+  width: 25em;
+}
 
 .climgheader img{
     margin-left: 250px!important;
-} 
+}
 
 .clplcenter {
     border-left-color: lightgray!important;
@@ -19,3 +23,20 @@
 .dropdown-toggle {
     cursor: pointer;
 }
+
+.ct {
+  color: #007bff;
+}
+
+.cb {
+  background-color: #f8f9fa !important;
+}
+
+/* .text-light {
+  color: #f8f9fa !important;
+}
+.bg-dark {
+  background-color: #343a40 !important;
+} */
+
+

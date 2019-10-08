@@ -11,7 +11,7 @@
     <p>
        <!--  <p-tieredMenu target="btn" #menu [model]="getItemMenu(items)" [popup]="false"></p-tieredMenu> -->
       <!--   <button #btn type="button" pButton icon="pi pi-bars" label="print" (click)="menu.toggle($event)"></button> -->
-    </p>  
+    </p>
 
   </div>
   <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single" [(selection)]="selectedAccident"
@@ -43,26 +43,26 @@
         </td>
         <td>{{rowData.id}}</td>
         <td>{{rowData.classification}}</td>
-        <td>{{rowData.curdate | date:'shortDate'}}</td>
+        <td>{{rowData.curdate | date:'dd/MM/yy'}}</td>
         <td>{{rowData.time | date:'HH:mm'}}</td>
-        <td>{{rowData.idsite.name}}</td>        
+        <td>{{rowData.idsite.name}}</td>
         <td>{{rowData.place}}</td>
         <td>{{rowData.description}}</td>
         <td>
          <!--    <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu> -->
-            <!-- 
+            <!--
             <p-toolbar>
-            <button #btn type="button" pButton label="Menu" icon="fa fa-bars" 
+            <button #btn type="button" pButton label="Menu" icon="fa fa-bars"
 
             class="ui-button-secondary" (click)="menu.toggle($event)"></button>
-   
-           <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>  
+
+           <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
             </p-toolbar> -->
             <!-- <p>
                 <p-tieredMenu target="btn" #menu [model]="getItemMenu(rowData.id)" [popup]="true"></p-tieredMenu>
-                <button #btn type="button" pButton icon="pi pi-bars" label="print" (click)="menu.toggle($event)"></button> 
+                <button #btn type="button" pButton icon="pi pi-bars" label="print" (click)="menu.toggle($event)"></button>
             </p>   -->
-        
+
       </td>
       </tr>
     </ng-template>
@@ -115,12 +115,12 @@
         </td>
       </tr>
     </ng-template>
-  </p-table>  
+  </p-table>
   <p-contextMenu #cm [model]="items"  appendTo="body" [style]="{'width':'300px'}"></p-contextMenu>
 </div>
 
 <p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" (onHide)="onHide($event)"
   width="890">
   <div class="ui-g ui-fluid" style="font-size:16px;padding:20px"  *ngIf="newAccident">
-    <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites" (operation)="performAction($event, dt)"></app-faccident>
+    <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites" (operation)="performAction($event, dt)" style="width: 100%;"></app-faccident>
   </div>

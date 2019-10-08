@@ -11,6 +11,7 @@ import { AppErrorHandler } from './core/component/common/app-error-handler';
 import { HomeComponent } from './core/component/home/home.component';
 import { CoreModule } from './core/core.module';
 import { ActivityComponent } from 'shared/component/activity/activity.component';
+import { LogonComponent } from 'app/core/component/logon/logon.component';
 import { AgentComponent } from 'shared/component/agent/agent.component';
 import { AlertComponent } from './alert/component/alert.component';
 import { BitComponent } from 'shared/component/bit/bit.component';
@@ -61,7 +62,7 @@ import { TreeNode } from 'primeng/api'; */
     AlertComponent,
     InstanceObjectComponent,
     CaseagentComponent,
-    ListagentComponent,
+    ListagentComponent
   ],
   imports: [
     SharedModule,
@@ -74,7 +75,8 @@ import { TreeNode } from 'primeng/api'; */
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
-             return     localStorage.getItem('access_token');},
+             return     localStorage.getItem('access_token')
+            },
         whitelistedDomains: ['10.1.0.150:8080/Hselife'],
         blacklistedRoutes: ['http://10.1.0.150:8080/Hselife/auth/login']
       }
@@ -86,6 +88,7 @@ import { TreeNode } from 'primeng/api'; */
       { path: 'instance', component: InstanceComponent },
       { path: 'jobposting', component: JobpostingComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'logon', component: LogonComponent },
 
       { path: 'operation', component: OperationComponent },
       { path: 'activity', component: ActivityComponent },

@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
-import { LoginComponent } from './component/login/login.component';
 import { NoAccessComponent } from './component/no-access/no-access.component';
+import { LogonComponent } from './component/logon/logon.component';
 
 @NgModule({
   imports: [
@@ -14,14 +14,15 @@ import { NoAccessComponent } from './component/no-access/no-access.component';
     RouterModule.forChild([])
   ],
   declarations: [
+    LogonComponent,
     NavComponent,
     HomeComponent,
-    LoginComponent,
     NoAccessComponent
   ],
   exports: [
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    LogonComponent
   ]
 })
 export class CoreModule { }

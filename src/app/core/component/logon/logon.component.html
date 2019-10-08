@@ -1,0 +1,37 @@
+<!-- <form class="form-signin" #f="ngForm" (ngSubmit)="signIn(f.value)"> -->
+<!-- <form class="form-signin" >
+  <h2 class="form-signin-heading">connection ... </h2>
+  <div *ngIf="invalidLogin" class="alert alert-danger">nom d'utilisateur ou mot de pass incorect.</div>
+  <label for="inputEmail" class="sr-only">Utilisateur</label>
+  <input type="text" id="inputUsername" name="username" ngModel class="form-control" placeholder="nom d'utilisateur" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" required>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">logon</button>
+</form> -->
+
+<div class="card bg-light mb-3 ccon" style="max-width: 34rem;">
+    <h3 class="card-header bg-dark text-light"><span class="badge badge-pill badge-dark" style="font-size: 32px;">HSELife - </span>     Fiche de connection</h3>
+    <div class="card-body">
+        <div *ngIf="invalidLogin" class="alert alert-danger">nom d'utilisateur ou mot de pass incorect.</div>
+        <!-- <label for="inputUsername" class="sr-only">Utilisateur</label>
+        <input type="text" id="inputUsername" [(ngModel)]="username" class="form-control" placeholder="nom d'utilisateur" required autofocus oninput="this.value = this.value.toUpperCase()">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" [(ngModel)]="password" class="form-control" placeholder="Password" required  oninput="this.value = this.value.toUpperCase()">
+ -->
+        <div class="form-group row">
+            <label for="inputUsername" class="col-sm-3 col-form-label">Utilisateur</label>
+            <div class="col-sm-9">
+                <input type="text" id="inputUsername" [(ngModel)]="username" class="form-control" placeholder="nom d'utilisateur" required autofocus oninput="this.value = this.value.toUpperCase()">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword" class="col-sm-3 col-form-label">Mot de passe</label>
+            <div class="col-sm-9">
+                <input type="password" id="inputPassword" [(ngModel)]="password" class="form-control" placeholder="Password" required  oninput="this.value = this.value.toUpperCase()">
+            </div>
+          </div>
+
+
+        <button class="btn btn-primary" (click)="singIn()">Connection</button>
+    </div>
+  </div>

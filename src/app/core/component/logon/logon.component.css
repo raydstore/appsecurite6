@@ -1,4 +1,14 @@
+.ccon {
+  display: bloc;
+  margin-top: 10%;
+  left: 30%;
+}
 
+.card-body button {
+  float: right;
+}
+
+/*
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -32,4 +42,4 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
+  } */
