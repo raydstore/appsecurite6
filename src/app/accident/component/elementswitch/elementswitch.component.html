@@ -3,7 +3,7 @@
   <app-accidentagentee *ngSwitchCase="2" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagentee>
   <app-accidentagenttp *ngSwitchCase="3" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"></app-accidentagenttp>
   <app-accidentmaterial *ngSwitchCase="4" [iddamage]="iddamage" [idgrid]="idgrid" [accidentdomain]="accidentdomain" [titlelist]="titlelist"></app-accidentmaterial>
-  <app-accidentvehicule *ngSwitchCase="6" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"
+  <app-accidentvehicule *ngSwitchCase="6" [idaccident]="idaccident" [iddamage]="iddamage" [idgrid]="idgrid" [titlelist]="titlelist"
        [classification]="'S'" [accidentdomain]="'6'"></app-accidentvehicule>
   <app-damagedefinition *ngSwitchDefault  [iddamage]="iddamage" [idgrid]="idgrid" [accidentdomain]="accidentdomain" [titlelist]="titlelist"></app-damagedefinition>
 </ng-container>  

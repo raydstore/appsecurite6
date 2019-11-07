@@ -48,6 +48,7 @@ import { DamagedescriptionComponent } from './component/damagedescription/damage
 import { VwactionaccidentComponent } from './component/vwactionaccident/vwactionaccident.component';
 import { AccidentpictureComponent } from './component/accidentpicture/accidentpicture.component';
 import { SendactionComponent } from './component/sendaction/sendaction.component';
+import { VehiculedisputtingComponent } from './component/vehiculedisputting/vehiculedisputting.component';
 
 
 
@@ -110,6 +111,7 @@ import { SendactionComponent } from './component/sendaction/sendaction.component
     VwactionaccidentComponent,
     AccidentpictureComponent,
     SendactionComponent,
+    VehiculedisputtingComponent,
   ]
 })
 export class AccidentModule { }

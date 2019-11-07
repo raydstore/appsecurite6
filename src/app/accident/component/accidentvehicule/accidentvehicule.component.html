@@ -1,4 +1,4 @@
-<div class="card-header alCenter cardtitle">
+<div class="card-header alCenter cardtitle tab-cel">
 
     <h4 class="titleform">
         <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -9,8 +9,7 @@
     </button>
 
 </div>
-
-<app-damagedescription [iddamage]="iddamage"></app-damagedescription>
+<!-- <app-damagedescription [iddamage]="iddamage"></app-damagedescription> -->
 
 <p-dataTable class="header-table" [value]="accidentvehicules" sortField="classification" rowGroupMode="subheader"
     groupField="classification" expandableRows="true" selectionMode="single" [(selection)]="selectedNode"
@@ -35,7 +34,7 @@
         <div class="container">
             <div class="clcolumn">
                 <div class="ca flex-item">
-                    <p-card title="Info Vehicule" >
+                    <p-card header="Info Vehicule" >
                         <div class="form-group row">
                             <label for="chclassification" class="col-sm-4 col-form-label">classification</label>
                             <div class="col-sm-11 clkind">

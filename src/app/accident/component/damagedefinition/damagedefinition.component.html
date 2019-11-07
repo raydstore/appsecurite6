@@ -1,5 +1,5 @@
-<div class="card bg-light">
-  <div class="card-header alCenter cardtitle">
+<!-- <div class="card bg-light"> -->
+  <div class="card-header alCenter cardtitle tab-cel">
 
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -10,7 +10,7 @@
     </button>
 
   </div>
-  <app-damagedescription [iddamage]="iddamage"></app-damagedescription>
+  <!-- <app-damagedescription [iddamage]="iddamage"></app-damagedescription> -->
 
   <p-dataTable [value]="damagedefinitions" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
     (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
@@ -63,7 +63,7 @@
     </ng-template>
   </p-dataTable>
   <!-- </div> -->
-</div>
+<!-- </div> -->
 
 <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newDamagedefinition">

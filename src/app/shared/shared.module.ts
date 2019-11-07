@@ -1,3 +1,4 @@
+import { VehiculedisputtingService } from './services/vehiculedisputting.service';
 import { AuthService } from './services/auth.service';
 import { LogonService } from './services/logon.service';
 import { VwactionopscardService } from './services/vwactionopscard.service';
@@ -174,6 +175,8 @@ import { TypeaccidentComponent } from './component/typeaccident/typeaccident.com
 import { NewtypeaccidentComponent } from './component/insertion/newtypeaccident/newtypeaccident.component';
 import { VwopscardService } from './services/vwopscard.service';
 import { VwreststructureofopscardService } from './services/vwreststructureofopscard.service';
+import { VwvehiculedisputtingService } from './services/vwvehiculedisputting.service';
+import { VwschemavehiculedisputtingService } from './services/vwschemavehiculedisputting.service';
 /* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
@@ -431,7 +434,10 @@ import { VwreststructureofopscardService } from './services/vwreststructureofops
     VwactionopscardService,
     VwreststructureofopscardService,
     PrintService,
-    LogonService
+    LogonService,
+    VehiculedisputtingService,
+    VwvehiculedisputtingService,
+    VwschemavehiculedisputtingService,
   ]
 })
 export class SharedModule { }

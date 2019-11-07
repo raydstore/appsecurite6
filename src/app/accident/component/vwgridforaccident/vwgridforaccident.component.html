@@ -12,7 +12,7 @@
         </tr>
         <tr class="trheader">
             <th></th>
-            <th *ngFor="let col of cols; let i = index" [class.selheader]="indexheader == i + 1" (click)="indexheader = i + 1">
+            <th *ngFor="let col of cols; let i = index" [class.selheader]="indexheader == i + 1" (click)="setIndexheader(i)">
                 {{col.header}}
             </th>
         </tr>
@@ -32,11 +32,14 @@
         </tr>
     </ng-template>
 
-    <ng-template pTemplate="rowexpansion" let-grid let-columns="columns">
+    <ng-template pTemplate="rowexpansion" let-grid let-columns="columns" let-index="rowIndex" >
         <tr *ngIf="grid[cols[indexheader - 1].field].iddamage != 0">
             <td [attr.colspan]="8">
+                <div *ngIf="isFirstOccurence(indexheader, index)">
+                   <app-vehiculedisputting [idaccident]="accident.id"></app-vehiculedisputting>
+                </div>
                 <div class="container" style="font-size:16px;padding:20px">
-                    <app-elementswitch [iddamage]="grid[cols[indexheader - 1].field].iddamage" [idgrid]="grid[cols[indexheader - 1].field].idgrid"
+                    <app-elementswitch [idaccident]="accident.id" [iddamage]="grid[cols[indexheader - 1].field].iddamage" [idgrid]="grid[cols[indexheader - 1].field].idgrid"
                         [titlelist]="getTitle(grid,indexheader)" [accidentdomain]="indexheader"></app-elementswitch>
                 </div>
             </td>

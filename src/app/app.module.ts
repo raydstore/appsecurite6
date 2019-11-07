@@ -72,7 +72,7 @@ import { TreeNode } from 'primeng/api'; */
     CoreModule,
     OpscardModule,
     // TreeTableModule,
-    JwtModule.forRoot({
+    /* JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token')
@@ -80,7 +80,7 @@ import { TreeNode } from 'primeng/api'; */
         whitelistedDomains: ['10.1.0.150:8080/Hselife'],
         blacklistedRoutes: ['http://10.1.0.150:8080/Hselife/auth/login']
       }
-    }),
+    }), */
     RouterModule.forRoot([
       { path: '', redirectTo: '/home' , pathMatch: 'full'},
       { path: 'object', component: ObjectComponent },

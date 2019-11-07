@@ -1,208 +1,247 @@
 <div *ngIf="!isLoggedIn(); then logon else home"></div>
 <ng-template #logon>
-<app-logon></app-logon>
+  <app-logon></app-logon>
 </ng-template>
 <ng-template #home>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="#">App Securité HSE</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="#">App Securité HSE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active current" routerLink="/">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fichier</a>
-        <div ngbDropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/activity">Activité</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/mark">Marque</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeobject">Type Objet</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeoperation">Type Operation</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/operation">Operation</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/unitmeasure">Unité de mesure</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/object">Objet</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeformation">Type Formation</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/formation">formation</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/label">Label</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/site">Site</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/nature">Nature dommage</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/grid">Grid</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/bit">Bit</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/agent">Agent</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/entreprise">Entreprise</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/work">Travaux</a>
-        </div>
-      </li>
-      <li ngbDropdown class="nav-item dropdown">
-        <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opération</a>
-        <div ngbDropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/titletask">Worksheet</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/instance">instance</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/jobposting">Feuille de poste</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/alert">alert</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/accident">accident</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/action">action</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/sendaction">suivi action</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/opscard">opscard</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/inspection">inspection</a>
-          <a class="dropdown-item" routerLinkActive="active current" routerLink="/inspectionplanning">Planning inspection</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Impression</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Apropos</a>
-      </li>
-      <!-- <li class="nav-item">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active current" routerLink="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">Fichier</a>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/activity">Activité</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/mark">Marque</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeobject">Type Objet</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeoperation">Type Operation</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/operation">Operation</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/unitmeasure">Unité de mesure</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/object">Objet</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/typeformation">Type Formation</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/formation">formation</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/label">Label</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/site">Site</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/nature">Nature dommage</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/grid">Grid</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/bit">Bit</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/agent">Agent</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/entreprise">Entreprise</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/work">Travaux</a>
+          </div>
+        </li>
+        <li ngbDropdown class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+            aria-haspopup="true" aria-expanded="false">Opération</a>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/titletask">Worksheet</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/instance">instance</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/jobposting">Feuille de poste</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/alert">alert</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/accident">accident</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/action">action</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/sendaction">suivi action</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/opscard">opscard</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/inspection">inspection</a>
+            <a class="dropdown-item" routerLinkActive="active current" routerLink="/inspectionplanning">Planning
+              inspection</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Impression</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Apropos</a>
+        </li>
+        <!-- <li class="nav-item">
         <a class="nav-link" (click)="logOut()">logout</a>
       </li> -->
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="page-header climgheader">
+    <img src="../../assets/hse_env.png" alt="">
+    <img>
   </div>
-</nav>
-<div class="page-header climgheader">
-  <img src="../../assets/hse_env.png" alt="">
-  <img>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-2 clplleft">
-      <div class="card my-4">
-        <h5 class="card-header  bg-dark text-light">Fichier</h5>
-        <div class="card-body cb">
-          <div class="row">
-            <div>
-              <nav class="d-none d-sm-block bg-light sidebar mb-0">
-                <ul class="nav nav-pills flex-column my-3">
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/activity">Activité</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/mark">Marque</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/typeobject">Type Objet</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/typeoperation">Type Operation</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/operation">Operation</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/unitmeasure">Unité de mesure</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/object">Objet</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/typeformation">Type Formation</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/formation">formation</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/label">Label</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/site">Site</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/nature">Nature dommage</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/grid">Grid</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/bit">Bit</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/agent">Agent</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/entreprise">Entreprise</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/typeaccident">Type accident</a>
-                  </li>
-                  <li class="nav-item">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2 clplleft">
+        <div class="card my-4">
+          <h5 class="card-header  bg-dark text-light">Fichier</h5>
+          <div class="card-body cb">
+            <div class="row">
+              <div>
+                <nav class="d-none d-sm-block bg-light sidebar mb-0">
+                  <ul class="nav nav-pills flex-column my-3">
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/activity">Activité</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/mark">Marque</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/typeobject">Type Objet</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/typeoperation">Type
+                        Operation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/operation">Operation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/unitmeasure">Unité de
+                        mesure</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/object">Objet</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/typeformation">Type
+                        Formation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/formation">formation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/label">Label</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/site">Site</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/nature">Nature dommage</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/grid">Grid</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/bit">Bit</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/agent">Agent</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/entreprise">Entreprise</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/typeaccident">Type accident</a>
+                    </li>
+                    <li class="nav-item">
                       <a class="nav-link" routerLinkActive="active current" routerLink="/work">Travaux</a>
                     </li>
-                </ul>
-              </nav>
+                  </ul>
+                </nav>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card my-4">
-        <h5 class="card-header bg-dark text-light">Opération</h5>
-        <div class="card-body">
-          <div class="row">
-            <div>
-              <nav class="d-none d-sm-block bg-light sidebar mb-0">
-                <ul class="nav nav-pills flex-column my-3">
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/titletask">Worksheet</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/instance">instance</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/jobposting">Feuille de poste</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/alert">alert</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/accident">accident</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/action">action</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/sendaction">suivi action</a>
-                  </li>
-                  <li class="nav-item">
+        <div class="card my-4">
+          <h5 class="card-header bg-dark text-light">Opération</h5>
+          <div class="card-body cb">
+            <div class="row">
+              <div>
+                <nav class="d-none d-sm-block bg-light sidebar mb-0">
+                  <ul class="nav nav-pills flex-column my-3">
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/titletask">Worksheet</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/instance">instance</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/jobposting">Feuille de
+                        poste</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/alert">alert</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/accident">accident</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/action">action</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/sendaction">suivi action</a>
+                    </li>
+                    <li class="nav-item">
                       <a class="nav-link" routerLinkActive="active current" routerLink="/opscard">opscard</a>
                     </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/inspection">Inspection</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active current" routerLink="/inspectionplanning">Planning Inspection</a>
-                  </li>
-                </ul>
-              </nav>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/inspection">Inspection</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" routerLinkActive="active current" routerLink="/inspectionplanning">Planning
+                        Inspection</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-sm-8 container-fluid clplcenter">
-      <router-outlet></router-outlet>
-    </div>
-    <div class="col-sm-2 clplright">
+      <div class="col-sm-8 container-fluid clplcenter">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-sm-2 clplright">
         <div class="card" style="width: 252px;">
-            <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
-              Utilisateur
-              <button type="button" class="btn btn-info" (click)="logOut()" style="margin-left: 8px;"  > Déconnection </button> </h5>
-            <div class="card-body">
-              <h5 class="ct card-title">{{ userInfo.name }}</h5>
-              <p class="card-text">Matricule : {{ userInfo.idagent }}</p>
-            </div>
+          <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
+            Utilisateur
+            <button type="button" class="btn btn-info" (click)="logOut()" style="margin-left: 8px;"> Déconnection
+            </button> </h5>
+          <div class="card-body">
+            <h5 class="ct card-title">{{ userInfo.name }}</h5>
+            <p class="card-text">Matricule : {{ userInfo.idagent }}</p>
+            <button type="button" class="btn btn-link" (click)="passwordSetting()">{{ labelChangePassword }}</button>
+            <div class="card text-danger bg-light"  *ngIf="activeChangePassword">
+                <div class="card-header" style="font-weight: bold;">Changer mot de passe</div>
+                <div class="card-body text-info">
+                  <!-- <div *ngIf="activeChangePassword"> -->
+                  <div class="form-group row">
+                    <label class="labpass" for="inputoldPassword">Ancien</label>
+                    <div class="col-sm-12">
+                      <input #oldpass type="password" id="inputoldPassword" [(ngModel)]="oldPassword" class="form-control"
+                        placeholder="ancien mot de passe" required autofocus oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="labpass" for="inputfirstPassword">Nouveaux</label>
+                    <div class="col-sm-12">
+                      <input #firstpass type="password" id="inputfirstPassword" [(ngModel)]="firstPassword" class="form-control"
+                        placeholder="nouveaux mot de passe" required oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="labpass" for="inputsecondPassword">Confirmation</label>
+                    <div class="col-sm-12">
+                      <input #secondpass type="password" id="inputsecondPassword" [(ngModel)]="secondPassword"
+                        class="form-control" placeholder="confirmation mot de passe" required oninput="this.value = this.value.toUpperCase()">
+                    </div>
+                  </div>
+                  <!-- firstpass.value != secondpass.value -->
+                  <button type="button" class="btn btn-primary" [disabled]="conditionChecked()"  (click)="updatePassword()" style="float: right;" >Change</button>
+                </div>
+              </div>
           </div>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </ng-template>

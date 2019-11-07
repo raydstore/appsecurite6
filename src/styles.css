@@ -64,6 +64,7 @@ body {
     float: right;
     position: relative;
     top: -40px;
+    right: 20px;
 }
 
 .alright {
@@ -94,12 +95,13 @@ body {
 
 .cardtitle {
 	height: 70px;
-	margin-top: 15px;
+  margin-top: 15px;
+  margin-left: 30%;
 	margin-bottom: 15px !important;
 	padding-left: 7px;
 	padding-top: 25px !important;
-	width: 100%;
-	height: auto;
+	width: 30%;
+	/* height: auto; */
 	background-color: #cce5ff !important;
 }
 
@@ -212,3 +214,7 @@ body {
     background-color: lightblue!important;
   }
 
+
+  .tab-cel {
+    display: table-cell;
+  }

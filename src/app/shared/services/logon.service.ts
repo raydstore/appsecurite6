@@ -19,11 +19,11 @@ const urlService = environment.urlService;
 
 @Injectable()
 export class LogonService {
-  url = urlService + '/users/logon';
+  url = urlService + '/users';
   headers = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-      /* super(urlService + '/users/logon', http); */
+    /* super(urlService + '/users/logon', http); */
   }
 
   logon(listParam: any) {
@@ -31,22 +31,22 @@ export class LogonService {
     let op: String = '?';
     for (const param in listParam) {
       if (listParam.hasOwnProperty(param)) {
-      query += op + param + '=' + listParam[param];
-          op = op === '?' ? '&&' : '&&';
-        }
-     }
-    return this.http.post<Users>(this.url + query, { headers: this.headers }).
-    map(response => {
-      const result = JSON.stringify(response);
-      console.log('refsult = ' + result);
-      if (response != null) {
-        localStorage.setItem('token', result);
-        return true;
-      } else {
-        return false;
+        query += op + param + '=' + listParam[param];
+        op = op === '?' ? '&&' : '&&';
       }
-    })
-    .catch(this.handleError);
+    }
+    return this.http.post<Users>(this.url + '/logon' + query, { headers: this.headers }).
+      map(response => {
+        const result = JSON.stringify(response);
+        console.log('refsult = ' + result);
+        if (response != null) {
+          localStorage.setItem('token', result);
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch(this.handleError);
   }
 
   logOut() {
@@ -62,16 +62,43 @@ export class LogonService {
     }
   }
 
+  checkPassword(password) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    } else {
+      return (JSON.parse(token))['password'] === password;
+    }
+  }
+
+  updatePassword(newpassword) {
+    const token = localStorage.getItem('token');
+    let user: Users;
+    if (!token) {
+      return null;
+    } else {
+       user = <Users> (JSON.parse(token));
+       user.password = newpassword;
+       user.lastuser = user.username;
+    }
+    return this.http.put<Users>(this.url + '/' + user.id, user, { headers: this.headers })
+        .map(response => {
+          localStorage.removeItem('token');
+          return true;
+      })
+      .catch(this.handleError);
+  }
+
   private handleError(error) {
     if (error.status === 400) {
-        return Observable.throw(new BadInput(error.json()));
+      return Observable.throw(new BadInput(error.json()));
     }
 
     if (error.status === 404) {
-        return Observable.throw(new NotFoundError());
+      return Observable.throw(new NotFoundError());
     }
 
     return Observable.throw(new AppError(error));
-}
+  }
 
 }

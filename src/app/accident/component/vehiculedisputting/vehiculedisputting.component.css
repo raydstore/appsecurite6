@@ -1,0 +1,15 @@
+.celcolor {
+  background-color: red!important;
+  width: 1em!important;
+}
+
+th {
+  text-align: center;
+}
+
+
+th[colspan="3"] {
+  background-color: black!important;
+  color: white!important;
+
+}

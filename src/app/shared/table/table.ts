@@ -963,3 +963,52 @@ export interface Vwreststructureofopscard {
   datecreate?: Date;
   dateupdate?: Date;
 }
+
+export interface Vehiculedisputting {
+  id?: number;
+  idaccident?: number;
+  iddamagea?: number;
+  idvehiculea?: number;
+  iddamageb?: number;
+  idvehiculeb?: number;
+  owner?: string;
+  lastuser?: string;
+  datecreate?: Date;
+  dateupdate?: Date;
+}
+
+export interface Vwvehiculedisputting {
+  id?: number;
+  idab?: string;
+  idaccident?: number;
+  iddamagea?: number;
+  idvehiculea?: number;
+  marka?: string;
+  namea?: string;
+  matriculea?: string;
+  iddamageb?: number;
+  idvehiculeb?: number;
+  markb?: string;
+  nameb?: string;
+  matriculeb?: string;
+}
+
+
+export interface Vwschemavehiculedisputting {
+  id?: string;
+  idaccident?: number;
+  iddamagea?: number;
+  idvehiculea?: number;
+  marka?: string;
+  namea?: string;
+  matriculea?: string;
+  iddamageb?: number;
+  idvehiculeb?: number;
+  markb?: string;
+  nameb?: string;
+  matriculeb?: string;
+  owner?: string;
+  lastuser?: string;
+  datecreate?: Date;
+  dateupdate?: Date;
+}

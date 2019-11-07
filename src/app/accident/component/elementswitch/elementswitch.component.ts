@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./elementswitch.component.css']
 })
 export class ElementswitchComponent implements OnInit {
+  @Input() idaccident: number;
   @Input() iddamage: number;
   @Input() idgrid: number;
   @Input() titlelist: string;

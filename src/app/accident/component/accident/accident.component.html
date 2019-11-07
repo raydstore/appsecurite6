@@ -1,5 +1,5 @@
 <div class="accidentd bg-light">
-  <div class="accidentd-header alCenter accidentdtitle">
+  <div class="card-header alCenter cardtitle">
 
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -44,7 +44,7 @@
         <td>{{rowData.id}}</td>
         <td>{{rowData.classification}}</td>
         <td>{{rowData.curdate | date:'dd/MM/yy'}}</td>
-        <td>{{rowData.time | date:'HH:mm'}}</td>
+        <td>{{rowData.curdate | date:'HH:mm'}}</td>
         <td>{{rowData.idsite.name}}</td>
         <td>{{rowData.place}}</td>
         <td>{{rowData.description}}</td>

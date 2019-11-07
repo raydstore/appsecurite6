@@ -24,6 +24,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
   styleUrls: ['./accidentvehicule.component.css']
 })
 export class AccidentvehiculeComponent implements OnInit {
+  @Input() idaccident: number;
   @Input() iddamage: number;
   @Input() idgrid: number;
   @Input() accidentdomain: number;

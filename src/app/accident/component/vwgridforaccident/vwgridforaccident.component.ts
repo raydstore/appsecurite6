@@ -83,6 +83,8 @@ export class VwgridforaccidentComponent implements OnInit {
   showLabel = true;
   titleExpandAll = `Tous déveloper      `;
   titleShowLabel = `Affiché les libéllé `;
+  firstOccurence = true;
+  indexFirstOccuence: number;
 
   constructor(private service: VwgridforaccidentService, private damageService: DamageService,
     private vwnotnatureofaccidentService: VwnotnatureofaccidentService, private accidentnatureService: AccidentnatureService) { }
@@ -136,6 +138,7 @@ export class VwgridforaccidentComponent implements OnInit {
       .subscribe(damages => {
         this.damages = damages;
       });
+      /* this.firstOccurence = true; */
   }
 
 ExpandedRow()   {
@@ -226,6 +229,14 @@ StringToCellGrid(col): CellGrid {
     }
   }
 
+  setIndexheader(index) {
+    this.indexheader = index + 1;
+    if (this.indexheader === 6)  {
+       this.firstOccurence = true;
+       this.indexFirstOccuence = -1;
+    }
+  }
+
   getTitle(item: VwGridForAccident, indexheader: number): string {
      let field: string = 'col' + indexheader;
      return this.cols[indexheader - 1].header + ' : ' + (<CellGrid> item[field]).name;
@@ -308,6 +319,17 @@ StringToCellGrid(col): CellGrid {
         damage.accidentnature = _accidentnature;
         this.createdamage(damage);
       });
+  }
+
+  isFirstOccurence (indexheader: number, index: number): boolean {
+    const result = (indexheader === 6) && ((this.firstOccurence) || this.indexFirstOccuence === index);
+    console.log('first indexheader = ' + indexheader + '; index = ' + index + '; this.firstOccurence = ' + this.firstOccurence + '; result = ' + result);
+    if (result) {
+      this.firstOccurence = false;
+      this.indexFirstOccuence = index;
+    }
+    console.log('second indexheader = ' + indexheader + '; index = ' + index + '; this.firstOccurence = ' + this.firstOccurence + '; result = ' + result);
+    return result;
   }
 
 }

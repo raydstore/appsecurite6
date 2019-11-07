@@ -47,29 +47,22 @@ export class FaccidentComponent implements OnInit {
 
 
   onChangeDate(item: Accident, event) {
-    console.log('1');
     item.curdate = event;
-    console.log('2');
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    console.log('3');
     const agent = <Agent> event;
     agent['_displayname'] = this.displayNameAgent(event, ['name']);
     this.item[field] = agent;
-    console.log('4');
   }
 
   onChangeSiteOfItem(item: Accident, field: string, event) {
-    console.log('5');
       this.item[field] = <Site> event;
       this.item[field]._displayname = this.displayNameSite(event, ['name']);
-      console.log('6');
   }
 
 
   perform(item: Accident, event) {
-    console.log('7');
     const loockUp = ['idsite', 'idagentdeclare', 'idagentvalidate'];
     for (const elmnt of loockUp) {
       if (item[elmnt] != null) {
@@ -82,7 +75,6 @@ export class FaccidentComponent implements OnInit {
     eventargs = this.mode === Mode.insert ? { item: item, mode: Mode.insert, dialogVisible: false, table: this.table }
                                           : { item: item, mode: Mode.update, dialogVisible: false, table: this.table };
     this.operation.emit(eventargs);
-    console.log('7');
   }
 
   cancel(item) {
@@ -91,7 +83,6 @@ export class FaccidentComponent implements OnInit {
   }
 
   displayNameAgent(item: any, args: string[]): string {
-    console.log('8');
     let result = '';
    /*  */
     if (!isNullOrUndefined(item))  {
@@ -103,11 +94,9 @@ export class FaccidentComponent implements OnInit {
       }
     }
     return result;
-    console.log('9');
   }
 
   displayNameSite(item: any, args: string[]): string {
-    console.log('10');
     let result = '';
     if (item !== null) {
       if (args.length > 0) {
@@ -115,7 +104,6 @@ export class FaccidentComponent implements OnInit {
       }
     }
     return result;
-    console.log('11');
   }
 
 }
