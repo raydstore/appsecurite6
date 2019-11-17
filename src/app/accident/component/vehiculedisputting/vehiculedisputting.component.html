@@ -50,17 +50,17 @@
   </div>
 </ng-template>
 <ng-template #noshowInput>
-  <div class="card border-success mb-3" style="border-width: 7px;" >
-    <div class="card-header">
+  <div class="card mb-3">
+    <div class="card-header ch">
       <button type="button" class="btn btn-info" (click)="initDeclaration()">Déclaration</button>
     </div>
-    <div class="card-body">
+    <div class="card-body cb">
       <h5 class="card-title">Vehicule déclarées</h5>
       <p-table [value]="vwvehiculedisputtings" [columns]="cols">
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th colspan="3">Vehicule A</th>
-            <th class="celcolor"></th>
+            <th class="celcolor" width="3.25em"></th>
             <th colspan="3">Vehicule B</th>
           </tr>
           <tr>
@@ -72,11 +72,13 @@
             <td>{{item.matriculea}}</td>
             <td>{{item.marka}}</td>
             <td>{{item.namea}}</td>
-            <td class="celcolor"></td>
+            <td class="celcolor">
+                <i class="fas fa-arrows-alt-h"></i>
+            </td>
             <td>{{item.matriculeb}}</td>
             <td>{{item.markb}}</td>
             <td>{{item.nameb}}</td>
-            <td>
+            <td class="sttddel">
               <button class="btn btn-danger" (click)="delete(item)">
                 <i class="fa fa-minus"></i>
                 </button>
@@ -90,5 +92,5 @@
 <!-- </div> -->
 
 <!-- <div class="card bg-light mb-3" *ngIf="!inputMode">
-    
+
 </div> -->

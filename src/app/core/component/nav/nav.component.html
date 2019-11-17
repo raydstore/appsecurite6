@@ -198,9 +198,10 @@
       </div>
 
       <div class="col-sm-8 container-fluid clplcenter">
-        <router-outlet></router-outlet>
+        <router-outlet #child></router-outlet>
       </div>
       <div class="col-sm-2 clplright">
+        <!--   <button (click)="showlog(child)">test</button> -->
         <div class="card" style="width: 252px;">
           <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
             Utilisateur
@@ -241,6 +242,9 @@
               </div>
           </div>
         </div>
+        <!-- <button (click)="console.log(child);"></button>
+        [idaccident] = "idaccident"-->
+        <app-printaccident></app-printaccident>
       </div>
     </div>
   </div>

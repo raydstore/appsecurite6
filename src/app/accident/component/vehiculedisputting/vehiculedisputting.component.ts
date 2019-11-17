@@ -6,6 +6,7 @@ import { Vehiculedisputting, Vwvehiculedisputting,  Vwschemavehiculedisputting} 
 import { AppError } from 'app/core/component/common/app-error';
 import { BadInput } from 'app/core/component/common/bad-input';
 import { NotFoundError } from 'app/core/component/common/not-found-error';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-vehiculedisputting',
@@ -41,7 +42,7 @@ export class VehiculedisputtingComponent implements OnInit {
       { field: 'matriculea',     header: 'matricule',   width: '7.75em' },
       { field: 'marka',          header: 'marque',      width: '7.75em' },
       { field: 'namea',          header: 'type',        width: '7.75em' },
-      { field: '',               header: '',        width: '1.75em' },
+      { field: '',               header: '',            width: '1.75em' },
       { field: 'matriculeb',     header: 'matricule',   width: '7.75em' },
       { field: 'markb',          header: 'marque',      width: '7.75em' },
       { field: 'nameb',          header: 'type',        width: '7.75em' },
@@ -51,7 +52,7 @@ export class VehiculedisputtingComponent implements OnInit {
 
   loadData() {
     this.loadVehiculedisputting();
-    
+    /* this.loadSchemavehiculedisputting(); */
   }
 
   loadVehiculedisputting() {
@@ -110,7 +111,7 @@ export class VehiculedisputtingComponent implements OnInit {
     }
     this.inputMode = !this.inputMode;
   }
-  
+
   delete(item) {
     /* let index = this.activitys.indexOf(_activity);
     this.activitys.splice(index, 1);
@@ -118,7 +119,7 @@ export class VehiculedisputtingComponent implements OnInit {
     this.service.delete(item.id)
       .subscribe( () =>
       {
-        this.loadVehiculedisputting();
+        this. loadData();
       },
       (error: Response) => {
         // this.activitys.splice(index, 0, _activity);

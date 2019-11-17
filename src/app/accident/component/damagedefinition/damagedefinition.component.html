@@ -1,5 +1,5 @@
 <!-- <div class="card bg-light"> -->
-  <div class="card-header alCenter cardtitle tab-cel">
+  <div class="card-header alCenter cardtitle">
 
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -65,7 +65,7 @@
   <!-- </div> -->
 <!-- </div> -->
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
+<p-dialog header="Nouveau definition dommage" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newDamagedefinition">
     <div class="bdcontent">
       <span>
@@ -76,7 +76,7 @@
         <label for="iname">name</label>
         <input type="text" id="iname" [(ngModel)]="newDamagedefinition.name" placeholder="l'équipement">
       </span>
-      <div class="toolbtn">
+      <div class="toolbtn alright">
         <button class="btn btn-primary" (click)="createDamagedefinition()">Valider</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>

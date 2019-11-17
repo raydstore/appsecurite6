@@ -11,6 +11,7 @@ import { Agent } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
 import { VwagentService } from 'shared/services/vwagent.service';
+import { PrintService } from 'shared/services/print.service';
 
 @Component({
   selector: 'app-agent',
@@ -40,10 +41,11 @@ export class AgentComponent implements OnInit {
   lastid: any;
   titlelist = 'Agent';
 
-  constructor(private service: AgentService, private vwagentService: VwagentService) {
+  constructor(private service: AgentService, private vwagentService: VwagentService, private _printService: PrintService) {
   }
 
   ngOnInit() {
+    this._printService.sendTargetToPrint({id: 0, name: 'agent'});
     this.loadData();
     this.cols = [
       { field: 'id', header: 'Matricule' },
@@ -171,7 +173,7 @@ export class AgentComponent implements OnInit {
   }
 
   cloneAgent(c: Agent): Agent {
-    let agent: Agent; 
+    let agent: Agent;
     agent = c;
     return agent;
   }

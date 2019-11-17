@@ -96,13 +96,18 @@ body {
 .cardtitle {
 	height: 70px;
   margin-top: 15px;
-  margin-left: 30%;
+  margin-left: 10%;
 	margin-bottom: 15px !important;
 	padding-left: 7px;
 	padding-top: 25px !important;
-	width: 30%;
-	/* height: auto; */
+  width: 80%;
+  /* width: 30%; */
+	height: auto;
 	background-color: #cce5ff !important;
+}
+
+.clop {
+  /* width: 30%; */
 }
 
 .titleform {

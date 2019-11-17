@@ -41,7 +41,7 @@ export class AccidentmaterialComponent implements OnInit {
 
   lastids: any[];
   lastid: any;
-  
+
 
   constructor(private service: AccidentmaterialService, private lastidService: LastidService) {
   }
@@ -64,7 +64,7 @@ export class AccidentmaterialComponent implements OnInit {
 
   getLastid(name) {
     let lts: any[] ;
-    this.loadLastId(); 
+    this.loadLastId();
     for (let lid of this.lastids)  {
         if (lid.id === name) {
            return lid['count'] ;

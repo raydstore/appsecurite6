@@ -6,6 +6,7 @@ import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
 import { NoAccessComponent } from './component/no-access/no-access.component';
 import { LogonComponent } from './component/logon/logon.component';
+import { PrintaccidentComponent } from './print/printaccident/printaccident.component';
 
 @NgModule({
   imports: [
@@ -17,12 +18,14 @@ import { LogonComponent } from './component/logon/logon.component';
     LogonComponent,
     NavComponent,
     HomeComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    PrintaccidentComponent
   ],
   exports: [
     NavComponent,
     HomeComponent,
-    LogonComponent
+    LogonComponent,
+    PrintaccidentComponent
   ]
 })
 export class CoreModule { }

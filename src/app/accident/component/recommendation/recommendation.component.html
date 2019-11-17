@@ -11,7 +11,7 @@
 
   </div>
 
-  
+
   <p-dataTable [value]="recommendations" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
     (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true">
     <p-column expander="true" styleClass="col-icon" [style]="{'width':'70px'}"></p-column>
@@ -34,7 +34,7 @@
           <i class="fa fa-minus"></i>
         </button>
       </ng-template>
-    </p-column> 
+    </p-column>
     <ng-template let-item pTemplate="rowexpansion">
       <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
       <!-- <div class="ui-grid-row"> -->
@@ -67,7 +67,7 @@
   <!-- </div> -->
 </div>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
+<p-dialog header="Nouveau recommandation" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newRecommendation">
     <div class="bdcontent">
       <span>
@@ -78,9 +78,9 @@
         <label for="iname">name</label>
         <input type="text" id="iname" [(ngModel)]="newRecommendation.name" placeholder="le nom de la marque">
       </span>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createRecommendation()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      <div class="toolbtn alright">
+        <button class="btn btn-primary" (click)="createRecommendation()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div>
   </div>

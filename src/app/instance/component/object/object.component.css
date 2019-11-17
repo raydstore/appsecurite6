@@ -39,3 +39,7 @@
     background-color: lightgray;
     border-radius: 10px;
 }
+
+.toolbtn {
+    float: right;
+}

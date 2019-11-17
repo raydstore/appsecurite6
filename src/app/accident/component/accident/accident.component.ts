@@ -100,7 +100,7 @@ export class AccidentComponent implements OnInit {
   constructor(private service: AccidentService,
     public siteService: SiteService,
     public agentService: AgentService,
-    private printService: PrintService) {
+    private _printService: PrintService) {
   }
 
 
@@ -536,7 +536,13 @@ export class AccidentComponent implements OnInit {
   }
 
   onRowSelect(event) {
+    this._printService.sendTargetToPrint({id: event.data.id, name: 'accident'});
   }
+
+  onRowUnselect(event) {
+    this._printService.sendTargetToPrint({id: 0, name: 'accident'});
+  }
+
 
   cloneAccident(c: Accident): Accident {
     const accident: Accident = c;

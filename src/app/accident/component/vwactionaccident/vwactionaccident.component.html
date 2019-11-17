@@ -1,6 +1,6 @@
   <div class="card bg-light">
-      <div class="card-header alCenter cardtitle">
-    
+      <div class="card-header alCenter cardtitle clop">
+
         <h4 class="titleform">
           <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
         </h4>
@@ -10,16 +10,16 @@
         </button>
 
         <button class="btn btn-success" (click)="showNewDialoge('Nouvelle Action', 'A')">
-          <i class="fa fa-plus">  Action</i> 
+          <i class="fa fa-plus">  Action</i>
         </button>
       </div>
       </div>
-    
-    
+
+
       <p-dataTable [value]="actions" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode"
         (onNodeExpand)="nodeExpand($event)" rowExpandMode="single" [responsive]="true" rowGroupMode="subheader"
         groupField="kind" sortField="kind">
-        
+
     <ng-template pTemplate="rowgroupheader" let-rowData>
         <h4 class="colgroup decal4">{{ getNameOfKind(rowData.kind) }}</h4>
     </ng-template>
@@ -76,7 +76,7 @@
       </p-dataTable>
       <!-- </div> -->
     </div>
-    
+
     <p-dialog [header]="titledialog" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="600">
       <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newAction">
         <div class="container">
@@ -109,11 +109,10 @@
             </div>
           </div> -->
           <!-- </div> -->
-          <div class="toolbtn">
+          <div class="toolbtn alright">
             <button class="btn btn-primary" (click)="createAction()">Valider</button>
             <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
           </div>
         </div>
       </div>
       </p-dialog>
-  

@@ -1,6 +1,9 @@
 .celcolor {
-  background-color: red!important;
-  width: 1em!important;
+  width: 7em!important
+}
+
+th.celcolor {
+  background-color: #d9d9d9!important;
 }
 
 th {
@@ -9,7 +12,22 @@ th {
 
 
 th[colspan="3"] {
-  background-color: black!important;
+  background-color:#34495e!important;
   color: white!important;
 
+}
+
+.sttddel {
+  background-color: lightgrey!important;
+}
+
+
+.cb {
+  /* background-color: #ebedf0; */
+background-color: #d3d3d3;
+}
+
+.ch {
+  /* background-color: lightgrey; */
+background-color: #cce5ff;
 }

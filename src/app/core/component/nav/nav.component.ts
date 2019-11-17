@@ -1,7 +1,8 @@
 import { AuthService } from './../../../shared/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LogonService } from 'shared/services/logon.service';
 import { Users } from 'shared/table/table';
+import { AccidentComponent } from 'app/accident/component/accident/accident.component';
 
 @Component({
   selector: 'app-nav',
@@ -15,12 +16,20 @@ export class NavComponent implements OnInit {
   firstPassword = '';
   secondPassword = '';
   labelChangePassword: string = 'Changer mot de passe';
+  /* @ViewChild(AccidentComponent, { static: false }) accidentComponentRef: AccidentComponent; */
+  idaccident;
 
   constructor(private authservise: AuthService, private logonService: LogonService) { }
 
   ngOnInit() {
     this.init();
   }
+
+ /*  ngAfterViewInit() {
+    this.idaccident = this.accidentComponentRef.selectedAccident.id;
+    console.log('idacc = ' + this.idaccident);
+  }
+ */
 
   logOut() {
     this.logonService.logOut();

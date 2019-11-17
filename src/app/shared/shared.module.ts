@@ -177,6 +177,7 @@ import { VwopscardService } from './services/vwopscard.service';
 import { VwreststructureofopscardService } from './services/vwreststructureofopscard.service';
 import { VwvehiculedisputtingService } from './services/vwvehiculedisputting.service';
 import { VwschemavehiculedisputtingService } from './services/vwschemavehiculedisputting.service';
+import { ListreportofaccidentService } from './services/listreportofaccident.service';
 /* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
@@ -438,6 +439,7 @@ import { VwschemavehiculedisputtingService } from './services/vwschemavehiculedi
     VehiculedisputtingService,
     VwvehiculedisputtingService,
     VwschemavehiculedisputtingService,
+    ListreportofaccidentService
   ]
 })
 export class SharedModule { }

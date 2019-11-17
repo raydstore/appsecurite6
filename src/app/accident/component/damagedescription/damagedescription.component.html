@@ -1,7 +1,7 @@
 <p-accordion *ngIf="damage !== null">
   <p-accordionTab [header]="getDescription(damage.description)">
     <textarea rows="5" cols="60" pInputTextarea [(ngModel)]="damage.description" selected="true"></textarea>
-    <div class="toolbtn">
+    <div class="toolbtn alright">
       <button class="btn btn-primary" (click)="update()">Valider</button>
       <button class="btn btn-warning" (click)="cancel()">Annuler</button>
     </div>

@@ -71,7 +71,7 @@
   </p-dataTable>
 </div>
 
-<p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
+<p-dialog header="Nouveau Template objet" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
   <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newObject">
     <div class="bdcontent">
       <span>
@@ -89,9 +89,9 @@
           <option *ngFor="let typeObject of typeObjects" [ngValue]="typeObject"> {{typeObject.name}} </option>
         </select>
       </div>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createObject()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      <div class="toolbtn alright">
+        <button class="btn btn-primary" (click)="createObject()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div>
   </div>

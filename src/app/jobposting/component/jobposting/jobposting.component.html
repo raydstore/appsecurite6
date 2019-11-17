@@ -1,5 +1,5 @@
 <div class="card bg-light">
-  <div class="card-header alCenter cardtitle">
+  <div class="card-header alCenter cardtitle clop">
 
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -120,9 +120,9 @@
         <label for="iidsite">Site</label>
         <input type="text" id="iidsite" [(ngModel)]="newJobposting.idSite" placeholder="le site">
       </span>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createJobposting()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+      <div class="toolbtn alright">
+        <button class="btn btn-primary" (click)="createJobposting()">Valider</button>
+        <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>
       </div>
     </div>
   </div>

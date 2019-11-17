@@ -1,5 +1,5 @@
 <div class="card bg-light">
-  <div class="card-header alCenter cardtitle">
+  <div class="card-header alCenter cardtitle clop">
 
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
@@ -64,9 +64,9 @@
             <td>
               <div class="ui-g-12 ui-md-4">
                 <div class="ui-inputgroup">
-                    <button pButton type="button" label="terminé" 
+                    <button pButton type="button" label="terminé"
                     (click)="perform(rowData, 'T')" ></button>
-                    <button pButton type="button"  class="ui-button-danger" label="terminé" 
+                    <button pButton type="button"  class="ui-button-danger" label="terminé"
                     (click)="perform(rowData, 'A')" ></button>
                 </div>
             </div>
@@ -136,7 +136,7 @@
 </p-tabView>
 
 
-  
+
 
 
   <!-- <p-dataTable [value]="vwactionsendeds" expandableRows="true" selectionMode="single" immuable="true"
@@ -275,7 +275,7 @@
         </mat-step>
       </mat-horizontal-stepper>
       <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createSendaction(stepper)" 
+        <button class="btn btn-primary" (click)="createSendaction(stepper)"
          [disabled]="stepper.selectedIndex !== 2 || itemsIsEmpty(selectedStructures) || itemsIsEmpty(selectedActions)">
            Valider
         </button>

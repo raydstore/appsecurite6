@@ -1012,3 +1012,17 @@ export interface Vwschemavehiculedisputting {
   datecreate?: Date;
   dateupdate?: Date;
 }
+
+
+export interface Listreportofaccident {
+  id?: string;
+  idaccident?: number;
+  name?: string;
+  label?: string;
+  enable?: number;
+}
+
+export interface ComponentTarget {
+  id: number;
+  name: string;
+}

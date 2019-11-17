@@ -1,0 +1,16 @@
+<div  *ngIf="showCard" class="card" style="width: 252px;">
+  <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
+    List rapport d'accident
+  </h5>
+  <div class="card-body list-group list-group-flush" *ngIf="showList">
+          <a *ngFor="let printitem of listrepotofaccidents" [href]="getPrintUrl(printitem.name)" target="_blank"
+          class="list-group-item list-group-item-action" [class.stitemprint]="printitem.enable === 1"
+          [class.disabled]="printitem.enable === 0" aria-disabled="printitem.enable === 0">{{printitem.label}}</a>
+   <!--  <h5 class="ct card-title">{{ userInfo.name }}</h5>
+    <p class="card-text">Matricule : {{ userInfo.idagent }}</p>
+    <button type="button" class="btn btn-link" (click)="passwordSetting()">{{ labelChangePassword }}</button> -->
+  </div>
+  <div class="card-body" *ngIf="!showList">
+    <p class="card-text">Veuillez selectionez un item.</p>
+  </div>
+</div>
