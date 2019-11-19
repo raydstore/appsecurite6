@@ -1,8 +1,11 @@
+import { ActionPrintCard } from './../../../store/action/printcard.action';
 import { AuthService } from './../../../shared/services/auth.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LogonService } from 'shared/services/logon.service';
 import { Users } from 'shared/table/table';
 import { AccidentComponent } from 'app/accident/component/accident/accident.component';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from 'app/store/store';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +22,8 @@ export class NavComponent implements OnInit {
   /* @ViewChild(AccidentComponent, { static: false }) accidentComponentRef: AccidentComponent; */
   idaccident;
 
-  constructor(private authservise: AuthService, private logonService: LogonService) { }
+  constructor(private authservise: AuthService, private logonService: LogonService,
+    private store: Store<StoreInterface>) { }
 
   ngOnInit() {
     this.init();
@@ -85,6 +89,11 @@ export class NavComponent implements OnInit {
   conditionChecked() {
     return !(this.checkPassword(this.oldPassword) && this.firstPassword !== '' && this.secondPassword !== '' &&
            this.firstPassword === this.secondPassword);
+  }
+
+  updatePrintCard(viewname: string, showcard: boolean) {
+    this.store.dispatch(new ActionPrintCard({viewname: viewname, id: 0, showcard: showcard}));
+
   }
 
 }

@@ -1,3 +1,5 @@
+import { ActionPrintCard } from './../../../store/action/printcard.action';
+// import { PrintCardAction } from './../../../store/store';
 import { PrintService } from 'shared/services/print.service';
 import { Site, Agent, IAgent, TFunctionName, Mode, EventArgs, Vwagent } from 'shared/table/table';
 import { SiteService } from 'shared/services/site.service';
@@ -32,6 +34,9 @@ import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { VwagentService } from 'shared/services/vwagent.service';
 import { isUndefined, isNullOrUndefined } from 'util';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from 'app/store/store';
+import { PrintAccidentAction } from 'app/store/action/printcard.action';
 
 
 /**
@@ -97,10 +102,8 @@ export class AccidentComponent implements OnInit {
   focus$ = new Subject<string>();
   click$ = new Subject<string>();
 
-  constructor(private service: AccidentService,
-    public siteService: SiteService,
-    public agentService: AgentService,
-    private _printService: PrintService) {
+  constructor(private service: AccidentService, public siteService: SiteService,
+    public agentService: AgentService, private _printService: PrintService, private store: Store<StoreInterface>) {
   }
 
 
@@ -536,11 +539,13 @@ export class AccidentComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    this._printService.sendTargetToPrint({id: event.data.id, name: 'accident'});
+    this._printService.sendTargetToPrint({id: event.data.id, name: 'printcard'});
+    this.store.dispatch(new ActionPrintCard({viewname: 'accident', id: event.data.id, showcard: true}));
   }
 
   onRowUnselect(event) {
     this._printService.sendTargetToPrint({id: 0, name: 'accident'});
+    this.store.dispatch(new ActionPrintCard({viewname: '', id: 0, showcard: true}));
   }
 
 

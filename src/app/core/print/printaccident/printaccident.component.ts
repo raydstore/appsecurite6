@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListreportofaccidentService } from 'shared/services/listreportofaccident.service';
 import { Listreportofaccident } from 'shared/table/table';
 import { PrintService } from 'shared/services/print.service';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from 'app/store/store';
+import { paramsSelector } from 'app/store/reducer/printcard.reducer';
 
 @Component({
   selector: 'app-printaccident',
@@ -17,15 +20,15 @@ export class PrintaccidentComponent implements OnInit {
 
   urlPrint: String = 'http://10.1.0.150:8080/HseWebService/wsrv/print';
 
-  constructor(private listrepotofaccidentService: ListreportofaccidentService, private _printService: PrintService) { }
+  constructor(private listrepotofaccidentService: ListreportofaccidentService, private _printService: PrintService, 
+    private store: Store<StoreInterface>) { }
 
   ngOnInit() {
-    this._printService.componentToPrint$.
+    /* this._printService.componentToPrint$.
       subscribe(componentTarget => {
         if (componentTarget.name === 'accident') {
           this.showCard = true;
           this.idaccident = componentTarget.id;
-          /* console.log('tr =' + JSON.stringify(componentTarget)); */
           if (componentTarget.id !== 0) {
             this.loadData(componentTarget.id);
             this.showList = true;
@@ -34,6 +37,18 @@ export class PrintaccidentComponent implements OnInit {
           }
         } else {
           this.showCard = false;
+        }
+      }); */
+      this.store.select(paramsSelector).subscribe(params => {
+        this.showCard = params.showcard;
+        if (this.showCard) {
+          this.idaccident = params.id;
+          if (params.id !== 0) {
+            this.loadData(params.id);
+            this.showList = true;
+          } else {
+            this.showList = false;
+          }
         }
       });
   }

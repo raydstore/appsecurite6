@@ -42,7 +42,8 @@ import { SharedModule } from './shared/shared.module';
 import { OpscardModule } from './opscard/opscard.module';
 import { WorkComponent } from './opscard/component/work/work.component';
 import { JwtModule } from '@auth0/angular-jwt';
-
+import { StoreModule } from '@ngrx/store';
+import { reducerList } from './store/store';
 /* import { TreeTableModule } from 'primeng/primeng';
 import { TreeNode } from 'primeng/api'; */
 
@@ -111,7 +112,8 @@ import { TreeNode } from 'primeng/api'; */
 
       { path: 'grid', component: GridComponent },
       { path: '**', component: NotFoundComponent }
-    ])
+    ]),
+    StoreModule.forRoot(reducerList)
   ],
   providers: [
     {provide: ErrorHandler, useClass: AppErrorHandler}

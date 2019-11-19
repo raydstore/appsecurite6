@@ -11,38 +11,66 @@
 
   </div>
 
-  <!-- <div class="card-body">immuable="flse"a (onRowSelect)="onRowSelect($event)"-->
-  <p-dataTable [value]="marks" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
-    rowExpandMode="single" [responsive]="true">
-    <p-column expander="true" styleClass="col-icon"></p-column>
-    <p-column field="id" header="Id"></p-column>
-    <p-column field="name" header="Name"></p-column>
-    <p-column field="datecreate" header="Crée le">
-      <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
-        {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
+<!--   <p-dataTable [value]="marks" expandableRows="true" selectionMode="single" immuable="true" [(selection)]="selectedNode" (onNodeExpand)="nodeExpand($event)"
+    rowExpandMode="single" [responsive]="true"> -->
+
+    <p-table #dt [columns]="cols" [value]="marks" dataKey="id" rowExpandMode="single" selectionMode="single"
+    [(selection)]="selectedNode" [paginator]="true" [rows]="10"
+    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+    <!-- [globalFilterFields]="['id','name', 'place', 'idsite.name']"  -->
+    <ng-template pTemplate="caption">
+      <div style="text-align: right">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Global Filter"
+          (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 2.25em"></th>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+              ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+            </p-sortIcon>
+          </th>
+          <th style="width:3em"></th>
+        </tr>
       </ng-template>
+      <ng-template pTemplate="body" let-expanded="expanded" let-rowData let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+            <td>
+              <a href="#" [pRowToggler]="rowData ">
+                <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'"
+                  style="font-size: 1.25em"></i>
+              </a>
+            </td>
+            <td>{{rowData.id}}</td>
+            <td>{{rowData.name}}</td>
+            <td>{{rowData.datecreate | date:'dd/MM/yy'}}</td>
+            <td>{{rowData.owner}}</td>
+            <td>{{rowData.dateupdate | date:'dd/MM/yy'}}</td>
+            <td>{{rowData.lastuser}}</td>
+            <td styleClass="col-button">
+              <!--   <ng-template let-m="rowData" pTemplate="body"> -->
+                    <button class="btn btn-danger" (click)="deleteMark(rowData)">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  <!-- </ng-template> -->
+            </td>
+          </tr>
+        </ng-template>
+
+
+
+    
+   <!--  <p-column styleClass="col-button">
+      
     </p-column>
-    <p-column field="owner" header="par"></p-column>
-    <p-column field="dateupdate" header="Modifier le">
-      <ng-template let-col let-m="rowData" pTemplate="body">
-        <!-- <span [style.color]="car[col.field]"> -->
-        {{m[col.field] | date:'shortDate'}}
-        <!-- </span> -->
-      </ng-template>
-    </p-column>
-    <p-column field="lastuser" header="par"></p-column>
-    <p-column styleClass="col-button">
-      <ng-template let-m="rowData" pTemplate="body">
-        <button class="btn btn-danger" (click)="deleteMark(m)">
-          <i class="fa fa-minus"></i>
-        </button>
-      </ng-template>
-    </p-column>
-    <ng-template let-item pTemplate="rowexpansion">
-      <!-- <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px"> -->
-      <!-- <div class="ui-grid-row"> -->
+    <ng-template let-item pTemplate="rowexpansion"> -->
+        <ng-template pTemplate="rowexpansion" let-item>
+            <tr>
+              <td [attr.colspan]="8">
       <div class="container">
         <div class="form-group row">
           <label for="chid" class="col-sm-2 col-form-label">id : </label>
@@ -65,29 +93,11 @@
           </button>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
+      </td>
+      </tr>
     </ng-template>
-  </p-dataTable>
-  <!-- </div> -->
+  </p-table>
 </div>
 
 <app-newmark [dialogVisible]="dialogVisible" (closeDialog)="createItem($event)"></app-newmark>
 
-<!-- <p-dialog header="Marque Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newMark">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newMark.id" placeholder="Identificateur" readonly>
-      </span>
-      <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newMark.name" placeholder="le nom de la marque">
-      </span>
-      <div class="toolbtn">
-        <button class="btn btn-primary" (click)="createMark()">Submit</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
-      </div>
-    </div>
-  </div> -->

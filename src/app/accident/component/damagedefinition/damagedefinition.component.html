@@ -66,16 +66,21 @@
 <!-- </div> -->
 
 <p-dialog header="Nouveau definition dommage" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true" width="450">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newDamagedefinition">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newDamagedefinition.id" placeholder="Identificateur" readonly>
-      </span>
-      <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newDamagedefinition.name" placeholder="l'équipement">
-      </span>
+  <div class="ui-g ui-fluid" *ngIf="newDamagedefinition">
+    <div class="container">
+        <div class="flex-item">
+      <div class="form-group row">
+        <label for="iid" class="col-sm-3 col-form-label">id : </label>
+        <div class="col-sm-9">
+        <input type="text" class="form-control" id="iid" [(ngModel)]="newDamagedefinition.id" placeholder="Identificateur" readonly>
+      </div>
+    </div>
+      <div class="form-group row">
+        <label for="iname" class="col-sm-3 col-form-label">name</label>
+        <div class="col-sm-9">
+        <input type="text" class="form-control" id="iname" [(ngModel)]="newDamagedefinition.name" placeholder="l'équipement">
+      </div>
+    </div>
       <div class="toolbtn alright">
         <button class="btn btn-primary" (click)="createDamagedefinition()">Valider</button>
         <button class="btn btn-warning" (click)="hideNewDialoge()">Annuler</button>

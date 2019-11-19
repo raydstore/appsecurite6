@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LogonService } from 'shared/services/logon.service';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from './store/store';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,6 @@ import { LogonService } from 'shared/services/logon.service';
 })
 export class AppComponent {
   title = 'app';
-  constructor (private logonService: LogonService) {}
+  constructor (private logonService: LogonService) {
+  }
 }

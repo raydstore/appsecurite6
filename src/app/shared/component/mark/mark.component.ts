@@ -1,3 +1,4 @@
+import { PrintMarkAction, ActionPrintCard } from './../../../store/action/printcard.action';
 import { TreeNode } from 'primeng/components/common/api';
 import { LastidService } from 'shared/services/lastid.service';
 import { NotFoundError } from '../../../core/component/common/not-found-error';
@@ -9,6 +10,8 @@ import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { Mark, UserInfo } from 'shared/table/table';
 import { PanelModule } from 'primeng/primeng';
 import { Http, Response } from '@angular/http';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from 'app/store/store';
 
 @Component({
   selector: 'app-mark',
@@ -32,12 +35,21 @@ export class MarkComponent implements OnInit {
   newMode = false;
 
   titlelist = 'Marque';
+  cols: any[];
 
-  constructor(private service: MarkService) {
+  constructor(private service: MarkService, private store: Store<StoreInterface>) {
   }
 
   ngOnInit() {
     this.loadData();
+    this.cols = [
+      { field: 'id',             header: 'id',             width: '4em' },
+      { field: 'name',           header: 'name',           width: '10em' },
+      { field: 'datecreate',     header: 'Crée le',        width: '5em' },
+      { field: 'owner',          header: 'par',            width: '10em' },
+      { field: 'dateupdate',     header: 'Modifier le',    width: '5em' },
+      { field: 'lastuser',       header: 'par',            width: '10em' }
+    ];
   }
 
   loadData() {
@@ -101,6 +113,13 @@ export class MarkComponent implements OnInit {
     this.dialogVisible = true;
   }
 
+  onRowSelect(event) {
+    this.store.dispatch(new ActionPrintCard({viewname: 'marque', id: event.data.id, showcard: false}));
+  }
+
+  onRowUnselect(event) {
+    this.store.dispatch(new ActionPrintCard({viewname: '', id: 0, showcard: false}));
+  }
 
 }
 
