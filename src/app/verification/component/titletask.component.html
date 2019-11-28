@@ -1,5 +1,5 @@
 <div class="card bg-light">
-  <div class="card-header alCenter cardtitle clop">
+  <div class="card-header alCenter cardtitle">
     <span>
       <h4 class="titleform">
         <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}</h4>
@@ -9,55 +9,91 @@
     </span>
   </div>
 
-  <p-treeTable [value]="data" [style]="{'margin-top':'50px'}" var="node" labelExpand="Expand">
-    <!-- <p-header>WorkSheet Templating</p-header> -->
-    <p-column field="name" header="WorkSheet Templating" styleClass="clsheet">
-      <div class="clsheet">
-        <ng-template let-node="rowData" pTemplate="body">
-          <input type="text" [(ngModel)]="node.data.name" #in [ngClass]="node.styleClass" maxlength="128" (focus)="setFocusColor(in)"
-            (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
-          <span class="alright" style="width:20%">
-            <!-- <ng-template let-m="rowData" pTemplate=dy ""bo> -->
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteTitleTask(node)">
-              <i class="fa fa-minus" aria-hidden="false"></i>
-            </button>
-            <button class="btn btn-outline-primary btn-sm" (click)="updateTitleTask(node)">
-              <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-outline-secondary btn-sm" (click)="addTitleTask(node)" *ngIf="node.data.kind === 'S' ? false : true">
-              <i class="fa fa-plus"></i>
-            </button>
-            <!-- </ng-template> -->
-          </span>
-        </ng-template>
-      </div>
+  <p-treeTable id="idth" #thheader [value]="data">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th class="hcenter">
+          <p (onmousedown)="onMouseDown()">titre</p>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr
+        [ngClass]="{'row-class': rowData.kind == 'W', 'row-group': rowData.kind == 'B', 'row-item': rowData.kind == 'S'}">
+        <td ttEditableColumn class="hibortd">
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{rowData.id}} - <p-treeTableCellEditor>
+            <ng-template pTemplate="input">
+              <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
+                (blur)="setDefaultColor(in)" [ngClass]="{'row-edit': 1 == 1}">
+              <span class="sptool">
+                <button class="btn btn-outline-primary btn-sm" (click)="updateTitleTask(rowData)">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+                <!-- <button class="btn btn-outline-secondary btn-sm" #bc (click)="thheader.onMouseDown()"
+                  *ngIf="rowData.kind === 'S' ? false : true">
+                  <i class="fa fa-window-close"></i>
+                </button> -->
+              </span>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{rowData.name}}
+              <span class="sptool">
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteTitleTask(rowData)">
+                  <i class="fa fa-minus" aria-hidden="false"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="addTitleTask(rowData)"
+                  *ngIf="rowData.kind === 'S' ? false : true">
+                  <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="printTitletask(rowData)"
+                  *ngIf="rowData.kind === 'W' ? false : true">
+                  <i class="fa fa-print"></i>
+                </button>
+              </span>
 
-    </p-column>
-
+            </ng-template>
+          </p-treeTableCellEditor>
+        </td>
+      </tr>
+    </ng-template>
   </p-treeTable>
 </div>
-<p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newTitleTask">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newTitleTask.id" placeholder="Identificateur"
-          readonly>
-      </span>
-      <span>
-        <label for="iname">name</label>
-        <input type="text" id="iname" [(ngModel)]="newTitleTask.name" placeholder="l'action">
-      </span>
-      <div *ngFor="let kind of kinds" class="radio" [hidden]="this.selectedKind === 'W'">
-        <label *ngIf="kind.id === 'W' ? false : true">
-          <input type="radio" [(ngModel)]="newTitleTask.kind" [value]="kind.id"> {{kind.name}}
-        </label>
-        <!-- (change)="onChangeRadio($event)" -->
-      </div>
-      <div class="toolbtn alright">
-        <button class="btn btn-primary" (click)="createTitleTask()">Valider</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+<p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade"
+  [modal]="true" width="450">
+  <div class="ui-g ui-fluid" *ngIf="newTitleTask">
+    <div class="container">
+      <div class="flex-item">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="iid">id : </label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="iid" [(ngModel)]="newTitleTask.id" placeholder="Identificateur"
+              readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="iname">name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="iname" [(ngModel)]="newTitleTask.name" placeholder="l'action">
+          </div>
+        </div>
+        <div class="card" *ngIf="!(selectedKind === 'W')">
+          <div class="card-body">
+            <h5 class="card-title">type</h5>
+            <ng-container *ngFor="let kind of kinds">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="kindradio" id="{{kind.id}}" [(ngModel)]="newTitleTask.kind" value="{{kind.id}}"
+                  *ngIf="kind.id === 'W' ? false : true"  checked="selectedKind === 'S'">
+                <label class="form-check-label" for="{{kind.id}}" *ngIf="kind.id === 'W' ? false : true">
+                  {{kind.name}}
+                </label>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="toolbtn alright">
+          <button class="btn btn-primary" (click)="createTitleTask()">Valider</button>
+          <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+        </div>
       </div>
     </div>
-  </div>

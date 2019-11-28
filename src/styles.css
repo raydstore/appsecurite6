@@ -79,7 +79,7 @@ body {
 .sptool {
     float: right;
    /*  background-color: #dfe6e9; */
-    width: 62px !important;
+    width: 95px !important;
 /*     border: none !important;
     border-radius: .2rem!important; */
 }
@@ -223,3 +223,31 @@ body {
   .tab-cel {
     display: table-cell;
   }
+
+  .row-class {
+    color: #222222 !important;
+    background-color: #cce5ff !important;
+    border-color: #f5c6cb !important;
+  }
+
+  .row-group {
+    color: #008fff !important;
+    background-color: #f8f9fa !important;
+    border-color: #ffeeba !important;
+  }
+
+  .row-item {
+    color: rgb(145, 84, 84) !important;
+    background-color: white !important;
+    border-color: #b8daff !important;
+    /* font-weight: bold;  */
+  }
+
+  .hibortd {
+    border-style: none!important;
+  }
+
+  .hcenter {
+    display: flex;
+    justify-content: center;
+}

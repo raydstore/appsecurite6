@@ -20,9 +20,11 @@ export class TitletaskComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
-    kind: 'W',
-    lastuser: 'ali',
+    idparent: null,
     name: '',
+    kind: 'W',
+    kindparent: null,
+    lastuser: 'ali',
     owner: 'ali'
   };
   selectedKind = 'W';
@@ -62,7 +64,7 @@ export class TitletaskComponent implements OnInit {
     for (let titletask of this.titletasks) {
       if (titletask.idparent !== undefined) {
         if ('idparent' in titletask) {
-          if ((titletask.idparent === titletaskParent['id']) && 
+          if ((titletask.idparent === titletaskParent['id']) &&
               (titletask.kindparent === titletaskParent['kind'])) {
           childs = this.getChilds(titletask);
           if (childs.length !== 0) {
@@ -121,8 +123,8 @@ export class TitletaskComponent implements OnInit {
 
   addTitleTask(node) {
     this.newTitleTask = this.templateNewTitleTask;
-    this.newTitleTask.kindparent = node.data.kind;
-    this.newTitleTask.idparent   = node.data.id;
+    this.newTitleTask.kindparent = node.kind;
+    this.newTitleTask.idparent   = node.id;
 //     this.newTitleTask.kind = this.selectedKind;
     this.selectedKind = 'S';
     this.newWorkSheet = false;
@@ -141,10 +143,10 @@ export class TitletaskComponent implements OnInit {
     this.newTitleTask.kind = this.selectedKind;
     this.showNewDialoge();
     this.newTitleTask.name = '';
-  } 
+  }
 
   onChangeRadio(event: any) {
-    this.newTitleTask.kind = event.target.value; 
+    this.newTitleTask.kind = event.target.value;
   }
 
   createTitleTask() {
@@ -206,5 +208,22 @@ export class TitletaskComponent implements OnInit {
     input.style.backgroundColor = 'beige';
     input.style.color = 'black';
   }
+
+  cancelUpdate() {
+   console.log('test');
+  }
+
+  printTitletask() {
+    return null;
+  }
+
+  clickHeader(th: HTMLParagraphElement) {
+    th.click();
+  }
+
+  onMouseDown() {
+    return null;
+  }
+
 
 }

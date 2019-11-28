@@ -3,117 +3,101 @@
     <span>
       <h4 class="titleform">
         <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}</h4>
-      <button class="btn btn-success btnright" (click)="addWorkSheet()">
+      <button class="btn btn-success btnright" (click)="addWorkSheet()"  *ngIf="false">
         <i class="fa fa-plus"></i>
       </button>
     </span>
   </div>
-
   <p-treeTable [value]="data">
     <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th >
-                titre
-            </th>
-        </tr>
+      <tr>
+        <th class="hcenter">
+          titre
+        </th>
+      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-        <tr [ngClass]="{'row-class': rowData.kind == 'C', 'row-group': rowData.kind == 'G', 'row-item': rowData.kind == 'I'}">
-            <td  ttEditableColumn>
-                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                {{rowData.id}} - <p-treeTableCellEditor>
-                  <ng-template pTemplate="input">
-                      <!-- <input type="text" [(ngModel)]="rowData.name"> -->
-                      <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
-            (blur)="setDefaultColor(in)" [ngClass]="{'row-edit': 1 == 1}">
-            <span class="sptool" style="width:20%">
+      <tr
+        [ngClass]="{'row-class': rowData.kind == 'C', 'row-group': rowData.kind == 'G', 'row-item': rowData.kind == 'I'}">
+        <td ttEditableColumn class="hibortd">
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{rowData.id}} - <p-treeTableCellEditor>
+            <ng-template pTemplate="input">
+              <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
+                (blur)="setDefaultColor(in)" [ngClass]="{'row-edit': 1 == 1}">
+              <span class="sptool" style="width:20%">
                 <button class="btn btn-outline-primary btn-sm" (click)="updateBit(rowData)">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </button>
               </span>
-                   </ng-template>
-                  <ng-template pTemplate="output">
-                    {{rowData.name}}
-                    <span class="sptool" style="width:20%">
-                        <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(rowData)">
-                          <i class="fa fa-minus" aria-hidden="false"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary btn-sm" (click)="addBit(rowData)" *ngIf="rowData.kind === 'I' ? false : true">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                      </span>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{rowData.name}}
+              <span class="sptool" style="width:20%" *ngIf="false">
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(rowData)">
+                  <i class="fa fa-minus" aria-hidden="false"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="addBit(rowData)"
+                  *ngIf="rowData.kind === 'I' ? false : true">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </span>
 
-                  </ng-template>
-              </p-treeTableCellEditor>
-                <!-- {{rowData.id}} -  {{rowData.name}} -->
-                <!-- <div class="clsheet">
-        <ng-template let-node="rowData" pTemplate="body">
-          {{rowData.id}} -  <input type="text" [(ngModel)]="rowData.name" #in maxlength="128" (focus)="setFocusColor(in)"
-            (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
-          <span class="alright" style="width:20%">
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(rowData)">
-              <i class="fa fa-minus" aria-hidden="false"></i>
-            </button>
-            <button class="btn btn-outline-primary btn-sm" (click)="updateBit(rowData)">
-              <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-outline-secondary btn-sm" (click)="addBit(rowData)" *ngIf="rowData.kind === 'I' ? false : true">
-              <i class="fa fa-plus"></i>
-            </button>
-          </span>
-        </ng-template>
-      </div> -->
-            </td>
-        </tr>
+            </ng-template>
+          </p-treeTableCellEditor>
+        </td>
+      </tr>
     </ng-template>
-</p-treeTable>
-
-  <!-- <p-treeTable [value]="data" [style]="{'margin-top':'50px'}" var="node" labelExpand="Expand">
-    <p-column field="name" header="titre" styleClass="clsheet">
-      <div class="clsheet">
-        <ng-template let-node="rowData" pTemplate="body">
-          {{node.data.id}} -  <input type="text" [(ngModel)]="node.data.name" #in [ngClass]="node.styleClass" maxlength="128" (focus)="setFocusColor(in)"
-            (blur)="setDefaultColor(in)" style="background-color: beige;width:70%;border-width:0px 0px 1px 0px">
-          <span class="alright" style="width:20%">
-            <button class="btn btn-outline-danger btn-sm" (click)="deleteBit(node)">
-              <i class="fa fa-minus" aria-hidden="false"></i>
-            </button>
-            <button class="btn btn-outline-primary btn-sm" (click)="updateBit(node)">
-              <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-outline-secondary btn-sm" (click)="addBit(node)" *ngIf="node.data.kind === 'I' ? false : true">
-              <i class="fa fa-plus"></i>
-            </button>
-          </span>
-        </ng-template>
-      </div>
-
-    </p-column>
-
-  </p-treeTable> -->
+  </p-treeTable>
 </div>
 
 
-<p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="250">
-  <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="newBit">
-    <div class="bdcontent">
-      <span>
-        <label for="iid">id : </label>
-        <input type="text" class="form-control" id="chid" [(ngModel)]="newBit.id" placeholder="Identificateur">
-      </span>
-      <span>
-        <label for="iname">titre</label>
-        <input type="text" id="iname" [(ngModel)]="newBit.name" placeholder="l'action">
-      </span>
-      <div *ngFor="let kind of kinds" class="radio" [hidden]="this.selectedKind === 'C'">
-        <label *ngIf="kind.id === 'C' ? false : true">
-          <input type="radio" [(ngModel)]="newBit.kind" [value]="kind.id"> {{kind.name}}
-        </label>
-      </div>
-      <div class="toolbtn alright">
-        <button class="btn btn-primary" (click)="createBit()">Valider</button>
-        <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+<p-dialog header="Création  {{titlenew}} " [(visible)]="dialogVisible" [responsive]="true" showEffect="fade"
+  [modal]="true" width="450">
+  <div class="ui-g ui-fluid" *ngIf="newBit">
+    <div class="container">
+      <div class="flex-item">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="iid">id : </label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="iid" [(ngModel)]="newBit.id" placeholder="Identificateur">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="iname">titre</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="iname" [(ngModel)]="newBit.name" placeholder="l'action">
+          </div>
+        </div>
+        <!-- <div *ngFor="let kind of kinds" class="radio form-group row" [hidden]="this.selectedKind === 'C'">
+          <label class="col-sm-3 col-form-label" *ngIf="kind.id === 'C' ? false : true"></label>
+          <div class="col-sm-9">
+            <input type="radio" class="form-control" [(ngModel)]="newBit.kind" [value]="kind.id"> {{kind.name}}
+          </div>
+        </div> -->
+
+        <div class="card" *ngIf="!(this.selectedKind === 'C')">
+          <div class="card-body">
+            <h5 class="card-title">type</h5>
+            <ng-container *ngFor="let kind of kinds">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="kindradio" id="{{kind.id}}" [value]="kind.id"
+                  *ngIf="kind.id === 'C' ? false : true">
+                <label class="form-check-label" for="{{kind.id}}" *ngIf="kind.id === 'C' ? false : true"
+                  checked="kind.id === 'I'">
+                  {{kind.name}}
+                </label>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+
+
+        <div class="toolbtn alright">
+          <button class="btn btn-primary" (click)="createBit()">Valider</button>
+          <button class="btn btn-warning" (click)="hideNewDialoge()">cancel</button>
+        </div>
       </div>
     </div>
   </div>

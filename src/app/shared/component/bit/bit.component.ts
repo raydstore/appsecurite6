@@ -120,8 +120,8 @@ export class BitComponent implements OnInit {
 
   addBit(node) {
     this.newBit = this.templateNewBit;
-    this.newBit.kindparent = node.data.kind;
-    this.newBit.idparent = node.data.id;
+    this.newBit.kindparent = node.kind;
+    this.newBit.idparent = node.id;
     //     this.newBit.kind = this.selectedKind;
     this.selectedKind = 'I';
     this.newWorkSheet = false;
