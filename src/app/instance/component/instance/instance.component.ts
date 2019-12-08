@@ -1,6 +1,7 @@
 import { PropertyService } from 'shared/services/property.service';
 import { Component, OnInit } from '@angular/core';
 import { ObjectService } from 'shared/services/object.service';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-instance',
@@ -12,6 +13,7 @@ export class InstanceComponent implements OnInit {
   selectedObject: any;
   propertys: any[];
   selectedId = 1;
+  titlelist = 'Répartition ';
 
   constructor(private service: ObjectService, private serviceProperty: PropertyService) { }
 

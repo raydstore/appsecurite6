@@ -46,10 +46,13 @@
                   *ngIf="rowData.kind === 'S' ? false : true">
                   <i class="fa fa-plus"></i>
                 </button>
-                <button class="btn btn-outline-secondary btn-sm" (click)="printTitletask(rowData)"
-                  *ngIf="rowData.kind === 'W' ? false : true">
+                <a *ngIf="rowData.kind != 'W' ? false : true" [href]="getPrintUrl(rowData.id)" target="_blank"
+                class="btn btn-outline-secondary btn-sm" >
+                <i class="fa fa-print"></i></a>
+              <!--   <button class="btn btn-outline-secondary btn-sm" (click)="printTitletask(rowData)"
+                  *ngIf="rowData.kind != 'W' ? false : true">
                   <i class="fa fa-print"></i>
-                </button>
+                </button> -->
               </span>
 
             </ng-template>

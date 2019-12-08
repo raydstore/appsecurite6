@@ -146,6 +146,8 @@ import { VwactionsendedService } from 'shared/services/vwactionsended.service';
 import { PdfViewerModule } from '../../../node_modules/ng2-pdf-viewer';
 import { DialogModalComponent } from 'shared/component/dialog-modal/dialog-modal.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '../../../node_modules/@angular/material';
@@ -197,6 +199,8 @@ import { ListreportofaccidentService } from './services/listreportofaccident.ser
     Validators, */
     TreeModule,
     MatStepperModule,
+    MatGridListModule,
+    MatCardModule,
     MatInputModule,
     MatButtonModule,
     OverlayPanelModule,
@@ -249,6 +253,8 @@ import { ListreportofaccidentService } from './services/listreportofaccident.ser
     FieldsetModule,
     OrganizationChartModule,
     MatStepperModule,
+    MatGridListModule,
+    MatCardModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,

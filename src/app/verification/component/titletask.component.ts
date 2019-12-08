@@ -40,6 +40,8 @@ export class TitletaskComponent implements OnInit {
   newMode = false;
   newWorkSheet = false;
   titlelist = 'WorkSheet';
+  reportname = 'rptWorksheet';
+  urlPrint: String = 'http://10.1.0.150:8080/HseWebService/wsrv/print';
 
   constructor(private service: TitletaskService) {
   }
@@ -215,6 +217,10 @@ export class TitletaskComponent implements OnInit {
 
   printTitletask() {
     return null;
+  }
+
+  getPrintUrl(id) {
+    return this.urlPrint + '?reportname=' + this.reportname + '&&p=' + id;
   }
 
   clickHeader(th: HTMLParagraphElement) {
