@@ -34,7 +34,7 @@
     "font-awesome": "^4.7.0",
     "g": "^2.0.1",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng2-pdf-viewer": "^5.0.1",
     "pdfjs-dist": "^2.0.489",
     "popper.js": "^1.12.9",
