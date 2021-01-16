@@ -32,7 +32,8 @@ export class AccidentvehiculedrivershComponent implements OnInit, OnChanges {
   constructor(private agentService: AgentService) { }
 
   setAgent() {
-    if (isUndefined(this.accidentvehiculedriversh.idagent)) {
+    console.log('enter  = setAgent');
+    if (this.accidentvehiculedriversh.idagent === undefined) {
       this.agent = this.templateAgent;
     } else {
       this.agent = this.accidentvehiculedriversh.idagent;
@@ -49,6 +50,7 @@ export class AccidentvehiculedrivershComponent implements OnInit, OnChanges {
   ngOnChanges() {
     console.log('enter ngonchange');
     this.setAgent();
+    console.log('exit ngonchange');
   }
 
   loadData() {
@@ -87,6 +89,7 @@ export class AccidentvehiculedrivershComponent implements OnInit, OnChanges {
     } */
 
   onChangeItem(event) {
+    console.log('enter onchange item');
     this.accidentvehiculedriversh.idagent = <Agent> event;
     
     console.log('emit s');

@@ -40,7 +40,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         }
       }
       this.item = Object.assign({}, _item);
-    }
+    } else this.item = null;
   }
 
   public dsname(a: Agent): string {

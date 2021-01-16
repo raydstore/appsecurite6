@@ -1,4 +1,5 @@
 import { Users } from 'shared/table/table';
+import { Vwuserauthorizationmodule } from 'shared/table/table';
 import { DataService } from './data.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -19,7 +20,8 @@ const urlService = environment.urlService;
 
 @Injectable()
 export class LogonService {
-  url = urlService + '/users';
+  // url = urlService + '/users';
+  url = urlService + '/vwuserauthorizationmodule';
   headers = new HttpHeaders();
 
   constructor(private http: HttpClient) {
@@ -71,20 +73,32 @@ export class LogonService {
     }
   }
 
+  getValueFrom(name) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    } else {
+      let session = JSON.parse(token);
+      if (session.hasOwnProperty(name)) {
+        return (session)[name];
+      } else return null;
+    }
+  }
+
   updatePassword(newpassword) {
     const token = localStorage.getItem('token');
     let user: Users;
     if (!token) {
       return null;
     } else {
-       user = <Users> (JSON.parse(token));
-       user.password = newpassword;
-       user.lastuser = user.username;
+      user = <Users>(JSON.parse(token));
+      user.password = newpassword;
+      user.lastuser = user.username;
     }
     return this.http.put<Users>(this.url + '/' + user.id, user, { headers: this.headers })
-        .map(response => {
-          localStorage.removeItem('token');
-          return true;
+      .map(response => {
+        localStorage.removeItem('token');
+        return true;
       })
       .catch(this.handleError);
   }

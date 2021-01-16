@@ -35,6 +35,21 @@ export interface Users {
   dateupdate?: Date;
 }
 
+export interface Vwuserauthorizationmodule {
+    id?: number;
+    idagent?: string;
+    name?: string;
+    username?: string;
+    password?: string;
+    idrole?: number;
+    siteuser?: string;
+    authorization?: any;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+  }
+
 export interface Activity {
     id?: number;
     name?: string;
@@ -108,12 +123,24 @@ export interface UnitMeasure {
     dateupdate?: Date;
 }
 
+export interface Detailsite {
+    idsite?: number;
+    path?: string;
+    rank?: number;
+    count?: number;
+    owner?: string;
+    lastuser?: string;
+    datecreate?: Date;
+    dateupdate?: Date;
+}
+
 
 export interface Site {
     id?: number;
     name?: string;
     idlabel?: Label;
     idparent?: Site;
+    detailsite?: Detailsite;
     owner?: string;
     lastuser?: string;
     datecreate?: Date;
@@ -497,10 +524,10 @@ export interface Accidentagentee {
     name?: string;
     function?: string;
     identreprise?: any;
-    countstopwork: number;
-    accidentdomain: number;
-    typeaccident: string;
-    idgrid: number;
+    countstopwork?: number;
+    accidentdomain?: number;
+    typeaccident?: string;
+    idgrid?: number;
     samury?: string;
     owner?: string;
     lastuser?: string;
@@ -1025,4 +1052,9 @@ export interface Listreportofaccident {
 export interface ComponentTarget {
   id: number;
   name: string;
+}
+
+export interface Item {
+    name: string;
+    obj: any;
 }

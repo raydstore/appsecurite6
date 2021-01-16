@@ -1,28 +1,29 @@
-<p-card header="" [style]="{width: '360px'}">
-    <div class="form-group row">
-      <label for="chidagentdeclare" class="col-sm-4 col-form-label">Agent : </label>
-      <div class="col-sm-8">
-        <app-autocomplete [i_item]="item.agent" [functionName]="displayNameAgent" [args]="['id', 'firstname', 'lastname']" [service]="agents"
-          (changeItem)="onChangeItem(item, 'agent', $event)"></app-autocomplete>
-      </div>
+<!-- <p-card header=""> -->
+<div class="form-group row">
+    <label for="chidagentdeclare" class="col-sm-3 col-form-label">Agent : </label>
+    <div class="col-sm-9">
+        <app-autocomplete [i_item]="item.agent" [functionName]="displayNameAgent"
+            [args]="['id', 'firstname', 'lastname']" [service]="agents"
+            (changeItem)="onChangeItem(item, 'agent', $event)"></app-autocomplete>
     </div>
-    <div class="form-group row" *ngIf="showcountstop()">
-      <label for="icountstopwork" class="col-sm-4 col-form-label">nombre de jour arrêt</label>
-      <div class="col-sm-8">
-      <input type="text" id="icountstopwork" [(ngModel)]="item.countstopwork" placeholder="nombre de jour arrêt">
+</div>
+<div class="form-group row" *ngIf="showcountstop()">
+    <label for="icountstopwork" class="col-sm-3 col-form-label">nombre de jour arrêt</label>
+    <div class="col-sm-9">
+        <input type="text" id="icountstopwork" [(ngModel)]="item.countstopwork" placeholder="nombre de jour arrêt">
     </div>
+</div>
+<div class="form-group row">
+    <label for="chsamury" class="col-sm-2 col-form-label">Recit succint</label>
+    <div class="col-sm-9 clkind">
+        <textarea rows="5" cols="40" id="chsamury" pInputTextarea [(ngModel)]="item.samury" class="cltextarea"></textarea>
     </div>
-    <div class="form-group row">
-      <label for="chevent" class="col-sm-2 col-form-label">Recit succint</label>
-      <div class="col-sm-11 clkind">
-        <textarea rows="5" cols="40" pInputTextarea [(ngModel)]="item.samury"></textarea>
-      </div>
-    </div>
-    <div class="toolbtn alright">
-      <button class="btn btn-primary" (click)="perform($event)">Valider</button>
-      <button class="btn btn-warning" (click)="cancel(item)">Annuler</button>
-    </div>
-  </p-card>
+</div>
+<div class="toolbtn alright">
+    <button class="btn btn-primary" (click)="perform($event)">Valider</button>
+    <button class="btn btn-warning" (click)="cancel(item)">Annuler</button>
+</div>
+<!-- </p-card> -->
 
 
 <!--       <p-card title="Info Vehicule" [style]="{width: '360px'}">

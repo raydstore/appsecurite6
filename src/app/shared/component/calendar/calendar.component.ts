@@ -14,9 +14,9 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('this.date = new Date(this.date);');
+    /* console.log('this.date = new Date(this.date);');
     console.log('this.date = ' + this.date);
-    console.log('new Date(this.date) = ' + new Date(this.date))
+    console.log('new Date(this.date) = ' + new Date(this.date)) */
     this.date = new Date(this.date);
   }
 

@@ -29,7 +29,7 @@ export class ActionComponent implements OnInit {
     datecreate: new Date(),
     dateupdate: new Date(),
     id: 0,
- /*    idparent: this.idaccident, */
+    /*    idparent: this.idaccident, */
     kind: 'M',
     state: 'C',
     lastuser: 'ali',
@@ -43,6 +43,7 @@ export class ActionComponent implements OnInit {
   lastid: any;
   datePipe: DatePipe;
   // titlelist = 'Marque';
+  rowGroupMetadata: any;
 
   constructor(private service: ActionService, private actionaccidentService: ActionaccidentService) {
   }
@@ -50,15 +51,42 @@ export class ActionComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.datePipe = new DatePipe('en-US');
-    // this.loadLastId(); 
+    // this.loadLastId();
   }
 
   loadData() {
-/*     this.service.getByQueryParam({ 'idparent': this.idaccident.id }) */
-      this.service.getAll()
+    /*     this.service.getByQueryParam({ 'idparent': this.idaccident.id }) */
+    this.service.getAll()
       .subscribe(actions => {
         this.actions = actions;
+        this.updateRowGroupMetaData();
       });
+  }
+
+  onSort() {
+    this.updateRowGroupMetaData();
+  }
+
+  updateRowGroupMetaData() {
+    this.rowGroupMetadata = {};
+    if (this.actions) {
+      for (let i = 0; i < this.actions.length; i++) {
+        let rowData = this.actions[i];
+        let kind = rowData.kind;
+        if (i == 0) {
+          this.rowGroupMetadata[kind] = { index: 0, size: 1 };
+        }
+        else {
+          let previousRowData = this.actions[i - 1];
+          let previousRowGroup = previousRowData.kind;
+          if (kind === previousRowGroup)
+            this.rowGroupMetadata[kind].size++;
+          else
+            this.rowGroupMetadata[kind] = { index: i, size: 1 };
+        }
+      }
+    }
+    console.log('this.rowGroupMetadata = ' + JSON.stringify(this.rowGroupMetadata))
   }
 
   nodeExpand(event) {
@@ -98,7 +126,7 @@ export class ActionComponent implements OnInit {
 
 
   createAction() {
-/*     this.newAction.idaccident = this.idaccident; */
+    /*     this.newAction.idaccident = this.idaccident; */
     const value = this.datePipe.transform(this.newAction.datecreate, 'yyMMddHHmmss');
     this.newAction.id = +value;
     this.dialogVisible = false;

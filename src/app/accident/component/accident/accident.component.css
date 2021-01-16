@@ -87,3 +87,7 @@
 .ui-dialog.ui-widget .ui-dialog-content {
     padding: 0px !important;
 }
+
+.cldropdown {
+    width: 20px;
+}

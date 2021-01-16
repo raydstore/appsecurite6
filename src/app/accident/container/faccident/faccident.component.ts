@@ -1,7 +1,7 @@
 import { isNullOrUndefined } from 'util';
 import { AgentService } from 'shared/services/agent.service';
 import { SiteService } from 'shared/services/site.service';
-import { Agent, Site, EventArgs } from 'shared/table/table';
+import { Agent, Site, EventArgs, Item } from 'shared/table/table';
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Accident, Mode } from 'shared/table/table';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -14,24 +14,10 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   encapsulation: ViewEncapsulation.None
 })
 export class FaccidentComponent implements OnInit {
-  /* private _item: Accident;
-  get item() {
-    return this._item;
-  }
-  @Input()
-  set item(value: Accident) {
-    console.log('i = ' + JSON.stringify(value));
-    this._item = value;
-    this.agentDeclare  = this._item.idagentdeclare;
-    this.agentValidate = this._item.idagentvalidate;
-    this.siteparent    = this._item.idsiteparent;
-    this.site          = this._item.idsite;
-  } */
   @Input() item: Accident;
   @Input() mode: Mode;
   @Input() sites: Site[];
   @Input() agents: Agent[];
-  /* @Input() table: any; */
   @Output() operation = new EventEmitter();
 
   table: any = {};
@@ -40,10 +26,30 @@ export class FaccidentComponent implements OnInit {
   agentValidate: Agent;
   site: Site;
   newid: string;
-  constructor() { }
+  enabled: boolean = false;
+  isDisabled: boolean = true; 
+  filteredAgentsMultiple: any[];
+  listAgent: Item[] = [];
+  items: any[];
+
+
+  constructor(private agentService: AgentService) { }
 
   ngOnInit() {
+    this.loadAgent();
   }
+
+  loadAgent() {
+    this.agentService.getAll()
+      .subscribe(agents => {
+        for (let agent of agents) {
+          if (agent !== null) {
+            this.listAgent.push({ name: agent.firstname + ' ' + agent.lastname, obj: agent });
+          }
+        }
+      });
+  }
+
 
 
   onChangeDate(item: Accident, event) {
@@ -51,14 +57,14 @@ export class FaccidentComponent implements OnInit {
   }
 
   onChangeItem(item: Accident, field: string, event) {
-    const agent = <Agent> event;
+    const agent = <Agent>event;
     agent['_displayname'] = this.displayNameAgent(event, ['name']);
     this.item[field] = agent;
   }
 
   onChangeSiteOfItem(item: Accident, field: string, event) {
-      this.item[field] = <Site> event;
-      this.item[field]._displayname = this.displayNameSite(event, ['name']);
+    this.item[field] = <Site>event;
+    this.item[field]._displayname = this.displayNameSite(event, ['name']);
   }
 
 
@@ -73,7 +79,7 @@ export class FaccidentComponent implements OnInit {
     }
     let eventargs: EventArgs;
     eventargs = this.mode === Mode.insert ? { item: item, mode: Mode.insert, dialogVisible: false, table: this.table }
-                                          : { item: item, mode: Mode.update, dialogVisible: false, table: this.table };
+      : { item: item, mode: Mode.update, dialogVisible: false, table: this.table };
     this.operation.emit(eventargs);
   }
 
@@ -84,8 +90,8 @@ export class FaccidentComponent implements OnInit {
 
   displayNameAgent(item: any, args: string[]): string {
     let result = '';
-   /*  */
-    if (!isNullOrUndefined(item))  {
+    /*  */
+    if ((item != null && item != undefined)) {
       if (args.length > 0) {
         result = item[args[0]];
       }
@@ -103,7 +109,69 @@ export class FaccidentComponent implements OnInit {
         result = item[args[0]];
       }
     }
+    console.log('item =' + JSON.stringify(item) + '\n' + result);
     return result;
+  }
+
+  addVictime() {
+
+  }
+
+  enableAddAgent() {
+    this.enabled = true;
+  }
+
+  getList(): string {
+    let result: string = '';
+    console.log('items = ' + this.items);
+    for (let item of this.items) {
+      if (item !== null) {
+        result === '' ? result = item.name : result = result + '\n' + item.name;
+      }
+    }
+    return result;
+  }
+
+  addAgent(item: any) {
+    /* add list of sh victims to Victim item  */
+    item.victim === '' ? item.victim = this.getList() : item.victim = item.victim + '\n' + this.getList();
+    /* desactivate add mode */
+    this.disable()
+  }
+
+  disable() {
+    /* clear suggestion */
+    this.filteredAgentsMultiple = [];
+    /* clear selected list */
+    this.items = [];
+    /* disable add  */
+    this.enabled = false;
+  }
+
+  onUnselectItems() {
+     this.isDisabled = this.items.length === 0;
+  }
+
+   selectValue() {
+    this.isDisabled = this.items.length === 0;
+  }
+
+  filterAgentMultiple(event) {
+    let query = event.query;
+    this.filteredAgentsMultiple = this.filterAgent(query);
+   }
+
+  filterAgent(query): any[] {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: any[] = [];
+    for (let agent of this.listAgent) {
+      if (agent !== null && agent !== undefined) {
+        if (agent.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(agent);
+        }
+      }
+    }
+    return filtered;
   }
 
 }

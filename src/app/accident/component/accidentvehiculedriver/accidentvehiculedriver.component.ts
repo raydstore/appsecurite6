@@ -82,9 +82,7 @@ export class AccidentvehiculedriverComponent implements OnInit {
   }
 
   isNullOrUndefinedProperty(property) {
-     console.log('property = ' + property);
-     const a = isNullOrUndefined(property);
-     console.log('a = ' + a);
+     const a = property === null || property === undefined;
      return !a;
   }
 

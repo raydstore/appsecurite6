@@ -3,16 +3,20 @@
     <h4 class="titleform">
       <i class="fa fa-list" aria-hidden="true"></i> {{titlelist}}
     </h4>
-    <button class="btn btn-success btnright" (click)="showNewDialoge()">
+    <button *ngIf="_authorization.i == 1" class="btn btn-success btnright" (click)="showNewDialoge()">
       <i class="fa fa-plus"></i>
     </button>
   </div>
   <p-table #dt [columns]="cols" [value]="accidents" dataKey="id" rowExpandMode="single" selectionMode="single"
-    [(selection)]="selectedAccident" [paginator]="true" [rows]="10"
+    [(selection)]="selectedAccident" [paginator]="true" [rows]="rows"
     [globalFilterFields]="['id','classification', 'place', 'idsite.name']" [(contextMenuSelection)]="selectedAccident"
     (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
+        <label for="iddropdownndrow">nombre d'item</label>
+       <!--  <span class="cldropdown"> -->
+        <p-dropdown [options]="listNbRows" [(ngModel)]="nbRow" placeholder="Nomber d'items" (onChange)="changeNbRowDisplay()" size="10"></p-dropdown>
+      <!-- </span> -->
         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
         <input type="text" pInputText size="50" placeholder="Global Filter"
           (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
@@ -32,8 +36,8 @@
     </ng-template>
     <ng-template pTemplate="body" let-expanded="expanded" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData" [pContextMenuRow]="rowData">
-        <td>
-          <a href="#" [pRowToggler]="rowData ">
+        <td >
+          <a *ngIf="_authorization.u == 1" href="#" [pRowToggler]="rowData ">
             <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'"
               style="font-size: 1.25em"></i>
           </a>
@@ -105,7 +109,7 @@
 </div>
 
 <p-dialog header="Accident Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  (onHide)="onHide($event)" width="890">
+  (onHide)="onHide($event)" width="890" closable="false">
   <div class="ui-g ui-fluid" style="font-size:16px;padding:20px" *ngIf="newAccident">
     <app-faccident [item]="newAccident" [mode]="mInsert" [agents]="agents" [sites]="sites"
       (operation)="performAction($event, dt)" style="width: 100%;"></app-faccident>

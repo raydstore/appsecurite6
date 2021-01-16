@@ -91,7 +91,7 @@
 </p-dataTable>
 <!-- ui-grid ui-grid-responsive ui-grid-pad  -->
 <p-dialog header="Nouveaux Agent" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="true"
-  width="380">
+width="600">
   <div class="container" *ngIf="newAccidentagentsh">
     <div class="ca flex-item">
       <app-faccidentagentsh [item]="newAccidentagentsh" [mode]="mInsert" [agents]="agents" (operation)="performAction($event)"></app-faccidentagentsh>

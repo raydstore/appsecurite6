@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrintComponent implements OnInit {
 
-  constructor() { }
+  /* const headerOptions = {
+    headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+
+    })
+  } */
+  constructor(){}
 
   ngOnInit() {
   }
 
 }
+
+
+
+

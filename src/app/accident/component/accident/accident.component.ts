@@ -37,6 +37,7 @@ import { isUndefined, isNullOrUndefined } from 'util';
 import { Store } from '@ngrx/store';
 import { StoreInterface } from 'app/store/store';
 import { PrintAccidentAction } from 'app/store/action/printcard.action';
+import { LogonService } from 'shared/services/logon.service';
 
 
 /**
@@ -68,6 +69,7 @@ export class AccidentComponent implements OnInit {
 
   sites: Site[];
   agents: Agent[];
+  _User: Agent;
   selectedAccident: Accident;
   selectedNode: TreeNode;
   newAccident: Accident;
@@ -85,8 +87,16 @@ export class AccidentComponent implements OnInit {
   filteredAgentsSingle: IAgent[];
   // expandedRows: {} = {};
   totalRecords: number;
+  listNbRows: any = [ { label: 10, value: 10 }, { label: 25, value: 25 }, { label: 50, value: 50 }, { label: 100, value: 100 } ];
+  nbRow: any = 10;
+  rows: number = 10;
 
   cols: any[];
+
+  siteuser = '';
+  authorization = '';
+  _authorization: any = {"s": 1, "i": 1, "u": 1, "d": 1, "p": 1};
+  _object: any;
 
   loading: boolean;
   datePipe: DatePipe;
@@ -103,17 +113,31 @@ export class AccidentComponent implements OnInit {
   click$ = new Subject<string>();
 
   constructor(private service: AccidentService, public siteService: SiteService,
-    public agentService: AgentService, private _printService: PrintService, private store: Store<StoreInterface>) {
+    public agentService: AgentService, private _printService: PrintService, private store: Store<StoreInterface>,
+           private logonService: LogonService) {
   }
 
 
 
   ngOnInit() {
     //   const thisRef = this;
+    const _user     = localStorage.getItem('token');
+    if (_user) {
+      this.siteuser      = (JSON.parse(_user))['siteuser'];
+      this.authorization = (JSON.parse(_user))['authorization'];
+      let v = this.authorization.replace('/', '');
+      v = v.split('};').join('},');
+      console.log('v = ' + v);
+      console.log(JSON.stringify((JSON.parse(v))['accident']));
+      this._authorization = (JSON.parse(v))['accident'];
+      console.log(this._authorization);
+      console.log('(JSON.parse(_user)) = ' + JSON.stringify(this._authorization));
+    }
     this.initAccident();
     this.loadData();
     this.loadSite();
     this.loadAgent();
+    this.getAgentDeclare(this.logonService.getValueFrom('idagent'));
     this.loading = true;
     this.datePipe = new DatePipe('en-US');
 
@@ -124,13 +148,14 @@ export class AccidentComponent implements OnInit {
     this.cols = [
       { field: 'id',             header: 'id',          width: '7.75em' },
       { field: 'Classification', header: 'Type',        width: '2.25em' },
-      { field: 'date',           header: 'curdate',     width: '5em' },
+      { field: 'curdate',        header: 'date',        width: '5em' },
       { field: 'time',           header: 'time',        width: '3.25em' },
       { field: 'idsite.name',    header: 'site',        width: 'auto' },
       { field: 'place',          header: 'lieu',        width: 'auto' },
       { field: 'description',    header: 'description', width: 'auto' }
     ];
   }
+
 
   loadAccidentsLazy(event: LazyLoadEvent) {
     this.loading = true;
@@ -151,9 +176,20 @@ export class AccidentComponent implements OnInit {
     }, 1000);
   }
 
+  getAgentDeclare(id) {
+    this.agentService.getItem(id).subscribe(agent => {
+      this._User = agent;
+    })
+  }
+
+  changeNbRowDisplay() {
+    this.rows = this.nbRow;
+  }
+
 
 
   initAccident() {
+    console.log('1');
     let a: any = {
       id: 0,
       classification: 'A',
@@ -170,21 +206,30 @@ export class AccidentComponent implements OnInit {
       curdate: new Date(),
       tabindex: 1,
       time: new Date(),
-      idagentdeclare: null,
+      idagentdeclare: this._User,
       idagentvalidate: null,
       datecreate: new Date(),
       dateupdate: new Date(),
-      lastuser: 'ali',
-      owner: 'ali'
+      lastuser: this.logonService.getValueFrom('idagent'),
+      owner: this.logonService.getValueFrom('idagent')
     };
-    this.newAccident = <Accident>a;
+    console.log('a =' + JSON.stringify(a));
+    this.newAccident  = Object.assign({}, <Accident> a);
     this._newAccident = Object.assign({}, this.newAccident);
+    console.log('this.newAccident =' + JSON.stringify(this.newAccident));
+    console.log('this._newAccident =' + JSON.stringify(this._newAccident));
   }
 
   loadData() {
     this.service.getAll()
       .subscribe(accidents => {
-        this.accidents = accidents;
+        this.accidents = accidents.filter(accident => {
+               let pathroot = accident.idsite.detailsite.path + '_' + accident.idsite.id;
+               let path     = accident.idsite.detailsite.path;
+               console.log('this.siteuser = ' + this.siteuser + '\n' + 'pathroot = ' + pathroot + '\n' + 'path = ' + path + '\n' + accident.id);
+              return (this.siteuser.indexOf(pathroot) != -1) || (this.siteuser.indexOf(path) != -1 && path.length > 1);
+            }
+         )
         this.totalRecords = this.accidents.length;
       });
    /*  this.printService.print()
@@ -373,19 +418,13 @@ export class AccidentComponent implements OnInit {
   }
 
   performAction(eventArgs: EventArgs, table: any) {
-    console.log('arg arived eventargs = ' + JSON.stringify(eventArgs));
-    console.log('mu = ' + JSON.stringify(this.mUpdate));
-    console.log('mi = ' + JSON.stringify(this.mInsert));
-    console.log('eventArgs.mode = ' + JSON.stringify(eventArgs.mode));
-
+    let _accident: Accident;
     switch (eventArgs.mode) {
       case this.mInsert: {
         console.log('insertion = ');
-        const _accident: Accident = <Accident>eventArgs.item;
+        _accident = <Accident>eventArgs.item;
         const value = this.datePipe.transform(_accident.curdate, 'yyMMddHHmmss');
         _accident.id = +value;
-        console.log('value = ' + value);
-        console.log('_accident.id = ' + _accident.id);
         this.dialogVisible = eventArgs.dialogVisible;
         this.createAccident();
         table.toggleRow(this.newAccident);
@@ -394,14 +433,15 @@ export class AccidentComponent implements OnInit {
         break;
       }
       case this.mUpdate: {
-        console.log('update = ' + JSON.stringify(eventArgs.item));
-        this.updateAccident(<Accident>eventArgs.item);
+        _accident = <Accident>eventArgs.item;
+        _accident.idagentvalidate = this._User;
+        this.updateAccident(_accident);
         break;
       }
-      /* default: {
+      default: {
              this.dialogVisible = false;
              this.initAccident();
-      } */
+      }
     }
   }
 
@@ -461,30 +501,10 @@ export class AccidentComponent implements OnInit {
   }
 
 
-  showNewDialoge() {
-    console.log('a');
+  showNewDialoge(table) {
     this.initAccident();
-    console.log('a = ' + JSON.stringify(this.newAccident));
     this.dialogVisible = true;
     this.newMode = true;
-    // this.initAccident();
-    /* this.newAccident = {
-      id: 0,
-      classification: 'A',
-      sitedescription: '',
-      event: '',
-      idsiteparent: null,
-      idsite: null,
-      tabindex: 1,
-      curdate: new Date(),
-      time: new Date(),
-      idagentdeclare: null,
-      idagentvalidate: null,
-      datecreate: new Date(),
-      dateupdate: new Date(),
-      lastuser: 'ali',
-      owner: 'ali'
-    }; */
   }
 
   onHide(event) {

@@ -17,14 +17,14 @@
     <label for="chdatefirst" class="col-sm-4 col-form-label">du : </label>
     <div class="col-sm-8">
         <app-calendar  class="clcalendar" id="chdatefirst" [date]="accidentvehiculeinsurance.datefirst"
-        [isTime]="true" [dateFormat]="'    le : yy-mm-dd       à : '" (changeDate)="onChangeDatefirst(accidentvehiculeinsurance, $event)"></app-calendar>
+        [isTime]="false" [dateFormat]="'    le : yy-mm-dd       à : '" (changeDate)="onChangeDatefirst(accidentvehiculeinsurance, $event)"></app-calendar>
     </div>
   </div>
   <div class="form-group row">
     <label for="chdatelast" class="col-sm-4 col-form-label">au : </label>
     <div class="col-sm-8">
         <app-calendar  class="clcalendar" id="chdatelast" [date]="accidentvehiculeinsurance.datelast"
-        [isTime]="true" [dateFormat]="'    le : yy-mm-yy       à : '" (changeDate)="onChangeDatelast(accidentvehiculeinsurance, $event)"></app-calendar>
+        [isTime]="false" [dateFormat]="'    le : yy-mm-yy       à : '" (changeDate)="onChangeDatelast(accidentvehiculeinsurance, $event)"></app-calendar>
     </div>
   </div>
   <div>

@@ -1,14 +1,57 @@
 <div  *ngIf="showCard" class="card" style="width: 252px;">
   <h5 class="card-header bg-dark text-light" style="padding-left: 10px;width: 251px;padding-right: 7px;">
     List rapport d'accident
+    <span class="badge bg-dark">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="html" [(ngModel)]="format">
+      <label class="form-check-label" for="inlineRadio2">en html   </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="pdf"  [(ngModel)]="format">
+      <label class="form-check-label" for="inlineRadio2">en pdf</label>
+    </div>
+  </span>
+    <!-- <span>
+
+      <h6>Format <p-inputSwitch [(ngModel)]="formatState" (onChange)="changeFormat($event)"></p-inputSwitch>{{ format }}</h6>
+      </span> -->
   </h5>
+
   <div class="card-body list-group list-group-flush" *ngIf="showList">
-          <a *ngFor="let printitem of listrepotofaccidents" [href]="getPrintUrl(printitem.name)" target="_blank"
+    <!-- <button *ngFor="let printitem of listrepotofaccidents" (click)="getPrintUrl(printitem.name)" type="button"
+    class="btn btn-link" [class.stitemprint]="printitem.enable === 1"
+    [class.disabled]="printitem.enable === 0" aria-disabled="printitem.enable === 0">{{printitem.label}}</button> -->
+
+          <a *ngFor="let printitem of listrepotofaccidents" [href]="getPrintUrl(printitem.name)" target= "_blank"
           class="list-group-item list-group-item-action" [class.stitemprint]="printitem.enable === 1"
           [class.disabled]="printitem.enable === 0" aria-disabled="printitem.enable === 0">{{printitem.label}}</a>
+
+
+          <!-- <div *ngFor="let printitem of listrepotofaccidents" class="alert alert-light"
+          [class.stitemprint]="printitem.enable === 1"
+          [class.disabled]="printitem.enable === 0" aria-disabled="printitem.enable === 0" role="alert">
+          {{ printitem.label }}
+            <a class="btn btn-primary" [href]="getPrintUrl(printitem.name)" role="button" target= "_blank"></a>
+            <a class="btn btn-primary" [href]="getPrintUrl(printitem.name)" role="button" target= "_blank"></a>
+          </div> -->
+
+
+          <!-- <div *ngFor="let printitem of listrepotofaccidents" [class.stitemprint]="printitem.enable === 1"
+          [class.disabled]="printitem.enable === 0" aria-disabled="printitem.enable === 0" role="alert">
+            <label>{{ printitem.label }} </label>
+  <a mat-icon-button color="primary" [href]="getPrintUrl(printitem.name)" target= "_blank">
+    <mat-icon>screen_share</mat-icon>
+  </a>
+  <a mat-icon-button color="primary" [href]="getPrintUrl(printitem.name)" target= "_blank">
+    <mat-icon>print</mat-icon>
+  </a>
+          </div> -->
+
+
    <!--  <h5 class="ct card-title">{{ userInfo.name }}</h5>
     <p class="card-text">Matricule : {{ userInfo.idagent }}</p>
     <button type="button" class="btn btn-link" (click)="passwordSetting()">{{ labelChangePassword }}</button> -->
+
   </div>
   <div class="card-body" *ngIf="!showList">
     <p class="card-text">Veuillez selectionez un item.</p>

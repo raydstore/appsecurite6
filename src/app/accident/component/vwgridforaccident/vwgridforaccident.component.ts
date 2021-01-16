@@ -323,12 +323,10 @@ StringToCellGrid(col): CellGrid {
 
   isFirstOccurence (indexheader: number, index: number): boolean {
     const result = (indexheader === 6) && ((this.firstOccurence) || this.indexFirstOccuence === index);
-    console.log('first indexheader = ' + indexheader + '; index = ' + index + '; this.firstOccurence = ' + this.firstOccurence + '; result = ' + result);
     if (result) {
       this.firstOccurence = false;
       this.indexFirstOccuence = index;
     }
-    console.log('second indexheader = ' + indexheader + '; index = ' + index + '; this.firstOccurence = ' + this.firstOccurence + '; result = ' + result);
     return result;
   }
 

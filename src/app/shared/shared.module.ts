@@ -180,6 +180,12 @@ import { VwreststructureofopscardService } from './services/vwreststructureofops
 import { VwvehiculedisputtingService } from './services/vwvehiculedisputting.service';
 import { VwschemavehiculedisputtingService } from './services/vwschemavehiculedisputting.service';
 import { ListreportofaccidentService } from './services/listreportofaccident.service';
+import { PrintreportService } from './services/printreport.service';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputMaskModule } from 'primeng/inputmask';
+import { ButtonModule } from 'primeng/button';
+import { MatDividerModule } from '@angular/material/divider';
+
 /* import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; */
 
 /* import {FormBuilder, FormGroup, Validators} from '@angular/forms'; */
@@ -237,6 +243,10 @@ import { ListreportofaccidentService } from './services/listreportofaccident.ser
     CalendarModule,
     CarouselModule,
     FileUploadModule,
+    InputSwitchModule,
+    InputMaskModule,
+    ButtonModule,
+    MatDividerModule,
     NgbModule.forRoot(),
   ],
   exports: [
@@ -311,7 +321,11 @@ import { ListreportofaccidentService } from './services/listreportofaccident.ser
     AutocompleteComponent,
     CarouselModule,
     CalendarComponent,
-    FileUploadModule
+    FileUploadModule,
+    InputSwitchModule,
+    InputMaskModule,
+    ButtonModule,
+    MatDividerModule
   ],
   declarations: [
     NotFoundComponent,
@@ -445,7 +459,8 @@ import { ListreportofaccidentService } from './services/listreportofaccident.ser
     VehiculedisputtingService,
     VwvehiculedisputtingService,
     VwschemavehiculedisputtingService,
-    ListreportofaccidentService
+    ListreportofaccidentService,
+    PrintreportService
   ]
 })
 export class SharedModule { }

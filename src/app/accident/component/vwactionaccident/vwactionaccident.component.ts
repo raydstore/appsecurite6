@@ -53,6 +53,7 @@ export class VwactionaccidentComponent implements OnInit {
 
   datePipe: DatePipe;
   titledialog: string;
+  
 
   constructor(private service: VwactionaccidentService, private serviceAction: ActionService,
     private actionaccidentService: ActionaccidentService) {
@@ -158,6 +159,14 @@ export class VwactionaccidentComponent implements OnInit {
 
   cancelUpdate(_action) {
     //
+  }
+
+  getPlaceholder(kind) : string {
+    if (kind = 'A') {
+      return "l'action"
+    } else {
+      return 'la recommandation';
+    }
   }
 
   showNewDialoge(title, kind) {
