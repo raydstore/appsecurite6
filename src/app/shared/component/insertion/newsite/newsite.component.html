@@ -21,11 +21,12 @@
             (changeItem)="setIdLabelToSite(newSite, 'idlabel', $event)"></app-autocomplete>
         </div>
       </div>
-      <div class="form-group row">
+      <div class="form-group row" *ngIf="siteParent != null">
         <label for="chidsite" class="col-sm-3 col-form-label">Emplacement : </label>
         <div class="col-sm-9">
-          <app-autocomplete [i_item]="newSite.idparent" [service]="sites" [functionName]="displayName" [args]="['name']"
-            (changeItem)="setIdSiteParentToSite(newSite, 'idparent', $event)"></app-autocomplete>
+          <input type="text" class="form-control" id="chidsite" [value]="siteParent.name" readonly>
+         <!--  <app-autocomplete [i_item]="newSite.idparent" [service]="sites" [functionName]="displayName" [args]="['name']"
+            (changeItem)="setIdSiteParentToSite(newSite, 'idparent', $event)"></app-autocomplete> -->
         </div>
       </div>
       <div class="clupdate">

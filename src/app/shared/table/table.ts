@@ -15,7 +15,7 @@ export let UserInfo: any = {
 };
 
 export type TFunctionName = <T, K>(item: T, arg: K) => any;
-export enum Mode {insert = 0, update = 1, delete = 2}
+export enum Mode {insert = 0, update = 1, delete = 2, none = 3}
 export interface EventArgs {
     item: any;
     mode: Mode;

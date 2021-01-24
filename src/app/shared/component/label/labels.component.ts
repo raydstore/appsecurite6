@@ -106,7 +106,7 @@ export class LabelsComponent implements OnInit {
     }
 
     updateLabel(_label, input: HTMLInputElement) {
-        _label.name = input.value;
+        //_label.name = input.value;
         this.service.update(_label)
             .subscribe(updatelabel => {
                 console.log(updatelabel);

@@ -13,6 +13,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 export class NewsiteComponent implements OnInit, OnChanges {
 
   @Input() dialogVisible: boolean;
+  @Input() siteParent: Site;
   @Output() closeDialog = new EventEmitter();
 
   sites: Site [];
@@ -36,6 +37,7 @@ export class NewsiteComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this._newSite.idparent = this.siteParent;
     this.newSite = Object.assign({}, this._newSite);
     this.loadData();
   }

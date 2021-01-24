@@ -87,15 +87,16 @@ export class AccidentComponent implements OnInit {
   filteredAgentsSingle: IAgent[];
   // expandedRows: {} = {};
   totalRecords: number;
-  listNbRows: any = [ { label: 10, value: 10 }, { label: 25, value: 25 }, { label: 50, value: 50 }, { label: 100, value: 100 } ];
+  listNbRows: any = [{ label: 10, value: 10 }, { label: 25, value: 25 }, { label: 50, value: 50 }, { label: 100, value: 100 }];
   nbRow: any = 10;
   rows: number = 10;
 
   cols: any[];
 
   siteuser = '';
+  listSiteOfUser = [];
   authorization = '';
-  _authorization: any = {"s": 1, "i": 1, "u": 1, "d": 1, "p": 1};
+  _authorization: any = { "s": 1, "i": 1, "u": 1, "d": 1, "p": 1 };
   _object: any;
 
   loading: boolean;
@@ -114,16 +115,17 @@ export class AccidentComponent implements OnInit {
 
   constructor(private service: AccidentService, public siteService: SiteService,
     public agentService: AgentService, private _printService: PrintService, private store: Store<StoreInterface>,
-           private logonService: LogonService) {
+    private logonService: LogonService) {
   }
 
 
 
   ngOnInit() {
     //   const thisRef = this;
-    const _user     = localStorage.getItem('token');
+    const _user = localStorage.getItem('token');
     if (_user) {
-      this.siteuser      = (JSON.parse(_user))['siteuser'];
+      this.siteuser = (JSON.parse(_user))['siteuser'];
+      this.listSiteOfUser = this.siteuser.split(',');
       this.authorization = (JSON.parse(_user))['authorization'];
       let v = this.authorization.replace('/', '');
       v = v.split('};').join('},');
@@ -146,13 +148,13 @@ export class AccidentComponent implements OnInit {
     }); */
 
     this.cols = [
-      { field: 'id',             header: 'id',          width: '7.75em' },
-      { field: 'Classification', header: 'Type',        width: '2.25em' },
-      { field: 'curdate',        header: 'date',        width: '5em' },
-      { field: 'time',           header: 'time',        width: '3.25em' },
-      { field: 'idsite.name',    header: 'site',        width: 'auto' },
-      { field: 'place',          header: 'lieu',        width: 'auto' },
-      { field: 'description',    header: 'description', width: 'auto' }
+      { field: 'id', header: 'id', width: '7.75em' },
+      { field: 'Classification', header: 'Type', width: '2.25em' },
+      { field: 'curdate', header: 'date', width: '5em' },
+      { field: 'time', header: 'time', width: '3.25em' },
+      { field: 'idsite.name', header: 'site', width: 'auto' },
+      { field: 'place', header: 'lieu', width: 'auto' },
+      { field: 'description', header: 'description', width: 'auto' }
     ];
   }
 
@@ -214,66 +216,74 @@ export class AccidentComponent implements OnInit {
       owner: this.logonService.getValueFrom('idagent')
     };
     console.log('a =' + JSON.stringify(a));
-    this.newAccident  = Object.assign({}, <Accident> a);
+    this.newAccident = Object.assign({}, <Accident>a);
     this._newAccident = Object.assign({}, this.newAccident);
     console.log('this.newAccident =' + JSON.stringify(this.newAccident));
     console.log('this._newAccident =' + JSON.stringify(this._newAccident));
+  }
+
+  existeIn(arr: string[], value: string): boolean {
+    for (let elt of arr) {
+      if (value.includes(elt)) return true;
+    }
+    return false;
   }
 
   loadData() {
     this.service.getAll()
       .subscribe(accidents => {
         this.accidents = accidents.filter(accident => {
-               let pathroot = accident.idsite.detailsite.path + '_' + accident.idsite.id;
-               let path     = accident.idsite.detailsite.path;
-               console.log('this.siteuser = ' + this.siteuser + '\n' + 'pathroot = ' + pathroot + '\n' + 'path = ' + path + '\n' + accident.id);
-              return (this.siteuser.indexOf(pathroot) != -1) || (this.siteuser.indexOf(path) != -1 && path.length > 1);
-            }
-         )
+          let pathroot = accident.idsite.detailsite.path + '_' + accident.idsite.id;
+          let path = accident.idsite.detailsite.path;
+          console.log('this.siteuser = ' + this.siteuser + '\n' + 'pathroot = ' + pathroot + '\n' + 'path = ' + path + '\n' + accident.id);
+          return (this.existeIn(this.listSiteOfUser, pathroot))
+          /* return (this.siteuser.indexOf(pathroot) != -1) || (this.siteuser.indexOf(path) != -1 && path.length > 1); */
+        }
+        )
         this.totalRecords = this.accidents.length;
       });
-   /*  this.printService.print()
-      .subscribe(pdffile => this.pdffile = pdffile); */
-      this.items = [
-   /*      {label: 'print',
-      items:[ */
-        {
-            label: 'Compte rendu d’accident / incident',
-            icon: 'pi pi-fw pi-file',
-            target: '_blanK',
-            url: '',
-            command: (event) => this.setItems('rptCompteRenduAccident', this.selectedAccident.id)
-        },
-        {
-          label: 'Declaration d’accident d travail',
-          icon: 'pi pi-fw pi-file',
-          target: '_blanK',
-          url: '',
-          command: (event) => this.setItems('rptAccidentTravail', this.selectedAccident.id)
-        },
-        {
-          label: 'Déclaration d’incident sur véhicule',
-          icon: 'pi pi-fw pi-file',
-          target: '_blanK',
-          url: '',
-          command: (event) => this.setItems('rptIncidentVehicule', this.selectedAccident.id)
-        },
-        {
-          label: 'Bilan des accidents de travail',
-          icon: 'pi pi-fw pi-file',
-          target: '_blanK',
-          url: '',
-          command: (event) => this.setItems('rptBilTravAccident', this.selectedAccident.id)
-        },
-        {
-          label: 'Rapport préliminaire',
-          icon: 'pi pi-fw pi-file',
-          target: '_blanK',
-          url: '',
-          command: (event) => this.setItems('rptRapportAccident', this.selectedAccident.id)
-        }
-    /* ]} */
-  ];
+    /*  this.printService.print()
+       .subscribe(pdffile => this.pdffile = pdffile); */
+    this.items = [
+      /*      {label: 'print',
+         items:[ */
+      {
+        label: 'Compte rendu d’accident / incident',
+        icon: 'pi pi-fw pi-file',
+        target: '_blanK',
+        url: '',
+        command: (event) => this.setItems('rptCompteRenduAccident', this.selectedAccident.id)
+      },
+      {
+        label: 'Declaration d’accident d travail',
+        icon: 'pi pi-fw pi-file',
+        target: '_blanK',
+        url: '',
+        command: (event) => this.setItems('rptAccidentTravail', this.selectedAccident.id)
+      },
+      {
+        label: 'Déclaration d’incident sur véhicule',
+        icon: 'pi pi-fw pi-file',
+        target: '_blanK',
+        url: '',
+        command: (event) => this.setItems('rptIncidentVehicule', this.selectedAccident.id)
+      },
+      {
+        label: 'Bilan des accidents de travail',
+        icon: 'pi pi-fw pi-file',
+        target: '_blanK',
+        url: '',
+        command: (event) => this.setItems('rptBilTravAccident', this.selectedAccident.id)
+      },
+      {
+        label: 'Rapport préliminaire',
+        icon: 'pi pi-fw pi-file',
+        target: '_blanK',
+        url: '',
+        command: (event) => this.setItems('rptRapportAccident', this.selectedAccident.id)
+      }
+      /* ]} */
+    ];
   }
 
   getItemMenu(reportname, idaccident): MenuItem[] {
@@ -291,16 +301,16 @@ export class AccidentComponent implements OnInit {
     } else {
       return this.items;
     }
-  // return this.items;
+    // return this.items;
   }
 
   setItems(reportname, idaccident) {
-   if (!isNullOrUndefined(idaccident)) {
-        const printList: Array<any> = this.items; // [0].items;
-        for (const item of printList) {
-          item.url = this.urlPrint + '?reportname=' + reportname + '&&p=' + idaccident;
-        }
+    if (!isNullOrUndefined(idaccident)) {
+      const printList: Array<any> = this.items; // [0].items;
+      for (const item of printList) {
+        item.url = this.urlPrint + '?reportname=' + reportname + '&&p=' + idaccident;
       }
+    }
   }
 
   displayNameAgent(item: any, args: string[]): string {
@@ -364,7 +374,11 @@ export class AccidentComponent implements OnInit {
   loadSite() {
     this.siteService.getAll()
       .subscribe(sites => {
-        this.sites = sites;
+        this.sites = sites.filter(site => {
+          let pathroot = site.detailsite.path + '_' + site.id;
+          return (this.existeIn(this.listSiteOfUser, pathroot))
+        }
+        );
       });
   }
 
@@ -439,8 +453,8 @@ export class AccidentComponent implements OnInit {
         break;
       }
       default: {
-             this.dialogVisible = false;
-             this.initAccident();
+        this.dialogVisible = false;
+        this.initAccident();
       }
     }
   }
@@ -559,13 +573,13 @@ export class AccidentComponent implements OnInit {
   }
 
   onRowSelect(event) {
-    this._printService.sendTargetToPrint({id: event.data.id, name: 'printcard'});
-    this.store.dispatch(new ActionPrintCard({viewname: 'accident', id: event.data.id, showcard: true}));
+    this._printService.sendTargetToPrint({ id: event.data.id, name: 'printcard' });
+    this.store.dispatch(new ActionPrintCard({ viewname: 'accident', id: event.data.id, showcard: true }));
   }
 
   onRowUnselect(event) {
-    this._printService.sendTargetToPrint({id: 0, name: 'accident'});
-    this.store.dispatch(new ActionPrintCard({viewname: '', id: 0, showcard: true}));
+    this._printService.sendTargetToPrint({ id: 0, name: 'accident' });
+    this.store.dispatch(new ActionPrintCard({ viewname: '', id: 0, showcard: true }));
   }
 
 

@@ -6,7 +6,7 @@ import { BadInput } from '../../../core/component/common/bad-input';
 import { SiteService } from 'shared/services/site.service';
 import { TreeNode } from 'primeng/api';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Site, Label } from 'shared/table/table';
+import { Site, Label, Mode } from 'shared/table/table';
 
 
 @Component({
@@ -35,9 +35,15 @@ export class SitesComponent implements OnInit {
     owner: 'ali'
   };
   newSite: Site;
-
+  mInsert: Mode.insert = 0;
+  mUpdate: Mode.update = 1;
+  mDelete: Mode.delete = 2;
+  mNone:   Mode.none   = 3;
   dialogVisible = false;
   newMode = false;
+  selectedFile: TreeNode;
+  selectedNode: TreeNode = null;
+  siteParent: Site;
   /*  ltLabels: Label[] = [];
    labels: any[] = [{ label: 'Select Label', value: null }];
    selectedLabel: Label;
@@ -50,6 +56,7 @@ export class SitesComponent implements OnInit {
 
   ngOnInit() {
     this.newSite = Object.assign({}, this._newSite);
+    console.log('0');
     this.loadData();
     this.cols = [
       { field: 'id', header: 'id' },
@@ -67,7 +74,8 @@ export class SitesComponent implements OnInit {
     this.service.getAll()
       .subscribe(sites => {
         this.sites = sites;
-        /* this.buildSites(); */
+        // console.log(sites);
+        this.buildSites();
       });
   }
 
@@ -91,8 +99,9 @@ export class SitesComponent implements OnInit {
             value = {
               label: site.name,
               type: 'branch',
+              mode: this.mUpdate,
               data: site,
-              children: null,
+              children: childs,
               childs: childs,
               expanded: _expanded,
               styleClass: 'stparent'
@@ -101,6 +110,7 @@ export class SitesComponent implements OnInit {
             value = {
               label: site.name,
               type: 'sheet',
+              mode: this.mUpdate,
               data: site,
               expanded: false,
               styleClass: 'stchild'
@@ -114,6 +124,8 @@ export class SitesComponent implements OnInit {
   }
 
   buildSites() {
+  //  console.log('1');
+    this.data = [];
     const siteRoot = this.getSiteRoot();
     const value: any = {
       label: siteRoot.name,
@@ -125,6 +137,7 @@ export class SitesComponent implements OnInit {
       styleClass: 'stparent'
     };
     this.data.push(value);
+   // console.log('this.data = ' + JSON.stringify(this.data));
   }
 
   newSiteNode(infoSite: InfoSite) {
@@ -171,7 +184,16 @@ export class SitesComponent implements OnInit {
     this.dialogVisible = false;
     /* refresh data */
     if (!event.cancelDialog) {
-      console.log('site inserted is = ' + JSON.stringify(event.newSite))
+    //  console.log('site inserted is = ' + JSON.stringify(event.newSite));
+     const value = {
+        label: event.newSite.name,
+        type: 'sheet',
+        mode: this.mUpdate,
+        data: event.newSite,
+        expanded: false,
+        styleClass: 'stchild'
+      };
+      this.selectedNode.children.push(value);
       this.loadData();
     }
   }
@@ -217,11 +239,15 @@ export class SitesComponent implements OnInit {
   }
 
   deleteSite(node: TreeNode) {
-    const index = this.sites.indexOf(node.data);
+    const indexParent = this.sites.indexOf(node.data.idparent);
+    const index       = this.sites.indexOf(node.data);
     this.sites.splice(index, 1);
     this.service.delete((<Site>node.data).id)
       .subscribe(
-        () => { this.loadData(); },
+        () => { 
+
+          this.loadData(); 
+        },
         (error: Response) => {
           this.sites.splice(index, 0, node.data);
           if (error instanceof NotFoundError) {
@@ -250,9 +276,9 @@ export class SitesComponent implements OnInit {
     this.dialogVisible = true;
   }
 
-  updateSite(item, name) {
+ /*  updateSite(item, name) {
 
-  }
+  } */
 
   cancelUpdate() {
 
@@ -266,6 +292,31 @@ export class SitesComponent implements OnInit {
   onChangeItemLabel(item: Site, field: string, event) {
     console.log('enter on change label = ' + JSON.stringify(item));
     item[field] = <Label>event;
+  }
+
+  nodeSelect(event) {
+    // this.messageService.add({severity: 'info', summary: 'Node Selected', detail: event.node.label});
+  }
+
+  nodeUnselect(event) {
+    // this.messageService.add({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
+  }
+
+  addChildSite(node) {
+    this.selectedNode =  node;
+    this.newSite = Object.assign({}, this._newSite);
+    this.siteParent = node.data;
+    this.newSite.idparent = node.data;
+    this.newMode = true;
+    this.dialogVisible = true;
+  }
+
+  updateSite(node) {
+    this.service.update(node.data)
+    .subscribe(site => {
+      node.label = node.data.name;
+        console.log(site);
+    });
   }
 
 

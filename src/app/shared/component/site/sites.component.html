@@ -8,7 +8,7 @@
       <i class="fa fa-plus"></i>
     </button>
   </div>
-  <p-table #dt [columns]="cols" [value]="sites" dataKey="id" rowExpandMode="single" selectionMode="single"
+  <!-- <p-table #dt [columns]="cols" [value]="sites" dataKey="id" rowExpandMode="single" selectionMode="single"
     [(selection)]="selectedSite" [paginator]="true" [rows]="10" [globalFilterFields]="['id','name', 'idlabel.name']">
     <ng-template pTemplate="caption">
       <div style="text-align: right">
@@ -93,6 +93,75 @@
       </tr>
     </ng-template>
   </p-table>
-</div>
+</div> -->
 
-<app-newsite [dialogVisible]="dialogVisible" (closeDialog)="createSite($event)"></app-newsite>
+<p-tree [value]="data"  class="ptreecls"  [filter]="true" filterMode="strict" filterBy="label">
+  <!--  selectionMode="single" 
+[(selection)]="selectedFile" (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)" -->
+<ng-template let-node pTemplate="branch">
+  <!-- {{ node.data.idlabel.name }} - {{ node.label }} -->
+  <span class="clbt">
+    <mat-form-field appearance="standard">
+      <mat-label>{{ node.data.idlabel.name }}</mat-label>
+      <input matInput [placeholder]="node.data.idlabel.name" [(ngModel)]="node.data.name">
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <mat-hint></mat-hint>
+    </mat-form-field>
+  <!-- <button pButton type="button" icon="pi pi-check" class="ui-button-success btcl"></button>
+  <button pButton type="button" label="+"  class="ui-button-info  btcl"></button> -->
+  <button mat-icon-button aria-label="Example icon button with a menu icon" [disabled]="node.data.name === node.label" (click)="updateSite(node)">
+    <mat-icon>check</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" aria-label="Example icon button with a heart icon" (click)="addChildSite(node)">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</span>
+</ng-template>
+<ng-template let-node pTemplate="sheet">
+ <!--  {{ node.data.idlabel.name }} - {{ node.label }} -->
+  <span  class="clbt">
+  <!-- <button pButton type="button" icon="pi pi-check" class="ui-button-success btcl"></button>
+  <button pButton type="button" label="-" class="ui-button-danger  btcl"></button>
+  <button pButton type="button" label="+"  class="ui-button-info  btcl"></button> -->
+  <mat-form-field appearance="standard">
+    <mat-label>{{ node.data.idlabel.name }}</mat-label>
+    <input matInput [placeholder]="node.data.idlabel.name" [(ngModel)]="node.data.name">
+    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    <mat-hint></mat-hint>
+  </mat-form-field>
+  <button mat-icon-button aria-label="Example icon button with a home icon" [disabled]="node.data.name === node.label" (click)="updateSite(node)">
+    <mat-icon>check</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon" (click)="addChildSite(node)">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon" (click)="deleteSite(node)">
+    <mat-icon>remove_circle</mat-icon>
+  </button>
+  </span>
+</ng-template>
+ <!--  <ng-template let-node pTemplate="branch">
+    <span  style="width:70%" class="spantree"> 
+      <input [(ngModel)]="node.label" type="text">
+     
+    </span> 
+    <span  style="width:30%" class="spantree"> 
+      <button pButton type="button" icon="pi pi-check" class="ui-button-success"></button>
+      <button pButton type="button" label="+"  class="ui-button-info"></button>
+    </span> 
+  </ng-template>
+  <ng-template let-node pTemplate="sheet">
+    <span  style="width:70%" class="spantree"> 
+      <input [(ngModel)]="node.label" type="text">
+    </span> 
+    <span  style="width:30%" class="spantree"> 
+      <button pButton type="button" icon="pi pi-check" class="ui-button-success"></button>
+      <button pButton type="button" label="-" class="ui-button-danger"></button>
+      <button pButton type="button" label="+"  class="ui-button-info"></button>
+    </span> 
+  </ng-template> -->
+</p-tree>
+
+<app-newsite [dialogVisible]="dialogVisible" [siteParent]="siteParent" (closeDialog)="createSite($event)"></app-newsite> 
+
+</div>
