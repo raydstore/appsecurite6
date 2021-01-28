@@ -319,5 +319,25 @@ export class SitesComponent implements OnInit {
     });
   }
 
+  expandAll(){
+    this.data.forEach( node => {
+        this.expandRecursive(node, true);
+    } );
+}
+
+collapseAll(){
+    this.data.forEach( node => {
+        this.expandRecursive(node, false);
+    } );
+}
+
+private expandRecursive(node:TreeNode, isExpand:boolean){
+    node.expanded = isExpand;
+    if (node.children){
+        node.children.forEach( childNode => {
+            this.expandRecursive(childNode, isExpand);
+        } );
+    }
+}
 
 }
