@@ -23,12 +23,12 @@ export class PrintaccidentComponent implements OnInit {
   iconFormat: 'print';
   grValue: 'html'
 
-  urlPrint: String = 'http://10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/';
+  urlPrint: String = 'http://10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/';
   // 'http://10.1.0.150:8080/HseWebService/wsrv/print';
 
 
-  url = 'http://jasperadmin:jasperadmin@10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003';
-  url1 = 'http://jasperadmin:jasperadmin@10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.pdf?p=200416080003';
+  url = 'http://jasperadmin:jasperadmin@10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003';
+  url1 = 'http://jasperadmin:jasperadmin@10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.pdf?p=200416080003';
 
   constructor(private listrepotofaccidentService: ListreportofaccidentService, private _printService: PrintService,
     private store: Store<StoreInterface>, private printreportService: PrintreportService) { }
@@ -106,7 +106,7 @@ theScript.innerHTML = 'window.onload = ' + injectThis.toString() + ';';
 theDoc.body.appendChild(theScript); */
 
 //return ' ';
-    let urlTarget = 'http://jasperadmin:jasperadmin@10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/' + reportname + '.' + this.format + '?p=' + this.idaccident;
+    let urlTarget = 'http://jasperadmin:jasperadmin@10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/' + reportname + '.' + this.format + '?p=' + this.idaccident;
     return urlTarget;
 
    /*  this.printreportService.print(reportname, this.format, this.idaccident).

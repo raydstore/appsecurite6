@@ -22,7 +22,7 @@ const httpOptions = {
 @Injectable()
 export class PrintreportService {
 
-  baseurl = 'http://10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/';
+  baseurl = 'http://10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/';
   username = 'jasperadmin';
   password = 'jasperadmin';
   authorizationData = 'Basic ' + btoa(this.username + ':' + this.password);
@@ -45,7 +45,7 @@ xhr.addEventListener("readystatechange", function() {
   }
 });
 
-xhr.open("GET", "http://10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003");
+xhr.open("GET", "http://10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003");
 xhr.setRequestHeader("Authorization", "Basic amFzcGVyYWRtaW46amFzcGVyYWRtaW4=");
 
 
@@ -63,7 +63,7 @@ xhr.send(); */
     };
 
     fetch(url, requestOptions)
-    fetch("http://10.1.10.200:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003", requestOptions)
+    fetch("http://10.113.113.64:8080/jasperserver/rest_v2/reports/prjAccident/rptRapportAccident.html?p=200416080003", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
